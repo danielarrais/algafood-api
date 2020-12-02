@@ -20,7 +20,7 @@ public class AlgafoodMainApiApplication {
                 .nome("President Jackin")
                 .build();
 
-        Cozinha novaCozinha = cadastroCozinha.adicionarOuAtualizar(cozinha);
+        Cozinha novaCozinha = cadastroCozinha.salvar(cozinha);
         Long idNovaCozinha = novaCozinha.getId();
 
         cadastroCozinha.listar().stream().forEach((entity) -> {
@@ -32,5 +32,9 @@ public class AlgafoodMainApiApplication {
         System.out.println("Cozinha Recém Inserida: " + cozinhaRecemInserida.getNome());
 
         cozinhaRecemInserida.setNome("President Jackin 2");
+
+        Cozinha cozinhaAtualizada = cadastroCozinha.salvar(cozinhaRecemInserida);
+
+        System.out.println("Cozinha Atualizada: " + cozinhaAtualizada.getNome());
     }
 }
