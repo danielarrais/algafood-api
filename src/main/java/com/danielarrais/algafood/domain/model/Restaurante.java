@@ -18,5 +18,6 @@ public class Restaurante {
     private String nome;
 
     @ManyToOne
+    @JoinColumn(name = "cozinha_id")
     private Cozinha cozinha;
 }
