@@ -3,4 +3,4 @@ alter table restaurante
 
 alter table restaurante
     add constraint restaurante_cozinha_id_fk
-        foreign key (id) references cozinha;
+        foreign key (cozinha_id) references cozinha;
