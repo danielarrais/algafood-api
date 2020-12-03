@@ -4,8 +4,8 @@ import com.danielarrais.algafood.domain.model.Cozinha;
 import java.util.List;
 
 public interface CozinhaRepository {
-    List<Cozinha> listar();
-    Cozinha buscarPorId(Long id);
-    Cozinha salvar(Cozinha cozinha);
-    void remover(Cozinha cozinha);
+    List<Cozinha> all();
+    Cozinha find(Long id);
+    Cozinha add(Cozinha cozinha);
+    void remove(Cozinha cozinha);
 }

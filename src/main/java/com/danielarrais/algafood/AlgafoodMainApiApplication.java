@@ -25,33 +25,33 @@ public class AlgafoodMainApiApplication {
                 .nome("President Jackin2")
                 .build();
 
-        Cozinha novaCozinha = cozinhaRepository.salvar(cozinha);
-        Cozinha novaCozinha2 = cozinhaRepository.salvar(cozinha2);
+        Cozinha novaCozinha = cozinhaRepository.add(cozinha);
+        Cozinha novaCozinha2 = cozinhaRepository.add(cozinha2);
 
         Long idNovaCozinha = novaCozinha.getId();
 
-        cozinhaRepository.listar().stream().forEach((entity) -> {
+        cozinhaRepository.all().stream().forEach((entity) -> {
             System.out.println(entity.getNome());
         });
 
         System.out.println("=================================================");
 
-        Cozinha cozinhaRecemInserida = cozinhaRepository.buscarPorId(idNovaCozinha);
+        Cozinha cozinhaRecemInserida = cozinhaRepository.find(idNovaCozinha);
         System.out.println("Cozinha Inserida: " + cozinhaRecemInserida.getNome());
 
         System.out.println("=================================================");
 
         cozinhaRecemInserida.setNome("President Jackin 2");
-        Cozinha cozinhaAtualizada = cozinhaRepository.salvar(cozinhaRecemInserida);
+        Cozinha cozinhaAtualizada = cozinhaRepository.add(cozinhaRecemInserida);
         System.out.println("Cozinha Atualizada: " + cozinhaAtualizada.getNome());
 
         System.out.println("=================================================");
 
-        cozinhaRepository.remover(cozinhaAtualizada);
+        cozinhaRepository.remove(cozinhaAtualizada);
 
         System.out.println("=================================================");
 
-        cozinhaRepository.listar().stream().forEach((entity) -> {
+        cozinhaRepository.all().stream().forEach((entity) -> {
             System.out.println(entity.getNome());
         });
     }
