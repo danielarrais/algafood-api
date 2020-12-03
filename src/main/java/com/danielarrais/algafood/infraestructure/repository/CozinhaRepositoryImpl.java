@@ -1,6 +1,7 @@
-package com.danielarrais.algafood.jpa;
+package com.danielarrais.algafood.infraestructure.repository;
 
 import com.danielarrais.algafood.domain.model.Cozinha;
+import com.danielarrais.algafood.domain.repository.CozinhaRepository;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -9,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
-public class CadastroCozinha {
+public class CozinhaRepositoryImpl implements CozinhaRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
