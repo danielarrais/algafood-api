@@ -13,7 +13,7 @@ public class AlgafoodMainApiApplication {
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+        CozinhaRepository cozinhas = applicationContext.getBean(CozinhaRepository.class);
 
         Cozinha cozinha =  Cozinha
                 .builder()
@@ -25,33 +25,33 @@ public class AlgafoodMainApiApplication {
                 .nome("President Jackin2")
                 .build();
 
-        Cozinha novaCozinha = cozinhaRepository.add(cozinha);
-        Cozinha novaCozinha2 = cozinhaRepository.add(cozinha2);
+        Cozinha novaCozinha = cozinhas.add(cozinha);
+        Cozinha novaCozinha2 = cozinhas.add(cozinha2);
 
         Long idNovaCozinha = novaCozinha.getId();
 
-        cozinhaRepository.all().stream().forEach((entity) -> {
+        cozinhas.all().stream().forEach((entity) -> {
             System.out.println(entity.getNome());
         });
 
         System.out.println("=================================================");
 
-        Cozinha cozinhaRecemInserida = cozinhaRepository.find(idNovaCozinha);
+        Cozinha cozinhaRecemInserida = cozinhas.find(idNovaCozinha);
         System.out.println("Cozinha Inserida: " + cozinhaRecemInserida.getNome());
 
         System.out.println("=================================================");
 
         cozinhaRecemInserida.setNome("President Jackin 2");
-        Cozinha cozinhaAtualizada = cozinhaRepository.add(cozinhaRecemInserida);
+        Cozinha cozinhaAtualizada = cozinhas.add(cozinhaRecemInserida);
         System.out.println("Cozinha Atualizada: " + cozinhaAtualizada.getNome());
 
         System.out.println("=================================================");
 
-        cozinhaRepository.remove(cozinhaAtualizada);
+        cozinhas.remove(cozinhaAtualizada);
 
         System.out.println("=================================================");
 
-        cozinhaRepository.all().stream().forEach((entity) -> {
+        cozinhas.all().stream().forEach((entity) -> {
             System.out.println(entity.getNome());
         });
     }
