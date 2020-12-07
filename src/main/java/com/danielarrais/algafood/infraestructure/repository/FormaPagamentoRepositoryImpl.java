@@ -29,8 +29,8 @@ public class FormaPagamentoRepositoryImpl implements FormaPagamentoRepository {
     }
 
     @Transactional
-    public void remover(FormaPagamento formaPagamento) {
-        formaPagamento = buscar(formaPagamento.getId());
+    public void remover(Long id) {
+        var formaPagamento = buscar(id);
         entityManager.remove(formaPagamento);
     }
 }

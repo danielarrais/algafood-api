@@ -2,12 +2,16 @@ package com.danielarrais.algafood.infraestructure.repository;
 
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CozinhaRepositoryImpl implements CozinhaRepository {
@@ -29,8 +33,13 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
     }
 
     @Transactional
-    public void remover(Cozinha cozinha) {
-        cozinha = buscar(cozinha.getId());
+    public void remover(Long id) {
+        Cozinha cozinha = Optional
+                .ofNullable(buscar(id))
+                .orElseThrow(() -> {
+                    throw new EmptyResultDataAccessException(1);
+                });
+
         entityManager.remove(cozinha);
     }
 }

@@ -8,5 +8,5 @@ public interface PermissaoRepository {
     List<Permissao> listar();
     Permissao buscar(Long id);
     void salvar(Permissao permissao);
-    void remover(Permissao permissao);
+    void remover(Long id);
 }

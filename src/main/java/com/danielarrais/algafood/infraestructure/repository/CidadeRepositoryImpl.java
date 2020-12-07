@@ -29,8 +29,8 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     }
 
     @Transactional
-    public void remover(Cidade cidade) {
-        cidade = buscar(cidade.getId());
+    public void remover(Long id) {
+        var cidade = buscar(id);
         entityManager.remove(cidade);
     }
 }
