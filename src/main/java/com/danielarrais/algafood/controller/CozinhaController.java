@@ -2,12 +2,12 @@ package com.danielarrais.algafood.controller;
 
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -28,7 +28,8 @@ public class CozinhaController {
     public ResponseEntity<Cozinha> buscar(@PathVariable Long id) {
         Cozinha cozinha = cozinhaRepository.find(id);
 
-        return Optional.ofNullable(cozinha)
+        return Optional
+                .ofNullable(cozinha)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -37,5 +38,18 @@ public class CozinhaController {
     @ResponseStatus(HttpStatus.CREATED)
     public void adicionar(@RequestBody Cozinha cozinha) {
         cozinhaRepository.add(cozinha);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Cozinha cozinha) {
+        return Optional
+                .ofNullable(cozinhaRepository.find(id))
+                .map(cozinhaAtual -> {
+                    BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
+                    cozinhaRepository.add(cozinhaAtual);
+
+                    return ResponseEntity.ok((Void) null);
+                }).orElse(ResponseEntity.notFound().build());
     }
 }
