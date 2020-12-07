@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "c7800894-1032-4a48-96d6-2c39a39793fa",
+		"name": "Alga Food API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "V1",
+			"item": [
+				{
+					"name": "Cozinha",
+					"item": [
+						{
+							"name": "LIstar",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/cozinhas",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cozinhas"
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Estado",
+					"item": [
+						{
+							"name": "LIstar",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
