@@ -23,5 +23,10 @@ public class ${MODEL_NAME}Controller {
     public List<${MODEL_NAME}> listar() {
         return ${MODEL_NAME_CAMEL_CASE}Repository.all();
     }
+
+    @GetMapping("/{id}")
+    public ${MODEL_NAME} buscar(@PathVariable Long id) {
+        return ${MODEL_NAME_CAMEL_CASE}Repository.find(id);
+    }
 }
 
