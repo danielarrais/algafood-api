@@ -52,4 +52,15 @@ public class CozinhaController {
                     return ResponseEntity.ok((Void) null);
                 }).orElse(ResponseEntity.notFound().build());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover(@PathVariable Long id) {
+        return Optional
+                .ofNullable(cozinhaRepository.find(id))
+                .map(cozinha -> {
+                    cozinhaRepository.remove(cozinha);
+
+                    return ResponseEntity.status(HttpStatus.NO_CONTENT).body((Void) null);
+                }).orElse(ResponseEntity.notFound().build());
+    }
 }
