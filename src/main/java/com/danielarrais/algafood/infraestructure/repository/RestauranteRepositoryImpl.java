@@ -15,22 +15,22 @@ public class RestauranteRepositoryImpl implements RestauranteRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Restaurante> all() {
+    public List<Restaurante> listar() {
         return entityManager.createQuery("select c from Restaurante as c", Restaurante.class).getResultList();
     }
 
     @Transactional
-    public Restaurante add(Restaurante restaurante) {
+    public Restaurante adicionar(Restaurante restaurante) {
         return entityManager.merge(restaurante);
     }
 
-    public Restaurante find(Long id) {
+    public Restaurante buscar(Long id) {
         return entityManager.find(Restaurante.class, id);
     }
 
     @Transactional
-    public void remove(Restaurante restaurante) {
-        restaurante = find(restaurante.getId());
+    public void remover(Restaurante restaurante) {
+        restaurante = buscar(restaurante.getId());
         entityManager.remove(restaurante);
     }
 }

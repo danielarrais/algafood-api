@@ -23,7 +23,7 @@ public class AlgafoodMainApiApplication {
                 .nome("Francesa")
                 .build();
 
-        cozinhaFrancesa = cozinhas.add(cozinhaFrancesa);
+        cozinhaFrancesa = cozinhas.adicionar(cozinhaFrancesa);
 
         Restaurante restauranteJackin =  Restaurante
                 .builder()
@@ -31,9 +31,9 @@ public class AlgafoodMainApiApplication {
                 .cozinha(cozinhaFrancesa)
                 .build();
 
-        restauranteJackin = restaurantes.add(restauranteJackin);
+        restauranteJackin = restaurantes.adicionar(restauranteJackin);
 
-        cozinhas.all().stream().forEach((entity) -> {
+        cozinhas.listar().stream().forEach((entity) -> {
             System.out.println(entity.getNome());
         });
 
@@ -45,13 +45,13 @@ public class AlgafoodMainApiApplication {
         System.out.println("================= MUDANDO NOME DO RESTAURANTE =============");
 
         restauranteJackin.setNome("President Jackin - II");
-        restauranteJackin = restaurantes.add(restauranteJackin);
+        restauranteJackin = restaurantes.adicionar(restauranteJackin);
         System.out.println("Novo nome do restaurante: " + restauranteJackin.getNome());
 
         System.out.println("================== REMOVENDO RESTAURANTE ==================");
 
-        restaurantes.remove(restauranteJackin);
-        cozinhas.remove(cozinhaFrancesa);
+        restaurantes.remover(restauranteJackin);
+        cozinhas.remover(cozinhaFrancesa);
 
         System.out.println("=================================================");
     }

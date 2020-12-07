@@ -5,8 +5,8 @@ import com.danielarrais.algafood.domain.model.FormaPagamento;
 import java.util.List;
 
 public interface FormaPagamentoRepository {
-    List<FormaPagamento> all();
-    FormaPagamento find(Long id);
-    FormaPagamento add(FormaPagamento formaPagamento);
-    void remove(FormaPagamento formaPagamento);
+    List<FormaPagamento> listar();
+    FormaPagamento buscar(Long id);
+    FormaPagamento adicionar(FormaPagamento formaPagamento);
+    void remover(FormaPagamento formaPagamento);
 }

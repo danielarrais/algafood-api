@@ -15,22 +15,22 @@ public class EstadoRepositoryImpl implements EstadoRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Estado> all() {
+    public List<Estado> listar() {
         return entityManager.createQuery("select c from Estado as c", Estado.class).getResultList();
     }
 
     @Transactional
-    public Estado add(Estado estado) {
+    public Estado adicionar(Estado estado) {
         return entityManager.merge(estado);
     }
 
-    public Estado find(Long id) {
+    public Estado buscar(Long id) {
         return entityManager.find(Estado.class, id);
     }
 
     @Transactional
-    public void remove(Estado estado) {
-        estado = find(estado.getId());
+    public void remover(Estado estado) {
+        estado = buscar(estado.getId());
         entityManager.remove(estado);
     }
 }

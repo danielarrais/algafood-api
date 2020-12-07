@@ -15,22 +15,22 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Cozinha> all() {
+    public List<Cozinha> listar() {
         return entityManager.createQuery("select c from Cozinha as c", Cozinha.class).getResultList();
     }
 
     @Transactional
-    public Cozinha add(Cozinha cozinha) {
+    public Cozinha adicionar(Cozinha cozinha) {
         return entityManager.merge(cozinha);
     }
 
-    public Cozinha find(Long id) {
+    public Cozinha buscar(Long id) {
         return entityManager.find(Cozinha.class, id);
     }
 
     @Transactional
-    public void remove(Cozinha cozinha) {
-        cozinha = find(cozinha.getId());
+    public void remover(Cozinha cozinha) {
+        cozinha = buscar(cozinha.getId());
         entityManager.remove(cozinha);
     }
 }

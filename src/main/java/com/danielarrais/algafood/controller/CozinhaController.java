@@ -21,12 +21,12 @@ public class CozinhaController {
 
     @GetMapping()
     public List<Cozinha> listar() {
-        return cozinhaRepository.all();
+        return cozinhaRepository.listar();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Cozinha> buscar(@PathVariable Long id) {
-        Cozinha cozinha = cozinhaRepository.find(id);
+        Cozinha cozinha = cozinhaRepository.buscar(id);
 
         return Optional
                 .ofNullable(cozinha)
@@ -37,17 +37,17 @@ public class CozinhaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void adicionar(@RequestBody Cozinha cozinha) {
-        cozinhaRepository.add(cozinha);
+        cozinhaRepository.adicionar(cozinha);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Cozinha cozinha) {
         return Optional
-                .ofNullable(cozinhaRepository.find(id))
+                .ofNullable(cozinhaRepository.buscar(id))
                 .map(cozinhaAtual -> {
                     BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
-                    cozinhaRepository.add(cozinhaAtual);
+                    cozinhaRepository.adicionar(cozinhaAtual);
 
                     return ResponseEntity.ok((Void) null);
                 }).orElse(ResponseEntity.notFound().build());
@@ -56,9 +56,9 @@ public class CozinhaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable Long id) {
         return Optional
-                .ofNullable(cozinhaRepository.find(id))
+                .ofNullable(cozinhaRepository.buscar(id))
                 .map(cozinha -> {
-                    cozinhaRepository.remove(cozinha);
+                    cozinhaRepository.remover(cozinha);
 
                     return ResponseEntity.status(HttpStatus.NO_CONTENT).body((Void) null);
                 }).orElse(ResponseEntity.notFound().build());

@@ -5,8 +5,8 @@ import com.danielarrais.algafood.domain.model.Permissao;
 import java.util.List;
 
 public interface PermissaoRepository {
-    List<Permissao> all();
-    Permissao find(Long id);
-    Permissao add(Permissao permissao);
-    void remove(Permissao permissao);
+    List<Permissao> listar();
+    Permissao buscar(Long id);
+    Permissao adicionar(Permissao permissao);
+    void remover(Permissao permissao);
 }

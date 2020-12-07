@@ -15,22 +15,22 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Cidade> all() {
+    public List<Cidade> listar() {
         return entityManager.createQuery("select c from Cidade as c", Cidade.class).getResultList();
     }
 
     @Transactional
-    public Cidade add(Cidade cidade) {
+    public Cidade adicionar(Cidade cidade) {
         return entityManager.merge(cidade);
     }
 
-    public Cidade find(Long id) {
+    public Cidade buscar(Long id) {
         return entityManager.find(Cidade.class, id);
     }
 
     @Transactional
-    public void remove(Cidade cidade) {
-        cidade = find(cidade.getId());
+    public void remover(Cidade cidade) {
+        cidade = buscar(cidade.getId());
         entityManager.remove(cidade);
     }
 }
