@@ -20,7 +20,7 @@ public class FormaPagamentoRepositoryImpl implements FormaPagamentoRepository {
     }
 
     @Transactional
-    public void adicionar(FormaPagamento formaPagamento) {
+    public void salvar(FormaPagamento formaPagamento) {
         entityManager.merge(formaPagamento);
     }
 

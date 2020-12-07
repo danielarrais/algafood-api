@@ -20,7 +20,7 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
     }
 
     @Transactional
-    public void adicionar(Cozinha cozinha) {
+    public void salvar(Cozinha cozinha) {
         entityManager.merge(cozinha);
     }
 

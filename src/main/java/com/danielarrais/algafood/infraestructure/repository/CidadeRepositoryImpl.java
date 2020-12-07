@@ -20,7 +20,7 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     }
 
     @Transactional
-    public void adicionar(Cidade cidade) {
+    public void salvar(Cidade cidade) {
         entityManager.merge(cidade);
     }
 

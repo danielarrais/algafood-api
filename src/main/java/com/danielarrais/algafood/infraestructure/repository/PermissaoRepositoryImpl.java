@@ -20,7 +20,7 @@ public class PermissaoRepositoryImpl implements PermissaoRepository {
     }
 
     @Transactional
-    public void adicionar(Permissao permissao) {
+    public void salvar(Permissao permissao) {
         entityManager.merge(permissao);
     }
 
