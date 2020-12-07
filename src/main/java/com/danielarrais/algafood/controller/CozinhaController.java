@@ -29,8 +29,6 @@ public class CozinhaController {
     public ResponseEntity<Cozinha> buscar(@PathVariable Long id) {
         Cozinha cozinha = cozinhaRepository.find(id);
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(cozinha);
+        return ResponseEntity.ok(cozinha);
     }
 }
