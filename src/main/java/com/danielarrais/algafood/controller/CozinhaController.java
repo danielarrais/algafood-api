@@ -2,6 +2,7 @@ package com.danielarrais.algafood.controller;
 
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
+import com.danielarrais.algafood.domain.service.CozinhaService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,20 +14,20 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/cozinhas")
 public class CozinhaController {
-    private final CozinhaRepository cozinhaRepository;
+    private final CozinhaService cozinhaService;
 
-    public CozinhaController(CozinhaRepository cozinhaRepository) {
-        this.cozinhaRepository = cozinhaRepository;
+    public CozinhaController(CozinhaService cozinhaService) {
+        this.cozinhaService = cozinhaService;
     }
 
     @GetMapping()
     public List<Cozinha> listar() {
-        return cozinhaRepository.listar();
+        return cozinhaService.listar();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Cozinha> buscar(@PathVariable Long id) {
-        Cozinha cozinha = cozinhaRepository.buscar(id);
+        Cozinha cozinha = cozinhaService.buscar(id);
 
         return Optional
                 .ofNullable(cozinha)
@@ -37,17 +38,17 @@ public class CozinhaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void adicionar(@RequestBody Cozinha cozinha) {
-        cozinhaRepository.adicionar(cozinha);
+        cozinhaService.salvar(cozinha);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Cozinha cozinha) {
         return Optional
-                .ofNullable(cozinhaRepository.buscar(id))
+                .ofNullable(cozinhaService.buscar(id))
                 .map(cozinhaAtual -> {
                     BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
-                    cozinhaRepository.adicionar(cozinhaAtual);
+                    cozinhaService.salvar(cozinhaAtual);
 
                     return ResponseEntity.ok((Void) null);
                 }).orElse(ResponseEntity.notFound().build());
@@ -56,9 +57,9 @@ public class CozinhaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable Long id) {
         return Optional
-                .ofNullable(cozinhaRepository.buscar(id))
+                .ofNullable(cozinhaService.buscar(id))
                 .map(cozinha -> {
-                    cozinhaRepository.remover(cozinha);
+                    cozinhaService.remover(cozinha);
 
                     return ResponseEntity.status(HttpStatus.NO_CONTENT).body((Void) null);
                 }).orElse(ResponseEntity.notFound().build());
