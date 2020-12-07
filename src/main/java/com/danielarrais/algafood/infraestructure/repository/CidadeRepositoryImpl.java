@@ -20,8 +20,8 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     }
 
     @Transactional
-    public Cidade adicionar(Cidade cidade) {
-        return entityManager.merge(cidade);
+    public void adicionar(Cidade cidade) {
+        entityManager.merge(cidade);
     }
 
     public Cidade buscar(Long id) {

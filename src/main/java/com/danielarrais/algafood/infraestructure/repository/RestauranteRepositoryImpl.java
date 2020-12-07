@@ -20,8 +20,8 @@ public class RestauranteRepositoryImpl implements RestauranteRepository {
     }
 
     @Transactional
-    public Restaurante adicionar(Restaurante restaurante) {
-        return entityManager.merge(restaurante);
+    public void adicionar(Restaurante restaurante) {
+        entityManager.merge(restaurante);
     }
 
     public Restaurante buscar(Long id) {

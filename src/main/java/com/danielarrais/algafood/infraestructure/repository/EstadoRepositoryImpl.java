@@ -20,8 +20,8 @@ public class EstadoRepositoryImpl implements EstadoRepository {
     }
 
     @Transactional
-    public Estado adicionar(Estado estado) {
-        return entityManager.merge(estado);
+    public void adicionar(Estado estado) {
+        entityManager.merge(estado);
     }
 
     public Estado buscar(Long id) {

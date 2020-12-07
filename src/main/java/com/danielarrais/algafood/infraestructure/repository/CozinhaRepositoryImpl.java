@@ -20,8 +20,8 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
     }
 
     @Transactional
-    public Cozinha adicionar(Cozinha cozinha) {
-        return entityManager.merge(cozinha);
+    public void adicionar(Cozinha cozinha) {
+        entityManager.merge(cozinha);
     }
 
     public Cozinha buscar(Long id) {

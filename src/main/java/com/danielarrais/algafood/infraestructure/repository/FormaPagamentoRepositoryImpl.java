@@ -20,8 +20,8 @@ public class FormaPagamentoRepositoryImpl implements FormaPagamentoRepository {
     }
 
     @Transactional
-    public FormaPagamento adicionar(FormaPagamento formaPagamento) {
-        return entityManager.merge(formaPagamento);
+    public void adicionar(FormaPagamento formaPagamento) {
+        entityManager.merge(formaPagamento);
     }
 
     public FormaPagamento buscar(Long id) {

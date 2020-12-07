@@ -20,8 +20,8 @@ public class PermissaoRepositoryImpl implements PermissaoRepository {
     }
 
     @Transactional
-    public Permissao adicionar(Permissao permissao) {
-        return entityManager.merge(permissao);
+    public void adicionar(Permissao permissao) {
+        entityManager.merge(permissao);
     }
 
     public Permissao buscar(Long id) {
