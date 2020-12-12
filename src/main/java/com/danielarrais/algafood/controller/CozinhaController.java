@@ -1,5 +1,7 @@
 package com.danielarrais.algafood.controller;
 
+import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
+import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
 import com.danielarrais.algafood.domain.service.CozinhaService;
@@ -44,24 +46,23 @@ public class CozinhaController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Cozinha cozinha) {
-        return Optional
-                .ofNullable(cozinhaService.buscar(id))
-                .map(cozinhaAtual -> {
-                    BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
-                    cozinhaService.salvar(cozinhaAtual);
-
-                    return ResponseEntity.ok((Void) null);
-                }).orElse(ResponseEntity.notFound().build());
+        try {
+            cozinhaService.atualizar(id, cozinha);
+            return ResponseEntity.noContent().build();
+        } catch (EntidadeNaoEncontradaException exception) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable Long id) {
-        return Optional
-                .ofNullable(cozinhaService.buscar(id))
-                .map(cozinha -> {
-                    cozinhaService.remover(cozinha);
-
-                    return ResponseEntity.status(HttpStatus.NO_CONTENT).body((Void) null);
-                }).orElse(ResponseEntity.notFound().build());
+        try {
+            cozinhaService.remover(id);
+            return ResponseEntity.noContent().build();
+        } catch (EntidadeEmUsoException exception) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        } catch (EntidadeNaoEncontradaException exception) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

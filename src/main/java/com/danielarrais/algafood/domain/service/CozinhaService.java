@@ -52,7 +52,7 @@ public class CozinhaService {
         try {
             cozinhaRepository.remover(id);
         } catch (EmptyResultDataAccessException exception) {
-
+            throw new EntidadeNaoEncontradaException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new EntidadeEmUsoException(id);
         }
