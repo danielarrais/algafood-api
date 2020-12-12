@@ -29,11 +29,7 @@ public class CozinhaService {
     }
 
     public void salvar(Cozinha cozinha) {
-        try {
-            cozinhaRepository.salvar(cozinha);
-        } catch (EmptyResultDataAccessException exception) {
-            throw new EntidadeNaoEncontradaException(cozinha.getId());
-        }
+        cozinhaRepository.salvar(cozinha);
     }
 
     public void atualizar(Long id, Cozinha cozinha) {
