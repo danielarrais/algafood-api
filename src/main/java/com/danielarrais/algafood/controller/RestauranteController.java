@@ -36,8 +36,13 @@ public class RestauranteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody Restaurante restaurante) {
-        restauranteService.salvar(restaurante);
+    public ResponseEntity<?> adicionar(@RequestBody Restaurante restaurante) {
+        try {
+            restauranteService.salvar(restaurante);
+            return ResponseEntity.noContent().build();
+        } catch (EntidadeNaoEncontradaException exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
