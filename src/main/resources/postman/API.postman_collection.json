@@ -19,7 +19,8 @@
 									{
 										"key": "Accept",
 										"value": "application/xml",
-										"type": "text"
+										"type": "text",
+										"disabled": true
 									}
 								],
 								"url": {
@@ -64,6 +65,260 @@
 									]
 								},
 								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
+							"name": "Criar Cozinha",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Nordestina\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cozinhas",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cozinhas"
+									]
+								},
+								"description": "Adiciona nova cozinha na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Cozinha",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cozinhas/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cozinhas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "26"
+										}
+									]
+								},
+								"description": "Atualiza cozinha cadastrada na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Cozinha",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cozinhas/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cozinhas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "26"
+										}
+									]
+								},
+								"description": "Exclui cozinha da base de dados do Alga Food API"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Restaurantes",
+					"item": [
+						{
+							"name": "LIstar Restaurantes",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/xml",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/restaurantes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"restaurantes"
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Restaurante",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/xml",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/restaurantes/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"restaurantes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
+							"name": "Criar Restaurante",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Jakin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/restaurantes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"restaurantes"
+									]
+								},
+								"description": "Adiciona nova cozinha na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Restaurante",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Jackin Predident\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/restaurantes/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"restaurantes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								},
+								"description": "Atualiza cozinha cadastrada na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Restaurante",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/restaurantes/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"restaurantes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "15"
+										}
+									]
+								},
+								"description": "Exclui cozinha da base de dados do Alga Food API"
 							},
 							"response": []
 						}
