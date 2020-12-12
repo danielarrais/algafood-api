@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -47,12 +48,18 @@ public class RestauranteController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Restaurante restaurante) {
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Restaurante restaurante) {
+        Restaurante restauranteAtual = restauranteService.buscar(id);
+
+        if(Objects.isNull(restauranteAtual)) {
+            return ResponseEntity.notFound().build();
+        }
+
         try {
             restauranteService.atualizar(id, restaurante);
             return ResponseEntity.noContent().build();
         } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().build();
         }
     }
 
