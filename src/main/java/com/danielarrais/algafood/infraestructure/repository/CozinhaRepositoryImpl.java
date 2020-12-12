@@ -3,8 +3,6 @@ package com.danielarrais.algafood.infraestructure.repository;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -37,6 +35,7 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
         Cozinha cozinha = Optional
                 .ofNullable(buscar(id))
                 .orElseThrow(() -> {
+                    // Esperava a existência de 1 cozinha
                     throw new EmptyResultDataAccessException(1);
                 });
 
