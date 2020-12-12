@@ -54,7 +54,7 @@ public class ${MODEL_NAME}Service {
         try {
             ${MODEL_NAME_CAMEL_CASE}Repository.remover(id);
         } catch (EmptyResultDataAccessException exception) {
-
+            throw new EntidadeNaoEncontradaException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new EntidadeEmUsoException(id);
         }
