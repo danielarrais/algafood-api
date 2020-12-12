@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c7800894-1032-4a48-96d6-2c39a39793fa",
+		"_postman_id": "3c84dd74-f96f-42a4-8e97-c8af3d6862eb",
 		"name": "API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -8,6 +8,165 @@
 		{
 			"name": "V1",
 			"item": [
+				{
+					"name": "Cidade",
+					"item": [
+						{
+							"name": "LIstar Cidades",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/xml",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/cidades",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades"
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Cidade",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/xml",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/cidades/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
+							"name": "Criar Cidade",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Sambaíba\",\n    \"estado\": {\n        \"id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cidades",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades"
+									]
+								},
+								"description": "Adiciona nova cozinha na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Cidade",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Sambaíba de Açúcar\",\n    \"estado\": {\n        \"id\": 2\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cidades/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								},
+								"description": "Atualiza cozinha cadastrada na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Cidade",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cidades/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								},
+								"description": "Exclui cozinha da base de dados do Alga Food API"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
 				{
 					"name": "Cozinha",
 					"item": [
@@ -168,6 +327,165 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "Estado",
+					"item": [
+						{
+							"name": "LIstar Estados",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/xml",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/estados",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estados"
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Estado",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/xml",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/estados/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estados",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "21"
+										}
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
+							"name": "Criar Estado",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Maranhão\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/estados",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estados"
+									]
+								},
+								"description": "Adiciona nova cozinha na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Estado",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/estados/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estados",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "26"
+										}
+									]
+								},
+								"description": "Atualiza cozinha cadastrada na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Estado",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/estados/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estados",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								},
+								"description": "Exclui cozinha da base de dados do Alga Food API"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "Restaurantes",
 					"item": [
 						{
@@ -234,7 +552,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Jakin\"\n}",
+									"raw": "{\n    \"nome\": \"Jackin Predident 2\",\n    \"cozinha\": {\n        \"id\": 222\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -319,38 +637,6 @@
 									]
 								},
 								"description": "Exclui cozinha da base de dados do Alga Food API"
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Estado",
-					"item": [
-						{
-							"name": "LIstar Estados",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/xml",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{host}}/estados",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"estados"
-									]
-								},
-								"description": "Traz todos os estados cadastrados no Alga Food API."
 							},
 							"response": []
 						}
