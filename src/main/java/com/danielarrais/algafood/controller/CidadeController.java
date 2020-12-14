@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -49,18 +50,26 @@ public class CidadeController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Cidade cidade) {
-        Cidade cidadeAtual = cidadeService.buscar(id);
-
-        if (Objects.isNull(cidadeAtual)) {
-            return ResponseEntity.notFound().build();
-        }
-
         try {
             cidadeService.atualizar(id, cidade);
             return ResponseEntity.noContent().build();
         } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.badRequest().body(exception.getMessage());
+            return exception.isDependencia() ?
+                    ResponseEntity.badRequest().body(exception.getMessage()) :
+                    ResponseEntity.notFound().build();
+        }
+    }
 
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+        try {
+            cidadeService.atualizar(id, valores);
+            return ResponseEntity.noContent().build();
+        } catch (EntidadeNaoEncontradaException exception) {
+            return exception.isDependencia() ?
+                    ResponseEntity.badRequest().body(exception.getMessage()) :
+                    ResponseEntity.notFound().build();
         }
     }
 

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -46,6 +47,17 @@ public class EstadoController {
     public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Estado estado) {
         try {
             estadoService.atualizar(id, estado);
+            return ResponseEntity.noContent().build();
+        } catch (EntidadeNaoEncontradaException exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+        try {
+            estadoService.atualizar(id, valores);
             return ResponseEntity.noContent().build();
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.notFound().build();

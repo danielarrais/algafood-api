@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -49,17 +49,26 @@ public class RestauranteController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Restaurante restaurante) {
-        Restaurante restauranteAtual = restauranteService.buscar(id);
-
-        if(Objects.isNull(restauranteAtual)) {
-            return ResponseEntity.notFound().build();
-        }
-
         try {
             restauranteService.atualizar(id, restaurante);
             return ResponseEntity.noContent().build();
         } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.badRequest().build();
+            return exception.isDependencia() ?
+                    ResponseEntity.badRequest().body(exception.getMessage()) :
+                    ResponseEntity.notFound().build();
+        }
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+        try {
+            restauranteService.atualizar(id, valores);
+            return ResponseEntity.noContent().build();
+        } catch (EntidadeNaoEncontradaException exception) {
+            return exception.isDependencia() ?
+                    ResponseEntity.badRequest().body(exception.getMessage()) :
+                    ResponseEntity.notFound().build();
         }
     }
 
