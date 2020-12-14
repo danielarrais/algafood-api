@@ -5,6 +5,7 @@ import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
 import com.danielarrais.algafood.domain.repository.RestauranteRepository;
+import com.danielarrais.algafood.util.CustomBeansUtils;
 import com.danielarrais.algafood.util.ExceptionUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
@@ -12,6 +13,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -37,7 +39,7 @@ public class RestauranteService {
         Long cozinhaId = restaurante.getCozinha().getId();
         Cozinha cozinha = cozinhaRepository.buscar(cozinhaId);
 
-        ExceptionUtils.throwIsNull(cozinha, new EntidadeNaoEncontradaException("Cozinha", cozinhaId));
+        ExceptionUtils.throwIsNull(cozinha, new EntidadeNaoEncontradaException("Cozinha", cozinhaId, true));
 
         restauranteRepository.salvar(restaurante);
     }
@@ -50,6 +52,18 @@ public class RestauranteService {
         }
 
         BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
+
+        salvar(restauranteAtual);
+    }
+
+    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
+        Restaurante restauranteAtual = buscar(id);
+
+        if (Objects.isNull(restauranteAtual)) {
+            throw new EntidadeNaoEncontradaException(id);
+        }
+
+        CustomBeansUtils.mergeValues(propertiesAndValues, restauranteAtual);
 
         salvar(restauranteAtual);
     }

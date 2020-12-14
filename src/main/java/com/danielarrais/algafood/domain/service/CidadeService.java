@@ -6,6 +6,7 @@ import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
+import com.danielarrais.algafood.util.CustomBeansUtils;
 import com.danielarrais.algafood.util.ExceptionUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
@@ -14,6 +15,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -39,7 +41,7 @@ public class CidadeService {
         Long estadoId = cidade.getEstado().getId();
         Estado estado = estadoRepository.buscar(estadoId);
 
-        ExceptionUtils.throwIsNull(estado, new EntidadeNaoEncontradaException("Estado", estadoId));
+        ExceptionUtils.throwIsNull(estado, new EntidadeNaoEncontradaException("Estado", estadoId, true));
 
         cidadeRepository.salvar(cidade);
     }
@@ -54,6 +56,18 @@ public class CidadeService {
         BeanUtils.copyProperties(cidade, cidadeAtual, "id");
 
         salvar(cidadeAtual);
+    }
+
+    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
+        Cidade cozinhaAtual = buscar(id);
+
+        if (Objects.isNull(cozinhaAtual)) {
+            throw new EntidadeNaoEncontradaException(id);
+        }
+
+        CustomBeansUtils.mergeValues(propertiesAndValues, cozinhaAtual);
+
+        salvar(cozinhaAtual);
     }
 
     public void remover(Long id) {

@@ -4,12 +4,14 @@ import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
 import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
+import com.danielarrais.algafood.util.CustomBeansUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -40,6 +42,18 @@ public class EstadoService {
         }
 
         BeanUtils.copyProperties(estado, estadoAtual, "id");
+
+        salvar(estadoAtual);
+    }
+
+    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
+        Estado estadoAtual = buscar(id);
+
+        if (Objects.isNull(estadoAtual)) {
+            throw new EntidadeNaoEncontradaException(id);
+        }
+
+        CustomBeansUtils.mergeValues(propertiesAndValues, estadoAtual);
 
         salvar(estadoAtual);
     }
