@@ -49,6 +49,18 @@ public class ${MODEL_NAME}Service {
 
         salvar(${MODEL_NAME_CAMEL_CASE}Atual);
     }
+    
+    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
+        ${MODEL_NAME} ${MODEL_NAME_CAMEL_CASE}Atual = buscar(id);
+
+        if (Objects.isNull(${MODEL_NAME_CAMEL_CASE}Atual)) {
+            throw new EntidadeNaoEncontradaException(id);
+        }
+
+        CustomBeansUtils.mergeValues(propertiesAndValues, ${MODEL_NAME_CAMEL_CASE}Atual);
+
+        salvar(${MODEL_NAME_CAMEL_CASE}Atual);
+    }
 
     public void remover(Long id) {
         try {
