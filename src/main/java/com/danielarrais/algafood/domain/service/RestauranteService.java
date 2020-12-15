@@ -33,30 +33,28 @@ public class RestauranteService {
     }
 
     @SneakyThrows
-    public void salvar(Restaurante restaurante) {
+    public Restaurante salvar(Restaurante restaurante) {
         Long cozinhaId = restaurante.getCozinha().getId();
         Optional<Cozinha> cozinha = cozinhaRepository.findById(cozinhaId);
 
-        cozinha.orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException("Cozinha", cozinhaId, true);
-        });
+        cozinha.orElseThrow(() -> new EntidadeNaoEncontradaException("Cozinha", cozinhaId, true));
 
-        restauranteRepository.save(restaurante);
+        return restauranteRepository.save(restaurante);
     }
 
-    public void atualizar(Long id, Restaurante restaurante) {
-        buscar(id).map(restauranteAtual -> {
+    public Restaurante atualizar(Long id, Restaurante restaurante) {
+        return buscar(id).map(restauranteAtual -> {
             BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
-            return restauranteRepository.save(restauranteAtual);
+            return salvar(restauranteAtual);
         }).orElseThrow(() -> {
             throw new EntidadeNaoEncontradaException(id);
         });
     }
 
-    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        buscar(id).map(restauranteAtual -> {
+    public Restaurante atualizar(Long id, Map<String, Object> propertiesAndValues) {
+        return buscar(id).map(restauranteAtual -> {
             CustomBeansUtils.mergeValues(propertiesAndValues, restauranteAtual);
-            return restauranteRepository.save(restauranteAtual);
+            return salvar(restauranteAtual);
         }).orElseThrow(() -> {
             throw new EntidadeNaoEncontradaException(id);
         });

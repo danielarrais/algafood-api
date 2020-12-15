@@ -29,23 +29,23 @@ public class EstadoService {
     }
 
     @SneakyThrows
-    public void salvar(Estado estado) {
-        estadoRepository.save(estado);
+    public Estado salvar(Estado estado) {
+        return estadoRepository.save(estado);
     }
 
-    public void atualizar(Long id, Estado estado) {
-        buscar(id).map(estadoAtual -> {
+    public Estado atualizar(Long id, Estado estado) {
+        return buscar(id).map(estadoAtual -> {
             BeanUtils.copyProperties(estado, estadoAtual, "id");
-            return estadoRepository.save(estadoAtual);
+            return salvar(estadoAtual);
         }).orElseThrow(() -> {
             throw new EntidadeNaoEncontradaException(id);
         });
     }
 
-    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        buscar(id).map(estadoAtual -> {
+    public Estado atualizar(Long id, Map<String, Object> propertiesAndValues) {
+        return buscar(id).map(estadoAtual -> {
             CustomBeansUtils.mergeValues(propertiesAndValues, estadoAtual);
-            return estadoRepository.save(estadoAtual);
+            return salvar(estadoAtual);
         }).orElseThrow(() -> {
             throw new EntidadeNaoEncontradaException(id);
         });

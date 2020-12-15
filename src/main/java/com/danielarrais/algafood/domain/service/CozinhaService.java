@@ -29,23 +29,23 @@ public class CozinhaService {
     }
 
     @SneakyThrows
-    public void salvar(Cozinha cozinha) {
-        cozinhaRepository.save(cozinha);
+    public Cozinha salvar(Cozinha cozinha) {
+        return cozinhaRepository.save(cozinha);
     }
 
-    public void atualizar(Long id, Cozinha cozinha) {
-        buscar(id).map(cozinhaAtual -> {
+    public Cozinha atualizar(Long id, Cozinha cozinha) {
+        return buscar(id).map(cozinhaAtual -> {
             BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
-            return cozinhaRepository.save(cozinhaAtual);
+            return salvar(cozinhaAtual);
         }).orElseThrow(() -> {
             throw new EntidadeNaoEncontradaException(id);
         });
     }
 
-    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        buscar(id).map(cozinhaAtual -> {
+    public Cozinha atualizar(Long id, Map<String, Object> propertiesAndValues) {
+        return buscar(id).map(cozinhaAtual -> {
             CustomBeansUtils.mergeValues(propertiesAndValues, cozinhaAtual);
-            return cozinhaRepository.save(cozinhaAtual);
+            return salvar(cozinhaAtual);
         }).orElseThrow(() -> {
             throw new EntidadeNaoEncontradaException(id);
         });

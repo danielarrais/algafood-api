@@ -2,7 +2,6 @@ package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Cidade;
-import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
@@ -34,30 +33,28 @@ CidadeService {
     }
 
     @SneakyThrows
-    public void salvar(Cidade cidade) {
+    public Cidade salvar(Cidade cidade) {
         Long estadoId = cidade.getEstado().getId();
-        Optional<Estado> cozinha = estadoRepository.findById(estadoId);
 
-        cozinha.orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException("Estado", estadoId, true);
-        });
+        estadoRepository.findById(estadoId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Estado", estadoId, true));
 
-        cidadeRepository.save(cidade);
+        return cidadeRepository.save(cidade);
     }
 
-    public void atualizar(Long id, Cidade cidade) {
-        buscar(id).map(cidadeAtual -> {
+    public Cidade atualizar(Long id, Cidade cidade) {
+        return buscar(id).map(cidadeAtual -> {
             BeanUtils.copyProperties(cidade, cidadeAtual, "id");
-            return cidadeRepository.save(cidadeAtual);
+            return salvar(cidadeAtual);
         }).orElseThrow(() -> {
             throw new EntidadeNaoEncontradaException(id);
         });
     }
 
-    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        buscar(id).map(cidadeAtual -> {
+    public Cidade atualizar(Long id, Map<String, Object> propertiesAndValues) {
+        return buscar(id).map(cidadeAtual -> {
             CustomBeansUtils.mergeValues(propertiesAndValues, cidadeAtual);
-            return cidadeRepository.save(cidadeAtual);
+            return salvar(cidadeAtual);
         }).orElseThrow(() -> {
             throw new EntidadeNaoEncontradaException(id);
         });
