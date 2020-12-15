@@ -10,10 +10,11 @@ import java.util.Objects;
 
 public class CustomBeansUtils extends BeanUtils {
     public static <T> void mergeValues(Map<String, Object> dadosOrigem, T destino) {
-        var origemMapper = new ObjectMapper().convertValue(dadosOrigem, destino.getClass());
+        var destinoClass = destino.getClass();
+        var origemMapper = new ObjectMapper().convertValue(dadosOrigem, destinoClass);
 
         dadosOrigem.forEach((nomePropriedade, valorPropriedade) -> {
-            Field field = ReflectionUtils.findField(destino.getClass(), nomePropriedade);
+            Field field = ReflectionUtils.findField(destinoClass, nomePropriedade);
             Objects.requireNonNull(field).setAccessible(true);
 
             Object novoValor = ReflectionUtils.getField(field, origemMapper);
