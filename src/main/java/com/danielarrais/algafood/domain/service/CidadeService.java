@@ -8,7 +8,6 @@ import com.danielarrais.algafood.domain.repository.EstadoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,10 +64,6 @@ CidadeService {
     }
 
     public void remover(Long id) {
-        try {
-            cidadeRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException exception) {
-            throw new EntidadeNaoEncontradaException(id);
-        }
+        cidadeRepository.deleteById(id);
     }
 }

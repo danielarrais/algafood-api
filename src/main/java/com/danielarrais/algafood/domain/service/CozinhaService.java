@@ -6,7 +6,6 @@ import com.danielarrais.algafood.domain.repository.CozinhaRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,10 +52,6 @@ public class CozinhaService {
     }
 
     public void remover(Long id) {
-        try {
-            cozinhaRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException exception) {
-            throw new EntidadeNaoEncontradaException(id);
-        }
+        cozinhaRepository.deleteById(id);
     }
 }
