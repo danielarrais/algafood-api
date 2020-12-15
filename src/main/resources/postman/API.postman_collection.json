@@ -75,7 +75,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Sambaíba\",\n    \"estado\": {\n        \"id\": 1\n    }\n}",
+									"raw": "{\n    \"nome\": \"Sambaíba\",\n    \"estado\": {\n        \"id\": 2\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -102,7 +102,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Sambaíba de Açúcar\",\n    \"estado\": {\n        \"id\": 2\n    }\n}",
+									"raw": "{\n    \"nome\": \"Sambaíba de Açúcar\",\n    \"estado\": {\n        \"id\": 555\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -121,7 +121,41 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "2"
+										}
+									]
+								},
+								"description": "Atualiza cozinha cadastrada na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Cidade",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"estado\": {\n        \"id\": 2\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cidades/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
 										}
 									]
 								},
@@ -258,6 +292,40 @@
 							"name": "Atualizar Cozinha",
 							"request": {
 								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cozinhas/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cozinhas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "26"
+										}
+									]
+								},
+								"description": "Atualiza cozinha cadastrada na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Cozinha",
+							"request": {
+								"method": "PATCH",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -448,6 +516,40 @@
 							"response": []
 						},
 						{
+							"name": "Atualizar Estado",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/estados/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estados",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "26"
+										}
+									]
+								},
+								"description": "Atualiza cozinha cadastrada na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
 							"name": "Deletar Estado",
 							"request": {
 								"method": "DELETE",
@@ -552,7 +654,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Jackin Predident 2\",\n    \"cozinha\": {\n        \"id\": 222\n    }\n}",
+									"raw": "{\n    \"nome\": \"Jackin Predident 2\",\n    \"cozinha\": {\n        \"id\": 26\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -575,11 +677,45 @@
 						{
 							"name": "Atualizar Restaurante",
 							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n    \"cozinha\": {\n        \"id\": 22,\n        \"nome\": \"Francesa e  Italiana\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/restaurantes/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"restaurantes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								},
+								"description": "Atualiza cozinha cadastrada na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Restaurante",
+							"request": {
 								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Jackin Predident\"\n}",
+									"raw": " {\n        \"nome\": \"Jackin Predident\",\n        \"cozinha\": {\n            \"id\": 26,\n            \"nome\": \"Francesa e  Italiana\"\n        }\n    }",
 									"options": {
 										"raw": {
 											"language": "json"
