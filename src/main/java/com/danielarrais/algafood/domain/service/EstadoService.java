@@ -1,18 +1,17 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
 import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
+import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class EstadoService {
@@ -23,48 +22,41 @@ public class EstadoService {
     }
 
     public List<Estado> listar() {
-        return estadoRepository.listar();
+        return estadoRepository.findAll();
     }
 
-    public Estado buscar(long estadoId) {
-        return estadoRepository.buscar(estadoId);
+    public Optional<Estado> buscar(long estadoId) {
+        return estadoRepository.findById(estadoId);
     }
 
+    @SneakyThrows
     public void salvar(Estado estado) {
-        estadoRepository.salvar(estado);
+        estadoRepository.save(estado);
     }
 
     public void atualizar(Long id, Estado estado) {
-        Estado estadoAtual = buscar(id);
-
-        if (Objects.isNull(estadoAtual)) {
+        buscar(id).map(estadoAtual -> {
+            BeanUtils.copyProperties(estado, estadoAtual, "id");
+            return estadoRepository.save(estadoAtual);
+        }).orElseThrow(() -> {
             throw new EntidadeNaoEncontradaException(id);
-        }
-
-        BeanUtils.copyProperties(estado, estadoAtual, "id");
-
-        salvar(estadoAtual);
+        });
     }
 
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        Estado estadoAtual = buscar(id);
-
-        if (Objects.isNull(estadoAtual)) {
+        buscar(id).map(estadoAtual -> {
+            CustomBeansUtils.mergeValues(propertiesAndValues, estadoAtual);
+            return estadoRepository.save(estadoAtual);
+        }).orElseThrow(() -> {
             throw new EntidadeNaoEncontradaException(id);
-        }
-
-        CustomBeansUtils.mergeValues(propertiesAndValues, estadoAtual);
-
-        salvar(estadoAtual);
+        });
     }
 
     public void remover(Long id) {
         try {
-            estadoRepository.remover(id);
+            estadoRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
             throw new EntidadeNaoEncontradaException(id);
-        } catch (DataIntegrityViolationException exception) {
-            throw new EntidadeEmUsoException(id);
         }
     }
 }
