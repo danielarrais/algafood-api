@@ -15,22 +15,22 @@ public class PermissaoRepositoryImpl implements PermissaoRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Permissao> all() {
+    public List<Permissao> listar() {
         return entityManager.createQuery("select c from Permissao as c", Permissao.class).getResultList();
     }
 
     @Transactional
-    public Permissao add(Permissao permissao) {
-        return entityManager.merge(permissao);
+    public void salvar(Permissao permissao) {
+        entityManager.merge(permissao);
     }
 
-    public Permissao find(Long id) {
+    public Permissao buscar(Long id) {
         return entityManager.find(Permissao.class, id);
     }
 
     @Transactional
-    public void remove(Permissao permissao) {
-        permissao = find(permissao.getId());
+    public void remover(Long id) {
+        var permissao = buscar(id);
         entityManager.remove(permissao);
     }
 }

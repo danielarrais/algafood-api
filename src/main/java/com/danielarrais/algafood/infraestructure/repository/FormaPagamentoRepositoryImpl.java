@@ -15,22 +15,22 @@ public class FormaPagamentoRepositoryImpl implements FormaPagamentoRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<FormaPagamento> all() {
+    public List<FormaPagamento> listar() {
         return entityManager.createQuery("select c from FormaPagamento as c", FormaPagamento.class).getResultList();
     }
 
     @Transactional
-    public FormaPagamento add(FormaPagamento formaPagamento) {
-        return entityManager.merge(formaPagamento);
+    public void salvar(FormaPagamento formaPagamento) {
+        entityManager.merge(formaPagamento);
     }
 
-    public FormaPagamento find(Long id) {
+    public FormaPagamento buscar(Long id) {
         return entityManager.find(FormaPagamento.class, id);
     }
 
     @Transactional
-    public void remove(FormaPagamento formaPagamento) {
-        formaPagamento = find(formaPagamento.getId());
+    public void remover(Long id) {
+        var formaPagamento = buscar(id);
         entityManager.remove(formaPagamento);
     }
 }

@@ -5,8 +5,8 @@ import com.danielarrais.algafood.domain.model.Restaurante;
 import java.util.List;
 
 public interface RestauranteRepository {
-    List<Restaurante> all();
-    Restaurante find(Long id);
-    Restaurante add(Restaurante Restaurante);
-    void remove(Restaurante Restaurante);
+    List<Restaurante> listar();
+    Restaurante buscar(Long id);
+    void salvar(Restaurante Restaurante);
+    void remover(Long id);
 }

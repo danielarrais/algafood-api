@@ -2,12 +2,14 @@ package com.danielarrais.algafood.infraestructure.repository;
 
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CozinhaRepositoryImpl implements CozinhaRepository {
@@ -15,22 +17,28 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Cozinha> all() {
+    public List<Cozinha> listar() {
         return entityManager.createQuery("select c from Cozinha as c", Cozinha.class).getResultList();
     }
 
     @Transactional
-    public Cozinha add(Cozinha cozinha) {
-        return entityManager.merge(cozinha);
+    public void salvar(Cozinha cozinha) {
+        entityManager.merge(cozinha);
     }
 
-    public Cozinha find(Long id) {
+    public Cozinha buscar(Long id) {
         return entityManager.find(Cozinha.class, id);
     }
 
     @Transactional
-    public void remove(Cozinha cozinha) {
-        cozinha = find(cozinha.getId());
+    public void remover(Long id) {
+        Cozinha cozinha = Optional
+                .ofNullable(buscar(id))
+                .orElseThrow(() -> {
+                    // Esperava a existência de 1 cozinha
+                    throw new EmptyResultDataAccessException(1);
+                });
+
         entityManager.remove(cozinha);
     }
 }
