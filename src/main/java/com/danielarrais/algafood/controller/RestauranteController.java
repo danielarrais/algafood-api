@@ -77,4 +77,9 @@ public class RestauranteController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/frete-gratis")
+    public List<Restaurante> findComFreteGratis() {
+        return restauranteService.findComFreteGratis();
+    }
 }

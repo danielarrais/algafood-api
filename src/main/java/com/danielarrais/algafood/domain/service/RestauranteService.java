@@ -63,4 +63,8 @@ public class RestauranteService {
     public void remover(Long id) {
         restauranteRepository.deleteById(id);
     }
+
+    public List<Restaurante> findComFreteGratis() {
+        return restauranteRepository.findComFreteGratis();
+    }
 }
