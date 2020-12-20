@@ -2,10 +2,8 @@ package com.danielarrais.algafood.domain.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +17,7 @@ public class Cozinha {
     @EqualsAndHashCode.Include
     private Long id;
     private String nome;
+
+    @OneToMany(mappedBy = Restaurante.Fields.cozinha)
+    private List<Restaurante> restaurantes;
 }
