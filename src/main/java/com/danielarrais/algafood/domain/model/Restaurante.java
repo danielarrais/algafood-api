@@ -28,7 +28,7 @@ public class Restaurante {
     private Boolean ativo;
 
     @CreationTimestamp
-    private LocalDate dataCadastro;
+    @Column(updatable = false)
     private LocalDateTime dataCadastro;
 
     @UpdateTimestamp
