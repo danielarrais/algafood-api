@@ -3,6 +3,7 @@ package com.danielarrais.algafood.domain.service;
 import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.repository.ProdutoRepository;
+import com.danielarrais.algafood.domain.service.validation.ProdutoValidation;
 import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
@@ -16,9 +17,11 @@ import java.util.Optional;
 @Service
 public class ProdutoService {
     private final ProdutoRepository produtoRepository;
+    private final ProdutoValidation produtoValidation;
 
-    public ProdutoService(ProdutoRepository produtoRepository) {
+    public ProdutoService(ProdutoRepository produtoRepository, ProdutoValidation produtoValidation) {
         this.produtoRepository = produtoRepository;
+        this.produtoValidation = produtoValidation;
     }
 
     public List<Produto> listar() {
@@ -31,6 +34,8 @@ public class ProdutoService {
 
     @SneakyThrows
     public void salvar(Produto produto) {
+        produtoValidation.validateExistenceRestaurante(produto);
+
         produtoRepository.save(produto);
     }
 

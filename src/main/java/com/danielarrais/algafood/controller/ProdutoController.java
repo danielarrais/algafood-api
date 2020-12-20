@@ -34,8 +34,13 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody Produto produto) {
-        produtoService.salvar(produto);
+    public ResponseEntity<?> adicionar(@RequestBody Produto produto) {
+        try {
+            produtoService.salvar(produto);
+            return ResponseEntity.noContent().build();
+        } catch (EntidadeNaoEncontradaException exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
@@ -45,7 +50,9 @@ public class ProdutoController {
             produtoService.atualizar(id, produto);
             return ResponseEntity.noContent().build();
         } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
+            return exception.isDependencia() ?
+                    ResponseEntity.badRequest().body(exception.getMessage()) :
+                    ResponseEntity.notFound().build();
         }
     }
 
@@ -56,7 +63,9 @@ public class ProdutoController {
             produtoService.atualizar(id, valores);
             return ResponseEntity.noContent().build();
         } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
+            return exception.isDependencia() ?
+                    ResponseEntity.badRequest().body(exception.getMessage()) :
+                    ResponseEntity.notFound().build();
         }
     }
 

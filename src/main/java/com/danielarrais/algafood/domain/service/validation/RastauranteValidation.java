@@ -11,12 +11,10 @@ import java.util.Objects;
 
 @Component
 public class RastauranteValidation {
-    private final RestauranteRepository restauranteRepository;
     private final CozinhaRepository cozinhaRepository;
     private final CidadeRepository cidadeRepository;
 
     public RastauranteValidation(RestauranteRepository restauranteRepository, CozinhaRepository cozinhaRepository, CidadeRepository cidadeRepository) {
-        this.restauranteRepository = restauranteRepository;
         this.cozinhaRepository = cozinhaRepository;
         this.cidadeRepository = cidadeRepository;
     }
