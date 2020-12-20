@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Cozinha {
     private Long id;
     private String nome;
 
+    @JsonIgnore
     @OneToMany(mappedBy = Restaurante.Fields.cozinha)
     private List<Restaurante> restaurantes;
 }
