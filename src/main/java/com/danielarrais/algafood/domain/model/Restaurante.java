@@ -8,7 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -29,9 +29,10 @@ public class Restaurante {
 
     @CreationTimestamp
     private LocalDate dataCadastro;
+    private LocalDateTime dataCadastro;
 
     @UpdateTimestamp
-    private LocalDate dataAtualizacao;
+    private LocalDateTime dataAtualizacao;
 
     @ManyToOne
     @JoinColumn(name = "cozinha_id")
