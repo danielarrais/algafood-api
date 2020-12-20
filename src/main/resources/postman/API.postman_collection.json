@@ -60,7 +60,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "2"
 										}
 									]
 								},
@@ -136,7 +136,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"estado\": {\n        \"id\": 2\n    }\n}",
+									"raw": "{\n    \"estado\": {\n        \"id\": 55\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -155,7 +155,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "3"
 										}
 									]
 								},
@@ -189,7 +189,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "2"
 										}
 									]
 								},
@@ -197,9 +197,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Cozinha",
@@ -390,9 +388,198 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
+				},
+				{
+					"name": "Forma de Pagamento",
+					"item": [
+						{
+							"name": "LIstar Formas de Pagamento",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/xml",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/formas-pagamento",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"formas-pagamento"
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Forma de Pagamento",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/xml",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/formas-pagamento/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"formas-pagamento",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
+							"name": "Criar Forma de Pagamento",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"descricao\": \"Cartão de Crédito\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/formas-pagamento",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"formas-pagamento"
+									]
+								},
+								"description": "Adiciona nova cozinha na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Forma de Pagamento",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"descricao\": \"Francesa e  Italiana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/formas-pagamento/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"formas-pagamento",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								},
+								"description": "Atualiza cozinha cadastrada na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Forma de Pagamento",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"descricao\": \"Francesa e  Italiana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/formas-pagamento/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"formas-pagamento",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								},
+								"description": "Atualiza cozinha cadastrada na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Forma de Pagamento",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/formas-pagamento/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"formas-pagamento",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								},
+								"description": "Exclui cozinha da base de dados do Alga Food API"
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "Estado",
@@ -541,7 +728,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "26"
+											"value": "2"
 										}
 									]
 								},
@@ -583,9 +770,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Restaurantes",
@@ -648,13 +833,39 @@
 							"response": []
 						},
 						{
+							"name": "Buscar Restaurantes Com Frete Grátis",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/xml",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/restaurantes/frete-gratis",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"restaurantes",
+										"frete-gratis"
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
 							"name": "Criar Restaurante",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Jackin Predident 2\",\n    \"cozinha\": {\n        \"id\": 26\n    }\n}",
+									"raw": "{\n    \"nome\": \"Jackin Predident 2\",\n    \"taxaFrete\": \"0.00\",\n    \"ativo\": \"true\",\n    \"cozinha\": {\n        \"id\": 26\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -681,7 +892,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": " {\n    \"cozinha\": {\n        \"id\": 22,\n        \"nome\": \"Francesa e  Italiana\"\n    }\n}",
+									"raw": "{\n    \"nome\": \"Jackin Predident 2\",\n    \"taxaFrete\": \"10.00\",\n    \"cozinha\": {\n        \"id\": 26\n    },\n    \"formasPagamento\": [\n        {\n            \"id\": 4\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -700,7 +911,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "13"
+											"value": "17"
 										}
 									]
 								},
@@ -776,13 +987,9 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
