@@ -1,17 +1,17 @@
 package com.danielarrais.algafood.infraestructure.repository;
 
-import com.danielarrais.algafood.domain.repository.custom.CustomSimpleJpaRepository;
+import com.danielarrais.algafood.domain.repository.custom.BaseSimpleJpaRepository;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
 
-public class CustomSimpleJpaRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> implements CustomSimpleJpaRepository<T, ID> {
+public class BaseSimpleJpaRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> implements BaseSimpleJpaRepository<T, ID> {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
-    public CustomSimpleJpaRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
+    public BaseSimpleJpaRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
         this.entityManager = entityManager;
     }
