@@ -2,12 +2,10 @@
 #set($MODEL_NAME_CAMEL_CASE = $MODEL_NAME.substring(0, 1).toLowerCase() + $MODEL_NAME.substring(1))
 
 import com.danielarrais.algafood.domain.model.${MODEL_NAME};
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 #parse("File Header.java")
-public interface ${MODEL_NAME}Repository {
-    List<${MODEL_NAME}> all();
-    ${MODEL_NAME} find(Long id);
-    ${MODEL_NAME} add(${MODEL_NAME} ${MODEL_NAME_CAMEL_CASE});
-    void remove(${MODEL_NAME} ${MODEL_NAME_CAMEL_CASE});
+public interface ${MODEL_NAME}Repository  extends JpaRepository<${MODEL_NAME}, Long> {
 }
+

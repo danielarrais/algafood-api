@@ -1,12 +1,10 @@
 package com.danielarrais.algafood.domain.repository;
 
 import com.danielarrais.algafood.domain.model.Restaurante;
+import com.danielarrais.algafood.domain.repository.custom.BaseSimpleJpaRepository;
+import com.danielarrais.algafood.domain.repository.custom.RestauranteRepositoryCustomQueries;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface RestauranteRepository {
-    List<Restaurante> listar();
-    Restaurante buscar(Long id);
-    void salvar(Restaurante Restaurante);
-    void remover(Long id);
+@Repository
+public interface RestauranteRepository extends BaseSimpleJpaRepository<Restaurante, Long>, RestauranteRepositoryCustomQueries {
 }

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/restaurantes")
@@ -27,10 +26,7 @@ public class RestauranteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Restaurante> buscar(@PathVariable Long id) {
-        Restaurante restaurante = restauranteService.buscar(id);
-
-        return Optional
-                .ofNullable(restaurante)
+        return restauranteService.buscar(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -80,5 +76,10 @@ public class RestauranteController {
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/frete-gratis")
+    public List<Restaurante> findComFreteGratis() {
+        return restauranteService.findComFreteGratis();
     }
 }

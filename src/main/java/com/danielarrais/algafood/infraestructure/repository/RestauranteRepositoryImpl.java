@@ -1,44 +1,25 @@
 package com.danielarrais.algafood.infraestructure.repository;
 
 import com.danielarrais.algafood.domain.model.Restaurante;
-import com.danielarrais.algafood.domain.repository.RestauranteRepository;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Component;
+import com.danielarrais.algafood.domain.repository.custom.RestauranteRepositoryCustomQueries;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
-@Component
-public class RestauranteRepositoryImpl implements RestauranteRepository {
+import static com.danielarrais.algafood.infraestructure.spec.RestauranteSpecs.comFreteGratis;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+@Repository
+public class RestauranteRepositoryImpl extends SimpleJpaRepository<Restaurante, Long> implements RestauranteRepositoryCustomQueries {
 
-    public List<Restaurante> listar() {
-        return entityManager.createQuery("select c from Restaurante as c", Restaurante.class).getResultList();
+    @Autowired
+    public RestauranteRepositoryImpl(EntityManager entityManager) {
+        super(Restaurante.class, entityManager);
     }
 
-    @Transactional
-    public void salvar(Restaurante restaurante) {
-        entityManager.merge(restaurante);
-    }
-
-    public Restaurante buscar(Long id) {
-        return entityManager.find(Restaurante.class, id);
-    }
-
-    @Transactional
-    public void remover(Long id) {
-        Restaurante restaurante = Optional
-                .ofNullable(buscar(id))
-                .orElseThrow(() -> {
-                    // Esperava a existência de 1 cozinha
-                    throw new EmptyResultDataAccessException(1);
-                });
-
-        entityManager.remove(restaurante);
+    public List<Restaurante> findComFreteGratis() {
+        return findAll(comFreteGratis());
     }
 }

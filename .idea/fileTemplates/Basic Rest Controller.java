@@ -29,10 +29,7 @@ public class ${MODEL_NAME}Controller {
 
     @GetMapping("/{id}")
     public ResponseEntity<${MODEL_NAME}> buscar(@PathVariable Long id) {
-        ${MODEL_NAME} ${MODEL_NAME_CAMEL_CASE} = ${MODEL_NAME_CAMEL_CASE}Service.buscar(id);
-
-        return Optional
-                .ofNullable(${MODEL_NAME_CAMEL_CASE})
+        return ${MODEL_NAME_CAMEL_CASE}Service.buscar(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
