@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.CreationTimestamp;
@@ -36,6 +37,7 @@ public class Restaurante {
     @JoinColumn(name = "cozinha_id")
     private Cozinha cozinha;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "forma_pagamento_restaurante",
