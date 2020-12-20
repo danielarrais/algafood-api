@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -34,4 +35,11 @@ public class Restaurante {
     @ManyToOne
     @JoinColumn(name = "cozinha_id")
     private Cozinha cozinha;
+
+    @ManyToMany
+    @JoinTable(
+            name = "forma_pagamento_restaurante",
+            joinColumns = @JoinColumn(name = "restaurante_id"),
+            inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
+    private List<FormaPagamento> formasPagamento;
 }
