@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,4 +25,11 @@ public class Usuario {
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime dataCadastro;
+
+    @ManyToMany
+    @JoinTable(
+            name = "usuario_grupo",
+            joinColumns = @JoinColumn(name = "grupo_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+    private List<Grupo> grupos;
 }
