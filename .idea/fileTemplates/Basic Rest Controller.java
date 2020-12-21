@@ -45,7 +45,7 @@ public class ${MODEL_NAME}Controller {
     public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody ${MODEL_NAME} ${MODEL_NAME_CAMEL_CASE}) {
         try {
             ${MODEL_NAME_CAMEL_CASE}Service.atualizar(id, ${MODEL_NAME_CAMEL_CASE});
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.notFound().build();
         }
@@ -56,7 +56,7 @@ public class ${MODEL_NAME}Controller {
     public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
         try {
             ${MODEL_NAME_CAMEL_CASE}Service.atualizar(id, valores);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.notFound().build();
         }
