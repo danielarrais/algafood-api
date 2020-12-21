@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -26,10 +27,11 @@ public class Usuario {
     @Column(updatable = false)
     private LocalDateTime dataCadastro;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "usuario_grupo",
-            joinColumns = @JoinColumn(name = "grupo_id"),
-            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "grupo_id"))
     private List<Grupo> grupos;
 }

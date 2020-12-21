@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,10 +19,11 @@ public class Grupo {
     private Long id;
     private String nome;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "grupo_permissao",
-            joinColumns = @JoinColumn(name = "permissao_id"),
-            inverseJoinColumns = @JoinColumn(name = "grupo_id"))
+            joinColumns = @JoinColumn(name = "grupo_id"),
+            inverseJoinColumns = @JoinColumn(name = "permissao_id"))
     private List<Permissao> permissoes;
 }
