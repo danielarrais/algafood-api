@@ -38,7 +38,6 @@ public class Restaurante {
     @JoinColumn(name = "cozinha_id")
     private Cozinha cozinha;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "forma_pagamento_restaurante",
