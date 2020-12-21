@@ -2,10 +2,8 @@ package com.danielarrais.algafood.domain.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +17,11 @@ public class Grupo {
     @EqualsAndHashCode.Include
     private Long id;
     private String nome;
+
+    @ManyToMany
+    @JoinTable(
+            name = "grupo_permissao",
+            joinColumns = @JoinColumn(name = "permissao_id"),
+            inverseJoinColumns = @JoinColumn(name = "grupo_id"))
+    private List<Permissao> permissoes;
 }
