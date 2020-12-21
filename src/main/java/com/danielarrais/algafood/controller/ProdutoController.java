@@ -33,22 +33,20 @@ public class ProdutoController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> adicionar(@RequestBody Produto produto) {
         try {
             produtoService.salvar(produto);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.badRequest().body(exception.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Produto produto) {
         try {
             produtoService.atualizar(id, produto);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return exception.isDependencia() ?
                     ResponseEntity.badRequest().body(exception.getMessage()) :
@@ -57,11 +55,10 @@ public class ProdutoController {
     }
 
     @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
         try {
             produtoService.atualizar(id, valores);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return exception.isDependencia() ?
                     ResponseEntity.badRequest().body(exception.getMessage()) :

@@ -32,22 +32,20 @@ public class CidadeController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> adicionar(@RequestBody Cidade cidade) {
         try {
             cidadeService.salvar(cidade);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.badRequest().body(exception.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Cidade cidade) {
         try {
             cidadeService.atualizar(id, cidade);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return exception.isDependencia() ?
                     ResponseEntity.badRequest().body(exception.getMessage()) :

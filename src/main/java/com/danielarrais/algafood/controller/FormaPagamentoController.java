@@ -39,11 +39,10 @@ public class FormaPagamentoController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody FormaPagamento formaPagamento) {
         try {
             formaPagamentoService.atualizar(id, formaPagamento);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return exception.isDependencia() ?
                     ResponseEntity.badRequest().body(exception.getMessage()) :
@@ -52,11 +51,10 @@ public class FormaPagamentoController {
     }
 
     @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
         try {
             formaPagamentoService.atualizar(id, valores);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return exception.isDependencia() ?
                     ResponseEntity.badRequest().body(exception.getMessage()) :
