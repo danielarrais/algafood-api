@@ -2,8 +2,8 @@ package com.danielarrais.algafood.controller;
 
 import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
 import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
-import com.danielarrais.algafood.domain.model.Estado;
-import com.danielarrais.algafood.domain.service.EstadoService;
+import com.danielarrais.algafood.domain.model.Permissao;
+import com.danielarrais.algafood.domain.service.PermissaoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,36 +12,37 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/estados")
-public class EstadoController {
-    private final EstadoService estadoService;
+@RequestMapping("/permissoes")
+public class PermissaoController {
+    private final PermissaoService permissaoService;
 
-    public EstadoController(EstadoService estadoService) {
-        this.estadoService = estadoService;
+    public PermissaoController(PermissaoService permissaoService) {
+        this.permissaoService = permissaoService;
     }
 
     @GetMapping()
-    public List<Estado> listar() {
-        return estadoService.listar();
+    public List<Permissao> listar() {
+        return permissaoService.listar();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Estado> buscar(@PathVariable Long id) {
-        return estadoService.buscar(id)
+    public ResponseEntity<Permissao> buscar(@PathVariable Long id) {
+        return permissaoService.buscar(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody Estado estado) {
-        estadoService.salvar(estado);
+    public void adicionar(@RequestBody Permissao permissao) {
+        permissaoService.salvar(permissao);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Estado estado) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Permissao permissao) {
         try {
-            estadoService.atualizar(id, estado);
+            permissaoService.atualizar(id, permissao);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.notFound().build();
@@ -49,9 +50,10 @@ public class EstadoController {
     }
 
     @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
         try {
-            estadoService.atualizar(id, valores);
+            permissaoService.atualizar(id, valores);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.notFound().build();
@@ -61,7 +63,7 @@ public class EstadoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable Long id) {
         try {
-            estadoService.remover(id);
+            permissaoService.remover(id);
             return ResponseEntity.noContent().build();
         } catch (EntidadeEmUsoException exception) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();

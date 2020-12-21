@@ -39,22 +39,20 @@ public class CozinhaController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Cozinha cozinha) {
         try {
             cozinhaService.atualizar(id, cozinha);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
         try {
             cozinhaService.atualizar(id, valores);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.notFound().build();
         }

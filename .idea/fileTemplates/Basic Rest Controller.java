@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/${MODEL_NAME_CAMEL_CASE}s")
@@ -42,14 +42,12 @@ public class ${MODEL_NAME}Controller {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody ${MODEL_NAME} ${MODEL_NAME_CAMEL_CASE}) {
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody ${MODEL_NAME} ${MODEL_NAME_CAMEL_CASE}) {
         try {
             ${MODEL_NAME_CAMEL_CASE}Service.atualizar(id, ${MODEL_NAME_CAMEL_CASE});
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
-            return exception.isDependencia() ?
-                    ResponseEntity.badRequest().body(exception.getMessage()) :
-                    ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -58,11 +56,9 @@ public class ${MODEL_NAME}Controller {
     public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
         try {
             ${MODEL_NAME_CAMEL_CASE}Service.atualizar(id, valores);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
-            return exception.isDependencia() ?
-                    ResponseEntity.badRequest().body(exception.getMessage()) :
-                    ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
     }
 

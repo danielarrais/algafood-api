@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Cozinha {
+public class Grupo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -20,6 +20,10 @@ public class Cozinha {
     private String nome;
 
     @JsonIgnore
-    @OneToMany(mappedBy = Restaurante.Fields.cozinha)
-    private List<Restaurante> restaurantes;
+    @ManyToMany
+    @JoinTable(
+            name = "grupo_permissao",
+            joinColumns = @JoinColumn(name = "grupo_id"),
+            inverseJoinColumns = @JoinColumn(name = "permissao_id"))
+    private List<Permissao> permissoes;
 }

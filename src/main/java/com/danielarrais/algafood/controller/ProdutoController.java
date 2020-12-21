@@ -1,8 +1,9 @@
 package com.danielarrais.algafood.controller;
 
+import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
 import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
-import com.danielarrais.algafood.domain.model.Cidade;
-import com.danielarrais.algafood.domain.service.CidadeService;
+import com.danielarrais.algafood.domain.model.Produto;
+import com.danielarrais.algafood.domain.service.ProdutoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,30 +12,30 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/cidades")
-public class CidadeController {
-    private final CidadeService cidadeService;
+@RequestMapping("/produtos")
+public class ProdutoController {
+    private final ProdutoService produtoService;
 
-    public CidadeController(CidadeService cidadeService) {
-        this.cidadeService = cidadeService;
+    public ProdutoController(ProdutoService produtoService) {
+        this.produtoService = produtoService;
     }
 
     @GetMapping()
-    public List<Cidade> listar() {
-        return cidadeService.listar();
+    public List<Produto> listar() {
+        return produtoService.listar();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cidade> buscar(@PathVariable Long id) {
-        return cidadeService.buscar(id)
+    public ResponseEntity<Produto> buscar(@PathVariable Long id) {
+        return produtoService.buscar(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> adicionar(@RequestBody Cidade cidade) {
+    public ResponseEntity<?> adicionar(@RequestBody Produto produto) {
         try {
-            cidadeService.salvar(cidade);
+            produtoService.salvar(produto);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.badRequest().body(exception.getMessage());
@@ -42,9 +43,9 @@ public class CidadeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Cidade cidade) {
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Produto produto) {
         try {
-            cidadeService.atualizar(id, cidade);
+            produtoService.atualizar(id, produto);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return exception.isDependencia() ?
@@ -54,11 +55,10 @@ public class CidadeController {
     }
 
     @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
         try {
-            cidadeService.atualizar(id, valores);
-            return ResponseEntity.noContent().build();
+            produtoService.atualizar(id, valores);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return exception.isDependencia() ?
                     ResponseEntity.badRequest().body(exception.getMessage()) :
@@ -69,8 +69,10 @@ public class CidadeController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable Long id) {
         try {
-            cidadeService.remover(id);
+            produtoService.remover(id);
             return ResponseEntity.noContent().build();
+        } catch (EntidadeEmUsoException exception) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.notFound().build();
         }

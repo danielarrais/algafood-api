@@ -1,10 +1,11 @@
 package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
-import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.model.Restaurante;
+import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
 import com.danielarrais.algafood.domain.repository.RestauranteRepository;
+import com.danielarrais.algafood.domain.service.validation.RastauranteValidation;
 import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
@@ -17,11 +18,11 @@ import java.util.Optional;
 @Service
 public class RestauranteService {
     private final RestauranteRepository restauranteRepository;
-    private final CozinhaRepository cozinhaRepository;
+    private final RastauranteValidation rastauranteValidation;
 
-    public RestauranteService(RestauranteRepository restauranteRepository, CozinhaRepository cozinhaRepository) {
+    public RestauranteService(RestauranteRepository restauranteRepository, CozinhaRepository cozinhaRepository, CidadeRepository cidadeRepository, RastauranteValidation rastauranteValidation) {
         this.restauranteRepository = restauranteRepository;
-        this.cozinhaRepository = cozinhaRepository;
+        this.rastauranteValidation = rastauranteValidation;
     }
 
     public List<Restaurante> listar() {
@@ -34,10 +35,8 @@ public class RestauranteService {
 
     @SneakyThrows
     public Restaurante salvar(Restaurante restaurante) {
-        Long cozinhaId = restaurante.getCozinha().getId();
-        Optional<Cozinha> cozinha = cozinhaRepository.findById(cozinhaId);
-
-        cozinha.orElseThrow(() -> new EntidadeNaoEncontradaException("Cozinha", cozinhaId, true));
+        rastauranteValidation.validateExistenceCozinha(restaurante);
+        rastauranteValidation.validateExistenceCidade(restaurante);
 
         return restauranteRepository.save(restaurante);
     }
