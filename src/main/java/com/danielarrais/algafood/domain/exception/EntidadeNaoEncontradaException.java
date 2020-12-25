@@ -2,13 +2,14 @@ package com.danielarrais.algafood.domain.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.server.ResponseStatusException;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class EntidadeNaoEncontradaException extends RuntimeException {
+@ResponseStatus
+public class EntidadeNaoEncontradaException extends ResponseStatusException {
     private Boolean dependencia = false;
 
     public EntidadeNaoEncontradaException(Long idRegistro) {
-        super(String.format("Registro de código %d não existe", idRegistro));
+        super(HttpStatus.NOT_FOUND, String.format("Registro de código %d não existe", idRegistro));
     }
 
     public EntidadeNaoEncontradaException(String entidade, Long idRegistro) {
@@ -16,7 +17,7 @@ public class EntidadeNaoEncontradaException extends RuntimeException {
     }
 
     public EntidadeNaoEncontradaException(String entidade, Long idRegistro, Boolean dependencia) {
-        super(String.format("%s de código %d não existe", entidade, idRegistro));
+        super(HttpStatus.NOT_FOUND, String.format("%s de código %d não existe", entidade, idRegistro));
         this.dependencia = dependencia;
     }
 
