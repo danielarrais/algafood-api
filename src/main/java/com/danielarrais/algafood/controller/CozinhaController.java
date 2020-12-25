@@ -39,34 +39,20 @@ public class CozinhaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Cozinha cozinha) {
-        try {
-            cozinhaService.atualizar(id, cozinha);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public void atualizar(@PathVariable Long id, @RequestBody Cozinha cozinha) {
+        cozinhaService.atualizar(id, cozinha);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
-        try {
-            cozinhaService.atualizar(id, valores);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+        cozinhaService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable Long id) {
-        try {
-            cozinhaService.remover(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntidadeEmUsoException exception) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remover(@PathVariable Long id) {
+        cozinhaService.remover(id);
     }
 }
