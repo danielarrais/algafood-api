@@ -55,6 +55,16 @@ INSERT INTO forma_pagamento (descricao) VALUES ('Cartão de débito'); -- 3
 INSERT INTO forma_pagamento (descricao) VALUES ('Boleto bancário'); -- 4
 INSERT INTO forma_pagamento (descricao) VALUES ('Cartão de crédito'); -- 5
 
+-- Inserts Produtos
+INSERT INTO public.produto (descricao, preco, ativo, restaurante_id) VALUES ('Prato feito', 10.00, true, 1); -- 1
+INSERT INTO public.produto (descricao, preco, ativo, restaurante_id) VALUES ('Churrasco', 50.00, true, 2); -- 2
+INSERT INTO public.produto (descricao, preco, ativo, restaurante_id) VALUES ('Espetinho', 15.00, true, 3); -- 3
+INSERT INTO public.produto (descricao, preco, ativo, restaurante_id) VALUES ('Cozido', 18.00, true, 4); -- 4
+INSERT INTO public.produto (descricao, preco, ativo, restaurante_id) VALUES ('Macarrão', 10.00, true, 1); -- 5
+INSERT INTO public.produto (descricao, preco, ativo, restaurante_id) VALUES ('Refrigerante 350ML', 3.50, true, 2); -- 6
+INSERT INTO public.produto (descricao, preco, ativo, restaurante_id) VALUES ('Suco Laranja', 5.00, true, 3); -- 7
+INSERT INTO public.produto (descricao, preco, ativo, restaurante_id) VALUES ('Suco Abacaxi', 8.00, true, 4); -- 8
+
 -- Inserts Formas de Pagamento
 INSERT INTO forma_pagamento_restaurante (restaurante_id, forma_pagamento_id) VALUES (1, 1);
 INSERT INTO forma_pagamento_restaurante (restaurante_id, forma_pagamento_id) VALUES (2, 1);
