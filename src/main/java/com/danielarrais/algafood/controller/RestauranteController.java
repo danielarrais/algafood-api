@@ -32,47 +32,26 @@ public class RestauranteController {
     }
 
     @PostMapping
-    public ResponseEntity<?> adicionar(@RequestBody Restaurante restaurante) {
-        try {
-            restauranteService.salvar(restaurante);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.badRequest().body(exception.getMessage());
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public void adicionar(@RequestBody Restaurante restaurante) {
+        restauranteService.salvar(restaurante);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Restaurante restaurante) {
-        try {
-            restauranteService.atualizar(id, restaurante);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return exception.isDependencia() ?
-                    ResponseEntity.badRequest().body(exception.getMessage()) :
-                    ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public void atualizar(@PathVariable Long id, @RequestBody Restaurante restaurante) {
+        restauranteService.atualizar(id, restaurante);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
-        try {
-            restauranteService.atualizar(id, valores);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return exception.isDependencia() ?
-                    ResponseEntity.badRequest().body(exception.getMessage()) :
-                    ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+        restauranteService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable Long id) {
-        try {
-            restauranteService.remover(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    public void remover(@PathVariable Long id) {
+        restauranteService.remover(id);
     }
 
     @GetMapping("/frete-gratis")
