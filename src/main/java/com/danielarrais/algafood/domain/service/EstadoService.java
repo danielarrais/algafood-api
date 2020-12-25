@@ -1,11 +1,14 @@
 package com.danielarrais.algafood.domain.service;
 
+import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
 import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,6 +55,12 @@ public class EstadoService {
     }
 
     public void remover(Long id) {
-        estadoRepository.deleteById(id);
+        try {
+            estadoRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new EntidadeNaoEncontradaException(id);
+        } catch (DataIntegrityViolationException exception) {
+            throw new EntidadeEmUsoException(id);
+        }
     }
 }
