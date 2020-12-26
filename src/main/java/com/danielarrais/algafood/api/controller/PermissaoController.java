@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.controller;
+package com.danielarrais.algafood.api.controller;
 
 import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.service.PermissaoService;
