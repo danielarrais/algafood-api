@@ -3,7 +3,6 @@ package com.danielarrais.algafood.controller;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.service.UsuarioService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,10 +23,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscar(@PathVariable Long id) {
-        return usuarioService.buscar(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Usuario buscar(@PathVariable Long id) {
+        return usuarioService.buscarObrigatorio(id);
     }
 
     @PostMapping

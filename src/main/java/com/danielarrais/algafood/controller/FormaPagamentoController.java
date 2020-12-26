@@ -3,7 +3,6 @@ package com.danielarrais.algafood.controller;
 import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.service.FormaPagamentoService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,10 +23,8 @@ public class FormaPagamentoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FormaPagamento> buscar(@PathVariable Long id) {
-        return formaPagamentoService.buscar(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public FormaPagamento buscar(@PathVariable Long id) {
+        return formaPagamentoService.buscarObrigatorio(id);
     }
 
     @PostMapping

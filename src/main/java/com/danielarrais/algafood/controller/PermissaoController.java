@@ -3,7 +3,6 @@ package com.danielarrais.algafood.controller;
 import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.service.PermissaoService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,10 +23,8 @@ public class PermissaoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Permissao> buscar(@PathVariable Long id) {
-        return permissaoService.buscar(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Permissao buscar(@PathVariable Long id) {
+        return permissaoService.buscarObrigatorio(id);
     }
 
     @PostMapping

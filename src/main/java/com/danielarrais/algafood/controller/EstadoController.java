@@ -3,7 +3,6 @@ package com.danielarrais.algafood.controller;
 import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.service.EstadoService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,10 +23,8 @@ public class EstadoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Estado> buscar(@PathVariable Long id) {
-        return estadoService.buscar(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Estado buscar(@PathVariable Long id) {
+        return estadoService.buscarObrigatorio(id);
     }
 
     @PostMapping

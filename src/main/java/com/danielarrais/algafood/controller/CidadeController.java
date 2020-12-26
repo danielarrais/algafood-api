@@ -3,7 +3,6 @@ package com.danielarrais.algafood.controller;
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.service.CidadeService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,10 +23,8 @@ public class CidadeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cidade> buscar(@PathVariable Long id) {
-        return cidadeService.buscar(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Cidade buscar(@PathVariable Long id) {
+        return cidadeService.buscarObrigatorio(id);
     }
 
     @PostMapping

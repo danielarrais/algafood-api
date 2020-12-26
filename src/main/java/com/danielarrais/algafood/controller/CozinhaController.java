@@ -3,7 +3,6 @@ package com.danielarrais.algafood.controller;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.service.CozinhaService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,10 +23,8 @@ public class CozinhaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cozinha> buscar(@PathVariable Long id) {
-        return cozinhaService.buscar(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Cozinha buscar(@PathVariable Long id) {
+        return cozinhaService.buscarObrigatorio(id);
     }
 
     @PostMapping
