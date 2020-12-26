@@ -40,6 +40,7 @@ public class RestauranteService {
     public Restaurante salvar(Restaurante restaurante) {
         rastauranteValidation.validateExistenceCozinha(restaurante);
         rastauranteValidation.validateExistenceCidade(restaurante);
+        rastauranteValidation.validateExistenceFormasPagamento(restaurante);
 
         return restauranteRepository.save(restaurante);
     }

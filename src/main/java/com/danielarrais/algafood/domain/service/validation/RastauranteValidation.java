@@ -4,7 +4,7 @@ import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaExcept
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
-import com.danielarrais.algafood.domain.repository.RestauranteRepository;
+import com.danielarrais.algafood.domain.repository.FormaPagamentoRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -13,10 +13,12 @@ import java.util.Objects;
 public class RastauranteValidation {
     private final CozinhaRepository cozinhaRepository;
     private final CidadeRepository cidadeRepository;
+    private final FormaPagamentoRepository formaPagamentoRepository;
 
-    public RastauranteValidation(RestauranteRepository restauranteRepository, CozinhaRepository cozinhaRepository, CidadeRepository cidadeRepository) {
+    public RastauranteValidation(CozinhaRepository cozinhaRepository, CidadeRepository cidadeRepository, FormaPagamentoRepository formaPagamentoRepository) {
         this.cozinhaRepository = cozinhaRepository;
         this.cidadeRepository = cidadeRepository;
+        this.formaPagamentoRepository = formaPagamentoRepository;
     }
 
     public void validateExistenceCozinha(Restaurante restaurante) {
@@ -26,6 +28,18 @@ public class RastauranteValidation {
         if (!existsCozinha) {
             throw new DependenciaNaoEncontradaException("Cozinha", cozinhaId);
         }
+    }
+
+    public void validateExistenceFormasPagamento(Restaurante restaurante) {
+        restaurante.getFormasPagamento().forEach(formaPagamento -> {
+            Long formaPagamentoId = formaPagamento.getId();
+            boolean existsFormaPagamento = formaPagamentoRepository.existsById(formaPagamentoId);
+
+            if (!existsFormaPagamento) {
+                throw new DependenciaNaoEncontradaException("Forma de Pagamento", formaPagamentoId);
+            }
+        });
+
     }
 
     public void validateExistenceCidade(Restaurante restaurante) {
