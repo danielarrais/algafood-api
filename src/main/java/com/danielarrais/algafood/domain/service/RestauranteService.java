@@ -38,9 +38,7 @@ public class RestauranteService {
 
     @SneakyThrows
     public Restaurante salvar(Restaurante restaurante) {
-        rastauranteValidation.validateExistenceCozinha(restaurante);
-        rastauranteValidation.validateExistenceCidade(restaurante);
-        rastauranteValidation.validateExistenceFormasPagamento(restaurante);
+        rastauranteValidation.validateAllDependencies(restaurante);
 
         return restauranteRepository.save(restaurante);
     }

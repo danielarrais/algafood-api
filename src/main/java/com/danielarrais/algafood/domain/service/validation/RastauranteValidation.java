@@ -21,7 +21,13 @@ public class RastauranteValidation {
         this.formaPagamentoRepository = formaPagamentoRepository;
     }
 
-    public void validateExistenceCozinha(Restaurante restaurante) {
+    public void validateAllDependencies(Restaurante restaurante) {
+        this.validateExistenceCozinha(restaurante);
+        this.validateExistenceCidade(restaurante);
+        this.validateExistenceFormasPagamento(restaurante);
+    }
+
+    private void validateExistenceCozinha(Restaurante restaurante) {
         Long cozinhaId = restaurante.getCozinha().getId();
         boolean existsCozinha = cozinhaRepository.existsById(cozinhaId);
 
@@ -30,7 +36,7 @@ public class RastauranteValidation {
         }
     }
 
-    public void validateExistenceFormasPagamento(Restaurante restaurante) {
+    private void validateExistenceFormasPagamento(Restaurante restaurante) {
         restaurante.getFormasPagamento().forEach(formaPagamento -> {
             Long formaPagamentoId = formaPagamento.getId();
             boolean existsFormaPagamento = formaPagamentoRepository.existsById(formaPagamentoId);
@@ -42,7 +48,7 @@ public class RastauranteValidation {
 
     }
 
-    public void validateExistenceCidade(Restaurante restaurante) {
+    private void validateExistenceCidade(Restaurante restaurante) {
         if (Objects.isNull(restaurante) ||
                 Objects.isNull(restaurante.getEndereco()) ||
                 Objects.isNull(restaurante.getEndereco().getCidade())) {
