@@ -1,7 +1,8 @@
 package com.danielarrais.algafood.domain.service;
 
+import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
@@ -40,7 +41,7 @@ CidadeService {
         Long estadoId = cidade.getEstado().getId();
 
         estadoRepository.findById(estadoId)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Estado", estadoId, true));
+                .orElseThrow(() -> new DependenciaNaoEncontradaException("Estado", estadoId));
 
         return cidadeRepository.save(cidade);
     }
@@ -50,7 +51,7 @@ CidadeService {
             BeanUtils.copyProperties(cidade, cidadeAtual, "id");
             return salvar(cidadeAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         });
     }
 
@@ -59,7 +60,7 @@ CidadeService {
             CustomBeansUtils.mergeValues(propertiesAndValues, cidadeAtual);
             return salvar(cidadeAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         });
     }
 
@@ -67,7 +68,7 @@ CidadeService {
         try {
             cidadeRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new EntidadeEmUsoException(id);
         }

@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.repository.PermissaoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
@@ -41,7 +41,7 @@ public class PermissaoService {
             BeanUtils.copyProperties(permissao, permissaoAtual, "id");
             return permissaoRepository.save(permissaoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         });
     }
 
@@ -50,7 +50,7 @@ public class PermissaoService {
             CustomBeansUtils.mergeValues(propertiesAndValues, permissaoAtual);
             return permissaoRepository.save(permissaoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         });
     }
 
@@ -58,7 +58,7 @@ public class PermissaoService {
         try {
             permissaoRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new EntidadeEmUsoException(id);
         }

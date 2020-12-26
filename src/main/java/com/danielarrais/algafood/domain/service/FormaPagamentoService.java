@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.repository.FormaPagamentoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
@@ -41,7 +41,7 @@ public class FormaPagamentoService {
             BeanUtils.copyProperties(formaPagamento, formaPagamentoAtual, "id");
             return formaPagamentoRepository.save(formaPagamentoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         });
     }
 
@@ -50,7 +50,7 @@ public class FormaPagamentoService {
             CustomBeansUtils.mergeValues(propertiesAndValues, formaPagamentoAtual);
             return formaPagamentoRepository.save(formaPagamentoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         });
     }
 
@@ -58,7 +58,7 @@ public class FormaPagamentoService {
         try {
             formaPagamentoRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new EntidadeEmUsoException(id);
         }

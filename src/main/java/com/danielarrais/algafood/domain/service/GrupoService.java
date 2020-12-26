@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Grupo;
 import com.danielarrais.algafood.domain.repository.GrupoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
@@ -41,7 +41,7 @@ public class GrupoService {
             BeanUtils.copyProperties(grupo, grupoAtual, "id");
             return grupoRepository.save(grupoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         });
     }
 
@@ -50,7 +50,7 @@ public class GrupoService {
             CustomBeansUtils.mergeValues(propertiesAndValues, grupoAtual);
             return grupoRepository.save(grupoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         });
     }
 
@@ -58,7 +58,7 @@ public class GrupoService {
         try {
             grupoRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new EntidadeEmUsoException(id);
         }

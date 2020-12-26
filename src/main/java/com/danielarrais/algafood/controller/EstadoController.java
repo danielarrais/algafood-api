@@ -1,7 +1,5 @@
 package com.danielarrais.algafood.controller;
 
-import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.service.EstadoService;
 import org.springframework.http.HttpStatus;
@@ -39,34 +37,19 @@ public class EstadoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody Estado estado) {
-        try {
-            estadoService.atualizar(id, estado);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public void atualizar(@PathVariable Long id, @RequestBody Estado estado) {
+        estadoService.atualizar(id, estado);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
-        try {
-            estadoService.atualizar(id, valores);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+        estadoService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable Long id) {
-        try {
-            estadoService.remover(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntidadeEmUsoException exception) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    public void remover(@PathVariable Long id) {
+        estadoService.remover(id);
     }
 }

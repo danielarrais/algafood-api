@@ -1,6 +1,5 @@
 package com.danielarrais.algafood.controller;
 
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.service.CidadeService;
 import org.springframework.http.HttpStatus;
@@ -32,47 +31,24 @@ public class CidadeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> adicionar(@RequestBody Cidade cidade) {
-        try {
-            cidadeService.salvar(cidade);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.badRequest().body(exception.getMessage());
-        }
+    public void adicionar(@RequestBody Cidade cidade) {
+        cidadeService.salvar(cidade);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Cidade cidade) {
-        try {
-            cidadeService.atualizar(id, cidade);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return exception.isDependencia() ?
-                    ResponseEntity.badRequest().body(exception.getMessage()) :
-                    ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public void atualizar(@PathVariable Long id, @RequestBody Cidade cidade) {
+        cidadeService.atualizar(id, cidade);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
-        try {
-            cidadeService.atualizar(id, valores);
-            return ResponseEntity.noContent().build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return exception.isDependencia() ?
-                    ResponseEntity.badRequest().body(exception.getMessage()) :
-                    ResponseEntity.notFound().build();
-        }
+    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+        cidadeService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable Long id) {
-        try {
-            cidadeService.remover(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    public void remover(@PathVariable Long id) {
+        cidadeService.remover(id);
     }
 }

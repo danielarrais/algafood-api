@@ -1,7 +1,5 @@
 package com.danielarrais.algafood.controller;
 
-import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.service.CozinhaService;
 import org.springframework.http.HttpStatus;

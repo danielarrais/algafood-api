@@ -1,7 +1,5 @@
 package com.danielarrais.algafood.controller;
 
-import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.service.ProdutoService;
 import org.springframework.http.HttpStatus;
@@ -33,48 +31,25 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ResponseEntity<?> adicionar(@RequestBody Produto produto) {
-        try {
-            produtoService.salvar(produto);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.badRequest().body(exception.getMessage());
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public void adicionar(@RequestBody Produto produto) {
+        produtoService.salvar(produto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Produto produto) {
-        try {
-            produtoService.atualizar(id, produto);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return exception.isDependencia() ?
-                    ResponseEntity.badRequest().body(exception.getMessage()) :
-                    ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public void atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+        produtoService.atualizar(id, produto);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
-        try {
-            produtoService.atualizar(id, valores);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return exception.isDependencia() ?
-                    ResponseEntity.badRequest().body(exception.getMessage()) :
-                    ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+        produtoService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable Long id) {
-        try {
-            produtoService.remover(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntidadeEmUsoException exception) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    public void remover(@PathVariable Long id) {
+        produtoService.remover(id);
     }
 }

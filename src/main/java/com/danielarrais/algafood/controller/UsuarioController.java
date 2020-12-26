@@ -1,7 +1,5 @@
 package com.danielarrais.algafood.controller;
 
-import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.service.UsuarioService;
 import org.springframework.http.HttpStatus;
@@ -40,35 +38,18 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
-        try {
-            usuarioService.atualizar(id, usuario);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    public void atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
+        usuarioService.atualizar(id, usuario);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
-        try {
-            usuarioService.atualizar(id, valores);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+        usuarioService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable Long id) {
-        try {
-            usuarioService.remover(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntidadeEmUsoException exception) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        } catch (EntidadeNaoEncontradaException exception) {
-            return ResponseEntity.notFound().build();
-        }
+    public void remover(@PathVariable Long id) {
+        usuarioService.remover(id);
     }
 }

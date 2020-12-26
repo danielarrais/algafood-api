@@ -1,6 +1,6 @@
 package com.danielarrais.algafood.domain.service.validation;
 
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
@@ -24,7 +24,7 @@ public class RastauranteValidation {
         boolean existsCozinha = cozinhaRepository.existsById(cozinhaId);
 
         if (!existsCozinha) {
-            throw new EntidadeNaoEncontradaException("Cozinha", cozinhaId, true);
+            throw new DependenciaNaoEncontradaException("Cozinha", cozinhaId);
         }
     }
 
@@ -39,7 +39,7 @@ public class RastauranteValidation {
         boolean existsCidade = cidadeRepository.existsById(cidadeId);
 
         if (!existsCidade) {
-            throw new EntidadeNaoEncontradaException("Cidade", cidadeId, true);
+            throw new DependenciaNaoEncontradaException("Cidade", cidadeId);
         }
     }
 }

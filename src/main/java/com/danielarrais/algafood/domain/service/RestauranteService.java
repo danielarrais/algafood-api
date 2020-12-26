@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
@@ -49,7 +49,7 @@ public class RestauranteService {
             BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
             return salvar(restauranteAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         });
     }
 
@@ -58,7 +58,7 @@ public class RestauranteService {
             CustomBeansUtils.mergeValues(propertiesAndValues, restauranteAtual);
             return salvar(restauranteAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         });
     }
 
@@ -66,7 +66,7 @@ public class RestauranteService {
         try {
             restauranteRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradaException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new EntidadeEmUsoException(id);
         }
