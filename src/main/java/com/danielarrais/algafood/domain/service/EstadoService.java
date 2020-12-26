@@ -31,6 +31,12 @@ public class EstadoService {
         return estadoRepository.findById(estadoId);
     }
 
+    public Estado buscarObrigatorio(long estadoId) {
+        return buscar(estadoId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradaException(estadoId);
+        });
+    }
+
     @SneakyThrows
     public Estado salvar(Estado estado) {
         return estadoRepository.save(estado);

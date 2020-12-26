@@ -31,6 +31,12 @@ public class UsuarioService {
         return usuarioRepository.findById(usuarioId);
     }
 
+    public Usuario buscarObrigatorio(long usuarioId) {
+        return buscar(usuarioId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradaException(usuarioId);
+        });
+    }
+
     @SneakyThrows
     public void salvar(Usuario usuario) {
         usuarioRepository.save(usuario);

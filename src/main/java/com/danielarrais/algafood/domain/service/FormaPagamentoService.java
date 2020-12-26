@@ -31,6 +31,12 @@ public class FormaPagamentoService {
         return formaPagamentoRepository.findById(formaPagamentoId);
     }
 
+    public FormaPagamento buscarObrigatorio(long formaPagamentoId) {
+        return buscar(formaPagamentoId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradaException(formaPagamentoId);
+        });
+    }
+
     @SneakyThrows
     public void salvar(FormaPagamento formaPagamento) {
         formaPagamentoRepository.save(formaPagamento);

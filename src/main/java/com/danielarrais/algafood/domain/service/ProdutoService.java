@@ -32,6 +32,12 @@ public class ProdutoService {
         return produtoRepository.findById(produtoId);
     }
 
+    public Produto buscarObrigatorio(long produtoId) {
+        return buscar(produtoId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradaException(produtoId);
+        });
+    }
+
     @SneakyThrows
     public void salvar(Produto produto) {
         produtoValidation.validateExistenceRestaurante(produto);

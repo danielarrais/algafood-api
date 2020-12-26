@@ -31,6 +31,12 @@ public class CozinhaService {
         return cozinhaRepository.findById(cozinhaId);
     }
 
+    public Cozinha buscarObrigatorio(long cozinhaId) {
+        return buscar(cozinhaId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradaException(cozinhaId);
+        });
+    }
+
     @SneakyThrows
     public Cozinha salvar(Cozinha cozinha) {
         return cozinhaRepository.save(cozinha);

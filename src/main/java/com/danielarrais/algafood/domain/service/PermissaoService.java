@@ -31,6 +31,12 @@ public class PermissaoService {
         return permissaoRepository.findById(permissaoId);
     }
 
+    public Permissao buscarObrigatorio(long permissao) {
+        return buscar(permissao).orElseThrow(() -> {
+            throw new RegistroNaoEncontradaException(permissao);
+        });
+    }
+
     @SneakyThrows
     public void salvar(Permissao permissao) {
         permissaoRepository.save(permissao);

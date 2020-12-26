@@ -31,6 +31,12 @@ public class GrupoService {
         return grupoRepository.findById(grupoId);
     }
 
+    public Grupo buscarObrigatorio(long grupoId) {
+        return buscar(grupoId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradaException(grupoId);
+        });
+    }
+
     @SneakyThrows
     public void salvar(Grupo grupo) {
         grupoRepository.save(grupo);

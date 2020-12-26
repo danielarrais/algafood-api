@@ -3,8 +3,6 @@ package com.danielarrais.algafood.domain.service;
 import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Restaurante;
-import com.danielarrais.algafood.domain.repository.CidadeRepository;
-import com.danielarrais.algafood.domain.repository.CozinhaRepository;
 import com.danielarrais.algafood.domain.repository.RestauranteRepository;
 import com.danielarrais.algafood.domain.service.validation.RastauranteValidation;
 import com.danielarrais.algafood.util.CustomBeansUtils;
@@ -23,7 +21,7 @@ public class RestauranteService {
     private final RestauranteRepository restauranteRepository;
     private final RastauranteValidation rastauranteValidation;
 
-    public RestauranteService(RestauranteRepository restauranteRepository, CozinhaRepository cozinhaRepository, CidadeRepository cidadeRepository, RastauranteValidation rastauranteValidation) {
+    public RestauranteService(RestauranteRepository restauranteRepository, RastauranteValidation rastauranteValidation) {
         this.restauranteRepository = restauranteRepository;
         this.rastauranteValidation = rastauranteValidation;
     }
@@ -34,6 +32,12 @@ public class RestauranteService {
 
     public Optional<Restaurante> buscar(long restauranteId) {
         return restauranteRepository.findById(restauranteId);
+    }
+
+    public Restaurante buscarObrigatorio(long restauranteId) {
+        return buscar(restauranteId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradaException(restauranteId);
+        });
     }
 
     @SneakyThrows

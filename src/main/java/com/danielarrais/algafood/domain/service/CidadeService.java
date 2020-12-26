@@ -36,6 +36,12 @@ CidadeService {
         return cidadeRepository.findById(cidadeId);
     }
 
+    public Cidade buscarObrigatorio(long cidadeId) {
+        return buscar(cidadeId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradaException(cidadeId);
+        });
+    }
+
     @SneakyThrows
     public Cidade salvar(Cidade cidade) {
         Long estadoId = cidade.getEstado().getId();
