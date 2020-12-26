@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Grupo;
 import com.danielarrais.algafood.domain.repository.GrupoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
@@ -33,7 +33,7 @@ public class GrupoService {
 
     public Grupo buscarObrigatorio(long grupoId) {
         return buscar(grupoId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(grupoId);
+            throw new RegistroNaoEncontradoException(grupoId);
         });
     }
 
@@ -47,7 +47,7 @@ public class GrupoService {
             BeanUtils.copyProperties(grupo, grupoAtual, "id");
             return grupoRepository.save(grupoAtual);
         }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -56,7 +56,7 @@ public class GrupoService {
             CustomBeansUtils.mergeValues(propertiesAndValues, grupoAtual);
             return grupoRepository.save(grupoAtual);
         }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -64,7 +64,7 @@ public class GrupoService {
         try {
             grupoRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new EntidadeEmUsoException(id);
         }

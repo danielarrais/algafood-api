@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
@@ -33,7 +33,7 @@ public class CozinhaService {
 
     public Cozinha buscarObrigatorio(long cozinhaId) {
         return buscar(cozinhaId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(cozinhaId);
+            throw new RegistroNaoEncontradoException(cozinhaId);
         });
     }
 
@@ -47,7 +47,7 @@ public class CozinhaService {
             BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
             return salvar(cozinhaAtual);
         }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -56,7 +56,7 @@ public class CozinhaService {
             CustomBeansUtils.mergeValues(propertiesAndValues, cozinhaAtual);
             return salvar(cozinhaAtual);
         }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -64,7 +64,7 @@ public class CozinhaService {
         try {
             cozinhaRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new EntidadeEmUsoException(id);
         }

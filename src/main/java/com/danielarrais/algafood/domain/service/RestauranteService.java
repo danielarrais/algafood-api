@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.repository.RestauranteRepository;
 import com.danielarrais.algafood.domain.service.validation.RastauranteValidation;
@@ -36,7 +36,7 @@ public class RestauranteService {
 
     public Restaurante buscarObrigatorio(long restauranteId) {
         return buscar(restauranteId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(restauranteId);
+            throw new RegistroNaoEncontradoException(restauranteId);
         });
     }
 
@@ -52,7 +52,7 @@ public class RestauranteService {
             BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
             return salvar(restauranteAtual);
         }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -61,7 +61,7 @@ public class RestauranteService {
             CustomBeansUtils.mergeValues(propertiesAndValues, restauranteAtual);
             return salvar(restauranteAtual);
         }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -69,7 +69,7 @@ public class RestauranteService {
         try {
             restauranteRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new EntidadeEmUsoException(id);
         }

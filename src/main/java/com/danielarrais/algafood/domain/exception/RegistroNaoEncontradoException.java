@@ -4,11 +4,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class RegistroNaoEncontradaException extends RuntimeException {
-    public RegistroNaoEncontradaException(Long idRegistro) {
+public class RegistroNaoEncontradoException extends RuntimeException {
+    public RegistroNaoEncontradoException(Long idRegistro) {
         super(String.format("Registro de código %d não existe", idRegistro));
     }
-    public RegistroNaoEncontradaException(String erro) {
+
+    public RegistroNaoEncontradoException(String erro) {
         super(erro);
     }
 }

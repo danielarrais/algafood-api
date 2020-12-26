@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
-import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.repository.UsuarioRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
@@ -33,7 +33,7 @@ public class UsuarioService {
 
     public Usuario buscarObrigatorio(long usuarioId) {
         return buscar(usuarioId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(usuarioId);
+            throw new RegistroNaoEncontradoException(usuarioId);
         });
     }
 
@@ -47,7 +47,7 @@ public class UsuarioService {
             BeanUtils.copyProperties(usuario, usuarioAtual, "id");
             return usuarioRepository.save(usuarioAtual);
         }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -56,7 +56,7 @@ public class UsuarioService {
             CustomBeansUtils.mergeValues(propertiesAndValues, usuarioAtual);
             return usuarioRepository.save(usuarioAtual);
         }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -64,7 +64,7 @@ public class UsuarioService {
         try {
             usuarioRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new EntidadeEmUsoException(id);
         }

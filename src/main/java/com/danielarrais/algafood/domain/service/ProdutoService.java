@@ -1,6 +1,6 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.repository.ProdutoRepository;
 import com.danielarrais.algafood.domain.service.validation.ProdutoValidation;
@@ -34,7 +34,7 @@ public class ProdutoService {
 
     public Produto buscarObrigatorio(long produtoId) {
         return buscar(produtoId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(produtoId);
+            throw new RegistroNaoEncontradoException(produtoId);
         });
     }
 
@@ -50,7 +50,7 @@ public class ProdutoService {
             BeanUtils.copyProperties(produto, produtoAtual, "id");
             return produtoRepository.save(produtoAtual);
         }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -59,7 +59,7 @@ public class ProdutoService {
             CustomBeansUtils.mergeValues(propertiesAndValues, produtoAtual);
             return produtoRepository.save(produtoAtual);
         }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -67,7 +67,7 @@ public class ProdutoService {
         try {
             produtoRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         }
     }
 }
