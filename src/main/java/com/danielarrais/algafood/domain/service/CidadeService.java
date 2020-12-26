@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
-import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
+import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
@@ -76,7 +76,7 @@ CidadeService {
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
-            throw new EntidadeEmUsoException(id);
+            throw new RegistroEmUsoException(id);
         }
     }
 }

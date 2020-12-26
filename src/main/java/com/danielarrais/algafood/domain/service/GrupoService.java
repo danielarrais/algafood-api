@@ -1,6 +1,6 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
+import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Grupo;
 import com.danielarrais.algafood.domain.repository.GrupoRepository;
@@ -66,7 +66,7 @@ public class GrupoService {
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
-            throw new EntidadeEmUsoException(id);
+            throw new RegistroEmUsoException(id);
         }
     }
 }

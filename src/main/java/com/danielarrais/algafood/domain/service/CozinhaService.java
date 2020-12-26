@@ -1,6 +1,6 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.domain.exception.EntidadeEmUsoException;
+import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
@@ -66,7 +66,7 @@ public class CozinhaService {
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
-            throw new EntidadeEmUsoException(id);
+            throw new RegistroEmUsoException(id);
         }
     }
 }
