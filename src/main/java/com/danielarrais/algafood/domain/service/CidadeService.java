@@ -1,12 +1,16 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,12 +36,18 @@ CidadeService {
         return cidadeRepository.findById(cidadeId);
     }
 
+    public Cidade buscarObrigatorio(long cidadeId) {
+        return buscar(cidadeId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradoException(cidadeId);
+        });
+    }
+
     @SneakyThrows
     public Cidade salvar(Cidade cidade) {
         Long estadoId = cidade.getEstado().getId();
 
         estadoRepository.findById(estadoId)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Estado", estadoId, true));
+                .orElseThrow(() -> new DependenciaNaoEncontradaException("Estado", estadoId));
 
         return cidadeRepository.save(cidade);
     }
@@ -47,7 +57,7 @@ CidadeService {
             BeanUtils.copyProperties(cidade, cidadeAtual, "id");
             return salvar(cidadeAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -56,11 +66,17 @@ CidadeService {
             CustomBeansUtils.mergeValues(propertiesAndValues, cidadeAtual);
             return salvar(cidadeAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
     public void remover(Long id) {
-        cidadeRepository.deleteById(id);
+        try {
+            cidadeRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new RegistroNaoEncontradoException(id);
+        } catch (DataIntegrityViolationException exception) {
+            throw new RegistroEmUsoException(id);
+        }
     }
 }

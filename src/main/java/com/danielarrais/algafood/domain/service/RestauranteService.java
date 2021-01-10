@@ -1,14 +1,15 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
-import com.danielarrais.algafood.domain.repository.CidadeRepository;
-import com.danielarrais.algafood.domain.repository.CozinhaRepository;
 import com.danielarrais.algafood.domain.repository.RestauranteRepository;
 import com.danielarrais.algafood.domain.service.validation.RastauranteValidation;
 import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class RestauranteService {
     private final RestauranteRepository restauranteRepository;
     private final RastauranteValidation rastauranteValidation;
 
-    public RestauranteService(RestauranteRepository restauranteRepository, CozinhaRepository cozinhaRepository, CidadeRepository cidadeRepository, RastauranteValidation rastauranteValidation) {
+    public RestauranteService(RestauranteRepository restauranteRepository, RastauranteValidation rastauranteValidation) {
         this.restauranteRepository = restauranteRepository;
         this.rastauranteValidation = rastauranteValidation;
     }
@@ -33,10 +34,15 @@ public class RestauranteService {
         return restauranteRepository.findById(restauranteId);
     }
 
+    public Restaurante buscarObrigatorio(long restauranteId) {
+        return buscar(restauranteId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradoException(restauranteId);
+        });
+    }
+
     @SneakyThrows
     public Restaurante salvar(Restaurante restaurante) {
-        rastauranteValidation.validateExistenceCozinha(restaurante);
-        rastauranteValidation.validateExistenceCidade(restaurante);
+        rastauranteValidation.validateAllDependencies(restaurante);
 
         return restauranteRepository.save(restaurante);
     }
@@ -46,7 +52,7 @@ public class RestauranteService {
             BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
             return salvar(restauranteAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -55,12 +61,18 @@ public class RestauranteService {
             CustomBeansUtils.mergeValues(propertiesAndValues, restauranteAtual);
             return salvar(restauranteAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
     public void remover(Long id) {
-        restauranteRepository.deleteById(id);
+        try {
+            restauranteRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new RegistroNaoEncontradoException(id);
+        } catch (DataIntegrityViolationException exception) {
+            throw new RegistroEmUsoException(id);
+        }
     }
 
     public List<Restaurante> findComFreteGratis() {

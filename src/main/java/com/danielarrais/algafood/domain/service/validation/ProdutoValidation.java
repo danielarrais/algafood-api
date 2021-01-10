@@ -1,6 +1,6 @@
 package com.danielarrais.algafood.domain.service.validation;
 
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.repository.RestauranteRepository;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class ProdutoValidation {
         boolean existsRestaurante = restauranteRepository.existsById(restauranteId);
 
         if (!existsRestaurante) {
-            throw new EntidadeNaoEncontradaException("Restaurante", restauranteId, true);
+            throw new DependenciaNaoEncontradaException("Restaurante", restauranteId);
         }
     }
 }

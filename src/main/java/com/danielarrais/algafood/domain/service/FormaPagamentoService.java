@@ -1,11 +1,13 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.repository.FormaPagamentoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,12 @@ public class FormaPagamentoService {
         return formaPagamentoRepository.findById(formaPagamentoId);
     }
 
+    public FormaPagamento buscarObrigatorio(long formaPagamentoId) {
+        return buscar(formaPagamentoId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradoException(formaPagamentoId);
+        });
+    }
+
     @SneakyThrows
     public void salvar(FormaPagamento formaPagamento) {
         formaPagamentoRepository.save(formaPagamento);
@@ -39,7 +47,7 @@ public class FormaPagamentoService {
             BeanUtils.copyProperties(formaPagamento, formaPagamentoAtual, "id");
             return formaPagamentoRepository.save(formaPagamentoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -48,7 +56,7 @@ public class FormaPagamentoService {
             CustomBeansUtils.mergeValues(propertiesAndValues, formaPagamentoAtual);
             return formaPagamentoRepository.save(formaPagamentoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -56,7 +64,9 @@ public class FormaPagamentoService {
         try {
             formaPagamentoRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
+        } catch (DataIntegrityViolationException exception) {
+            throw new RegistroEmUsoException(id);
         }
     }
 }

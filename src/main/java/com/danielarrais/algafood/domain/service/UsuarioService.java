@@ -1,11 +1,13 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.repository.UsuarioRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,12 @@ public class UsuarioService {
         return usuarioRepository.findById(usuarioId);
     }
 
+    public Usuario buscarObrigatorio(long usuarioId) {
+        return buscar(usuarioId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradoException(usuarioId);
+        });
+    }
+
     @SneakyThrows
     public void salvar(Usuario usuario) {
         usuarioRepository.save(usuario);
@@ -39,7 +47,7 @@ public class UsuarioService {
             BeanUtils.copyProperties(usuario, usuarioAtual, "id");
             return usuarioRepository.save(usuarioAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -48,7 +56,7 @@ public class UsuarioService {
             CustomBeansUtils.mergeValues(propertiesAndValues, usuarioAtual);
             return usuarioRepository.save(usuarioAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -56,7 +64,9 @@ public class UsuarioService {
         try {
             usuarioRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
+        } catch (DataIntegrityViolationException exception) {
+            throw new RegistroEmUsoException(id);
         }
     }
 }

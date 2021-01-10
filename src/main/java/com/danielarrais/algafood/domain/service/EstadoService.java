@@ -1,11 +1,14 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,12 @@ public class EstadoService {
         return estadoRepository.findById(estadoId);
     }
 
+    public Estado buscarObrigatorio(long estadoId) {
+        return buscar(estadoId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradoException(estadoId);
+        });
+    }
+
     @SneakyThrows
     public Estado salvar(Estado estado) {
         return estadoRepository.save(estado);
@@ -38,7 +47,7 @@ public class EstadoService {
             BeanUtils.copyProperties(estado, estadoAtual, "id");
             return salvar(estadoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -47,11 +56,17 @@ public class EstadoService {
             CustomBeansUtils.mergeValues(propertiesAndValues, estadoAtual);
             return salvar(estadoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
     public void remover(Long id) {
-        estadoRepository.deleteById(id);
+        try {
+            estadoRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new RegistroNaoEncontradoException(id);
+        } catch (DataIntegrityViolationException exception) {
+            throw new RegistroEmUsoException(id);
+        }
     }
 }

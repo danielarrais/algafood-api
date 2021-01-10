@@ -1,11 +1,13 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.repository.PermissaoRepository;
 import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,12 @@ public class PermissaoService {
         return permissaoRepository.findById(permissaoId);
     }
 
+    public Permissao buscarObrigatorio(long permissao) {
+        return buscar(permissao).orElseThrow(() -> {
+            throw new RegistroNaoEncontradoException(permissao);
+        });
+    }
+
     @SneakyThrows
     public void salvar(Permissao permissao) {
         permissaoRepository.save(permissao);
@@ -39,7 +47,7 @@ public class PermissaoService {
             BeanUtils.copyProperties(permissao, permissaoAtual, "id");
             return permissaoRepository.save(permissaoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -48,7 +56,7 @@ public class PermissaoService {
             CustomBeansUtils.mergeValues(propertiesAndValues, permissaoAtual);
             return permissaoRepository.save(permissaoAtual);
         }).orElseThrow(() -> {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
         });
     }
 
@@ -56,7 +64,9 @@ public class PermissaoService {
         try {
             permissaoRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new EntidadeNaoEncontradaException(id);
+            throw new RegistroNaoEncontradoException(id);
+        } catch (DataIntegrityViolationException exception) {
+            throw new RegistroEmUsoException(id);
         }
     }
 }

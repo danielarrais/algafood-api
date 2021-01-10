@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.util;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.ReflectionUtils;
@@ -10,8 +11,9 @@ import java.util.Objects;
 
 public class CustomBeansUtils extends BeanUtils {
     public static <T> void mergeValues(Map<String, Object> dadosOrigem, T destino) {
+        var objectMapper = buildObjectMapper();
         var destinoClass = destino.getClass();
-        var origemMapper = new ObjectMapper().convertValue(dadosOrigem, destinoClass);
+        var origemMapper = objectMapper.convertValue(dadosOrigem, destinoClass);
 
         dadosOrigem.forEach((nomePropriedade, valorPropriedade) -> {
             Field field = ReflectionUtils.findField(destinoClass, nomePropriedade);
@@ -21,5 +23,14 @@ public class CustomBeansUtils extends BeanUtils {
 
             ReflectionUtils.setField(field, destino, novoValor);
         });
+    }
+
+    private static ObjectMapper buildObjectMapper() {
+        var objectMapper = new ObjectMapper();
+
+        objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+
+        return objectMapper;
     }
 }
