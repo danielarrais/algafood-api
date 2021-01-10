@@ -23,7 +23,7 @@ public class BussinessExceptionHandler {
     public ResponseEntity<?> handleRegistroNaoEncontradoException(RegistroNaoEncontradoException e, WebRequest request) {
         Problem problem = Problem.builder()
                 .status(HttpStatus.NOT_FOUND)
-                .title("Registro não encontrado")
+                .title("Recurso não encontrado")
                 .detail(e.getMessage())
                 .build();
 
