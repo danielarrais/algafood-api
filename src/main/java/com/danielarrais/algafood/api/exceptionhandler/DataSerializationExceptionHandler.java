@@ -11,8 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -21,6 +23,20 @@ public class DataSerializationExceptionHandler {
 
     public DataSerializationExceptionHandler(ResponseEntityCustomExceptionHandler exceptionHandler) {
         this.exceptionHandler = exceptionHandler;
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    private ResponseEntity<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e, WebRequest request) {
+        String detail = String.format("O paramêtro '%s' recebeu o valor '%s', que não é aceito. Corrija e informe um valor do tipo %s.",
+                e.getName(), e.getValue(), Objects.requireNonNull(e.getRequiredType()).getSimpleName());
+
+        Problem problem = Problem.builder()
+                .status(HttpStatus.BAD_REQUEST)
+                .title("Paramêtro inválido")
+                .detail(detail)
+                .build();
+
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getHttpStatus(), request);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
@@ -60,7 +76,7 @@ public class DataSerializationExceptionHandler {
     private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException e, WebRequest request) {
         String path = joinPath(e.getPath());
 
-        String detail = String.format("A propriedade '%s' recebeu o valor '%s', que é de um tipo inválido. Corrija e informe um valor compatível com o tipo %s.",
+        String detail = String.format("A propriedade '%s' recebeu o valor '%s', que não é aceito. Corrija e informe um valor do tipo %s.",
                 path, e.getValue(), e.getTargetType().getSimpleName());
 
         Problem problem = Problem.builder()
