@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.model;
 
+import com.danielarrais.algafood.domain.util.Groups;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,10 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
 
 @Data
 @Builder
@@ -35,6 +39,9 @@ public class Endereco {
     @Column(name = "endereco_bairro")
     private String bairro;
 
+    @Valid
+    @ConvertGroup(to = Groups.OnlyId.class)
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "endereco_cidade_id")
     private Cidade cidade;

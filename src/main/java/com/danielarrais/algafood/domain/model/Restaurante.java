@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.model;
 
+import com.danielarrais.algafood.domain.util.Groups;
 import com.danielarrais.algafood.domain.util.Groups.OnlyId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -27,14 +28,15 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Restaurante {
     @Id
+    @NotNull(groups = Groups.OnlyId.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
 
-    @NotBlank(groups = OnlyId.class)
+    @NotBlank
     private String nome;
 
-    @PositiveOrZero(groups = OnlyId.class)
+    @PositiveOrZero
     private BigDecimal taxaFrete;
     private Boolean ativo = true;
 
@@ -45,11 +47,11 @@ public class Restaurante {
     @UpdateTimestamp
     private LocalDateTime dataAtualizacao;
 
-    @Valid
     @NotNull
+    @Valid
+    @ConvertGroup(to = OnlyId.class)
     @ManyToOne
     @JoinColumn(name = "cozinha_id")
-    @ConvertGroup(to = OnlyId.class)
     private Cozinha cozinha;
 
     @NotEmpty
@@ -60,6 +62,7 @@ public class Restaurante {
             inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
     private List<FormaPagamento> formasPagamento;
 
+    @Valid
     @Embedded
     private Endereco endereco;
 
