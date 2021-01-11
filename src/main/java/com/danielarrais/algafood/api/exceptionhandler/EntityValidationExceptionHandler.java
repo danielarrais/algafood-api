@@ -30,6 +30,6 @@ public class EntityValidationExceptionHandler {
                 .detail("Um ou mais campos estão inválidos.")
                 .build();
 
-        return exceptionHandler.handleExceptionInternal(e, validationProblem, new HttpHeaders(), validationProblem.getHttpStatus(), request);
+        return exceptionHandler.handleExceptionInternal(e, validationProblem, new HttpHeaders(), validationProblem.getStatus(), request);
     }
 }

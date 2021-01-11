@@ -26,7 +26,7 @@ public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptio
 
         ex.printStackTrace();
 
-        return handleExceptionInternal(ex, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptio
                 .detail(detail)
                 .build();
 
-        return super.handleExceptionInternal(e, problem, headers, problem.getHttpStatus(), request);
+        return super.handleExceptionInternal(e, problem, headers, problem.getStatus(), request);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptio
                 .detail("O corpo da requisição está inválido. Verifique se a sintaxe da mensagem está correta.")
                 .build();
 
-        return super.handleExceptionInternal(e, problem, headers, problem.getHttpStatus(), request);
+        return super.handleExceptionInternal(e, problem, headers, problem.getStatus(), request);
     }
 
     @Override

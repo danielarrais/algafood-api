@@ -36,7 +36,7 @@ public class DataSerializationExceptionHandler {
                 .detail(detail)
                 .build();
 
-        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
@@ -56,7 +56,7 @@ public class DataSerializationExceptionHandler {
                 .detail("O corpo da requisição está inválido. Verifique se a sintaxe da mensagem está correta.")
                 .build();
 
-        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     private ResponseEntity<Object> handlePropertyBindingException(PropertyBindingException e, WebRequest request) {
@@ -70,7 +70,7 @@ public class DataSerializationExceptionHandler {
                 .detail(detail)
                 .build();
 
-        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException e, WebRequest request) {
@@ -85,7 +85,7 @@ public class DataSerializationExceptionHandler {
                 .detail(detail)
                 .build();
 
-        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     private String joinPath(List<JsonMappingException.Reference> references) {

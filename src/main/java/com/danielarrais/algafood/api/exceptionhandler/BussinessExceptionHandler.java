@@ -27,7 +27,7 @@ public class BussinessExceptionHandler {
                 .detail(e.getMessage())
                 .build();
 
-        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     @ExceptionHandler(DependenciaNaoEncontradaException.class)
@@ -38,7 +38,7 @@ public class BussinessExceptionHandler {
                 .detail(e.getMessage())
                 .build();
 
-        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     @ExceptionHandler(RegistroEmUsoException.class)
@@ -49,6 +49,6 @@ public class BussinessExceptionHandler {
                 .detail(e.getMessage())
                 .build();
 
-        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 }
