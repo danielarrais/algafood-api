@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.model;
 
+import com.danielarrais.algafood.domain.util.Groups.OnlyId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;
@@ -7,8 +8,12 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import javax.validation.groups.ConvertGroup;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,10 +31,10 @@ public class Restaurante {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @NotBlank
+    @NotBlank(groups = OnlyId.class)
     private String nome;
 
-    @PositiveOrZero
+    @PositiveOrZero(groups = OnlyId.class)
     private BigDecimal taxaFrete;
     private Boolean ativo = true;
 
@@ -40,10 +45,14 @@ public class Restaurante {
     @UpdateTimestamp
     private LocalDateTime dataAtualizacao;
 
+    @Valid
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "cozinha_id")
+    @ConvertGroup(to = OnlyId.class)
     private Cozinha cozinha;
 
+    @NotEmpty
     @ManyToMany
     @JoinTable(
             name = "forma_pagamento_restaurante",
