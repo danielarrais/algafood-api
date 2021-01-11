@@ -5,6 +5,7 @@ import com.danielarrais.algafood.domain.service.ProdutoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -29,19 +30,19 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody Produto produto) {
+    public void adicionar(@RequestBody @Valid Produto produto) {
         produtoService.salvar(produto);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid Produto produto) {
         produtoService.atualizar(id, produto);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
         produtoService.atualizar(id, valores);
     }
 

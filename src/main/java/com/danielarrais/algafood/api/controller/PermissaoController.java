@@ -5,6 +5,7 @@ import com.danielarrais.algafood.domain.service.PermissaoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -29,19 +30,19 @@ public class PermissaoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody Permissao permissao) {
+    public void adicionar(@RequestBody @Valid Permissao permissao) {
         permissaoService.salvar(permissao);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizar(@PathVariable Long id, @RequestBody Permissao permissao) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid Permissao permissao) {
         permissaoService.atualizar(id, permissao);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
         permissaoService.atualizar(id, valores);
     }
 
