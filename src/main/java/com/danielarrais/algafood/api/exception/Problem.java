@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.exceptionhandler.util;
+package com.danielarrais.algafood.api.exception;
 
 import com.danielarrais.algafood.util.serializer.HttpStatusSerializer;
 import com.fasterxml.jackson.annotation.JsonInclude;

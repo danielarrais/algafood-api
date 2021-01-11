@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.exceptionhandler.util;
+package com.danielarrais.algafood.api.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

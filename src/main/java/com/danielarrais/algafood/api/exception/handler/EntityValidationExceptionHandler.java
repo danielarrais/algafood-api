@@ -1,6 +1,6 @@
-package com.danielarrais.algafood.api.exceptionhandler;
+package com.danielarrais.algafood.api.exception.handler;
 
-import com.danielarrais.algafood.api.exceptionhandler.util.ValidationProblem;
+import com.danielarrais.algafood.api.exception.ValidationProblem;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
