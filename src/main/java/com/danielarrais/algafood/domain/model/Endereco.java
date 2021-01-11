@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @Builder
@@ -16,9 +17,11 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @Embeddable
 public class Endereco {
+    @NotBlank
     @Column(name = "endereco_cep")
     private String cep;
 
+    @NotBlank
     @Column(name = "endereco_logradouro")
     private String logradouro;
 
@@ -28,6 +31,7 @@ public class Endereco {
     @Column(name = "endereco_complemento")
     private String complemento;
 
+    @NotBlank
     @Column(name = "endereco_bairro")
     private String bairro;
 
