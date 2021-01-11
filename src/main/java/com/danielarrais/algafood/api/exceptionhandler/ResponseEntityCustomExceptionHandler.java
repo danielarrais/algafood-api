@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptionHandler {
-    
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUncaught(Exception ex, WebRequest request) {
         String detail = "Ocorreu um erro interno inesperado no sistema. Tente novamente e se o problema persistir, entre em contato com o administrador do sistema.";
