@@ -60,7 +60,7 @@ public class Restaurante {
             name = "forma_pagamento_restaurante",
             joinColumns = @JoinColumn(name = "restaurante_id"),
             inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
-    private List<FormaPagamento> formasPagamento;
+    private List<@Valid FormaPagamento> formasPagamento;
 
     @Valid
     @Embedded
@@ -68,5 +68,5 @@ public class Restaurante {
 
     @JsonIgnore
     @OneToMany(mappedBy = Produto.Fields.restaurante)
-    private List<Produto> produtos;
+    private List<@Valid Produto> produtos;
 }
