@@ -16,6 +16,7 @@ public class ValidationUtils {
 
         messageSource.setBasenames("messages");
         messageSource.setUseCodeAsDefaultMessage(true);
+        messageSource.setDefaultEncoding("UTF-8");
 
         bindingResult.getFieldErrors().forEach(error -> {
             var objectNameKebabCase = StringUtils.camelToKebab(error.getObjectName());
