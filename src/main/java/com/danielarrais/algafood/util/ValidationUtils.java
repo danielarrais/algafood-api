@@ -4,6 +4,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,9 +22,11 @@ public class ValidationUtils {
     public static List<Map<String, String>> extractErrorsFrom(BindingResult bindingResult){
         var validationErrors = new ArrayList<Map<String, String>>();
 
-        bindingResult.getFieldErrors().forEach(error -> {
+        bindingResult.getAllErrors().forEach(error -> {
+            String name = error instanceof FieldError ?
+                    ((FieldError) error).getField() : error.getObjectName();
             String message = messageSource.getMessage(error, LocaleContextHolder.getLocale());
-            validationErrors.add(Collections.singletonMap(error.getField(), message));
+            validationErrors.add(Collections.singletonMap(name, message));
         });
 
         return validationErrors;
