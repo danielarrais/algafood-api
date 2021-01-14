@@ -2,6 +2,7 @@ package com.danielarrais.algafood.domain.model;
 
 import com.danielarrais.algafood.core.validation.Groups;
 import com.danielarrais.algafood.core.validation.Groups.OnlyId;
+import com.danielarrais.algafood.core.validation.Multiplo;
 import com.danielarrais.algafood.core.validation.TaxaFrete;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -38,6 +39,7 @@ public class Restaurante {
 
     @NotNull
     @TaxaFrete
+    @Multiplo(numero = 10)
     private BigDecimal taxaFrete;
     private Boolean ativo = true;
 
