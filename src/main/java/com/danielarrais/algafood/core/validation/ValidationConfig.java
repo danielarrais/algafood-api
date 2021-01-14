@@ -45,7 +45,6 @@ public class ValidationConfig {
                 .map(resource -> {
                     var fileName = Objects.requireNonNull(resource.getFilename()).replace(".properties", "");
                     return String.format("messages/%s", fileName);
-                })
-                .toArray(String[]::new);
+                }).toArray(String[]::new);
     }
 }
