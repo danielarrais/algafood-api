@@ -7,11 +7,11 @@ import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.*;
 
-@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
+@Target({TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {FreteGratisValidator.class})
 public @interface FreteGratis {
-    String message() default "{0} não tem frete grátis";
+    String message() default "{1} deve conter {2}";
     Class<?>[] groups() default {};
     Class<? extends javax.validation.Payload>[] payload() default {};
 
