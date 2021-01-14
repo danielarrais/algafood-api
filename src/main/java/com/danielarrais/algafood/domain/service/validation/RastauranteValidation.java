@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class RastauranteValidation {
+public class RastauranteValidation extends ComumValidation {
     private final CozinhaRepository cozinhaRepository;
     private final CidadeRepository cidadeRepository;
     private final FormaPagamentoRepository formaPagamentoRepository;
