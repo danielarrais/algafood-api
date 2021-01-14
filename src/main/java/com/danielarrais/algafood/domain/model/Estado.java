@@ -1,6 +1,6 @@
 package com.danielarrais.algafood.domain.model;
 
-import com.danielarrais.algafood.domain.util.Groups;
+import com.danielarrais.algafood.core.validation.Groups;
 import lombok.*;
 
 import javax.persistence.Entity;

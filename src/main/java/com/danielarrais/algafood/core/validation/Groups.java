@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.domain.util;
+package com.danielarrais.algafood.core.validation;
 
 public interface Groups {
     interface OnlyId {}

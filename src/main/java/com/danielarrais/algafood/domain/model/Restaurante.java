@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.domain.model;
 
-import com.danielarrais.algafood.domain.util.Groups;
-import com.danielarrais.algafood.domain.util.Groups.OnlyId;
+import com.danielarrais.algafood.core.validation.Groups;
+import com.danielarrais.algafood.core.validation.Groups.OnlyId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;
