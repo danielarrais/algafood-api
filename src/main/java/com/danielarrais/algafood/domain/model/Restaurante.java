@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.model;
 
+import com.danielarrais.algafood.core.validation.FreteGratis;
 import com.danielarrais.algafood.core.validation.Groups;
 import com.danielarrais.algafood.core.validation.Groups.OnlyId;
 import com.danielarrais.algafood.core.validation.Multiplo;
@@ -20,6 +21,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.danielarrais.algafood.domain.model.Restaurante.Fields.nome;
+import static com.danielarrais.algafood.domain.model.Restaurante.Fields.taxaFrete;
+
 @Data
 @Entity
 @Builder
@@ -27,6 +31,7 @@ import java.util.List;
 @AllArgsConstructor
 @FieldNameConstants
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@FreteGratis(valorField = taxaFrete, descricaoField = nome, descricaoObrigatoria = "frete grátis")
 public class Restaurante {
     @Id
     @NotNull(groups = Groups.OnlyId.class)
@@ -63,7 +68,7 @@ public class Restaurante {
             name = "forma_pagamento_restaurante",
             joinColumns = @JoinColumn(name = "restaurante_id"),
             inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
-    private List<@Valid FormaPagamento> formasPagamento;
+    private List<@Valid @ConvertGroup(to = OnlyId.class) FormaPagamento> formasPagamento;
 
     @Valid
     @Embedded

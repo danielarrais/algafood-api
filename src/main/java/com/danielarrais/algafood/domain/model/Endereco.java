@@ -40,9 +40,9 @@ public class Endereco {
     private String bairro;
 
     @Valid
-    @ConvertGroup(to = Groups.OnlyId.class)
     @NotNull
     @ManyToOne
     @JoinColumn(name = "endereco_cidade_id")
+    @ConvertGroup(to = Groups.OnlyId.class)
     private Cidade cidade;
 }
