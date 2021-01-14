@@ -42,7 +42,7 @@ public class RestauranteService {
 
     @SneakyThrows
     public Restaurante salvar(Restaurante restaurante) {
-        rastauranteValidation.validateAllDependencies(restaurante);
+        rastauranteValidation.validate(restaurante);
 
         return restauranteRepository.save(restaurante);
     }

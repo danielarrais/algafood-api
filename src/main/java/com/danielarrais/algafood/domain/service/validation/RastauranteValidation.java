@@ -10,21 +10,31 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class RastauranteValidation extends ComumValidation {
+public class RastauranteValidation {
     private final CozinhaRepository cozinhaRepository;
     private final CidadeRepository cidadeRepository;
     private final FormaPagamentoRepository formaPagamentoRepository;
+    private final ComumValidation comumValidation;
 
-    public RastauranteValidation(CozinhaRepository cozinhaRepository, CidadeRepository cidadeRepository, FormaPagamentoRepository formaPagamentoRepository) {
+    public RastauranteValidation(CozinhaRepository cozinhaRepository,
+                                 CidadeRepository cidadeRepository,
+                                 FormaPagamentoRepository formaPagamentoRepository,
+                                 ComumValidation comumValidation
+    ) {
         this.cozinhaRepository = cozinhaRepository;
         this.cidadeRepository = cidadeRepository;
         this.formaPagamentoRepository = formaPagamentoRepository;
+        this.comumValidation = comumValidation;
     }
 
-    public void validateAllDependencies(Restaurante restaurante) {
+    public void validate(Restaurante restaurante) {
         this.validateExistenceCozinha(restaurante);
         this.validateExistenceCidade(restaurante);
         this.validateExistenceFormasPagamento(restaurante);
+    }
+
+    public void smartValidate(Restaurante restaurante) {
+        this.comumValidation.smartValidate(restaurante);
     }
 
     private void validateExistenceCozinha(Restaurante restaurante) {
