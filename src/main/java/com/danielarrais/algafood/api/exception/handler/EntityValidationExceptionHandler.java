@@ -4,7 +4,7 @@ import com.danielarrais.algafood.api.exception.ValidationProblem;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -19,8 +19,8 @@ public class EntityValidationExceptionHandler {
         this.exceptionHandler = exceptionHandler;
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    private ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e, WebRequest request) {
+    @ExceptionHandler(BindException.class)
+    private ResponseEntity<?> handleBindException(BindException e, WebRequest request) {
         var errorsMap = extractErrorsFrom(e.getBindingResult());
 
         ValidationProblem validationProblem = ValidationProblem.builder()
