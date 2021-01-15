@@ -5,6 +5,7 @@ import com.danielarrais.algafood.domain.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -29,19 +30,19 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody Usuario usuario) {
+    public void adicionar(@RequestBody @Valid Usuario usuario) {
         usuarioService.salvar(usuario);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid Usuario usuario) {
         usuarioService.atualizar(id, usuario);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
         usuarioService.atualizar(id, valores);
     }
 

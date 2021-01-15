@@ -5,6 +5,7 @@ import com.danielarrais.algafood.domain.service.CidadeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -28,19 +29,19 @@ public class CidadeController {
     }
 
     @PostMapping
-    public void adicionar(@RequestBody Cidade cidade) {
+    public void adicionar(@RequestBody @Valid Cidade cidade) {
         cidadeService.salvar(cidade);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizar(@PathVariable Long id, @RequestBody Cidade cidade) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid Cidade cidade) {
         cidadeService.atualizar(id, cidade);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
         cidadeService.atualizar(id, valores);
     }
 

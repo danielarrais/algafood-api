@@ -5,6 +5,7 @@ import com.danielarrais.algafood.domain.service.CozinhaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -29,19 +30,19 @@ public class CozinhaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody Cozinha cozinha) {
+    public void adicionar(@RequestBody @Valid Cozinha cozinha) {
         cozinhaService.salvar(cozinha);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizar(@PathVariable Long id, @RequestBody Cozinha cozinha) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid Cozinha cozinha) {
         cozinhaService.atualizar(id, cozinha);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
         cozinhaService.atualizar(id, valores);
     }
 

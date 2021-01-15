@@ -5,6 +5,7 @@ import com.danielarrais.algafood.domain.service.FormaPagamentoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -29,18 +30,18 @@ public class FormaPagamentoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody FormaPagamento formaPagamento) {
+    public void adicionar(@RequestBody @Valid FormaPagamento formaPagamento) {
         formaPagamentoService.salvar(formaPagamento);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizar(@PathVariable Long id, @RequestBody FormaPagamento formaPagamento) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid FormaPagamento formaPagamento) {
         formaPagamentoService.atualizar(id, formaPagamento);
     }
 
     @PatchMapping("/{id}")
-    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
         formaPagamentoService.atualizar(id, valores);
     }
 

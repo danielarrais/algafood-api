@@ -1,6 +1,6 @@
-package com.danielarrais.algafood.api.exceptionhandler;
+package com.danielarrais.algafood.api.exception.handler;
 
-import com.danielarrais.algafood.api.exceptionhandler.util.Problem;
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
@@ -27,7 +27,7 @@ public class BussinessExceptionHandler {
                 .detail(e.getMessage())
                 .build();
 
-        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     @ExceptionHandler(DependenciaNaoEncontradaException.class)
@@ -38,7 +38,7 @@ public class BussinessExceptionHandler {
                 .detail(e.getMessage())
                 .build();
 
-        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     @ExceptionHandler(RegistroEmUsoException.class)
@@ -49,6 +49,6 @@ public class BussinessExceptionHandler {
                 .detail(e.getMessage())
                 .build();
 
-        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 }

@@ -1,10 +1,14 @@
 package com.danielarrais.algafood.domain.model;
 
+import com.danielarrais.algafood.core.validation.Groups;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.groups.ConvertGroup;
 import java.math.BigDecimal;
 
 @Entity
@@ -20,15 +24,15 @@ public class Produto {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @NotNull
+    @NotBlank
     private String descricao;
 
-    @NotNull
+    @PositiveOrZero
     private BigDecimal preco;
+    private Boolean ativo = true;
 
-    @NotNull
-    private Boolean ativo;
-
+    @Valid
+    @ConvertGroup(to = Groups.OnlyId.class)
     @ManyToOne
     @JoinColumn(name = "restaurante_id")
     private Restaurante restaurante;

@@ -5,6 +5,7 @@ import com.danielarrais.algafood.domain.service.GrupoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -29,19 +30,19 @@ public class GrupoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody Grupo grupo) {
+    public void adicionar(@RequestBody @Valid Grupo grupo) {
         grupoService.salvar(grupo);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizar(@PathVariable Long id, @RequestBody Grupo grupo) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid Grupo grupo) {
         grupoService.atualizar(id, grupo);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> valores) {
+    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
         grupoService.atualizar(id, valores);
     }
 

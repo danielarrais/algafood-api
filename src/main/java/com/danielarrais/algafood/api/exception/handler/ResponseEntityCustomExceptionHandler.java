@@ -1,6 +1,6 @@
-package com.danielarrais.algafood.api.exceptionhandler;
+package com.danielarrais.algafood.api.exception.handler;
 
-import com.danielarrais.algafood.api.exceptionhandler.util.Problem;
+import com.danielarrais.algafood.api.exception.Problem;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptionHandler {
-    
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUncaught(Exception ex, WebRequest request) {
         String detail = "Ocorreu um erro interno inesperado no sistema. Tente novamente e se o problema persistir, entre em contato com o administrador do sistema.";
@@ -26,7 +26,7 @@ public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptio
 
         ex.printStackTrace();
 
-        return handleExceptionInternal(ex, problem, new HttpHeaders(), problem.getHttpStatus(), request);
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptio
                 .detail(detail)
                 .build();
 
-        return super.handleExceptionInternal(e, problem, headers, problem.getHttpStatus(), request);
+        return super.handleExceptionInternal(e, problem, headers, problem.getStatus(), request);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptio
                 .detail("O corpo da requisição está inválido. Verifique se a sintaxe da mensagem está correta.")
                 .build();
 
-        return super.handleExceptionInternal(e, problem, headers, problem.getHttpStatus(), request);
+        return super.handleExceptionInternal(e, problem, headers, problem.getStatus(), request);
     }
 
     @Override

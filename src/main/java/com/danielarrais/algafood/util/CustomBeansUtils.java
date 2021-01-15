@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Objects;
 
@@ -32,5 +33,9 @@ public class CustomBeansUtils extends BeanUtils {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
 
         return objectMapper;
+    }
+
+    public static<T> T getPropertieValue(Object value, String valorField, Class<T> classe) throws InvocationTargetException, IllegalAccessException {
+        return (T) Objects.requireNonNull(getPropertyDescriptor(value.getClass(), valorField)).getReadMethod().invoke(value);
     }
 }

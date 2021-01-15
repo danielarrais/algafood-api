@@ -42,7 +42,7 @@ public class RestauranteService {
 
     @SneakyThrows
     public Restaurante salvar(Restaurante restaurante) {
-        rastauranteValidation.validateAllDependencies(restaurante);
+        rastauranteValidation.validate(restaurante);
 
         return restauranteRepository.save(restaurante);
     }
@@ -59,6 +59,9 @@ public class RestauranteService {
     public Restaurante atualizar(Long id, Map<String, Object> propertiesAndValues) {
         return buscar(id).map(restauranteAtual -> {
             CustomBeansUtils.mergeValues(propertiesAndValues, restauranteAtual);
+
+            rastauranteValidation.smartValidate(restauranteAtual);
+
             return salvar(restauranteAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
