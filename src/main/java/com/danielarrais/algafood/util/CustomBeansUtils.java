@@ -35,7 +35,7 @@ public class CustomBeansUtils extends BeanUtils {
         return objectMapper;
     }
 
-    public static<T> T getPropertieValue(Object value, String valorField, Class<T> classe) throws InvocationTargetException, IllegalAccessException {
+    public static<T> T getPropertieValue(Object value, String valorField) throws InvocationTargetException, IllegalAccessException {
         return (T) Objects.requireNonNull(getPropertyDescriptor(value.getClass(), valorField)).getReadMethod().invoke(value);
     }
 }

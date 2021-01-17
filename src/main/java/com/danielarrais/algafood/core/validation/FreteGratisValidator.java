@@ -30,8 +30,8 @@ public class FreteGratisValidator implements ConstraintValidator<FreteGratis, Ob
         var valido = false;
 
         try {
-            BigDecimal valor = CustomBeansUtils.getPropertieValue(value, valorField, BigDecimal.class);
-            String descricao = CustomBeansUtils.getPropertieValue(value, descricaoField, String.class);
+            BigDecimal valor = CustomBeansUtils.getPropertieValue(value, valorField);
+            String descricao = CustomBeansUtils.getPropertieValue(value, descricaoField);
 
             if (valor != null && ZERO.compareTo(valor) == 0 && StringUtils.hasText(descricao)) {
                 valido = descricao.toLowerCase().contains(descricaoObrigatoria);
