@@ -3,8 +3,6 @@ package com.danielarrais.algafood.domain.model;
 import com.danielarrais.algafood.core.validation.FreteGratis;
 import com.danielarrais.algafood.core.validation.Groups;
 import com.danielarrais.algafood.core.validation.Groups.OnlyId;
-import com.danielarrais.algafood.core.validation.Multiplo;
-import com.danielarrais.algafood.core.validation.TaxaFrete;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;
@@ -43,8 +41,6 @@ public class Restaurante {
     private String nome;
 
     @NotNull
-    @TaxaFrete
-    @Multiplo(numero = 10)
     private BigDecimal taxaFrete;
     private Boolean ativo = true;
 
