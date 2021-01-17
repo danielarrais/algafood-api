@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -38,10 +39,12 @@ public class GrupoService {
     }
 
     @SneakyThrows
+    @Transactional
     public void salvar(Grupo grupo) {
         grupoRepository.save(grupo);
     }
 
+    @Transactional
     public void atualizar(Long id, Grupo grupo) {
         buscar(id).map(grupoAtual -> {
             BeanUtils.copyProperties(grupo, grupoAtual, "id");
@@ -51,6 +54,7 @@ public class GrupoService {
         });
     }
 
+    @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
         buscar(id).map(grupoAtual -> {
             CustomBeansUtils.mergeValues(propertiesAndValues, grupoAtual);
@@ -60,6 +64,7 @@ public class GrupoService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             grupoRepository.deleteById(id);

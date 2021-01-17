@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -38,10 +39,12 @@ public class PermissaoService {
     }
 
     @SneakyThrows
+    @Transactional
     public void salvar(Permissao permissao) {
         permissaoRepository.save(permissao);
     }
 
+    @Transactional
     public void atualizar(Long id, Permissao permissao) {
         buscar(id).map(permissaoAtual -> {
             BeanUtils.copyProperties(permissao, permissaoAtual, "id");
@@ -51,6 +54,7 @@ public class PermissaoService {
         });
     }
 
+    @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
         buscar(id).map(permissaoAtual -> {
             CustomBeansUtils.mergeValues(propertiesAndValues, permissaoAtual);
@@ -60,6 +64,7 @@ public class PermissaoService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             permissaoRepository.deleteById(id);

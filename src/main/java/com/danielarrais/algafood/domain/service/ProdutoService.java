@@ -9,6 +9,7 @@ import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -39,12 +40,14 @@ public class ProdutoService {
     }
 
     @SneakyThrows
+    @Transactional
     public void salvar(Produto produto) {
-        produtoValidation.validateExistenceRestaurante(produto);
+        produtoValidation.validateTheRestauranteExistence(produto);
 
         produtoRepository.save(produto);
     }
 
+    @Transactional
     public void atualizar(Long id, Produto produto) {
         buscar(id).map(produtoAtual -> {
             BeanUtils.copyProperties(produto, produtoAtual, "id");
@@ -54,6 +57,7 @@ public class ProdutoService {
         });
     }
 
+    @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
         buscar(id).map(produtoAtual -> {
             CustomBeansUtils.mergeValues(propertiesAndValues, produtoAtual);
@@ -63,6 +67,7 @@ public class ProdutoService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             produtoRepository.deleteById(id);

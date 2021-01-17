@@ -12,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,7 @@ CidadeService {
     }
 
     @SneakyThrows
+    @Transactional
     public Cidade salvar(Cidade cidade) {
         Long estadoId = cidade.getEstado().getId();
 
@@ -52,6 +54,7 @@ CidadeService {
         return cidadeRepository.save(cidade);
     }
 
+    @Transactional
     public Cidade atualizar(Long id, Cidade cidade) {
         return buscar(id).map(cidadeAtual -> {
             BeanUtils.copyProperties(cidade, cidadeAtual, "id");
@@ -61,6 +64,7 @@ CidadeService {
         });
     }
 
+    @Transactional
     public Cidade atualizar(Long id, Map<String, Object> propertiesAndValues) {
         return buscar(id).map(cidadeAtual -> {
             CustomBeansUtils.mergeValues(propertiesAndValues, cidadeAtual);
@@ -70,6 +74,7 @@ CidadeService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             cidadeRepository.deleteById(id);

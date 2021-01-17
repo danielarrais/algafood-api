@@ -11,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -41,12 +42,14 @@ public class RestauranteService {
     }
 
     @SneakyThrows
+    @Transactional
     public Restaurante salvar(Restaurante restaurante) {
         rastauranteValidation.validate(restaurante);
 
         return restauranteRepository.save(restaurante);
     }
 
+    @Transactional
     public Restaurante atualizar(Long id, Restaurante restaurante) {
         return buscar(id).map(restauranteAtual -> {
             BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
@@ -56,6 +59,7 @@ public class RestauranteService {
         });
     }
 
+    @Transactional
     public Restaurante atualizar(Long id, Map<String, Object> propertiesAndValues) {
         return buscar(id).map(restauranteAtual -> {
             CustomBeansUtils.mergeValues(propertiesAndValues, restauranteAtual);
@@ -68,6 +72,7 @@ public class RestauranteService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             restauranteRepository.deleteById(id);
