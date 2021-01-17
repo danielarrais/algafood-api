@@ -13,7 +13,7 @@ public class ProdutoValidation {
         this.restauranteRepository = restauranteRepository;
     }
 
-    public void validateExistenceRestaurante(Produto restaurante) {
+    public void validateTheRestauranteExistence(Produto restaurante) {
         Long restauranteId = restaurante.getRestaurante().getId();
         boolean existsRestaurante = restauranteRepository.existsById(restauranteId);
 
