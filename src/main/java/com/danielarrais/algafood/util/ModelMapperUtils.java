@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ControllerUtils {
+public class ModelMapperUtils {
     private static ModelMapper modelMapper;
 
-    public ControllerUtils(ModelMapper modelMapper) {
-        ControllerUtils.modelMapper = modelMapper;
+    public ModelMapperUtils(ModelMapper modelMapper) {
+        ModelMapperUtils.modelMapper = modelMapper;
     }
 
     public static <T> T mapper(Object input, Class<T> outputType) {

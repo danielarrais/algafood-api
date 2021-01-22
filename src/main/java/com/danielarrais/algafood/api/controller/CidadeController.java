@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
-import static com.danielarrais.algafood.util.ControllerUtils.mapper;
+import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
 @RequestMapping("/cidades")
