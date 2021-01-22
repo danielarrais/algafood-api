@@ -64,7 +64,6 @@ public class GrupoService {
         });
     }
 
-    @Transactional
     public void remover(Long id) {
         try {
             grupoRepository.deleteById(id);

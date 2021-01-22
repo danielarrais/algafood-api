@@ -5,5 +5,5 @@ import com.danielarrais.algafood.domain.repository.custom.BaseSimpleJpaRepositor
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EstadoRepository  extends BaseSimpleJpaRepository<Estado, Long> {
+public interface EstadoRepository extends BaseSimpleJpaRepository<Estado, Long> {
 }

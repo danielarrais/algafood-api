@@ -64,7 +64,6 @@ public class PermissaoService {
         });
     }
 
-    @Transactional
     public void remover(Long id) {
         try {
             permissaoRepository.deleteById(id);

@@ -48,7 +48,7 @@ public class FreteGratisValidator implements ConstraintValidator<FreteGratis, Ob
         return valido;
     }
 
-    public void tratarTemplateDaMensagem(ConstraintValidatorContext context){
+    public void tratarTemplateDaMensagem(ConstraintValidatorContext context) {
         HibernateConstraintValidatorContext hibernateContext = context.unwrap(HibernateConstraintValidatorContext.class);
 
         hibernateContext.disableDefaultConstraintViolation();

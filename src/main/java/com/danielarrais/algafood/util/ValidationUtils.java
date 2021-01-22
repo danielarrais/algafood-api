@@ -17,7 +17,7 @@ public class ValidationUtils {
         ValidationUtils.messageSource = messageSource;
     }
 
-    public static List<ObjectError> extractErrorsFrom(BindingResult bindingResult){
+    public static List<ObjectError> extractErrorsFrom(BindingResult bindingResult) {
         var validationErrors = new ArrayList<ObjectError>();
 
         bindingResult.getAllErrors().forEach(error -> {

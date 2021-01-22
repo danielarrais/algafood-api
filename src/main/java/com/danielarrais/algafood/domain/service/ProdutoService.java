@@ -67,7 +67,6 @@ public class ProdutoService {
         });
     }
 
-    @Transactional
     public void remover(Long id) {
         try {
             produtoRepository.deleteById(id);

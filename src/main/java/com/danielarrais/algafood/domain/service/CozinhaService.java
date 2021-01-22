@@ -64,7 +64,6 @@ public class CozinhaService {
         });
     }
 
-    @Transactional
     public void remover(Long id) {
         try {
             cozinhaRepository.deleteById(id);

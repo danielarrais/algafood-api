@@ -14,11 +14,11 @@ public class ControllerUtils {
         ControllerUtils.modelMapper = modelMapper;
     }
 
-    public static<T> T mapper(Object input, Class<T> outputType) {
+    public static <T> T mapper(Object input, Class<T> outputType) {
         return modelMapper.map(input, outputType);
     }
 
-    public static<T> List<T> mapper(List<?> inputList, Class<T> outputType) {
+    public static <T> List<T> mapper(List<?> inputList, Class<T> outputType) {
         return inputList
                 .stream().map(user -> modelMapper.map(user, outputType))
                 .collect(Collectors.toList());

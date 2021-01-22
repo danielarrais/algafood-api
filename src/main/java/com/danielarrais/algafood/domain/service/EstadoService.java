@@ -64,7 +64,6 @@ public class EstadoService {
         });
     }
 
-    @Transactional
     public void remover(Long id) {
         try {
             estadoRepository.deleteById(id);

@@ -11,10 +11,10 @@ import java.util.TimeZone;
 @EnableJpaRepositories(repositoryBaseClass = BaseSimpleJpaRepositoryImpl.class)
 public class AlgafoodApiApplication {
 
-	public static void main(String[] args) {
-		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+    public static void main(String[] args) {
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 
-		SpringApplication.run(AlgafoodApiApplication.class, args);
-	}
+        SpringApplication.run(AlgafoodApiApplication.class, args);
+    }
 
 }

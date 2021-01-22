@@ -14,6 +14,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -74,13 +75,12 @@ CidadeService {
         });
     }
 
-    @Transactional
     public void remover(Long id) {
         try {
             cidadeRepository.deleteById(id);
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
-        } catch (DataIntegrityViolationException exception) {
+        } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
             throw new RegistroEmUsoException(id);
         }
     }

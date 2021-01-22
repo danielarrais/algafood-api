@@ -16,6 +16,8 @@ import static java.lang.annotation.ElementType.*;
 public @interface TaxaFrete {
     @OverridesAttribute(constraint = PositiveOrZero.class, name = "message")
     String message() default "{TaxaFrete}";
+
     Class<?>[] groups() default {};
+
     Class<? extends javax.validation.Payload>[] payload() default {};
 }
