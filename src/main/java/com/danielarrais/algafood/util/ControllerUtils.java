@@ -2,8 +2,10 @@ package com.danielarrais.algafood.util;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
@@ -15,10 +17,18 @@ public class ControllerUtils {
     }
 
     public static<T> T mapper(Object input, Class<T> outputType) {
+        if (Objects.isNull(input)) {
+            return null;
+        }
+
         return modelMapper.map(input, outputType);
     }
 
-    public static<T> List<T> mapper(List<Object> inputList, Class<T> outputType) {
+    public static<T> List<T> mapper(List<?> inputList, Class<T> outputType) {
+        if (CollectionUtils.isEmpty(inputList)) {
+            return null;
+        }
+
         return inputList
                 .stream().map(user -> modelMapper.map(user, outputType))
                 .collect(Collectors.toList());
