@@ -1,5 +1,7 @@
 package com.danielarrais.algafood.api.controller;
 
+import com.danielarrais.algafood.api.dto.input.produto.ProdutoInput;
+import com.danielarrais.algafood.api.dto.output.produto.ProdutoOutput;
 import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.service.ProdutoService;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+
+import static com.danielarrais.algafood.util.ControllerUtils.mapper;
 
 @RestController
 @RequestMapping("/produtos")
@@ -19,24 +23,27 @@ public class ProdutoController {
     }
 
     @GetMapping()
-    public List<Produto> listar() {
-        return produtoService.listar();
+    public List<ProdutoOutput> listar() {
+        var produtos = produtoService.listar();
+        return mapper(produtos, ProdutoOutput.class);
     }
 
     @GetMapping("/{id}")
-    public Produto buscar(@PathVariable Long id) {
-        return produtoService.buscarObrigatorio(id);
+    public ProdutoOutput buscar(@PathVariable Long id) {
+        var produto = produtoService.buscarObrigatorio(id);
+        return mapper(produto, ProdutoOutput.class);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody @Valid Produto produto) {
+    public void adicionar(@RequestBody @Valid ProdutoInput produtoInput) {
+        var produto = mapper(produtoInput, Produto.class);
         produtoService.salvar(produto);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizar(@PathVariable Long id, @RequestBody @Valid Produto produto) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid ProdutoInput produtoInput) {
+        var produto = mapper(produtoInput, Produto.class);
         produtoService.atualizar(id, produto);
     }
 

@@ -1,5 +1,7 @@
 package com.danielarrais.algafood.api.controller;
 
+import com.danielarrais.algafood.api.dto.input.permissao.PermissaoInput;
+import com.danielarrais.algafood.api.dto.output.permissao.PermissaoOutput;
 import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.service.PermissaoService;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+
+import static com.danielarrais.algafood.util.ControllerUtils.mapper;
 
 @RestController
 @RequestMapping("/permissoes")
@@ -19,24 +23,27 @@ public class PermissaoController {
     }
 
     @GetMapping()
-    public List<Permissao> listar() {
-        return permissaoService.listar();
+    public List<PermissaoOutput> listar() {
+        var permissaos = permissaoService.listar();
+        return mapper(permissaos, PermissaoOutput.class);
     }
 
     @GetMapping("/{id}")
-    public Permissao buscar(@PathVariable Long id) {
-        return permissaoService.buscarObrigatorio(id);
+    public PermissaoOutput buscar(@PathVariable Long id) {
+        var permissao = permissaoService.buscarObrigatorio(id);
+        return mapper(permissao, PermissaoOutput.class);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody @Valid Permissao permissao) {
+    public void adicionar(@RequestBody @Valid PermissaoInput permissaoInput) {
+        var permissao = mapper(permissaoInput, Permissao.class);
         permissaoService.salvar(permissao);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizar(@PathVariable Long id, @RequestBody @Valid Permissao permissao) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid PermissaoInput permissaoInput) {
+        var permissao = mapper(permissaoInput, Permissao.class);
         permissaoService.atualizar(id, permissao);
     }
 
