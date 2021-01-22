@@ -4,9 +4,7 @@ import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Grupo;
 import com.danielarrais.algafood.domain.repository.GrupoRepository;
-import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
-import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -15,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.danielarrais.algafood.util.CustomBeansUtils.copyNoNullValues;
+import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class GrupoService {
@@ -47,7 +48,7 @@ public class GrupoService {
     @Transactional
     public void atualizar(Long id, Grupo grupo) {
         buscar(id).map(grupoAtual -> {
-            BeanUtils.copyProperties(grupo, grupoAtual, "id");
+            copyNoNullValues(grupo, grupoAtual);
             return grupoRepository.save(grupoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
@@ -57,7 +58,7 @@ public class GrupoService {
     @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
         buscar(id).map(grupoAtual -> {
-            CustomBeansUtils.mergeValues(propertiesAndValues, grupoAtual);
+            mergeValues(propertiesAndValues, grupoAtual);
             return grupoRepository.save(grupoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);

@@ -4,9 +4,7 @@ import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.repository.PermissaoRepository;
-import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
-import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -15,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.danielarrais.algafood.util.CustomBeansUtils.copyNoNullValues;
+import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class PermissaoService {
@@ -47,7 +48,7 @@ public class PermissaoService {
     @Transactional
     public void atualizar(Long id, Permissao permissao) {
         buscar(id).map(permissaoAtual -> {
-            BeanUtils.copyProperties(permissao, permissaoAtual, "id");
+            copyNoNullValues(permissao, permissaoAtual);
             return permissaoRepository.save(permissaoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
@@ -57,7 +58,7 @@ public class PermissaoService {
     @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
         buscar(id).map(permissaoAtual -> {
-            CustomBeansUtils.mergeValues(propertiesAndValues, permissaoAtual);
+            mergeValues(propertiesAndValues, permissaoAtual);
             return permissaoRepository.save(permissaoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);

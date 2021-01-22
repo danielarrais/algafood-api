@@ -6,9 +6,7 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
-import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
-import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -18,6 +16,9 @@ import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.danielarrais.algafood.util.CustomBeansUtils.copyNoNullValues;
+import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class
@@ -58,7 +59,7 @@ CidadeService {
     @Transactional
     public Cidade atualizar(Long id, Cidade cidade) {
         return buscar(id).map(cidadeAtual -> {
-            BeanUtils.copyProperties(cidade, cidadeAtual, "id");
+            copyNoNullValues(cidade, cidadeAtual);
             return salvar(cidadeAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
@@ -68,7 +69,7 @@ CidadeService {
     @Transactional
     public Cidade atualizar(Long id, Map<String, Object> propertiesAndValues) {
         return buscar(id).map(cidadeAtual -> {
-            CustomBeansUtils.mergeValues(propertiesAndValues, cidadeAtual);
+            mergeValues(propertiesAndValues, cidadeAtual);
             return salvar(cidadeAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);

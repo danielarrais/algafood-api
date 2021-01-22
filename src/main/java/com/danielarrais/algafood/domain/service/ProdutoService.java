@@ -4,9 +4,7 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.repository.ProdutoRepository;
 import com.danielarrais.algafood.domain.service.validation.ProdutoValidation;
-import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
-import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.danielarrais.algafood.util.CustomBeansUtils.copyNoNullValues;
+import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class ProdutoService {
@@ -50,7 +51,7 @@ public class ProdutoService {
     @Transactional
     public void atualizar(Long id, Produto produto) {
         buscar(id).map(produtoAtual -> {
-            BeanUtils.copyProperties(produto, produtoAtual, "id");
+            copyNoNullValues(produto, produtoAtual);
             return produtoRepository.save(produtoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
@@ -60,7 +61,7 @@ public class ProdutoService {
     @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
         buscar(id).map(produtoAtual -> {
-            CustomBeansUtils.mergeValues(propertiesAndValues, produtoAtual);
+            mergeValues(propertiesAndValues, produtoAtual);
             return produtoRepository.save(produtoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);

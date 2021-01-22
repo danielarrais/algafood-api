@@ -4,9 +4,7 @@ import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
-import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
-import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -15,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.danielarrais.algafood.util.CustomBeansUtils.copyNoNullValues;
+import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class EstadoService {
@@ -47,7 +48,7 @@ public class EstadoService {
     @Transactional
     public Estado atualizar(Long id, Estado estado) {
         return buscar(id).map(estadoAtual -> {
-            BeanUtils.copyProperties(estado, estadoAtual, "id");
+            copyNoNullValues(estado, estadoAtual);
             return salvar(estadoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
@@ -57,7 +58,7 @@ public class EstadoService {
     @Transactional
     public Estado atualizar(Long id, Map<String, Object> propertiesAndValues) {
         return buscar(id).map(estadoAtual -> {
-            CustomBeansUtils.mergeValues(propertiesAndValues, estadoAtual);
+            mergeValues(propertiesAndValues, estadoAtual);
             return salvar(estadoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
