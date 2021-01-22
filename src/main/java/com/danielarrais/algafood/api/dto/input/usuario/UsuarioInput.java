@@ -2,6 +2,8 @@ package com.danielarrais.algafood.api.dto.input.usuario;
 
 import com.danielarrais.algafood.api.dto.input.grupo.GrupoIdInput;
 import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioInput {
     @NotBlank
     private String nome;

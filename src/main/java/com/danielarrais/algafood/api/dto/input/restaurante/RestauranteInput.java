@@ -3,6 +3,8 @@ package com.danielarrais.algafood.api.dto.input.restaurante;
 import com.danielarrais.algafood.api.dto.input.cozinha.CozinhaIdInput;
 import com.danielarrais.algafood.api.dto.input.formaPagamento.FormaPagamentoIdInput;
 import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -14,6 +16,8 @@ import java.util.List;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RestauranteInput {
     @NotBlank
     private String nome;

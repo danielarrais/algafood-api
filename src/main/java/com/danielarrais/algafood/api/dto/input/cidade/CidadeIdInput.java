@@ -6,6 +6,8 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CidadeIdInput {
     @NotNull
     private Long id;

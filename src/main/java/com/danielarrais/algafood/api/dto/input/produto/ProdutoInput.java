@@ -2,6 +2,8 @@ package com.danielarrais.algafood.api.dto.input.produto;
 
 import com.danielarrais.algafood.api.dto.input.restaurante.RestauranteIdInput;
 import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -11,6 +13,8 @@ import java.math.BigDecimal;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProdutoInput {
     @NotBlank
     private String descricao;
