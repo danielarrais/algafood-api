@@ -2,6 +2,7 @@ package com.danielarrais.algafood.domain.model;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -23,14 +24,17 @@ public class Usuario {
     private String email;
     private String senha;
 
-    @CreationTimestamp
-    @Column(updatable = false)
-    private OffsetDateTime dataCadastro;
-
     @ManyToMany
     @JoinTable(
             name = "usuario_grupo",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "grupo_id"))
     private List<@Valid Grupo> grupos;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private OffsetDateTime dataCadastro;
+
+    @UpdateTimestamp
+    private OffsetDateTime dataAtualizacao;
 }

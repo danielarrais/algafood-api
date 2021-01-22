@@ -1,6 +1,7 @@
 package com.danielarrais.algafood.domain.model;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Permissao {
     private String nome;
     private String descricao;
 
+    @CreationTimestamp
     @Column(updatable = false)
     private OffsetDateTime dataCadastro;
 
