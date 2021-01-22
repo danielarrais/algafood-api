@@ -5,5 +5,5 @@ import com.danielarrais.algafood.domain.repository.custom.BaseSimpleJpaRepositor
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CidadeRepository  extends BaseSimpleJpaRepository<Cidade, Long> {
+public interface CidadeRepository extends BaseSimpleJpaRepository<Cidade, Long> {
 }

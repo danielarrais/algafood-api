@@ -1,5 +1,8 @@
 package com.danielarrais.algafood.api.controller;
 
+import com.danielarrais.algafood.api.dto.input.cozinha.CozinhaInput;
+import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaFullOutput;
+import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaOutput;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.service.CozinhaService;
 import org.springframework.http.HttpStatus;
@@ -8,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+
+import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
 @RequestMapping("/cozinhas")
@@ -19,24 +24,27 @@ public class CozinhaController {
     }
 
     @GetMapping()
-    public List<Cozinha> listar() {
-        return cozinhaService.listar();
+    public List<CozinhaOutput> listar() {
+        var cozinhas = cozinhaService.listar();
+        return mapper(cozinhas, CozinhaOutput.class);
     }
 
     @GetMapping("/{id}")
-    public Cozinha buscar(@PathVariable Long id) {
-        return cozinhaService.buscarObrigatorio(id);
+    public CozinhaFullOutput buscar(@PathVariable Long id) {
+        var cozinha = cozinhaService.buscarObrigatorio(id);
+        return mapper(cozinha, CozinhaFullOutput.class);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void adicionar(@RequestBody @Valid Cozinha cozinha) {
+    public void adicionar(@RequestBody @Valid CozinhaInput cozinhaInput) {
+        var cozinha = mapper(cozinhaInput, Cozinha.class);
         cozinhaService.salvar(cozinha);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizar(@PathVariable Long id, @RequestBody @Valid Cozinha cozinha) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid CozinhaInput cozinhaInput) {
+        var cozinha = mapper(cozinhaInput, Cozinha.class);
         cozinhaService.atualizar(id, cozinha);
     }
 

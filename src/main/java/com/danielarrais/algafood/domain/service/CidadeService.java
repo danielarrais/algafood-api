@@ -6,16 +6,19 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
-import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
-import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
+import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class
@@ -43,6 +46,7 @@ CidadeService {
     }
 
     @SneakyThrows
+    @Transactional
     public Cidade salvar(Cidade cidade) {
         Long estadoId = cidade.getEstado().getId();
 
@@ -52,30 +56,34 @@ CidadeService {
         return cidadeRepository.save(cidade);
     }
 
+    @Transactional
     public Cidade atualizar(Long id, Cidade cidade) {
         return buscar(id).map(cidadeAtual -> {
-            BeanUtils.copyProperties(cidade, cidadeAtual, "id");
+            copyNonNullValues(cidade, cidadeAtual);
             return salvar(cidadeAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
         });
     }
 
+    @Transactional
     public Cidade atualizar(Long id, Map<String, Object> propertiesAndValues) {
         return buscar(id).map(cidadeAtual -> {
-            CustomBeansUtils.mergeValues(propertiesAndValues, cidadeAtual);
+            mergeValues(propertiesAndValues, cidadeAtual);
             return salvar(cidadeAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             cidadeRepository.deleteById(id);
+            cidadeRepository.flush();
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
-        } catch (DataIntegrityViolationException exception) {
+        } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
             throw new RegistroEmUsoException(id);
         }
     }

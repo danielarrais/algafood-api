@@ -12,7 +12,9 @@ import static java.lang.annotation.ElementType.*;
 @Constraint(validatedBy = {MultiploValidator.class})
 public @interface Multiplo {
     String message() default "{0} não é múltiplo de {numero}";
+
     Class<?>[] groups() default {};
+
     Class<? extends javax.validation.Payload>[] payload() default {};
 
     int numero();

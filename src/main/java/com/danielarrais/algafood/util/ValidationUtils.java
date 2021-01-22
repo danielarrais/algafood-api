@@ -17,12 +17,12 @@ public class ValidationUtils {
         ValidationUtils.messageSource = messageSource;
     }
 
-    public static List<ObjectError> extractErrorsFrom(BindingResult bindingResult){
+    public static List<ObjectError> extractErrorsFrom(BindingResult bindingResult) {
         var validationErrors = new ArrayList<ObjectError>();
 
         bindingResult.getAllErrors().forEach(error -> {
-            String name = error instanceof FieldError ? ((FieldError) error).getField() : error.getObjectName();
-            String message = messageSource.getMessage(error, LocaleContextHolder.getLocale());
+            var name = error instanceof FieldError ? ((FieldError) error).getField() : error.getObjectName();
+            var message = messageSource.getMessage(error, LocaleContextHolder.getLocale());
 
             validationErrors.add(new ObjectError(name, message));
         });

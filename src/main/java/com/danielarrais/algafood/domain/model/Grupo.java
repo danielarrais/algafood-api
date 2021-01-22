@@ -1,14 +1,13 @@
 package com.danielarrais.algafood.domain.model;
 
-import com.danielarrais.algafood.core.validation.Groups;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Entity
@@ -19,15 +18,11 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Grupo {
     @Id
-    @NotNull(groups = Groups.OnlyId.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
-
-    @NotBlank
     private String nome;
 
-    @NotEmpty
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -35,4 +30,11 @@ public class Grupo {
             joinColumns = @JoinColumn(name = "grupo_id"),
             inverseJoinColumns = @JoinColumn(name = "permissao_id"))
     private List<@Valid Permissao> permissoes;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private OffsetDateTime dataCadastro;
+
+    @UpdateTimestamp
+    private OffsetDateTime dataAtualizacao;
 }

@@ -4,16 +4,18 @@ import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Grupo;
 import com.danielarrais.algafood.domain.repository.GrupoRepository;
-import com.danielarrais.algafood.util.CustomBeansUtils;
 import lombok.SneakyThrows;
-import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
+import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class GrupoService {
@@ -38,31 +40,36 @@ public class GrupoService {
     }
 
     @SneakyThrows
+    @Transactional
     public void salvar(Grupo grupo) {
         grupoRepository.save(grupo);
     }
 
+    @Transactional
     public void atualizar(Long id, Grupo grupo) {
         buscar(id).map(grupoAtual -> {
-            BeanUtils.copyProperties(grupo, grupoAtual, "id");
+            copyNonNullValues(grupo, grupoAtual);
             return grupoRepository.save(grupoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
         });
     }
 
+    @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
         buscar(id).map(grupoAtual -> {
-            CustomBeansUtils.mergeValues(propertiesAndValues, grupoAtual);
+            mergeValues(propertiesAndValues, grupoAtual);
             return grupoRepository.save(grupoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             grupoRepository.deleteById(id);
+            grupoRepository.flush();
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {

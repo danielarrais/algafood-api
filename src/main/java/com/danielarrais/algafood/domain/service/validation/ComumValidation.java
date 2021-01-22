@@ -2,15 +2,17 @@ package com.danielarrais.algafood.domain.service.validation;
 
 import com.danielarrais.algafood.domain.exception.SmartValidationException;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.SmartValidator;
 
 @Service
 public class ComumValidation {
-    @Autowired
-    private SmartValidator smartValidator;
+    private final SmartValidator smartValidator;
+
+    public ComumValidation(SmartValidator smartValidator) {
+        this.smartValidator = smartValidator;
+    }
 
     @SneakyThrows
     public void smartValidate(Object object) {
