@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.danielarrais.algafood.util.CustomBeansUtils.copyNoNullValues;
+import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
 import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
@@ -48,7 +48,7 @@ public class GrupoService {
     @Transactional
     public void atualizar(Long id, Grupo grupo) {
         buscar(id).map(grupoAtual -> {
-            copyNoNullValues(grupo, grupoAtual);
+            copyNonNullValues(grupo, grupoAtual);
             return grupoRepository.save(grupoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);

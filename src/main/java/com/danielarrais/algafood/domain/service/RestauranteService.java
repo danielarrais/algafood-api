@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.danielarrais.algafood.util.CustomBeansUtils.copyNoNullValues;
+import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
 import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
@@ -53,7 +53,7 @@ public class RestauranteService {
     @Transactional
     public Restaurante atualizar(Long id, Restaurante restaurante) {
         return buscar(id).map(restauranteAtual -> {
-            copyNoNullValues(restaurante, restauranteAtual);
+            copyNonNullValues(restaurante, restauranteAtual);
             return salvar(restauranteAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);

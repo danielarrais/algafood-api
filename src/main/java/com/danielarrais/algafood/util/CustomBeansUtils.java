@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class CustomBeansUtils extends BeanUtils {
-    public static <T> void copyNoNullValues(Object input, T output) {
+    public static <T> void copyNonNullValues(Object input, T output) {
         var ignoreProperties = nullPropertiesFromObject(input);
         copyProperties(input, output, ignoreProperties);
     }
@@ -35,12 +35,12 @@ public class CustomBeansUtils extends BeanUtils {
     }
 
     @SneakyThrows
-    private static String[] nullPropertiesFromObject(Object o) {
+    private static String[] nullPropertiesFromObject(Object object) {
         List<String> nullFields = new ArrayList<>();
 
-        for (Field field : o.getClass().getDeclaredFields()) {
+        for (Field field : object.getClass().getDeclaredFields()) {
             field.setAccessible(true);
-            Object attribute = field.get(o);
+            Object attribute = field.get(object);
             if (attribute == null) {
                 nullFields.add(field.getName());
             }

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.danielarrais.algafood.util.CustomBeansUtils.copyNoNullValues;
+import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
 import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
@@ -59,7 +59,7 @@ CidadeService {
     @Transactional
     public Cidade atualizar(Long id, Cidade cidade) {
         return buscar(id).map(cidadeAtual -> {
-            copyNoNullValues(cidade, cidadeAtual);
+            copyNonNullValues(cidade, cidadeAtual);
             return salvar(cidadeAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);

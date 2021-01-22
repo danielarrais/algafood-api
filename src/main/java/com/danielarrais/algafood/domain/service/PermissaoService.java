@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.danielarrais.algafood.util.CustomBeansUtils.copyNoNullValues;
+import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
 import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
@@ -48,7 +48,7 @@ public class PermissaoService {
     @Transactional
     public void atualizar(Long id, Permissao permissao) {
         buscar(id).map(permissaoAtual -> {
-            copyNoNullValues(permissao, permissaoAtual);
+            copyNonNullValues(permissao, permissaoAtual);
             return permissaoRepository.save(permissaoAtual);
         }).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException(id);
