@@ -31,10 +31,10 @@ INSERT INTO grupo (nome) VALUES ('Terceirizados'); -- 3
 INSERT INTO grupo (nome) VALUES ('Reitoria'); -- 4
 
 -- Inserts Usuários
-INSERT INTO usuario (nome, email, senha, data_cadastro) VALUES ('Daniel', 'daniel@email.com', 'Sambaíba', current_timestamp); -- 1
-INSERT INTO usuario (nome, email, senha, data_cadastro) VALUES ('Maria', 'maria@email.com', 'Sambaíba', current_timestamp); -- 2
-INSERT INTO usuario (nome, email, senha, data_cadastro) VALUES ('João', 'joão@email.com', 'Sambaíba', current_timestamp); -- 3
-INSERT INTO usuario (nome, email, senha, data_cadastro) VALUES ('Joana', 'joana@email.com', 'Sambaíba', current_timestamp); -- 4
+INSERT INTO usuario (nome, email, senha, data_cadastro) VALUES ('Daniel', 'daniel@email.com', 'Sambaíba', (now() at time zone 'utc')); -- 1
+INSERT INTO usuario (nome, email, senha, data_cadastro) VALUES ('Maria', 'maria@email.com', 'Sambaíba', (now() at time zone 'utc')); -- 2
+INSERT INTO usuario (nome, email, senha, data_cadastro) VALUES ('João', 'joão@email.com', 'Sambaíba', (now() at time zone 'utc')); -- 3
+INSERT INTO usuario (nome, email, senha, data_cadastro) VALUES ('Joana', 'joana@email.com', 'Sambaíba', (now() at time zone 'utc')); -- 4
 
 -- Inserts Cozinha
 INSERT INTO cozinha (nome) VALUES ('Nordestina'); -- 1
@@ -43,10 +43,10 @@ INSERT INTO cozinha (nome) VALUES ('Italiana'); -- 3
 INSERT INTO cozinha (nome) VALUES ('Islamica'); -- 4
 
 -- Inserts Restaurantes
-INSERT INTO restaurante (nome, cozinha_id, taxa_frete, ativo, data_cadastro, data_atualizacao, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id) VALUES ('Churrascaria Tradição', 1, 10.00, true, current_timestamp, current_timestamp, '77060140', 'Rua Mato Grosso e Mathias', 'S/N', 'Predio mais alto da cidade', 'Aureny 1', 1);
-INSERT INTO restaurante (nome, cozinha_id, taxa_frete, ativo, data_cadastro, data_atualizacao, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id) VALUES ('Jackin Predident', 2, 5.00, true, current_timestamp, current_timestamp, '77060140', 'Rua Mato Grosso e Mathias', 'S/N', 'Predio mais alto da cidade', 'Aureny 1', 2);
-INSERT INTO restaurante (nome, cozinha_id, taxa_frete, ativo, data_cadastro, data_atualizacao, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id) VALUES ('Espetinho do Luiz', 3, 0.00, true, current_timestamp, current_timestamp, '77060140', 'Rua Mato Grosso e Mathias', 'S/N', 'Predio mais alto da cidade', 'Aureny 1', 1);
-INSERT INTO restaurante (nome, cozinha_id, taxa_frete, ativo, data_cadastro, data_atualizacao, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id) VALUES ('K-ane Lanches', 4, 0.00, true, current_timestamp, current_timestamp, '77060140', 'Rua Mato Grosso e Mathias', 'S/N', 'Predio mais alto da cidade', 'Aureny 1', 2);
+INSERT INTO restaurante (nome, cozinha_id, taxa_frete, ativo, data_cadastro, data_atualizacao, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id) VALUES ('Churrascaria Tradição', 1, 10.00, true, (now() at time zone 'utc'), (now() at time zone 'utc'), '77060140', 'Rua Mato Grosso e Mathias', 'S/N', 'Predio mais alto da cidade', 'Aureny 1', 1);
+INSERT INTO restaurante (nome, cozinha_id, taxa_frete, ativo, data_cadastro, data_atualizacao, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id) VALUES ('Jackin Predident', 2, 5.00, true, (now() at time zone 'utc'), (now() at time zone 'utc'), '77060140', 'Rua Mato Grosso e Mathias', 'S/N', 'Predio mais alto da cidade', 'Aureny 1', 2);
+INSERT INTO restaurante (nome, cozinha_id, taxa_frete, ativo, data_cadastro, data_atualizacao, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id) VALUES ('Espetinho do Luiz', 3, 0.00, true, (now() at time zone 'utc'), (now() at time zone 'utc'), '77060140', 'Rua Mato Grosso e Mathias', 'S/N', 'Predio mais alto da cidade', 'Aureny 1', 1);
+INSERT INTO restaurante (nome, cozinha_id, taxa_frete, ativo, data_cadastro, data_atualizacao, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id) VALUES ('K-ane Lanches', 4, 0.00, true, (now() at time zone 'utc'), (now() at time zone 'utc'), '77060140', 'Rua Mato Grosso e Mathias', 'S/N', 'Predio mais alto da cidade', 'Aureny 1', 2);
 
 -- Inserts Formas de Pagamento
 INSERT INTO forma_pagamento (descricao) VALUES ('Dinheiro'); -- 1
