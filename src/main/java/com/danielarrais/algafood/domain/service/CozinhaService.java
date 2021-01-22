@@ -65,9 +65,11 @@ public class CozinhaService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             cozinhaRepository.deleteById(id);
+            cozinhaRepository.flush();
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {

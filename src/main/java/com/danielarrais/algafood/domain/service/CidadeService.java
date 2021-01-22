@@ -76,9 +76,11 @@ CidadeService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             cidadeRepository.deleteById(id);
+            cidadeRepository.flush();
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException | ConstraintViolationException exception) {

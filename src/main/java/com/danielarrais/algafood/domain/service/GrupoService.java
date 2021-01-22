@@ -65,9 +65,11 @@ public class GrupoService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             grupoRepository.deleteById(id);
+            grupoRepository.flush();
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {

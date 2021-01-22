@@ -65,9 +65,11 @@ public class FormaPagamentoService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             formaPagamentoRepository.deleteById(id);
+            formaPagamentoRepository.flush();
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {

@@ -65,9 +65,11 @@ public class EstadoService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             estadoRepository.deleteById(id);
+            estadoRepository.flush();
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {

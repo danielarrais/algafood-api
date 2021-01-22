@@ -68,9 +68,11 @@ public class ProdutoService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             produtoRepository.deleteById(id);
+            produtoRepository.flush();
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
         }

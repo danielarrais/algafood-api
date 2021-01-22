@@ -65,9 +65,11 @@ public class PermissaoService {
         });
     }
 
+    @Transactional
     public void remover(Long id) {
         try {
             permissaoRepository.deleteById(id);
+            permissaoRepository.flush();
         } catch (EmptyResultDataAccessException exception) {
             throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
