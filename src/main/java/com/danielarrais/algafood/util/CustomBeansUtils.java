@@ -2,15 +2,23 @@ package com.danielarrais.algafood.util;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class CustomBeansUtils extends BeanUtils {
+    public static <T> void copyNoNullValues(Object input, T output) {
+        var ignoreProperties = nullPropertiesFromObject(input);
+        copyProperties(input, output, ignoreProperties);
+    }
+
     public static <T> void mergeValues(Map<String, Object> dadosOrigem, T destino) {
         var objectMapper = buildObjectMapper();
         var destinoClass = destino.getClass();
@@ -24,6 +32,21 @@ public class CustomBeansUtils extends BeanUtils {
 
             ReflectionUtils.setField(field, destino, novoValor);
         });
+    }
+
+    @SneakyThrows
+    private static String[] nullPropertiesFromObject(Object o) {
+        List<String> nullFields = new ArrayList<>();
+
+        for (Field field : o.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            Object attribute = field.get(o);
+            if (attribute == null) {
+                nullFields.add(field.getName());
+            }
+        }
+
+        return nullFields.toArray(new String[0]);
     }
 
     private static ObjectMapper buildObjectMapper() {
