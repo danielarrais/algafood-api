@@ -1,13 +1,10 @@
 package com.danielarrais.algafood.domain.model;
 
-import com.danielarrais.algafood.core.validation.Groups;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
 
 @Entity
@@ -18,10 +15,10 @@ import java.time.OffsetDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Estado {
     @Id
-    @NotNull(groups = Groups.OnlyId.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+    private String nome;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -29,7 +26,4 @@ public class Estado {
 
     @UpdateTimestamp
     private OffsetDateTime dataAtualizacao;
-
-    @NotBlank
-    private String nome;
 }

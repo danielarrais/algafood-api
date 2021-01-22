@@ -5,9 +5,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -22,22 +19,14 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
-
-    @NotBlank
     private String nome;
-
-    @NotBlank
-    @Email
     private String email;
-
-    @NotBlank
     private String senha;
 
     @CreationTimestamp
     @Column(updatable = false)
     private OffsetDateTime dataCadastro;
 
-    @NotEmpty
     @ManyToMany
     @JoinTable(
             name = "usuario_grupo",
