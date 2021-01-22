@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.api.controller;
 
 import com.danielarrais.algafood.api.dto.input.restaurante.RestauranteInput;
-import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteOutput;
+import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteFullOutput;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.service.RestauranteService;
 import org.springframework.http.HttpStatus;
@@ -23,15 +23,15 @@ public class RestauranteController {
     }
 
     @GetMapping()
-    public List<RestauranteOutput> listar() {
+    public List<RestauranteFullOutput> listar() {
         var restaurantes = restauranteService.listar();
-        return mapper(restaurantes, RestauranteOutput.class);
+        return mapper(restaurantes, RestauranteFullOutput.class);
     }
 
     @GetMapping("/{id}")
-    public RestauranteOutput buscar(@PathVariable Long id) {
+    public RestauranteFullOutput buscar(@PathVariable Long id) {
         var restaurante = restauranteService.buscarObrigatorio(id);
-        return mapper(restaurante, RestauranteOutput.class);
+        return mapper(restaurante, RestauranteFullOutput.class);
     }
 
     @PostMapping

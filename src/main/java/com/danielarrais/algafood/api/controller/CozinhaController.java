@@ -1,6 +1,7 @@
 package com.danielarrais.algafood.api.controller;
 
 import com.danielarrais.algafood.api.dto.input.cozinha.CozinhaInput;
+import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaFullOutput;
 import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaOutput;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.service.CozinhaService;
@@ -29,9 +30,9 @@ public class CozinhaController {
     }
 
     @GetMapping("/{id}")
-    public CozinhaOutput buscar(@PathVariable Long id) {
+    public CozinhaFullOutput buscar(@PathVariable Long id) {
         var cozinha = cozinhaService.buscarObrigatorio(id);
-        return mapper(cozinha, CozinhaOutput.class);
+        return mapper(cozinha, CozinhaFullOutput.class);
     }
 
     @PostMapping
