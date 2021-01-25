@@ -4,10 +4,9 @@ import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.repository.RestauranteRepository;
-import com.danielarrais.algafood.domain.service.validation.RastauranteValidation;
+import com.danielarrais.algafood.domain.service.validation.RestauranteValidation;
 import lombok.SneakyThrows;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +20,14 @@ import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 @Service
 public class RestauranteService {
     private final RestauranteRepository restauranteRepository;
-    private final RastauranteValidation rastauranteValidation;
+    private final RestauranteValidation restauranteValidation;
 
-    public RestauranteService(RestauranteRepository restauranteRepository, RastauranteValidation rastauranteValidation) {
+    private final FormaPagamentoService formaPagamentoService;
+
+    public RestauranteService(RestauranteRepository restauranteRepository, RestauranteValidation restauranteValidation, FormaPagamentoService formaPagamentoService) {
         this.restauranteRepository = restauranteRepository;
-        this.rastauranteValidation = rastauranteValidation;
+        this.restauranteValidation = restauranteValidation;
+        this.formaPagamentoService = formaPagamentoService;
     }
 
     public List<Restaurante> listar() {
@@ -38,55 +40,71 @@ public class RestauranteService {
 
     public Restaurante buscarObrigatorio(long restauranteId) {
         return buscar(restauranteId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(restauranteId);
+            throw new RegistroNaoEncontradoException("Restaurante", restauranteId);
         });
     }
 
     @SneakyThrows
     @Transactional
     public void salvar(Restaurante restaurante) {
-        rastauranteValidation.validate(restaurante);
+        restauranteValidation.validate(restaurante);
         restauranteRepository.save(restaurante);
     }
 
     @Transactional
     public void atualizar(Long id, Restaurante restaurante) {
-        Restaurante restauranteAtual = buscarObrigatorio(id);
-        copyNonNullValues(restaurante, restauranteAtual);
+        var restauranteAtual = buscarObrigatorio(id);
 
+        copyNonNullValues(restaurante, restauranteAtual);
         salvar(restauranteAtual);
     }
 
     @Transactional
     public void ativar(Long id) {
-        Restaurante restaurante = buscarObrigatorio(id);
+        var restaurante = buscarObrigatorio(id);
         restaurante.ativar();
     }
 
     @Transactional
     public void inativar(Long id) {
-        Restaurante restaurante = buscarObrigatorio(id);
+        var restaurante = buscarObrigatorio(id);
         restaurante.inativar();
     }
 
     @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        Restaurante restauranteAtual = buscarObrigatorio(id);
+        var restauranteAtual = buscarObrigatorio(id);
+
         mergeValues(propertiesAndValues, restauranteAtual);
-        rastauranteValidation.smartValidate(restauranteAtual);
+        restauranteValidation.smartValidate(restauranteAtual);
 
         salvar(restauranteAtual);
     }
 
     @Transactional
     public void remover(Long id) {
+        var restaurante = buscarObrigatorio(id);
         try {
-            restauranteRepository.deleteById(id);
+            restauranteRepository.delete(restaurante);
             restauranteRepository.flush();
-        } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new RegistroEmUsoException(id);
         }
+    }
+
+    @Transactional
+    public void adicionarFormaPagamento(Long idRestaurante, Long idFormaPagamento) {
+        var restaurante = buscarObrigatorio(idRestaurante);
+        var formaPagamento = formaPagamentoService.buscarObrigatorio(idFormaPagamento);
+
+        restaurante.adicionarFormaPagamento(formaPagamento);
+    }
+
+    @Transactional
+    public void removerFormaPagamento(Long idRestaurante, Long idFormaPagamento) {
+        var restaurante = buscarObrigatorio(idRestaurante);
+        var formaPagamento = formaPagamentoService.buscarObrigatorio(idFormaPagamento);
+
+        restaurante.removerFormaPagamento(formaPagamento);
     }
 }
