@@ -37,4 +37,12 @@ public class Grupo {
 
     @UpdateTimestamp
     private OffsetDateTime dataAtualizacao;
+    
+    public void adicionarPermissao(Permissao formaPagamento) {
+        getPermissoes().add(formaPagamento);
+    }
+
+    public void removerPermissao(Permissao formaPagamento) {
+        getPermissoes().remove(formaPagamento);
+    }
 }

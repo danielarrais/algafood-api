@@ -20,9 +20,11 @@ import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 @Service
 public class GrupoService {
     private final GrupoRepository grupoRepository;
+    private final PermissaoService permissaoService;
 
-    public GrupoService(GrupoRepository grupoRepository) {
+    public GrupoService(GrupoRepository grupoRepository, PermissaoService permissaoService) {
         this.grupoRepository = grupoRepository;
+        this.permissaoService = permissaoService;
     }
 
     public List<Grupo> listar() {
@@ -71,5 +73,21 @@ public class GrupoService {
         } catch (DataIntegrityViolationException exception) {
             throw new RegistroEmUsoException(id);
         }
+    }
+
+    @Transactional
+    public void associarPermissao(Long grupoId, Long idPermissao) {
+        var grupo = buscarObrigatorio(grupoId);
+        var permissao = permissaoService.buscarObrigatorio(idPermissao);
+
+        grupo.adicionarPermissao(permissao);
+    }
+
+    @Transactional
+    public void desassociarPermissao(Long grupoId, Long idPermissao) {
+        var grupo = buscarObrigatorio(grupoId);
+        var permissao = permissaoService.buscarObrigatorio(idPermissao);
+
+        grupo.removerPermissao(permissao);
     }
 }
