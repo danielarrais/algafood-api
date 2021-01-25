@@ -1,8 +1,8 @@
 package com.danielarrais.algafood.api.dto.output.restaurante;
 
 import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaOutput;
+import com.danielarrais.algafood.api.dto.output.endereco.EnderecoOutput;
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
-import com.danielarrais.algafood.domain.model.Endereco;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -18,7 +18,7 @@ public class RestauranteFullOutput {
     private Boolean ativo;
     private CozinhaOutput cozinha;
     private List<FormaPagamentoOutput> formasPagamento;
-    private Endereco endereco;
+    private EnderecoOutput endereco;
     private OffsetDateTime dataCadastro;
     private OffsetDateTime dataAtualizacao;
 }

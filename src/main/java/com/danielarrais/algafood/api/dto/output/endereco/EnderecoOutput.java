@@ -1,6 +1,6 @@
-package com.danielarrais.algafood.api.dto.output.restaurante;
+package com.danielarrais.algafood.api.dto.output.endereco;
 
-import com.danielarrais.algafood.api.dto.output.cidade.CidadeOutput;
+import com.danielarrais.algafood.api.dto.output.cidade.CidadeSimpleOutput;
 import lombok.Data;
 
 
@@ -11,5 +11,5 @@ public class EnderecoOutput {
     private String numero;
     private String complemento;
     private String bairro;
-    private CidadeOutput cidade;
+    private CidadeSimpleOutput cidade;
 }
