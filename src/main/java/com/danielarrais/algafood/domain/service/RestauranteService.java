@@ -23,11 +23,13 @@ public class RestauranteService {
     private final RestauranteValidation restauranteValidation;
 
     private final FormaPagamentoService formaPagamentoService;
+    private final UsuarioService usuarioService;
 
-    public RestauranteService(RestauranteRepository restauranteRepository, RestauranteValidation restauranteValidation, FormaPagamentoService formaPagamentoService) {
+    public RestauranteService(RestauranteRepository restauranteRepository, RestauranteValidation restauranteValidation, FormaPagamentoService formaPagamentoService, UsuarioService usuarioService) {
         this.restauranteRepository = restauranteRepository;
         this.restauranteValidation = restauranteValidation;
         this.formaPagamentoService = formaPagamentoService;
+        this.usuarioService = usuarioService;
     }
 
     public List<Restaurante> listar() {
@@ -118,5 +120,21 @@ public class RestauranteService {
         var formaPagamento = formaPagamentoService.buscarObrigatorio(idFormaPagamento);
 
         restaurante.removerFormaPagamento(formaPagamento);
+    }
+
+    @Transactional
+    public void associarResponsavel(Long restauranteId, Long idUsuario) {
+        var restaurante = buscarObrigatorio(restauranteId);
+        var usuario = usuarioService.buscarObrigatorio(idUsuario);
+
+        restaurante.adicionarResponsavel(usuario);
+    }
+
+    @Transactional
+    public void desassociarResponsavel(Long restauranteId, Long idUsuario) {
+        var restaurante = buscarObrigatorio(restauranteId);
+        var usuario = usuarioService.buscarObrigatorio(idUsuario);
+
+        restaurante.removerResponsavel(usuario);
     }
 }

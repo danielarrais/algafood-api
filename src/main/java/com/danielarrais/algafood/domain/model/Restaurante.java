@@ -49,7 +49,7 @@ public class Restaurante {
             name = "usuario_responsavel_restaurante",
             joinColumns = @JoinColumn(name = "restaurante_id"),
             inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-    private Set<@Valid @ConvertGroup(to = OnlyId.class) Usuario> usuariosResponsaveis = new HashSet<>();
+    private Set<@Valid @ConvertGroup(to = OnlyId.class) Usuario> responsaveis = new HashSet<>();
 
     @Embedded
     private Endereco endereco;
@@ -87,5 +87,13 @@ public class Restaurante {
 
     public void removerFormaPagamento(FormaPagamento formaPagamento) {
         getFormasPagamento().remove(formaPagamento);
+    }
+
+    public void adicionarResponsavel(Usuario usuario) {
+        getResponsaveis().add(usuario);
+    }
+
+    public void removerResponsavel(Usuario usuario) {
+        getResponsaveis().remove(usuario);
     }
 }
