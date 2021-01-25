@@ -1,6 +1,7 @@
 package com.danielarrais.algafood.api.controller;
 
 import com.danielarrais.algafood.api.dto.input.usuario.UsuarioInput;
+import com.danielarrais.algafood.api.dto.input.usuario.UsuarioSenhaInput;
 import com.danielarrais.algafood.api.dto.output.usuario.UsuarioOutput;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.service.UsuarioService;
@@ -32,6 +33,12 @@ public class UsuarioController {
     public UsuarioOutput buscar(@PathVariable Long id) {
         var usuario = usuarioService.buscarObrigatorio(id);
         return mapper(usuario, UsuarioOutput.class);
+    }
+
+    @PutMapping("/{usuarioId}/senha")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void alterarSenha(@PathVariable Long usuarioId, @RequestBody @Valid UsuarioSenhaInput usuarioSenhaInput) {
+        usuarioService.alterarSenha(usuarioId, usuarioSenhaInput.getSenhaAtual(), usuarioSenhaInput.getNovaSenha());
     }
 
     @PostMapping
