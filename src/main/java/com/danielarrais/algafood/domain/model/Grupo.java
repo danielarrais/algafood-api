@@ -8,7 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.Valid;
 import java.time.OffsetDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -29,7 +30,7 @@ public class Grupo {
             name = "grupo_permissao",
             joinColumns = @JoinColumn(name = "grupo_id"),
             inverseJoinColumns = @JoinColumn(name = "permissao_id"))
-    private List<@Valid Permissao> permissoes;
+    private Set<@Valid Permissao> permissoes = new HashSet<>();
 
     @CreationTimestamp
     @Column(updatable = false)
