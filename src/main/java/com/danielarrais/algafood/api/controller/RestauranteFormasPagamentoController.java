@@ -10,7 +10,7 @@ import java.util.List;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping("/restaurantes/{idRestaurante}/formas-pagamento")
+@RequestMapping("/restaurantes/{restauranteId}/formas-pagamento")
 public class RestauranteFormasPagamentoController {
     private final RestauranteService restauranteService;
 
@@ -19,20 +19,20 @@ public class RestauranteFormasPagamentoController {
     }
 
     @GetMapping()
-    public List<FormaPagamentoOutput> listarFormasPagamento(@PathVariable Long idRestaurante) {
-        var restaurante = restauranteService.buscarObrigatorio(idRestaurante);
+    public List<FormaPagamentoOutput> listar(@PathVariable Long restauranteId) {
+        var restaurante = restauranteService.buscarObrigatorio(restauranteId);
         return mapper(restaurante.getFormasPagamento(), FormaPagamentoOutput.class);
     }
 
     @PutMapping("/{idFormaPagamento}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void adicionarFormaPagamento(@PathVariable Long idRestaurante, @PathVariable Long idFormaPagamento) {
-        restauranteService.adicionarFormaPagamento(idRestaurante, idFormaPagamento);
+    public void adicionar(@PathVariable Long restauranteId, @PathVariable Long idFormaPagamento) {
+        restauranteService.adicionarFormaPagamento(restauranteId, idFormaPagamento);
     }
 
     @DeleteMapping("/{idFormaPagamento}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removerFormaPagamento(@PathVariable Long idRestaurante, @PathVariable Long idFormaPagamento) {
-        restauranteService.removerFormaPagamento(idRestaurante, idFormaPagamento);
+    public void remover(@PathVariable Long restauranteId, @PathVariable Long idFormaPagamento) {
+        restauranteService.removerFormaPagamento(restauranteId, idFormaPagamento);
     }
 }

@@ -93,16 +93,16 @@ public class RestauranteService {
     }
 
     @Transactional
-    public void adicionarFormaPagamento(Long idRestaurante, Long idFormaPagamento) {
-        var restaurante = buscarObrigatorio(idRestaurante);
+    public void adicionarFormaPagamento(Long restauranteId, Long idFormaPagamento) {
+        var restaurante = buscarObrigatorio(restauranteId);
         var formaPagamento = formaPagamentoService.buscarObrigatorio(idFormaPagamento);
 
         restaurante.adicionarFormaPagamento(formaPagamento);
     }
 
     @Transactional
-    public void removerFormaPagamento(Long idRestaurante, Long idFormaPagamento) {
-        var restaurante = buscarObrigatorio(idRestaurante);
+    public void removerFormaPagamento(Long restauranteId, Long idFormaPagamento) {
+        var restaurante = buscarObrigatorio(restauranteId);
         var formaPagamento = formaPagamentoService.buscarObrigatorio(idFormaPagamento);
 
         restaurante.removerFormaPagamento(formaPagamento);
