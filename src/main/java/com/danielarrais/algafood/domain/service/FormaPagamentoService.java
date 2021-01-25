@@ -4,9 +4,7 @@ import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.repository.FormaPagamentoRepository;
-import lombok.SneakyThrows;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,11 +33,10 @@ public class FormaPagamentoService {
 
     public FormaPagamento buscarObrigatorio(long formaPagamentoId) {
         return buscar(formaPagamentoId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(formaPagamentoId);
+            throw new RegistroNaoEncontradoException("Forma de pagamento", formaPagamentoId);
         });
     }
 
-    @SneakyThrows
     @Transactional
     public void salvar(FormaPagamento formaPagamento) {
         formaPagamentoRepository.save(formaPagamento);
@@ -47,31 +44,27 @@ public class FormaPagamentoService {
 
     @Transactional
     public void atualizar(Long id, FormaPagamento formaPagamento) {
-        buscar(id).map(formaPagamentoAtual -> {
-            copyNonNullValues(formaPagamento, formaPagamentoAtual);
-            return formaPagamentoRepository.save(formaPagamentoAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+        var formaPagamentoAtual = buscarObrigatorio(id);
+
+        copyNonNullValues(formaPagamento, formaPagamentoAtual);
+        formaPagamentoRepository.save(formaPagamentoAtual);
     }
 
     @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        buscar(id).map(formaPagamentoAtual -> {
-            mergeValues(propertiesAndValues, formaPagamentoAtual);
-            return formaPagamentoRepository.save(formaPagamentoAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+        var formaPagamentoAtual = buscarObrigatorio(id);
+
+        mergeValues(propertiesAndValues, formaPagamentoAtual);
+        formaPagamentoRepository.save(formaPagamentoAtual);
     }
 
     @Transactional
     public void remover(Long id) {
+        var formaPagamentoAtual = buscarObrigatorio(id);
+
         try {
-            formaPagamentoRepository.deleteById(id);
+            formaPagamentoRepository.delete(formaPagamentoAtual);
             formaPagamentoRepository.flush();
-        } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new RegistroEmUsoException(id);
         }

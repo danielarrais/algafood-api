@@ -7,7 +7,6 @@ import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.repository.UsuarioRepository;
 import com.danielarrais.algafood.domain.service.validation.UsuarioValidation;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +37,7 @@ public class UsuarioService {
 
     public Usuario buscarObrigatorio(long usuarioId) {
         return buscar(usuarioId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(usuarioId);
+            throw new RegistroNaoEncontradoException("Usuário", usuarioId);
         });
     }
 
@@ -57,37 +56,33 @@ public class UsuarioService {
         }
 
         usuario.setSenha(novaSenha);
-
-        usuarioRepository.save(usuario);
     }
 
     @Transactional
     public void atualizar(Long id, Usuario usuario) {
         var usuarioAtual = buscarObrigatorio(id);
+
         copyNonNullValues(usuario, usuarioAtual);
-
         this.usuarioValidation.validate(usuarioAtual);
-
         usuarioRepository.save(usuarioAtual);
     }
 
     @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
         var usuarioAtual = buscarObrigatorio(id);
+
         mergeValues(propertiesAndValues, usuarioAtual);
-
         this.usuarioValidation.validate(usuarioAtual);
-
         usuarioRepository.save(usuarioAtual);
     }
 
     @Transactional
     public void remover(Long id) {
+        var usuario = buscarObrigatorio(id);
+
         try {
-            usuarioRepository.deleteById(id);
+            usuarioRepository.delete(usuario);
             usuarioRepository.flush();
-        } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new RegistroEmUsoException(id);
         }

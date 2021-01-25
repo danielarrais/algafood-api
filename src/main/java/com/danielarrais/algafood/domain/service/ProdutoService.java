@@ -5,7 +5,6 @@ import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.repository.ProdutoRepository;
 import com.danielarrais.algafood.domain.service.validation.ProdutoValidation;
 import lombok.SneakyThrows;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,7 +35,7 @@ public class ProdutoService {
 
     public Produto buscarObrigatorio(long produtoId) {
         return buscar(produtoId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(produtoId);
+            throw new RegistroNaoEncontradoException("Produto", produtoId);
         });
     }
 
@@ -50,31 +49,25 @@ public class ProdutoService {
 
     @Transactional
     public void atualizar(Long id, Produto produto) {
-        buscar(id).map(produtoAtual -> {
-            copyNonNullValues(produto, produtoAtual);
-            return produtoRepository.save(produtoAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+        var produtoAtual = buscarObrigatorio(id);
+
+        copyNonNullValues(produto, produtoAtual);
+        produtoRepository.save(produtoAtual);
     }
 
     @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        buscar(id).map(produtoAtual -> {
-            mergeValues(propertiesAndValues, produtoAtual);
-            return produtoRepository.save(produtoAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+        var produtoAtual = buscarObrigatorio(id);
+
+        mergeValues(propertiesAndValues, produtoAtual);
+        produtoRepository.save(produtoAtual);
     }
 
     @Transactional
     public void remover(Long id) {
-        try {
-            produtoRepository.deleteById(id);
-            produtoRepository.flush();
-        } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradoException(id);
-        }
+        var produtoAtual = buscarObrigatorio(id);
+
+        produtoRepository.delete(produtoAtual);
+        produtoRepository.flush();
     }
 }
