@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.service;
 
+import com.danielarrais.algafood.domain.exception.NegocioException;
 import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Usuario;
@@ -42,6 +43,19 @@ public class UsuarioService {
     @SneakyThrows
     @Transactional
     public void salvar(Usuario usuario) {
+        usuarioRepository.save(usuario);
+    }
+
+    @Transactional
+    public void alterarSenha(Long id, String senhaAtual, String novaSenha) {
+        Usuario usuario = buscarObrigatorio(id);
+
+        if (!usuario.isSenhaIgual(senhaAtual)) {
+            throw new NegocioException("A senha atual informada não é válida");
+        }
+
+        usuario.setSenha(novaSenha);
+
         usuarioRepository.save(usuario);
     }
 

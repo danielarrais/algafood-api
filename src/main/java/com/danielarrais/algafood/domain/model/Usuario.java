@@ -37,4 +37,8 @@ public class Usuario {
 
     @UpdateTimestamp
     private OffsetDateTime dataAtualizacao;
+
+    public boolean isSenhaIgual(String senhaAtual) {
+        return this.senha.equals(senhaAtual);
+    }
 }
