@@ -28,7 +28,7 @@ public class Restaurante {
     private Long id;
     private String nome;
     private BigDecimal taxaFrete;
-    private Boolean ativo = true;
+    private Boolean ativo = Boolean.TRUE;
 
     @ManyToOne
     @JoinColumn(name = "cozinha_id")
@@ -54,4 +54,12 @@ public class Restaurante {
 
     @UpdateTimestamp
     private OffsetDateTime dataAtualizacao;
+
+    public void ativar() {
+        setAtivo(true);
+    }
+
+    public void inativar() {
+        setAtivo(false);
+    }
 }

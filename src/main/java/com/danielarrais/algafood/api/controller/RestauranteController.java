@@ -47,6 +47,18 @@ public class RestauranteController {
         restauranteService.atualizar(id, restaurante);
     }
 
+    @PutMapping("/{id}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void ativar(@PathVariable Long id) {
+        restauranteService.ativar(id);
+    }
+
+    @DeleteMapping("/{id}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void inativar(@PathVariable Long id) {
+        restauranteService.inativar(id);
+    }
+
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {

@@ -44,33 +44,38 @@ public class RestauranteService {
 
     @SneakyThrows
     @Transactional
-    public Restaurante salvar(Restaurante restaurante) {
+    public void salvar(Restaurante restaurante) {
         rastauranteValidation.validate(restaurante);
-
-        return restauranteRepository.save(restaurante);
+        restauranteRepository.save(restaurante);
     }
 
     @Transactional
-    public Restaurante atualizar(Long id, Restaurante restaurante) {
-        return buscar(id).map(restauranteAtual -> {
-            copyNonNullValues(restaurante, restauranteAtual);
-            return salvar(restauranteAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+    public void atualizar(Long id, Restaurante restaurante) {
+        Restaurante restauranteAtual = buscarObrigatorio(id);
+        copyNonNullValues(restaurante, restauranteAtual);
+
+        salvar(restauranteAtual);
     }
 
     @Transactional
-    public Restaurante atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        return buscar(id).map(restauranteAtual -> {
-            mergeValues(propertiesAndValues, restauranteAtual);
+    public void ativar(Long id) {
+        Restaurante restaurante = buscarObrigatorio(id);
+        restaurante.ativar();
+    }
 
-            rastauranteValidation.smartValidate(restauranteAtual);
+    @Transactional
+    public void inativar(Long id) {
+        Restaurante restaurante = buscarObrigatorio(id);
+        restaurante.inativar();
+    }
 
-            return salvar(restauranteAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+    @Transactional
+    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
+        Restaurante restauranteAtual = buscarObrigatorio(id);
+        mergeValues(propertiesAndValues, restauranteAtual);
+        rastauranteValidation.smartValidate(restauranteAtual);
+
+        salvar(restauranteAtual);
     }
 
     @Transactional
@@ -83,9 +88,5 @@ public class RestauranteService {
         } catch (DataIntegrityViolationException exception) {
             throw new RegistroEmUsoException(id);
         }
-    }
-
-    public List<Restaurante> findComFreteGratis() {
-        return restauranteRepository.findComFreteGratis();
     }
 }
