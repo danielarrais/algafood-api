@@ -31,6 +31,7 @@ public class Restaurante {
     private String nome;
     private BigDecimal taxaFrete;
     private Boolean ativo = Boolean.TRUE;
+    private Boolean aberto = Boolean.TRUE;
 
     @ManyToOne
     @JoinColumn(name = "cozinha_id")
@@ -63,6 +64,14 @@ public class Restaurante {
 
     public void inativar() {
         setAtivo(false);
+    }
+
+    public void abrir() {
+        setAberto(true);
+    }
+
+    public void fechar() {
+        setAberto(false);
     }
 
     public void adicionarFormaPagamento(FormaPagamento formaPagamento) {

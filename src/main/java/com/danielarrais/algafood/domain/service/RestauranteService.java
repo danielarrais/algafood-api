@@ -72,6 +72,18 @@ public class RestauranteService {
     }
 
     @Transactional
+    public void abrir(Long id) {
+        var restaurante = buscarObrigatorio(id);
+        restaurante.abrir();
+    }
+
+    @Transactional
+    public void fechar(Long id) {
+        var restaurante = buscarObrigatorio(id);
+        restaurante.fechar();
+    }
+
+    @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
         var restauranteAtual = buscarObrigatorio(id);
 
