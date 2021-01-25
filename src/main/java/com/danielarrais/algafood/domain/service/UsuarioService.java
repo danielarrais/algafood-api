@@ -5,7 +5,7 @@ import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.repository.UsuarioRepository;
-import lombok.SneakyThrows;
+import com.danielarrais.algafood.domain.service.validation.UsuarioValidation;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -21,9 +21,11 @@ import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
+    private final UsuarioValidation usuarioValidation;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioValidation usuarioValidation) {
         this.usuarioRepository = usuarioRepository;
+        this.usuarioValidation = usuarioValidation;
     }
 
     public List<Usuario> listar() {
@@ -40,9 +42,9 @@ public class UsuarioService {
         });
     }
 
-    @SneakyThrows
     @Transactional
     public void salvar(Usuario usuario) {
+        this.usuarioValidation.validate(usuario);
         usuarioRepository.save(usuario);
     }
 
@@ -61,22 +63,22 @@ public class UsuarioService {
 
     @Transactional
     public void atualizar(Long id, Usuario usuario) {
-        buscar(id).map(usuarioAtual -> {
-            copyNonNullValues(usuario, usuarioAtual);
-            return usuarioRepository.save(usuarioAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+        var usuarioAtual = buscarObrigatorio(id);
+        copyNonNullValues(usuario, usuarioAtual);
+
+        this.usuarioValidation.validate(usuarioAtual);
+
+        usuarioRepository.save(usuarioAtual);
     }
 
     @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        buscar(id).map(usuarioAtual -> {
-            mergeValues(propertiesAndValues, usuarioAtual);
-            return usuarioRepository.save(usuarioAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+        var usuarioAtual = buscarObrigatorio(id);
+        mergeValues(propertiesAndValues, usuarioAtual);
+
+        this.usuarioValidation.validate(usuarioAtual);
+
+        usuarioRepository.save(usuarioAtual);
     }
 
     @Transactional
