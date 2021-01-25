@@ -1,7 +1,7 @@
-package com.danielarrais.algafood.api.controller;
+package com.danielarrais.algafood.api.controller.restaurante;
 
-import com.danielarrais.algafood.api.dto.input.produto.ProdutoInput;
-import com.danielarrais.algafood.api.dto.output.produto.ProdutoOutput;
+import com.danielarrais.algafood.api.dto.input.restaurante.ProdutoInput;
+import com.danielarrais.algafood.api.dto.output.restaurante.ProdutoOutput;
 import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.service.ProdutoService;
 import com.danielarrais.algafood.domain.service.RestauranteService;

@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.dto.output.endereco;
+package com.danielarrais.algafood.api.dto.output.restaurante;
 
 import com.danielarrais.algafood.api.dto.output.cidade.CidadeSimpleOutput;
 import lombok.Data;

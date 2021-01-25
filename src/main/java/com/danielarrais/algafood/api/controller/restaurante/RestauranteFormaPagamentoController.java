@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.controller;
+package com.danielarrais.algafood.api.controller.restaurante;
 
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
 import com.danielarrais.algafood.domain.service.RestauranteService;

@@ -1,6 +1,5 @@
 package com.danielarrais.algafood.api.dto.output.restaurante;
 
-import com.danielarrais.algafood.api.dto.output.endereco.EnderecoOutput;
 import lombok.Data;
 
 import java.math.BigDecimal;

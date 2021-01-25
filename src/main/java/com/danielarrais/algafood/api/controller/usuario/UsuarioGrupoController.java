@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.controller;
+package com.danielarrais.algafood.api.controller.usuario;
 
 import com.danielarrais.algafood.api.dto.output.permissao.PermissaoOutput;
 import com.danielarrais.algafood.domain.service.UsuarioService;

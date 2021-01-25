@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.controller;
+package com.danielarrais.algafood.api.controller.formaPagamento;
 
 import com.danielarrais.algafood.api.dto.input.formaPagamento.FormaPagamentoInput;
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;

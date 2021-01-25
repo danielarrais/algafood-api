@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.controller;
+package com.danielarrais.algafood.api.controller.cidade;
 
 import com.danielarrais.algafood.api.dto.input.cidade.CidadeInput;
 import com.danielarrais.algafood.api.dto.output.cidade.CidadeOutput;

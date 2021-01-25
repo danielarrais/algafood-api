@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.dto.input.produto;
+package com.danielarrais.algafood.api.dto.input.restaurante;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

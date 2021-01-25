@@ -1,7 +1,6 @@
 package com.danielarrais.algafood.api.dto.output.restaurante;
 
 import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaOutput;
-import com.danielarrais.algafood.api.dto.output.endereco.EnderecoOutput;
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
 import lombok.Data;
 

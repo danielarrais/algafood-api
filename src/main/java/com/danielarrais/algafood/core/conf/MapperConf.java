@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.core.conf;
 
 
-import com.danielarrais.algafood.api.dto.output.endereco.EnderecoOutput;
+import com.danielarrais.algafood.api.dto.output.restaurante.EnderecoOutput;
 import com.danielarrais.algafood.domain.model.Endereco;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.dto.output.produto;
+package com.danielarrais.algafood.api.dto.output.restaurante;
 
 import lombok.Data;
 
