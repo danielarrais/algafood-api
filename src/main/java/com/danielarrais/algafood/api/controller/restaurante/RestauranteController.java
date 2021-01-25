@@ -2,6 +2,8 @@ package com.danielarrais.algafood.api.controller.restaurante;
 
 import com.danielarrais.algafood.api.dto.input.restaurante.RestauranteInput;
 import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteFullOutput;
+import com.danielarrais.algafood.domain.exception.NegocioException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.service.RestauranteService;
 import org.springframework.http.HttpStatus;
@@ -57,6 +59,26 @@ public class RestauranteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void inativar(@PathVariable Long id) {
         restauranteService.inativar(id);
+    }
+
+    @PutMapping("/ativos")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void ativarBach(@RequestBody List<Long> ids) {
+        try {
+            restauranteService.ativar(ids);
+        } catch (RegistroNaoEncontradoException e) {
+            throw new NegocioException(e.getMessage(), e);
+        }
+    }
+
+    @PutMapping("/inativos")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void inativarBach(@RequestBody List<Long> ids) {
+        try {
+            restauranteService.inativar(ids);
+        } catch (RegistroNaoEncontradoException e) {
+            throw new NegocioException(e.getMessage(), e);
+        }
     }
 
     @PutMapping("/{id}/aberto")

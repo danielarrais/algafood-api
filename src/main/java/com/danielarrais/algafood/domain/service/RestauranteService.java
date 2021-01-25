@@ -74,6 +74,16 @@ public class RestauranteService {
     }
 
     @Transactional
+    public void ativar(List<Long> ids) {
+        ids.forEach(this::ativar);
+    }
+
+    @Transactional
+    public void inativar(List<Long> ids) {
+        ids.forEach(this::inativar);
+    }
+
+    @Transactional
     public void abrir(Long id) {
         var restaurante = buscarObrigatorio(id);
         restaurante.abrir();
