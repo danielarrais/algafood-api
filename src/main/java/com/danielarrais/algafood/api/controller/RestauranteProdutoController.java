@@ -48,9 +48,4 @@ public class RestauranteProdutoController {
         var produto = mapper(produtoInput, Produto.class);
         produtoService.atualizar(id, restauranteId, produto);
     }
-
-    @DeleteMapping("/{id}")
-    public void remover(@PathVariable Long restauranteId, @PathVariable Long id) {
-        produtoService.remover(id, restauranteId);
-    }
 }

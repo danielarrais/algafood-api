@@ -6,7 +6,6 @@ import com.danielarrais.algafood.domain.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
@@ -19,10 +18,6 @@ public class ProdutoService {
     public ProdutoService(ProdutoRepository produtoRepository, RestauranteService restauranteService) {
         this.produtoRepository = produtoRepository;
         this.restauranteService = restauranteService;
-    }
-
-    public List<Produto> listar() {
-        return produtoRepository.findAll();
     }
 
     public Optional<Produto> buscar(Long restauranteId, long produtoId) {
@@ -49,13 +44,5 @@ public class ProdutoService {
 
         copyNonNullValues(produto, produtoAtual);
         produtoRepository.save(produtoAtual);
-    }
-
-    @Transactional
-    public void remover(Long id, Long restauranteId) {
-        var produtoAtual = buscarObrigatorio(id, restauranteId);
-
-        produtoRepository.delete(produtoAtual);
-        produtoRepository.flush();
     }
 }
