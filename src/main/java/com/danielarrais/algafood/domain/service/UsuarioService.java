@@ -21,10 +21,12 @@ import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final UsuarioValidation usuarioValidation;
+    private final GrupoService grupoService;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioValidation usuarioValidation) {
+    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioValidation usuarioValidation, GrupoService grupoService) {
         this.usuarioRepository = usuarioRepository;
         this.usuarioValidation = usuarioValidation;
+        this.grupoService = grupoService;
     }
 
     public List<Usuario> listar() {
@@ -86,5 +88,21 @@ public class UsuarioService {
         } catch (DataIntegrityViolationException exception) {
             throw new RegistroEmUsoException(id);
         }
+    }
+
+    @Transactional
+    public void associarGrupo(Long usuarioId, Long idGrupo) {
+        var usuario = buscarObrigatorio(usuarioId);
+        var grupo = grupoService.buscarObrigatorio(idGrupo);
+
+        usuario.adicionarGrupo(grupo);
+    }
+
+    @Transactional
+    public void desassociarGrupo(Long usuarioId, Long idGrupo) {
+        var usuario = buscarObrigatorio(usuarioId);
+        var grupo = grupoService.buscarObrigatorio(idGrupo);
+
+        usuario.removerGrupo(grupo);
     }
 }
