@@ -38,7 +38,6 @@ public class CozinhaService {
         });
     }
 
-    @SneakyThrows
     @Transactional
     public Cozinha salvar(Cozinha cozinha) {
         return cozinhaRepository.save(cozinha);

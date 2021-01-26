@@ -4,7 +4,6 @@ import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.repository.PermissaoRepository;
-import lombok.SneakyThrows;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +37,6 @@ public class PermissaoService {
         });
     }
 
-    @SneakyThrows
     @Transactional
     public void salvar(Permissao permissao) {
         permissaoRepository.save(permissao);

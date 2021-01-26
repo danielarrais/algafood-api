@@ -41,7 +41,6 @@ public class GrupoService {
         });
     }
 
-    @SneakyThrows
     @Transactional
     public void salvar(Grupo grupo) {
         grupoRepository.save(grupo);

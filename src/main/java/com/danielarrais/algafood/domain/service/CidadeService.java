@@ -6,7 +6,6 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
-import lombok.SneakyThrows;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +42,6 @@ CidadeService {
         });
     }
 
-    @SneakyThrows
     @Transactional
     public Cidade salvar(Cidade cidade) {
         Long estadoId = cidade.getEstado().getId();

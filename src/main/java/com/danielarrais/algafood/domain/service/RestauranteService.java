@@ -46,7 +46,6 @@ public class RestauranteService {
         });
     }
 
-    @SneakyThrows
     @Transactional
     public void salvar(Restaurante restaurante) {
         restauranteValidation.validate(restaurante);
