@@ -40,7 +40,7 @@ public class Pedido {
     @JoinColumn(name = "restaurante_id")
     private Restaurante restaurante;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "forma_pagamento_id")
     private FormaPagamento formaPagamento;
 
