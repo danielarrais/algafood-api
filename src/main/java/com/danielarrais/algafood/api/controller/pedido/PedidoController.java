@@ -1,6 +1,7 @@
 package com.danielarrais.algafood.api.controller.pedido;
 
-import com.danielarrais.algafood.api.dto.output.pedido.PedidoOutput;
+import com.danielarrais.algafood.api.dto.output.pedido.PedidoFullOutput;
+import com.danielarrais.algafood.api.dto.output.pedido.PedidoSimpleOutput;
 import com.danielarrais.algafood.domain.service.PedidoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,14 +22,14 @@ public class PedidoController {
     }
 
     @GetMapping()
-    public List<PedidoOutput> listar() {
+    public List<PedidoSimpleOutput> listar() {
         var pedidos = pedidoService.listar();
-        return mapper(pedidos, PedidoOutput.class);
+        return mapper(pedidos, PedidoSimpleOutput.class);
     }
 
     @GetMapping("/{id}")
-    public PedidoOutput buscar(@PathVariable Long id) {
+    public PedidoFullOutput buscar(@PathVariable Long id) {
         var pedido = pedidoService.buscarObrigatorio(id);
-        return mapper(pedido, PedidoOutput.class);
+        return mapper(pedido, PedidoFullOutput.class);
     }
 }

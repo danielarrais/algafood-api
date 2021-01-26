@@ -12,7 +12,7 @@ import java.time.OffsetDateTime;
 import java.util.Set;
 
 @Data
-public class PedidoOutput {
+public class PedidoFullOutput {
     private Long id;
     private StatusPedido status;
     private BigDecimal subtotal;
