@@ -12,6 +12,4 @@ public class ProdutoOutput {
     private String descricao;
     private BigDecimal preco;
     private Boolean ativo = true;
-    private OffsetDateTime dataCadastro;
-    private OffsetDateTime dataAtualizacao;
 }

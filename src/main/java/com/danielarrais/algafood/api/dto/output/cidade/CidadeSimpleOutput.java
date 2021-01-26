@@ -10,6 +10,4 @@ public class CidadeSimpleOutput {
     private Long id;
     private String nome;
     private String estado;
-    private OffsetDateTime dataCadastro;
-    private OffsetDateTime dataAtualizacao;
 }

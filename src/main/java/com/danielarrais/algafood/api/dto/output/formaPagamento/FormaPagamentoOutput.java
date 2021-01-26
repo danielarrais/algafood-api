@@ -9,6 +9,4 @@ import java.time.OffsetDateTime;
 public class FormaPagamentoOutput {
     private Long id;
     private String descricao;
-    private OffsetDateTime dataCadastro;
-    private OffsetDateTime dataAtualizacao;
 }

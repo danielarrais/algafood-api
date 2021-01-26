@@ -18,6 +18,4 @@ public class RestauranteFullOutput {
     private CozinhaOutput cozinha;
     private List<FormaPagamentoOutput> formasPagamento;
     private EnderecoOutput endereco;
-    private OffsetDateTime dataCadastro;
-    private OffsetDateTime dataAtualizacao;
 }

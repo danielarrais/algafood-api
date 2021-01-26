@@ -11,6 +11,4 @@ public class CidadeOutput {
     private Long id;
     private String nome;
     private EstadoOutput estado;
-    private OffsetDateTime dataCadastro;
-    private OffsetDateTime dataAtualizacao;
 }

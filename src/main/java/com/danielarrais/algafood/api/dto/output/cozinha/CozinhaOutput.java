@@ -9,6 +9,4 @@ import java.time.OffsetDateTime;
 public class CozinhaOutput {
     private Long id;
     private String nome;
-    private OffsetDateTime dataCadastro;
-    private OffsetDateTime dataAtualizacao;
 }

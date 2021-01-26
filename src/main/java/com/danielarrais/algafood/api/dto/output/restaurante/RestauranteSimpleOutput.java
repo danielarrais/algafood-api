@@ -13,6 +13,4 @@ public class RestauranteSimpleOutput {
     private BigDecimal taxaFrete;
     private Boolean ativo;
     private EnderecoOutput endereco;
-    private OffsetDateTime dataCadastro;
-    private OffsetDateTime dataAtualizacao;
 }
