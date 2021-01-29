@@ -18,8 +18,8 @@ public class FluxoPedidoService {
     }
 
     @Transactional
-    public void cancelar(Long pedidoId) {
-        var pedido = pedidoService.buscarObrigatorio(pedidoId);
+    public void cancelar(String codigo) {
+        var pedido = pedidoService.buscarObrigatorio(codigo);
 
         if (pedido.getStatus().equals(CRIADO)) {
             pedido.setStatus(CANCELADO);
@@ -30,8 +30,8 @@ public class FluxoPedidoService {
     }
 
     @Transactional
-    public void entregar(Long pedidoId) {
-        var pedido = pedidoService.buscarObrigatorio(pedidoId);
+    public void entregar(String codigo) {
+        var pedido = pedidoService.buscarObrigatorio(codigo);
 
         if (pedido.getStatus().equals(CONFIRMADO)) {
             pedido.setStatus(CANCELADO);
@@ -42,8 +42,8 @@ public class FluxoPedidoService {
     }
 
     @Transactional
-    public void confirmar(Long pedidoId) {
-        var pedido = pedidoService.buscarObrigatorio(pedidoId);
+    public void confirmar(String codigo) {
+        var pedido = pedidoService.buscarObrigatorio(codigo);
 
         if (pedido.getStatus().equals(CRIADO)) {
             pedido.setStatus(ENTREGUE);

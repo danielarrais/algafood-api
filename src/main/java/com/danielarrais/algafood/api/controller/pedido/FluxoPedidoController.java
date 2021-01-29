@@ -13,22 +13,22 @@ public class FluxoPedidoController {
         this.fluxoPedidoService = fluxoPedidoService;
     }
 
-    @PutMapping("/{idPedido}/cancelamento")
+    @PutMapping("/{codigo}/cancelamento")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void cancelar(@PathVariable Long idPedido) {
-        fluxoPedidoService.cancelar(idPedido);
+    public void cancelar(@PathVariable String codigo) {
+        fluxoPedidoService.cancelar(codigo);
     }
 
-    @PutMapping("/{idPedido}/confirmacao")
+    @PutMapping("/{codigo}/confirmacao")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void confirmar(@PathVariable Long idPedido) {
-        fluxoPedidoService.confirmar(idPedido);
+    public void confirmar(@PathVariable String codigo) {
+        fluxoPedidoService.confirmar(codigo);
     }
 
 
-    @PutMapping("/{idPedido}/entrega")
+    @PutMapping("/{codigo}/entrega")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void entregar(@PathVariable Long idPedido) {
-        fluxoPedidoService.entregar(idPedido);
+    public void entregar(@PathVariable String codigo) {
+        fluxoPedidoService.entregar(codigo);
     }
 }

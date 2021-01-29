@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Data
 public class ItemPedidoOutput {
-    private Long id;
+    private String codigo;
     private Integer quantidade;
     private BigDecimal precoUnitario;
     private BigDecimal precoTotal;

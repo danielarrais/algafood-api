@@ -80,19 +80,19 @@ VALUES ('Prato feito', 10.00, true, 1, (now() at time zone 'utc'), (now() at tim
        ('Suco Abacaxi', 8.00, true, 4, (now() at time zone 'utc'), (now() at time zone 'utc'));
 
 -- Inserts de Pedidos
-INSERT INTO public.pedido (status, subtotal, taxa_frete, valor_total, data_criacao, data_confirmacao, data_entrega,
+INSERT INTO public.pedido (codigo, status, subtotal, taxa_frete, valor_total, data_criacao, data_confirmacao, data_entrega,
                            data_cancelamento, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento,
                            endereco_bairro, endereco_cidade_id, usuario_id, restaurante_id, forma_pagamento_id,
                            data_cadastro, data_atualizacao)
-VALUES ('CRIADO', 10.00, 5.00, 15.00, (now() at time zone 'utc'), null, null, null, '77060140',
+VALUES (uuid_generate_v4(), 'CRIADO', 10.00, 5.00, 15.00, (now() at time zone 'utc'), null, null, null, '77060140',
         'Rua Mato Grosso e Mathias', '8', null, 'Aureny 15', 1, 1, 1, 1, (now() at time zone 'utc'), (now() at time zone 'utc')),
-       ('ENTREGUE', 10.00, 5.00, 15.00, (now() at time zone 'utc'), (now() at time zone 'utc'),
+       (uuid_generate_v4(), 'ENTREGUE', 10.00, 5.00, 15.00, (now() at time zone 'utc'), (now() at time zone 'utc'),
         (now() at time zone 'utc'), null, '77060140',
         'Rua Mato Grosso e Mathias', '8', null, 'Aureny 15', 2, 2, 4, 3, (now() at time zone 'utc'), (now() at time zone 'utc')),
-       ('CANCELADO', 10.00, 5.00, 15.00, (now() at time zone 'utc'), (now() at time zone 'utc'), null,
+       (uuid_generate_v4(), 'CANCELADO', 10.00, 5.00, 15.00, (now() at time zone 'utc'), (now() at time zone 'utc'), null,
         (now() at time zone 'utc'), '77060140',
         'Rua Mato Grosso e Mathias', '8', null, 'Aureny 15', 1, 4, 2, 2, (now() at time zone 'utc'), (now() at time zone 'utc')),
-       ('CONFIRMADO', 10.00, 5.00, 15.00, (now() at time zone 'utc'), (now() at time zone 'utc'), null, null, '77060140',
+       (uuid_generate_v4(), 'CONFIRMADO', 10.00, 5.00, 15.00, (now() at time zone 'utc'), (now() at time zone 'utc'), null, null, '77060140',
         'Rua Mato Grosso e Mathias', '8', null, 'Aureny 15', 2, 4, 2, 4, (now() at time zone 'utc'), (now() at time zone 'utc'));
 
 -- Inserts de itens de pedido
@@ -109,33 +109,12 @@ VALUES (5, 2.00, 10.00, 'Tirar os ovos', 1, 1, (now() at time zone 'utc'), (now(
 
 -- Inserts Formas de Pagamento
 INSERT INTO forma_pagamento_restaurante (restaurante_id, forma_pagamento_id)
-VALUES (1, 1),
-       (2, 1),
-       (3, 1),
-       (4, 1),
-       (1, 2),
-       (2, 2),
-       (3, 2),
-       (4, 2),
-       (1, 3),
-       (2, 3),
-       (3, 3),
-       (4, 3);
+VALUES (1, 1), (2, 1), (3, 1), (4, 1), (1, 2), (2, 2), (3, 2), (4, 2), (1, 3), (2, 3), (3, 3), (4, 3);
 
 -- Inserts Grupos de Permissão
 INSERT INTO grupo_permissao (grupo_id, permissao_id)
-VALUES (1, 1),
-       (2, 1),
-       (3, 1),
-       (4, 1),
-       (1, 2),
-       (2, 2),
-       (3, 2),
-       (4, 2);
+VALUES (1, 1), (2, 1), (3, 1), (4, 1), (1, 2), (2, 2), (3, 2), (4, 2);
 
 -- Inserts Grupos de Usuário
 INSERT INTO usuario_grupo (usuario_id, grupo_id)
-VALUES (1, 1),
-       (2, 2),
-       (3, 3),
-       (4, 4);
+VALUES (1, 1), (2, 2), (3, 3), (4, 4);

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static com.danielarrais.algafood.domain.model.ItemPedido.Fields.pedido;
 
@@ -23,6 +24,9 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+
+    @Column(updatable = false, nullable = false)
+    private UUID codigo = UUID.randomUUID();
 
     @Enumerated(EnumType.STRING)
     private StatusPedido status;

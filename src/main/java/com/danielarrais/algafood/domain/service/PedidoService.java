@@ -46,13 +46,13 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
-    public Optional<Pedido> buscar(long pedidoId) {
-        return pedidoRepository.findById(pedidoId);
+    public Optional<Pedido> buscar(String codigo) {
+        return pedidoRepository.findByCodigo(codigo);
     }
 
-    public Pedido buscarObrigatorio(Long pedidoId) {
-        return buscar(pedidoId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException("Pedido", pedidoId);
+    public Pedido buscarObrigatorio(String codigo) {
+        return buscar(codigo).orElseThrow(() -> {
+            throw new RegistroNaoEncontradoException("Pedido", codigo);
         });
     }
 

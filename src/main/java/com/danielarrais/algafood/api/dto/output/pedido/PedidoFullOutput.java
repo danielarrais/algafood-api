@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Data
 public class PedidoFullOutput {
-    private Long id;
+    private String codigo;
     private StatusPedido status;
     private BigDecimal subtotal;
     private BigDecimal taxaFrete;

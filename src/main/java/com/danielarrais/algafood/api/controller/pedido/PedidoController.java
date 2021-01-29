@@ -35,9 +35,9 @@ public class PedidoController {
         return mapper(pedidos, PedidoSimpleOutput.class);
     }
 
-    @GetMapping("/{id}")
-    public PedidoFullOutput buscar(@PathVariable Long id) {
-        var pedido = pedidoService.buscarObrigatorio(id);
+    @GetMapping("/{codigo}")
+    public PedidoFullOutput buscar(@PathVariable String codigo) {
+        var pedido = pedidoService.buscarObrigatorio(codigo);
         return mapper(pedido, PedidoFullOutput.class);
     }
 }
