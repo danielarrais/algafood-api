@@ -5,10 +5,13 @@ import com.danielarrais.algafood.domain.model.*;
 import com.danielarrais.algafood.domain.repository.PedidoRepository;
 import com.danielarrais.algafood.domain.service.validation.PedidoValidation;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
+
+import static com.danielarrais.algafood.domain.model.StatusPedido.CRIADO;
 
 @Service
 public class PedidoService {
@@ -46,12 +49,13 @@ public class PedidoService {
         return pedidoRepository.findById(pedidoId);
     }
 
-    public Pedido buscarObrigatorio(long pedidoId) {
+    public Pedido buscarObrigatorio(Long pedidoId) {
         return buscar(pedidoId).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException("Pedido", pedidoId);
         });
     }
 
+    @Transactional
     public void adicionar(Pedido pedido) {
         prencherDadosDoPedido(pedido);
         prencherDadosItens(pedido);
@@ -73,7 +77,7 @@ public class PedidoService {
         FormaPagamento formaPagamento = formaPagamentoService.buscarObrigatorio(formaPagamentoId);
         Cidade cidade = cidadeService.buscarObrigatorio(cidadeId);
 
-        pedido.setStatus(StatusPedido.CRIADO);
+        pedido.setStatus(CRIADO);
         pedido.setRestaurante(restaurante);
         pedido.setCliente(usuario);
         pedido.setFormaPagamento(formaPagamento);
