@@ -92,7 +92,7 @@ VALUES ('CRIADO', 10.00, 5.00, 15.00, (now() at time zone 'utc'), null, null, nu
        ('CANCELADO', 10.00, 5.00, 15.00, (now() at time zone 'utc'), (now() at time zone 'utc'), null,
         (now() at time zone 'utc'), '77060140',
         'Rua Mato Grosso e Mathias', '8', null, 'Aureny 15', 1, 4, 2, 2, (now() at time zone 'utc'), (now() at time zone 'utc')),
-       ('CONFIMADO', 10.00, 5.00, 15.00, (now() at time zone 'utc'), (now() at time zone 'utc'), null, null, '77060140',
+       ('CONFIRMADO', 10.00, 5.00, 15.00, (now() at time zone 'utc'), (now() at time zone 'utc'), null, null, '77060140',
         'Rua Mato Grosso e Mathias', '8', null, 'Aureny 15', 2, 4, 2, 4, (now() at time zone 'utc'), (now() at time zone 'utc'));
 
 -- Inserts de itens de pedido
