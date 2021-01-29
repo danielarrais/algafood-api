@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -95,5 +96,9 @@ public class Restaurante {
 
     public void removerResponsavel(Usuario usuario) {
         getResponsaveis().remove(usuario);
+    }
+
+    public boolean isAceitaFormaDePagamento(FormaPagamento formaPagamento) {
+        return !CollectionUtils.isEmpty(getFormasPagamento()) && getFormasPagamento().contains(formaPagamento);
     }
 }
