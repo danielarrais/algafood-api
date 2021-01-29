@@ -40,4 +40,8 @@ public class ItemPedido {
 
     @UpdateTimestamp
     private OffsetDateTime dataAtualizacao;
+
+    public void calcularTotal() {
+        this.precoTotal = precoUnitario.multiply(BigDecimal.valueOf(quantidade));
+    }
 }

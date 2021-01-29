@@ -7,7 +7,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.danielarrais.algafood.domain.model.ItemPedido.Fields.pedido;
 
 @Entity
 @Data
@@ -44,8 +47,8 @@ public class Pedido {
     @JoinColumn(name = "forma_pagamento_id")
     private FormaPagamento formaPagamento;
 
-    @OneToMany(mappedBy = ItemPedido.Fields.pedido)
-    private Set<ItemPedido> itens;
+    @OneToMany(mappedBy = pedido, cascade = CascadeType.ALL)
+    private List<ItemPedido> itens = new ArrayList<>();
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -53,4 +56,18 @@ public class Pedido {
 
     @UpdateTimestamp
     private OffsetDateTime dataAtualizacao;
+
+    private void calcularSubtotal() {
+        getItens().forEach(ItemPedido::calcularTotal);
+
+        this.subtotal = itens.stream()
+                .map(ItemPedido::getPrecoTotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public void calcularTotal() {
+        calcularSubtotal();
+
+        this.valorTotal = subtotal.add(taxaFrete);
+    }
 }
