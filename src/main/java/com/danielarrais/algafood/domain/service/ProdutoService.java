@@ -26,7 +26,8 @@ public class ProdutoService {
 
     public Produto buscarObrigatorio(long produtoId, Long restauranteId) {
         return buscar(restauranteId, produtoId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException("Produto", produtoId);
+            var mensagem = "Produto de código %d não existe ou não pertence ao restaurante de código %d";
+            throw new RegistroNaoEncontradoException(mensagem, produtoId, restauranteId);
         });
     }
 
