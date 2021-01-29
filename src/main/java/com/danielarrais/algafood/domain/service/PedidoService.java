@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.service;
 
+import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.*;
 import com.danielarrais.algafood.domain.repository.PedidoRepository;
@@ -57,8 +58,12 @@ public class PedidoService {
 
     @Transactional
     public void adicionar(Pedido pedido) {
-        prencherDadosDoPedido(pedido);
-        prencherDadosItens(pedido);
+        try {
+            prencherDadosDoPedido(pedido);
+            prencherDadosItens(pedido);
+        } catch (RegistroNaoEncontradoException e) {
+            throw new DependenciaNaoEncontradaException(e.getMessage(), e);
+        }
 
         pedido.calcularTotal();
         pedidoValidation.validate(pedido);

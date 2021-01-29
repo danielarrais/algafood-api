@@ -2,7 +2,7 @@ package com.danielarrais.algafood.api.controller.restaurante;
 
 import com.danielarrais.algafood.api.dto.input.restaurante.RestauranteInput;
 import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteFullOutput;
-import com.danielarrais.algafood.domain.exception.NegocioException;
+import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.service.RestauranteService;
@@ -67,7 +67,7 @@ public class RestauranteController {
         try {
             restauranteService.ativar(ids);
         } catch (RegistroNaoEncontradoException e) {
-            throw new NegocioException(e.getMessage(), e);
+            throw new DependenciaNaoEncontradaException(e.getMessage(), e);
         }
     }
 
@@ -77,7 +77,7 @@ public class RestauranteController {
         try {
             restauranteService.inativar(ids);
         } catch (RegistroNaoEncontradoException e) {
-            throw new NegocioException(e.getMessage(), e);
+            throw new DependenciaNaoEncontradaException(e.getMessage(), e);
         }
     }
 
