@@ -3,6 +3,7 @@ package com.danielarrais.algafood.util;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ public class ModelMapperUtils {
         return modelMapper.map(input, outputType);
     }
 
-    public static <T> List<T> mapper(List<?> inputList, Class<T> outputType) {
+    public static <T> List<T> mapper(Collection<?> inputList, Class<T> outputType) {
         return inputList
                 .stream().map(user -> modelMapper.map(user, outputType))
                 .collect(Collectors.toList());

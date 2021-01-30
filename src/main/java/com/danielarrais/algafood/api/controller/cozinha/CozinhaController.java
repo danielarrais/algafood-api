@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.controller;
+package com.danielarrais.algafood.api.controller.cozinha;
 
 import com.danielarrais.algafood.api.dto.input.cozinha.CozinhaInput;
 import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaFullOutput;

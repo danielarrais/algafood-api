@@ -1,6 +1,7 @@
 package com.danielarrais.algafood.api.dto.input.restaurante;
 
 import com.danielarrais.algafood.api.dto.input.cozinha.CozinhaIdInput;
+import com.danielarrais.algafood.api.dto.input.endereco.EnderecoInput;
 import com.danielarrais.algafood.api.dto.input.formaPagamento.FormaPagamentoIdInput;
 import lombok.Builder;
 import lombok.AllArgsConstructor;

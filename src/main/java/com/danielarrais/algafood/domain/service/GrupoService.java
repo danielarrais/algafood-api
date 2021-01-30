@@ -20,9 +20,11 @@ import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 @Service
 public class GrupoService {
     private final GrupoRepository grupoRepository;
+    private final PermissaoService permissaoService;
 
-    public GrupoService(GrupoRepository grupoRepository) {
+    public GrupoService(GrupoRepository grupoRepository, PermissaoService permissaoService) {
         this.grupoRepository = grupoRepository;
+        this.permissaoService = permissaoService;
     }
 
     public List<Grupo> listar() {
@@ -35,11 +37,10 @@ public class GrupoService {
 
     public Grupo buscarObrigatorio(long grupoId) {
         return buscar(grupoId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(grupoId);
+            throw new RegistroNaoEncontradoException("Grupo", grupoId);
         });
     }
 
-    @SneakyThrows
     @Transactional
     public void salvar(Grupo grupo) {
         grupoRepository.save(grupo);
@@ -47,22 +48,18 @@ public class GrupoService {
 
     @Transactional
     public void atualizar(Long id, Grupo grupo) {
-        buscar(id).map(grupoAtual -> {
-            copyNonNullValues(grupo, grupoAtual);
-            return grupoRepository.save(grupoAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+        var grupoAtual = buscarObrigatorio(id);
+
+        copyNonNullValues(grupo, grupoAtual);
+        grupoRepository.save(grupoAtual);
     }
 
     @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        buscar(id).map(grupoAtual -> {
-            mergeValues(propertiesAndValues, grupoAtual);
-            return grupoRepository.save(grupoAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+        var grupoAtual = buscarObrigatorio(id);
+
+        mergeValues(propertiesAndValues, grupoAtual);
+        grupoRepository.save(grupoAtual);
     }
 
     @Transactional
@@ -71,9 +68,25 @@ public class GrupoService {
             grupoRepository.deleteById(id);
             grupoRepository.flush();
         } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradoException(id);
+            throw new RegistroNaoEncontradoException("Grupo",id);
         } catch (DataIntegrityViolationException exception) {
             throw new RegistroEmUsoException(id);
         }
+    }
+
+    @Transactional
+    public void associarPermissao(Long grupoId, Long idPermissao) {
+        var grupo = buscarObrigatorio(grupoId);
+        var permissao = permissaoService.buscarObrigatorio(idPermissao);
+
+        grupo.adicionarPermissao(permissao);
+    }
+
+    @Transactional
+    public void desassociarPermissao(Long grupoId, Long idPermissao) {
+        var grupo = buscarObrigatorio(grupoId);
+        var permissao = permissaoService.buscarObrigatorio(idPermissao);
+
+        grupo.removerPermissao(permissao);
     }
 }

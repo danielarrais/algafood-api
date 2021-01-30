@@ -12,6 +12,4 @@ public class CozinhaFullOutput {
     private Long id;
     private String nome;
     private List<RestauranteSimpleOutput> restaurantes;
-    private OffsetDateTime dataCadastro;
-    private OffsetDateTime dataAtualizacao;
 }

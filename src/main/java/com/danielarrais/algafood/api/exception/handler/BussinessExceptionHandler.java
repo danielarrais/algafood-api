@@ -2,6 +2,7 @@ package com.danielarrais.algafood.api.exception.handler;
 
 import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.NegocioException;
 import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import org.springframework.http.HttpHeaders;
@@ -46,6 +47,17 @@ public class BussinessExceptionHandler {
         Problem problem = Problem.builder()
                 .status(HttpStatus.CONFLICT)
                 .title("Registro em uso")
+                .detail(e.getMessage())
+                .build();
+
+        return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
+    }
+
+    @ExceptionHandler(NegocioException.class)
+    public ResponseEntity<?> handleNegocioException(NegocioException e, WebRequest request) {
+        Problem problem = Problem.builder()
+                .status(HttpStatus.BAD_REQUEST)
+                .title("Violação de regra de negócio")
                 .detail(e.getMessage())
                 .build();
 

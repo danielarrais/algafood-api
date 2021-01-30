@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.controller;
+package com.danielarrais.algafood.api.controller.grupo;
 
 import com.danielarrais.algafood.api.dto.input.grupo.GrupoInput;
 import com.danielarrais.algafood.api.dto.output.grupo.GrupoOutput;

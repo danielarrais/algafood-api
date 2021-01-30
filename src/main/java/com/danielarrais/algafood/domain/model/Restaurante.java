@@ -6,13 +6,16 @@ import lombok.*;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.groups.ConvertGroup;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -28,7 +31,8 @@ public class Restaurante {
     private Long id;
     private String nome;
     private BigDecimal taxaFrete;
-    private Boolean ativo = true;
+    private Boolean ativo = Boolean.TRUE;
+    private Boolean aberto = Boolean.TRUE;
 
     @ManyToOne
     @JoinColumn(name = "cozinha_id")
@@ -39,7 +43,14 @@ public class Restaurante {
             name = "forma_pagamento_restaurante",
             joinColumns = @JoinColumn(name = "restaurante_id"),
             inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
-    private List<@Valid @ConvertGroup(to = OnlyId.class) FormaPagamento> formasPagamento;
+    private Set<@Valid @ConvertGroup(to = OnlyId.class) FormaPagamento> formasPagamento = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "usuario_responsavel_restaurante",
+            joinColumns = @JoinColumn(name = "restaurante_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+    private Set<@Valid @ConvertGroup(to = OnlyId.class) Usuario> responsaveis = new HashSet<>();
 
     @Embedded
     private Endereco endereco;
@@ -54,4 +65,40 @@ public class Restaurante {
 
     @UpdateTimestamp
     private OffsetDateTime dataAtualizacao;
+
+    public void ativar() {
+        setAtivo(true);
+    }
+
+    public void inativar() {
+        setAtivo(false);
+    }
+
+    public void abrir() {
+        setAberto(true);
+    }
+
+    public void fechar() {
+        setAberto(false);
+    }
+
+    public void adicionarFormaPagamento(FormaPagamento formaPagamento) {
+        getFormasPagamento().add(formaPagamento);
+    }
+
+    public void removerFormaPagamento(FormaPagamento formaPagamento) {
+        getFormasPagamento().remove(formaPagamento);
+    }
+
+    public void adicionarResponsavel(Usuario usuario) {
+        getResponsaveis().add(usuario);
+    }
+
+    public void removerResponsavel(Usuario usuario) {
+        getResponsaveis().remove(usuario);
+    }
+
+    public boolean isAceitaFormaDePagamento(FormaPagamento formaPagamento) {
+        return !CollectionUtils.isEmpty(getFormasPagamento()) && getFormasPagamento().contains(formaPagamento);
+    }
 }

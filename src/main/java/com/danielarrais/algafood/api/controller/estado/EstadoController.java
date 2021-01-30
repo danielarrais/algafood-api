@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.api.controller;
+package com.danielarrais.algafood.api.controller.estado;
 
 import com.danielarrais.algafood.api.dto.input.estado.EstadoInput;
 import com.danielarrais.algafood.api.dto.output.estado.EstadoOutput;
