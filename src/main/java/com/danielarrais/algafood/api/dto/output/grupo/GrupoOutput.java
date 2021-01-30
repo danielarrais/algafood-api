@@ -12,6 +12,4 @@ public class GrupoOutput {
     private Long id;
     private String nome;
     private List<PermissaoOutput> permissoes;
-    private OffsetDateTime dataCadastro;
-    private OffsetDateTime dataAtualizacao;
 }

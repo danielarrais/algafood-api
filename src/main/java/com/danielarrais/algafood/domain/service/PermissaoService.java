@@ -4,9 +4,7 @@ import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.repository.PermissaoRepository;
-import lombok.SneakyThrows;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,11 +33,10 @@ public class PermissaoService {
 
     public Permissao buscarObrigatorio(long permissao) {
         return buscar(permissao).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(permissao);
+            throw new RegistroNaoEncontradoException("Permissão", permissao);
         });
     }
 
-    @SneakyThrows
     @Transactional
     public void salvar(Permissao permissao) {
         permissaoRepository.save(permissao);
@@ -47,31 +44,27 @@ public class PermissaoService {
 
     @Transactional
     public void atualizar(Long id, Permissao permissao) {
-        buscar(id).map(permissaoAtual -> {
-            copyNonNullValues(permissao, permissaoAtual);
-            return permissaoRepository.save(permissaoAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+        var permissaoAtual = buscarObrigatorio(id);
+
+        copyNonNullValues(permissao, permissaoAtual);
+        permissaoRepository.save(permissaoAtual);
     }
 
     @Transactional
     public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        buscar(id).map(permissaoAtual -> {
-            mergeValues(propertiesAndValues, permissaoAtual);
-            return permissaoRepository.save(permissaoAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+        var permissaoAtual = buscarObrigatorio(id);
+
+        mergeValues(propertiesAndValues, permissaoAtual);
+        permissaoRepository.save(permissaoAtual);
     }
 
     @Transactional
     public void remover(Long id) {
+        var permissao = buscarObrigatorio(id);
+
         try {
-            permissaoRepository.deleteById(id);
+            permissaoRepository.delete(permissao);
             permissaoRepository.flush();
-        } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new RegistroEmUsoException(id);
         }

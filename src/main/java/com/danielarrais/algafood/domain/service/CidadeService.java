@@ -6,13 +6,10 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
-import lombok.SneakyThrows;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -41,11 +38,10 @@ CidadeService {
 
     public Cidade buscarObrigatorio(long cidadeId) {
         return buscar(cidadeId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(cidadeId);
+            throw new RegistroNaoEncontradoException("Cidade", cidadeId);
         });
     }
 
-    @SneakyThrows
     @Transactional
     public Cidade salvar(Cidade cidade) {
         Long estadoId = cidade.getEstado().getId();
@@ -57,33 +53,29 @@ CidadeService {
     }
 
     @Transactional
-    public Cidade atualizar(Long id, Cidade cidade) {
-        return buscar(id).map(cidadeAtual -> {
-            copyNonNullValues(cidade, cidadeAtual);
-            return salvar(cidadeAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+    public void atualizar(Long id, Cidade cidade) {
+        var cidadeAtual = buscarObrigatorio(id);
+
+        copyNonNullValues(cidade, cidadeAtual);
+        salvar(cidadeAtual);
     }
 
     @Transactional
-    public Cidade atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        return buscar(id).map(cidadeAtual -> {
-            mergeValues(propertiesAndValues, cidadeAtual);
-            return salvar(cidadeAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
+        var cidadeAtual = buscarObrigatorio(id);
+
+        mergeValues(propertiesAndValues, cidadeAtual);
+        salvar(cidadeAtual);
     }
 
     @Transactional
     public void remover(Long id) {
+        var cidade = buscarObrigatorio(id);
+
         try {
-            cidadeRepository.deleteById(id);
+            cidadeRepository.delete(cidade);
             cidadeRepository.flush();
-        } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradoException(id);
-        } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
+        } catch (DataIntegrityViolationException exception) {
             throw new RegistroEmUsoException(id);
         }
     }

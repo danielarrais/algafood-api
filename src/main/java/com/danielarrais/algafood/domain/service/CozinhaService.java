@@ -6,7 +6,6 @@ import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
 import lombok.SneakyThrows;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,43 +34,38 @@ public class CozinhaService {
 
     public Cozinha buscarObrigatorio(long cozinhaId) {
         return buscar(cozinhaId).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(cozinhaId);
+            throw new RegistroNaoEncontradoException("Cozinha", cozinhaId);
         });
     }
 
-    @SneakyThrows
     @Transactional
     public Cozinha salvar(Cozinha cozinha) {
         return cozinhaRepository.save(cozinha);
     }
 
     @Transactional
-    public Cozinha atualizar(Long id, Cozinha cozinha) {
-        return buscar(id).map(cozinhaAtual -> {
-            copyNonNullValues(cozinha, cozinhaAtual);
-            return salvar(cozinhaAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+    public void atualizar(Long id, Cozinha cozinha) {
+        var cozinhaAtual = buscarObrigatorio(id);
+
+        copyNonNullValues(cozinha, cozinhaAtual);
+        salvar(cozinhaAtual);
     }
 
     @Transactional
-    public Cozinha atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        return buscar(id).map(cozinhaAtual -> {
-            mergeValues(propertiesAndValues, cozinhaAtual);
-            return salvar(cozinhaAtual);
-        }).orElseThrow(() -> {
-            throw new RegistroNaoEncontradoException(id);
-        });
+    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
+        var cozinhaAtual = buscarObrigatorio(id);
+
+        mergeValues(propertiesAndValues, cozinhaAtual);
+        salvar(cozinhaAtual);
     }
 
     @Transactional
     public void remover(Long id) {
+        var cozinha = buscarObrigatorio(id);
+
         try {
-            cozinhaRepository.deleteById(id);
+            cozinhaRepository.delete(cozinha);
             cozinhaRepository.flush();
-        } catch (EmptyResultDataAccessException exception) {
-            throw new RegistroNaoEncontradoException(id);
         } catch (DataIntegrityViolationException exception) {
             throw new RegistroEmUsoException(id);
         }

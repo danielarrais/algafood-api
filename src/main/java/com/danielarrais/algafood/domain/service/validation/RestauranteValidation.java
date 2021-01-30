@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class RastauranteValidation {
+public class RestauranteValidation {
     private final CozinhaRepository cozinhaRepository;
     private final CidadeRepository cidadeRepository;
     private final FormaPagamentoRepository formaPagamentoRepository;
     private final ComumValidation comumValidation;
 
-    public RastauranteValidation(CozinhaRepository cozinhaRepository,
+    public RestauranteValidation(CozinhaRepository cozinhaRepository,
                                  CidadeRepository cidadeRepository,
                                  FormaPagamentoRepository formaPagamentoRepository,
                                  ComumValidation comumValidation

@@ -1,7 +1,9 @@
-package com.danielarrais.algafood.api.controller;
+package com.danielarrais.algafood.api.controller.restaurante;
 
 import com.danielarrais.algafood.api.dto.input.restaurante.RestauranteInput;
 import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteFullOutput;
+import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.service.RestauranteService;
 import org.springframework.http.HttpStatus;
@@ -45,6 +47,50 @@ public class RestauranteController {
     public void atualizar(@PathVariable Long id, @RequestBody @Valid RestauranteInput restauranteInput) {
         var restaurante = mapper(restauranteInput, Restaurante.class);
         restauranteService.atualizar(id, restaurante);
+    }
+
+    @PutMapping("/{id}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void ativar(@PathVariable Long id) {
+        restauranteService.ativar(id);
+    }
+
+    @PutMapping("/{id}/inativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void inativar(@PathVariable Long id) {
+        restauranteService.inativar(id);
+    }
+
+    @PutMapping("/ativos")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void ativarBach(@RequestBody List<Long> ids) {
+        try {
+            restauranteService.ativar(ids);
+        } catch (RegistroNaoEncontradoException e) {
+            throw new DependenciaNaoEncontradaException(e.getMessage(), e);
+        }
+    }
+
+    @PutMapping("/inativos")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void inativarBach(@RequestBody List<Long> ids) {
+        try {
+            restauranteService.inativar(ids);
+        } catch (RegistroNaoEncontradoException e) {
+            throw new DependenciaNaoEncontradaException(e.getMessage(), e);
+        }
+    }
+
+    @PutMapping("/{id}/aberto")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void abrir(@PathVariable Long id) {
+        restauranteService.abrir(id);
+    }
+
+    @PutMapping("/{id}/fechado")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void fechar(@PathVariable Long id) {
+        restauranteService.fechar(id);
     }
 
     @PatchMapping("/{id}")
