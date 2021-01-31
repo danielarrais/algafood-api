@@ -1,6 +1,7 @@
 package com.danielarrais.algafood.api.controller.pedido;
 
 import com.danielarrais.algafood.api.dto.input.pedido.PedidoInput;
+import com.danielarrais.algafood.api.dto.input.pedido.filter.PedidoFilter;
 import com.danielarrais.algafood.api.dto.output.pedido.PedidoFullOutput;
 import com.danielarrais.algafood.api.dto.output.pedido.PedidoSimpleOutput;
 import com.danielarrais.algafood.domain.model.Pedido;
@@ -30,8 +31,8 @@ public class PedidoController {
     }
 
     @GetMapping()
-    public List<PedidoSimpleOutput> listar() {
-        var pedidos = pedidoService.listar();
+    public List<PedidoSimpleOutput> listar(PedidoFilter filtro) {
+        var pedidos = pedidoService.listar(filtro);
         return mapper(pedidos, PedidoSimpleOutput.class);
     }
 
