@@ -34,7 +34,7 @@ public class Restaurante {
     private Boolean ativo = Boolean.TRUE;
     private Boolean aberto = Boolean.TRUE;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cozinha_id")
     private Cozinha cozinha;
 
