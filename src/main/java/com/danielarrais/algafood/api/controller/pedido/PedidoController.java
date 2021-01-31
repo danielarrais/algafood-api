@@ -6,11 +6,12 @@ import com.danielarrais.algafood.api.dto.output.pedido.PedidoFullOutput;
 import com.danielarrais.algafood.api.dto.output.pedido.PedidoSimpleOutput;
 import com.danielarrais.algafood.domain.model.Pedido;
 import com.danielarrais.algafood.domain.service.PedidoService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
@@ -31,8 +32,8 @@ public class PedidoController {
     }
 
     @GetMapping()
-    public List<PedidoSimpleOutput> listar(PedidoFilter filtro) {
-        var pedidos = pedidoService.listar(filtro);
+    public Page<PedidoSimpleOutput> listar(PedidoFilter filtro, Pageable pageable) {
+        var pedidos = pedidoService.listar(filtro, pageable);
         return mapper(pedidos, PedidoSimpleOutput.class);
     }
 

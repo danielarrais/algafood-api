@@ -11,8 +11,10 @@ import java.util.Objects;
 public class PedidoSpecs {
     public static Specification<Pedido> usandoFiltro(PedidoFilter filtro) {
         return (root, query, builder) -> {
-            root.fetch("restaurante");
-            root.fetch("cliente");
+            if (Pedido.class.equals(query.getResultType())) {
+                root.fetch("restaurante");
+                root.fetch("cliente");
+            }
 
             var predicates = new ArrayList<Predicate>();
 

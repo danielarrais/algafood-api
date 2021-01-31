@@ -7,10 +7,11 @@ import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.repository.CidadeRepository;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -28,8 +29,8 @@ CidadeService {
         this.estadoRepository = estadoRepository;
     }
 
-    public List<Cidade> listar() {
-        return cidadeRepository.findAll();
+    public Page<Cidade> listar(Pageable pageable) {
+        return cidadeRepository.findAll(pageable);
     }
 
     public Optional<Cidade> buscar(long cidadeId) {

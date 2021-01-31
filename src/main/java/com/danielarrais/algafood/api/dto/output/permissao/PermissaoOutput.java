@@ -2,8 +2,6 @@ package com.danielarrais.algafood.api.dto.output.permissao;
 
 import lombok.Data;
 
-import java.time.OffsetDateTime;
-
 
 @Data
 public class PermissaoOutput {

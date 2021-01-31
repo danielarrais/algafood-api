@@ -4,11 +4,12 @@ import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
-import lombok.SneakyThrows;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,8 +25,8 @@ public class CozinhaService {
         this.cozinhaRepository = cozinhaRepository;
     }
 
-    public List<Cozinha> listar() {
-        return cozinhaRepository.findAll();
+    public Page<Cozinha> listar(Pageable pageable) {
+        return cozinhaRepository.findAll(pageable);
     }
 
     public Optional<Cozinha> buscar(long cozinhaId) {

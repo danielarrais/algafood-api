@@ -5,9 +5,7 @@ import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOut
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.List;
-
 
 @Data
 public class RestauranteFullOutput {

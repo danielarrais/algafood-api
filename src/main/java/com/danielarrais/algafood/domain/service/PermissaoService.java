@@ -5,9 +5,11 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.repository.PermissaoRepository;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,8 +25,8 @@ public class PermissaoService {
         this.permissaoRepository = permissaoRepository;
     }
 
-    public List<Permissao> listar() {
-        return permissaoRepository.findAll();
+    public Page<Permissao> listar(Pageable pageable) {
+        return permissaoRepository.findAll(pageable);
     }
 
     public Optional<Permissao> buscar(long permissaoId) {
