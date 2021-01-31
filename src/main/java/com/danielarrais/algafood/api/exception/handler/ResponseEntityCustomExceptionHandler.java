@@ -1,15 +1,19 @@
 package com.danielarrais.algafood.api.exception.handler;
 
 import com.danielarrais.algafood.api.exception.Problem;
+import com.danielarrais.algafood.api.exception.ValidationProblem;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import static com.danielarrais.algafood.util.ValidationUtils.extractErrorsFrom;
 
 @ControllerAdvice
 public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptionHandler {
@@ -68,5 +72,19 @@ public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptio
         }
 
         return super.handleExceptionInternal(ex, body, headers, status, request);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        var errorsMap = extractErrorsFrom(ex.getBindingResult());
+
+        ValidationProblem validationProblem = ValidationProblem.builder()
+                .status(HttpStatus.BAD_REQUEST)
+                .title("Erros de validação")
+                .errors(errorsMap)
+                .detail("Um ou mais campos estão inválidos.")
+                .build();
+
+        return handleExceptionInternal(ex, validationProblem, new HttpHeaders(), validationProblem.getStatus(), request);
     }
 }
