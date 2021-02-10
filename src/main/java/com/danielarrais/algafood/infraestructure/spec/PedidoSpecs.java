@@ -1,6 +1,6 @@
 package com.danielarrais.algafood.infraestructure.spec;
 
-import com.danielarrais.algafood.api.dto.input.pedido.filter.PedidoFilter;
+import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import com.danielarrais.algafood.domain.model.Pedido;
 import org.springframework.data.jpa.domain.Specification;
 

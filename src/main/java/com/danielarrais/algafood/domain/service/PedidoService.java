@@ -1,6 +1,6 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.api.dto.input.pedido.filter.PedidoFilter;
+import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.*;
