@@ -5,6 +5,6 @@ import com.danielarrais.algafood.domain.model.dto.VendaDiaria;
 
 import java.util.List;
 
-public interface ConsultaVendaService {
+public interface VendaConsultaService {
     List<VendaDiaria> consultarVendasDiarias(VendaDiariaFilter filter);
 }

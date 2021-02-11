@@ -1,14 +1,22 @@
 package com.danielarrais.algafood.domain.model.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.SneakyThrows;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Data
-@AllArgsConstructor
 public class VendaDiaria {
-    private String data;
+    private Date data;
     private Long totalVendas;
     private BigDecimal totalFaturado;
+
+    @SneakyThrows
+    public VendaDiaria(String data, Long totalVendas, BigDecimal totalFaturado) {
+        this.data = new SimpleDateFormat("yyyy-MM-dd").parse(data);
+        this.totalVendas = totalVendas;
+        this.totalFaturado = totalFaturado;
+    }
 }

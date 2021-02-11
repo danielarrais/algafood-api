@@ -3,7 +3,7 @@ package com.danielarrais.algafood.infraestructure.service;
 import com.danielarrais.algafood.domain.filter.VendaDiariaFilter;
 import com.danielarrais.algafood.domain.model.Pedido;
 import com.danielarrais.algafood.domain.model.dto.VendaDiaria;
-import com.danielarrais.algafood.domain.service.ConsultaVendaService;
+import com.danielarrais.algafood.domain.service.VendaConsultaService;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,10 +14,10 @@ import static com.danielarrais.algafood.domain.model.StatusPedido.CONFIRMADO;
 import static com.danielarrais.algafood.domain.model.StatusPedido.ENTREGUE;
 
 @Repository
-public class ConsultaVendaServiceImpl implements ConsultaVendaService {
+public class VendaConsultaServiceImpl implements VendaConsultaService {
     private final EntityManager entityManager;
 
-    public ConsultaVendaServiceImpl(EntityManager entityManager) {
+    public VendaConsultaServiceImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
