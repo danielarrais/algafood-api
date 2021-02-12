@@ -45,7 +45,7 @@ public class FotoProdutoService {
         fotoStorageService.storage(foto);
     }
 
-    public FotoProduto buscar(Long restauranteId, Long produtoId) {
+    public FotoProduto buscarOuFalhar(Long restauranteId, Long produtoId) {
         return produtoRepository.findFotoById(restauranteId, produtoId).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException("Foto do produto", produtoId);
         });

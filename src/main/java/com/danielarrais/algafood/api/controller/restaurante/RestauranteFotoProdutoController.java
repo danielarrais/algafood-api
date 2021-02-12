@@ -1,16 +1,18 @@
 package com.danielarrais.algafood.api.controller.restaurante;
 
 import com.danielarrais.algafood.api.dto.input.restaurante.ProdutoFotoInput;
+import com.danielarrais.algafood.api.dto.output.restaurante.FotoProdutoOutput;
 import com.danielarrais.algafood.domain.model.FotoProduto;
 import com.danielarrais.algafood.domain.service.FotoProdutoService;
 import lombok.SneakyThrows;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 
 @RestController
@@ -26,8 +28,8 @@ RestauranteFotoProdutoController {
     @SneakyThrows
     @PutMapping(produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void atualizarFoto(@PathVariable Long restauranteId,
-                               @PathVariable Long produtoId,
-                               @Valid ProdutoFotoInput produtoFotoInput) {
+                              @PathVariable Long produtoId,
+                              @Valid ProdutoFotoInput produtoFotoInput) {
         var file = produtoFotoInput.getArquivo();
 
         var fotoProduto = FotoProduto.builder()
@@ -38,5 +40,12 @@ RestauranteFotoProdutoController {
                 .build();
 
         fotoProdutoService.salvar(restauranteId, produtoId, fotoProduto, file.getInputStream());
+    }
+
+    @GetMapping
+    public FotoProdutoOutput buscar(@PathVariable Long restauranteId,
+                                    @PathVariable Long produtoId) {
+        var fotoProduto = fotoProdutoService.buscarOuFalhar(restauranteId, produtoId);
+        return mapper(fotoProduto, FotoProdutoOutput.class);
     }
 }
