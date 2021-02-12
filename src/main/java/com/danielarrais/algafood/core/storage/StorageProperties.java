@@ -13,6 +13,11 @@ import java.nio.file.Path;
 public class StorageProperties {
     private Local local;
     private S3 s3;
+    private TipoStorage tipoStorage = TipoStorage.S3;
+
+    public enum TipoStorage {
+        S3, LOCAL
+    }
 
     @Data
     public static class Local {
