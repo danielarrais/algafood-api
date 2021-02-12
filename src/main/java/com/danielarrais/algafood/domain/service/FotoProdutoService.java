@@ -27,8 +27,8 @@ public class FotoProdutoService {
     public void salvar(Long restauranteId, Long produtoId,
                        FotoProduto fotoProduto, InputStream conteudoArquivo) {
         var produto = produtoService.buscarObrigatorio(produtoId, restauranteId);
-        var fotoProdutoOld = produtoRepository.findFotoById(restauranteId, produtoId);
         var novoNome = fotoStorageService.gerarNomeArquivo(fotoProduto.getNomeArquivo());
+        var fotoProdutoOld = produtoRepository.findFotoById(restauranteId, produtoId);
 
         fotoProdutoOld.ifPresent(foto -> {
             produtoRepository.delete(foto);
@@ -54,5 +54,13 @@ public class FotoProdutoService {
 
     public FileInputStream download(String nomeArquivo) {
         return fotoStorageService.recover(nomeArquivo);
+    }
+
+    @Transactional
+    public void deletar(Long restauranteId, Long produtoId) {
+        var fotoProduto = buscarOuFalhar(restauranteId, produtoId);
+
+        produtoRepository.delete(fotoProduto);
+        fotoStorageService.delete(fotoProduto.getNomeArquivo());
     }
 }

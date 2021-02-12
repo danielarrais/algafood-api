@@ -6,6 +6,7 @@ import com.danielarrais.algafood.domain.model.FotoProduto;
 import com.danielarrais.algafood.domain.service.FotoProdutoService;
 import lombok.SneakyThrows;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
@@ -65,6 +66,16 @@ RestauranteFotoProdutoController {
                 .contentType(MediaType.valueOf(fotoProduto.getContentType()))
                 .body(new InputStreamResource(arquivoFoto));
     }
+
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable Long restauranteId,
+                                    @PathVariable Long produtoId) {
+        fotoProdutoService.deletar(restauranteId, produtoId);
+    }
+
+
 
     private void validMediaType(String mediaTypeName) throws HttpMediaTypeNotAcceptableException {
         var mediaType = MediaType.parseMediaType(mediaTypeName);
