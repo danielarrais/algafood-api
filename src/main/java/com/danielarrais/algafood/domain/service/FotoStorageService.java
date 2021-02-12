@@ -1,4 +1,4 @@
-package com.danielarrais.algafood.domain.model;
+package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.infraestructure.service.storage.FotoStorageServiceImpl;
 import lombok.Builder;
@@ -16,6 +16,7 @@ public interface FotoStorageService {
     }
 
     void delete(String fileName);
+    byte[] recover(String fileName);
 
     @Data
     @Builder

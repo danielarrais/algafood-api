@@ -1,9 +1,9 @@
 package com.danielarrais.algafood.domain.service;
 
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.FotoProduto;
-import com.danielarrais.algafood.domain.model.FotoStorageService;
-import com.danielarrais.algafood.domain.model.FotoStorageService.Foto;
 import com.danielarrais.algafood.domain.repository.ProdutoRepository;
+import com.danielarrais.algafood.domain.service.FotoStorageService.Foto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,5 +43,11 @@ public class FotoProdutoService {
 
         produtoRepository.saveAndFlush(fotoProduto);
         fotoStorageService.storage(foto);
+    }
+
+    public FotoProduto buscar(Long restauranteId, Long produtoId) {
+        return produtoRepository.findFotoById(restauranteId, produtoId).orElseThrow(() -> {
+            throw new RegistroNaoEncontradoException("Foto do produto", produtoId);
+        });
     }
 }
