@@ -2,6 +2,7 @@ package com.danielarrais.algafood.infraestructure.service.storage;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.danielarrais.algafood.core.storage.StorageProperties;
@@ -40,13 +41,24 @@ public class S3FotoStorageServiceImpl implements FotoStorageService {
 
             amazonS3.putObject(putObjectRequest);
         } catch (Exception e) {
-            throw new StorageException("Não foi possível o arquivo para Amazon S3", e);
+            throw new StorageException("Não foi possível enviar o arquivo para Amazon S3", e);
         }
     }
 
     @Override
     public void delete(String fileName) {
+        var caminhoArquivo = String.format("%s/%s", storageProperties.getS3().getDiretorioFotos(), fileName);
 
+        try {
+            var putObjectRequest = new DeleteObjectRequest(
+                    storageProperties.getS3().getBucket(),
+                    caminhoArquivo
+            );
+
+            amazonS3.deleteObject(putObjectRequest);
+        } catch (Exception e) {
+            throw new StorageException("Não foi possível remover o arquivo do Amazon S3", e);
+        }
     }
 
     @Override
