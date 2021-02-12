@@ -2,10 +2,9 @@ package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.infraestructure.service.storage.LocalFotoStorageServiceImpl;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.UUID;
 
@@ -17,13 +16,24 @@ public interface FotoStorageService {
     }
 
     void delete(String fileName);
-    FileInputStream recover(String fileName);
+    FotoRecuperada recover(String fileName);
 
-    @Data
+    @Getter
     @Builder
     class Foto {
-        private String nomeArquivo;
-        private String contentType;
-        private InputStream inputStream;
+        private final String nomeArquivo;
+        private final String contentType;
+        private final InputStream inputStream;
+    }
+
+    @Getter
+    @Builder
+    class FotoRecuperada {
+        private final String url;
+        private final InputStream inputStream;
+
+        public boolean temUrl() {
+            return StringUtils.isNotBlank(url);
+        }
     }
 }

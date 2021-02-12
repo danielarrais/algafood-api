@@ -2,10 +2,13 @@ package com.danielarrais.algafood.api.controller.restaurante;
 
 import com.danielarrais.algafood.api.dto.input.restaurante.ProdutoFotoInput;
 import com.danielarrais.algafood.api.dto.output.restaurante.FotoProdutoOutput;
+import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.FotoProduto;
 import com.danielarrais.algafood.domain.service.FotoProdutoService;
+import com.danielarrais.algafood.domain.service.FotoStorageService.FotoRecuperada;
 import lombok.SneakyThrows;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -54,19 +57,32 @@ RestauranteFotoProdutoController {
 
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<InputStreamResource> downloadFoto(@PathVariable Long restauranteId,
+    public ResponseEntity<?> downloadFoto(@PathVariable Long restauranteId,
                                                             @PathVariable Long produtoId,
                                                             @RequestHeader(name = "Accept") String mediaTypeName) {
         validMediaType(mediaTypeName);
 
-        var fotoProduto = fotoProdutoService.buscarOuFalhar(restauranteId, produtoId);
-        var arquivoFoto = fotoProdutoService.download(fotoProduto.getNomeArquivo());
+        try {
+            var fotoProduto = fotoProdutoService.buscarOuFalhar(restauranteId, produtoId);
+            var fotoRecuperada = fotoProdutoService.download(fotoProduto.getNomeArquivo());
 
-        return ResponseEntity.ok()
-                .contentType(MediaType.valueOf(fotoProduto.getContentType()))
-                .body(new InputStreamResource(arquivoFoto));
+            return responseFotoRecuperada(fotoRecuperada, fotoProduto.getContentType());
+        } catch (RegistroNaoEncontradoException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
+    public ResponseEntity<?> responseFotoRecuperada(FotoRecuperada fotoRecuperada, String contentType) {
+        if (fotoRecuperada.temUrl()) {
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .header(HttpHeaders.LOCATION, fotoRecuperada.getUrl())
+                    .build();
+        } else {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.valueOf(contentType))
+                    .body(new InputStreamResource(fotoRecuperada.getInputStream()));
+        }
+    }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)

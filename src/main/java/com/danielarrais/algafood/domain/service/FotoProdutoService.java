@@ -4,10 +4,10 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.FotoProduto;
 import com.danielarrais.algafood.domain.repository.ProdutoRepository;
 import com.danielarrais.algafood.domain.service.FotoStorageService.Foto;
+import com.danielarrais.algafood.domain.service.FotoStorageService.FotoRecuperada;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 @Service
@@ -53,7 +53,7 @@ public class FotoProdutoService {
         });
     }
 
-    public FileInputStream download(String nomeArquivo) {
+    public FotoRecuperada download(String nomeArquivo) {
         return fotoStorageService.recover(nomeArquivo);
     }
 

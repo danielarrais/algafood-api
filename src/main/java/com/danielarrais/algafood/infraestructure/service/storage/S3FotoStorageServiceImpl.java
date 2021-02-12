@@ -10,8 +10,6 @@ import com.danielarrais.algafood.domain.service.FotoStorageService;
 import com.danielarrais.algafood.infraestructure.exceptions.StorageException;
 import org.springframework.stereotype.Service;
 
-import java.io.FileInputStream;
-
 @Service
 public class S3FotoStorageServiceImpl implements FotoStorageService {
 
@@ -62,7 +60,10 @@ public class S3FotoStorageServiceImpl implements FotoStorageService {
     }
 
     @Override
-    public FileInputStream recover(String fileName) {
-        return null;
+    public FotoRecuperada recover(String fileName) {
+        var caminhoArquivo = String.format("%s/%s", storageProperties.getS3().getDiretorioFotos(), fileName);
+        var urlFoto = amazonS3.getUrl(storageProperties.getS3().getBucket(), caminhoArquivo);
+
+        return FotoRecuperada.builder().url(urlFoto.toString()).build();
     }
 }
