@@ -7,6 +7,7 @@ import com.danielarrais.algafood.domain.service.FotoStorageService.Foto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 @Service
@@ -49,5 +50,9 @@ public class FotoProdutoService {
         return produtoRepository.findFotoById(restauranteId, produtoId).orElseThrow(() -> {
             throw new RegistroNaoEncontradoException("Foto do produto", produtoId);
         });
+    }
+
+    public FileInputStream download(String nomeArquivo) {
+        return fotoStorageService.recover(nomeArquivo);
     }
 }

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ public interface FotoStorageService {
     }
 
     void delete(String fileName);
-    byte[] recover(String fileName);
+    FileInputStream recover(String fileName);
 
     @Data
     @Builder
