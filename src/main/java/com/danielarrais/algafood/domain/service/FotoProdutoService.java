@@ -40,6 +40,7 @@ public class FotoProdutoService {
 
         var foto = Foto.builder()
                 .nomeArquivo(fotoProduto.getNomeArquivo())
+                .contentType(fotoProduto.getContentType())
                 .inputStream(conteudoArquivo).build();
 
         produtoRepository.saveAndFlush(fotoProduto);

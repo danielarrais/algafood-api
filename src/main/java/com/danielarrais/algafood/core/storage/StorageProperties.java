@@ -1,26 +1,28 @@
 package com.danielarrais.algafood.core.storage;
 
+import com.amazonaws.regions.Regions;
 import lombok.Data;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Path;
 
 @Data
 @Component
-@Configuration("algafood.storage")
+@ConfigurationProperties("algafood.storage")
 public class StorageProperties {
     private Local local;
+    private S3 s3;
 
     @Data
-    static class Local {
+    public static class Local {
         private Path diretorioFotos;
     }
 
     @Data
-    static class S3 {
+    public static class S3 {
         private String bucket;
-        private String regiao;
+        private Regions regiao;
         private String chaveAcesso;
         private String idChaveAcesso;
         private String diretorioFotos;

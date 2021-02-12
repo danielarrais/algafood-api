@@ -3,15 +3,15 @@ package com.danielarrais.algafood.infraestructure.service.storage;
 import com.danielarrais.algafood.domain.service.FotoStorageService;
 import com.danielarrais.algafood.infraestructure.exceptions.StorageException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-@Service
-public class FotoStorageServiceImpl implements FotoStorageService {
+//@Service
+public class LocalFotoStorageServiceImpl implements FotoStorageService {
 
     @Value("${algafood.storage.local.path-fotos}")
     private Path diretorioFotos;
