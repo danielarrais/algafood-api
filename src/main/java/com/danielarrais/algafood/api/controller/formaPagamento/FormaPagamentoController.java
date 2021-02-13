@@ -11,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
@@ -33,7 +31,7 @@ public class FormaPagamentoController {
         var formasPagamentoDTO = mapper(formaPagamentos, FormaPagamentoOutput.class);
 
         return ResponseEntity.ok()
-                .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
+                .cacheControl(CacheControl.noCache())
                 .body(formasPagamentoDTO);
     }
 
@@ -64,13 +62,6 @@ public class FormaPagamentoController {
 
     @DeleteMapping("/{id}")
     public void remover(@PathVariable Long id) {
-        var list = new ArrayList<>(){{
-            add("Item ");
-            add("Item ");
-            add("Item ");
-            add("Item ");
-        }};
-
         formaPagamentoService.remover(id);
     }
 }
