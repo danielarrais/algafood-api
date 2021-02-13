@@ -15,4 +15,9 @@ public class EmailProperties {
 
     @NotEmpty
     private String remetente;
+    private ServicoEmail servicoEmail = ServicoEmail.FAKE;
+
+    public enum ServicoEmail{
+        FAKE, SMTP
+    }
 }

@@ -25,7 +25,7 @@ public interface EnvioEmailService {
 
     @Getter
     enum TemplateEmail {
-        PEDIDO_CONFIRMADO("pedido-confirmado.html");
+        PEDIDO_CONFIRMADO("pedido-confirmado.ftl");
 
 
         private String nome;
