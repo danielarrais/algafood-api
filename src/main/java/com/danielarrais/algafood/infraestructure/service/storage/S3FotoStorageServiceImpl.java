@@ -7,7 +7,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.danielarrais.algafood.core.storage.StorageProperties;
 import com.danielarrais.algafood.domain.service.FotoStorageService;
-import com.danielarrais.algafood.infraestructure.exceptions.StorageException;
+import com.danielarrais.algafood.infraestructure.exception.StorageException;
 import org.springframework.stereotype.Service;
 
 @Service

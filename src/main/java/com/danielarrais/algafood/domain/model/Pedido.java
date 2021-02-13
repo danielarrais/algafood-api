@@ -1,8 +1,11 @@
 package com.danielarrais.algafood.domain.model;
 
+import com.danielarrais.algafood.domain.event.PedidoCanceladoEvent;
+import com.danielarrais.algafood.domain.event.PedidoConfirmadoEvent;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,14 +15,16 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.danielarrais.algafood.domain.model.ItemPedido.Fields.pedido;
+import static com.danielarrais.algafood.domain.model.StatusPedido.CANCELADO;
+import static com.danielarrais.algafood.domain.model.StatusPedido.ENTREGUE;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Pedido {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+public class Pedido extends AbstractAggregateRoot<Pedido> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -61,17 +66,36 @@ public class Pedido {
     @UpdateTimestamp
     private OffsetDateTime dataAtualizacao;
 
-    private void calcularSubtotal() {
-        getItens().forEach(ItemPedido::calcularTotal);
+    public void confirmar() {
+        setStatus(ENTREGUE);
+        setDataConfirmacao(OffsetDateTime.now());
 
-        this.subtotal = itens.stream()
-                .map(ItemPedido::getPrecoTotal)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        registerEvent(new PedidoConfirmadoEvent(this));
+    }
+
+    public void cancelar() {
+        setStatus(CANCELADO);
+        setDataEntrega(OffsetDateTime.now());
+
+        registerEvent(new PedidoCanceladoEvent(this));
+    }
+
+    public void entregar() {
+        setStatus(ENTREGUE);
+        setDataCancelamento(OffsetDateTime.now());
     }
 
     public void calcularTotal() {
         calcularSubtotal();
 
         this.valorTotal = subtotal.add(taxaFrete);
+    }
+
+    private void calcularSubtotal() {
+        getItens().forEach(ItemPedido::calcularTotal);
+
+        this.subtotal = itens.stream()
+                .map(ItemPedido::getPrecoTotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
