@@ -4,10 +4,12 @@ import com.danielarrais.algafood.api.dto.input.permissao.PermissaoInput;
 import com.danielarrais.algafood.api.dto.output.permissao.PermissaoOutput;
 import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.service.PermissaoService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +25,8 @@ public class PermissaoController {
     }
 
     @GetMapping()
-    public List<PermissaoOutput> listar() {
-        var permissaos = permissaoService.listar();
+    public Page<PermissaoOutput> listar(Pageable pageable) {
+        var permissaos = permissaoService.listar(pageable);
         return mapper(permissaos, PermissaoOutput.class);
     }
 

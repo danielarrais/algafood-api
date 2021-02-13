@@ -1,10 +1,10 @@
 package com.danielarrais.algafood.api.dto.input.endereco;
 
 import com.danielarrais.algafood.api.dto.input.cidade.CidadeIdInput;
-import lombok.Builder;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;

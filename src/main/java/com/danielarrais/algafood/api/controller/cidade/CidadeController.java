@@ -4,6 +4,8 @@ import com.danielarrais.algafood.api.dto.input.cidade.CidadeInput;
 import com.danielarrais.algafood.api.dto.output.cidade.CidadeOutput;
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.service.CidadeService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +25,8 @@ public class CidadeController {
     }
 
     @GetMapping()
-    public List<CidadeOutput> listar() {
-        var cidades = cidadeService.listar();
+    public Page<CidadeOutput> listar(Pageable pageable) {
+        var cidades = cidadeService.listar(pageable);
         return mapper(cidades, CidadeOutput.class);
     }
 

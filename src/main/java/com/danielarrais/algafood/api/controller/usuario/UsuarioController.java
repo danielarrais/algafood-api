@@ -5,11 +5,12 @@ import com.danielarrais.algafood.api.dto.input.usuario.UsuarioSenhaInput;
 import com.danielarrais.algafood.api.dto.output.usuario.UsuarioOutput;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.service.UsuarioService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
@@ -24,8 +25,8 @@ public class UsuarioController {
     }
 
     @GetMapping()
-    public List<UsuarioOutput> listar() {
-        var usuarios = usuarioService.listar();
+    public Page<UsuarioOutput> listar(Pageable pageable) {
+        var usuarios = usuarioService.listar(pageable);
         return mapper(usuarios, UsuarioOutput.class);
     }
 

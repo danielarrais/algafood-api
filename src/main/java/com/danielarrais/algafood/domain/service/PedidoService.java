@@ -1,15 +1,18 @@
 package com.danielarrais.algafood.domain.service;
 
+import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.*;
 import com.danielarrais.algafood.domain.repository.PedidoRepository;
 import com.danielarrais.algafood.domain.service.validation.PedidoValidation;
+import com.danielarrais.algafood.infraestructure.spec.PedidoSpecs;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.Optional;
 
 import static com.danielarrais.algafood.domain.model.StatusPedido.CRIADO;
@@ -42,8 +45,8 @@ public class PedidoService {
         this.cidadeService = cidadeService;
     }
 
-    public List<Pedido> listar() {
-        return pedidoRepository.findAll();
+    public Page<Pedido> listar(PedidoFilter filtro, Pageable pageable) {
+        return pedidoRepository.findAll(PedidoSpecs.usandoFiltro(filtro), pageable);
     }
 
     public Optional<Pedido> buscar(String codigo) {

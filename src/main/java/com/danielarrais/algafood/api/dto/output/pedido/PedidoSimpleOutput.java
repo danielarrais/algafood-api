@@ -17,4 +17,5 @@ public class PedidoSimpleOutput {
     private OffsetDateTime dataCriacao;
     private RestauranteSimpleOutput restaurante;
     private UsuarioSimpleOutput cliente;
+    private String nomeUsuario;
 }

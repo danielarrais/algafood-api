@@ -26,7 +26,7 @@ public class Pedido {
     private Long id;
 
     @Column(updatable = false, nullable = false)
-    private UUID codigo = UUID.randomUUID();
+    private String codigo = UUID.randomUUID().toString();
 
     @Enumerated(EnumType.STRING)
     private StatusPedido status;

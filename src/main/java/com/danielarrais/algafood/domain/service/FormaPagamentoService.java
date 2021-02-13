@@ -5,10 +5,11 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.repository.FormaPagamentoRepository;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,8 +24,8 @@ public class FormaPagamentoService {
         this.formaPagamentoRepository = formaPagamentoRepository;
     }
 
-    public List<FormaPagamento> listar() {
-        return formaPagamentoRepository.findAll();
+    public Page<FormaPagamento> listar(Pageable pageable) {
+        return formaPagamentoRepository.findAll(pageable);
     }
 
     public Optional<FormaPagamento> buscar(long formaPagamentoId) {
