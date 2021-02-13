@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.model;
 
+import com.danielarrais.algafood.domain.event.PedidoCanceladoEvent;
 import com.danielarrais.algafood.domain.event.PedidoConfirmadoEvent;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -75,6 +76,8 @@ public class Pedido extends AbstractAggregateRoot<Pedido> {
     public void cancelar() {
         setStatus(CANCELADO);
         setDataEntrega(OffsetDateTime.now());
+
+        registerEvent(new PedidoCanceladoEvent(this));
     }
 
     public void entregar() {
