@@ -1,20 +1,22 @@
 package com.danielarrais.algafood.domain.service;
 
 import com.danielarrais.algafood.domain.exception.NegocioException;
+import com.danielarrais.algafood.domain.repository.PedidoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.OffsetDateTime;
-
-import static com.danielarrais.algafood.domain.model.StatusPedido.*;
+import static com.danielarrais.algafood.domain.model.StatusPedido.CONFIRMADO;
+import static com.danielarrais.algafood.domain.model.StatusPedido.CRIADO;
 
 @Service
 public class FluxoPedidoService {
 
     private final PedidoService pedidoService;
+    private final PedidoRepository pedidoRepository;
 
-    public FluxoPedidoService(PedidoService pedidoService) {
+    public FluxoPedidoService(PedidoService pedidoService, PedidoRepository pedidoRepository) {
         this.pedidoService = pedidoService;
+        this.pedidoRepository = pedidoRepository;
     }
 
     @Transactional
@@ -22,8 +24,8 @@ public class FluxoPedidoService {
         var pedido = pedidoService.buscarObrigatorio(codigo);
 
         if (pedido.getStatus().equals(CRIADO)) {
-            pedido.setStatus(CANCELADO);
-            pedido.setDataCancelamento(OffsetDateTime.now());
+            pedido.cancelar();
+            pedidoRepository.save(pedido);
         } else {
             throw new NegocioException("Somente pedido com status %s podem ser cancelados", CRIADO.name());
         }
@@ -34,8 +36,8 @@ public class FluxoPedidoService {
         var pedido = pedidoService.buscarObrigatorio(codigo);
 
         if (pedido.getStatus().equals(CONFIRMADO)) {
-            pedido.setStatus(CANCELADO);
-            pedido.setDataEntrega(OffsetDateTime.now());
+            pedido.entregar();
+            pedidoRepository.save(pedido);
         } else {
             throw new NegocioException("Somente pedido com status %s podem ser entregues", CONFIRMADO.name());
         }
@@ -46,8 +48,8 @@ public class FluxoPedidoService {
         var pedido = pedidoService.buscarObrigatorio(codigo);
 
         if (pedido.getStatus().equals(CRIADO)) {
-            pedido.setStatus(ENTREGUE);
-            pedido.setDataConfirmacao(OffsetDateTime.now());
+            pedido.confirmar();
+            pedidoRepository.save(pedido);
         } else {
             throw new NegocioException("Somente pedido com status %s podem ser entregues", CRIADO.name());
         }

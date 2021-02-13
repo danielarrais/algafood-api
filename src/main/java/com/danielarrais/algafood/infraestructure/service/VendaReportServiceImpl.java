@@ -3,7 +3,7 @@ package com.danielarrais.algafood.infraestructure.service;
 import com.danielarrais.algafood.domain.filter.VendaDiariaFilter;
 import com.danielarrais.algafood.domain.service.VendaConsultaService;
 import com.danielarrais.algafood.domain.service.VendaReportService;
-import com.danielarrais.algafood.infraestructure.exceptions.ReportException;
+import com.danielarrais.algafood.infraestructure.exception.ReportException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
