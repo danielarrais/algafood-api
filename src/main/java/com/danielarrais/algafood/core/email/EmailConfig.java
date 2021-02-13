@@ -1,8 +1,10 @@
 package com.danielarrais.algafood.core.email;
 
+import com.danielarrais.algafood.core.email.EmailProperties.ServicoEmail;
 import com.danielarrais.algafood.domain.service.EnvioEmailService;
 import com.danielarrais.algafood.infraestructure.service.email.EnvioEmailServiceImpl;
 import com.danielarrais.algafood.infraestructure.service.email.FakeEnvioEmailServiceImpl;
+import com.danielarrais.algafood.infraestructure.service.email.SandboxEnvioEmailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,8 +23,11 @@ public class EmailConfig {
 
     @Bean
     public EnvioEmailService envioEmailService() {
-        if (emailProperties.getServicoEmail().equals(EmailProperties.ServicoEmail.FAKE)) {
+        var servicoEmail = emailProperties.getServicoEmail();
+        if (servicoEmail.equals(ServicoEmail.FAKE)) {
             return new FakeEnvioEmailServiceImpl(emailProperties);
+        } else if (servicoEmail.equals(ServicoEmail.SANDBOX)) {
+            return new SandboxEnvioEmailServiceImpl(mailSender, emailProperties, configurationFreemarker);
         } else {
             return new EnvioEmailServiceImpl(mailSender, emailProperties, configurationFreemarker);
         }
