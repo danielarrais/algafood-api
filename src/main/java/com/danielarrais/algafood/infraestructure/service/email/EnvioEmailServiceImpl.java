@@ -2,7 +2,7 @@ package com.danielarrais.algafood.infraestructure.service.email;
 
 import com.danielarrais.algafood.core.email.EmailProperties;
 import com.danielarrais.algafood.domain.service.EnvioEmailService;
-import com.danielarrais.algafood.infraestructure.exceptions.EmailExceptionException;
+import com.danielarrais.algafood.infraestructure.exception.EmailExceptionException;
 import freemarker.template.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
