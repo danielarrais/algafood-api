@@ -4,20 +4,23 @@ import com.danielarrais.algafood.api.dto.input.formaPagamento.FormaPagamentoInpu
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
 import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.service.FormaPagamentoService;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import org.springframework.data.domain.Pageable;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
 @RequestMapping("/formas-pagamento")
 public class FormaPagamentoController {
+
     private final FormaPagamentoService formaPagamentoService;
 
     public FormaPagamentoController(FormaPagamentoService formaPagamentoService) {
@@ -25,9 +28,13 @@ public class FormaPagamentoController {
     }
 
     @GetMapping()
-    public Page<FormaPagamentoOutput> listar(Pageable pageable) {
+    public ResponseEntity<?> listar(Pageable pageable) {
         var formaPagamentos = formaPagamentoService.listar(pageable);
-        return mapper(formaPagamentos, FormaPagamentoOutput.class);
+        var formasPagamentoDTO = mapper(formaPagamentos, FormaPagamentoOutput.class);
+
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
+                .body(formasPagamentoDTO);
     }
 
     @GetMapping("/{id}")
@@ -57,6 +64,13 @@ public class FormaPagamentoController {
 
     @DeleteMapping("/{id}")
     public void remover(@PathVariable Long id) {
+        var list = new ArrayList<>(){{
+            add("Item ");
+            add("Item ");
+            add("Item ");
+            add("Item ");
+        }};
+
         formaPagamentoService.remover(id);
     }
 }
