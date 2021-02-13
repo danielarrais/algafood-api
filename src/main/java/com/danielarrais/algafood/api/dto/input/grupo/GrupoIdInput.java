@@ -1,9 +1,9 @@
 package com.danielarrais.algafood.api.dto.input.grupo;
 
-import lombok.Builder;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 

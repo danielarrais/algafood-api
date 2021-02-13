@@ -4,10 +4,12 @@ import com.danielarrais.algafood.api.dto.input.formaPagamento.FormaPagamentoInpu
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
 import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.service.FormaPagamentoService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +25,8 @@ public class FormaPagamentoController {
     }
 
     @GetMapping()
-    public List<FormaPagamentoOutput> listar() {
-        var formaPagamentos = formaPagamentoService.listar();
+    public Page<FormaPagamentoOutput> listar(Pageable pageable) {
+        var formaPagamentos = formaPagamentoService.listar(pageable);
         return mapper(formaPagamentos, FormaPagamentoOutput.class);
     }
 

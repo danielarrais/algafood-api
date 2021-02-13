@@ -5,11 +5,12 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.repository.RestauranteRepository;
 import com.danielarrais.algafood.domain.service.validation.RestauranteValidation;
-import lombok.SneakyThrows;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -32,8 +33,8 @@ public class RestauranteService {
         this.usuarioService = usuarioService;
     }
 
-    public List<Restaurante> listar() {
-        return restauranteRepository.findAll();
+    public Page<Restaurante> listar(Pageable pageable) {
+        return restauranteRepository.findAll(pageable);
     }
 
     public Optional<Restaurante> buscar(long restauranteId) {

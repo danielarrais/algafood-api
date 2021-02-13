@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.infraestructure.repository;
 
 import com.danielarrais.algafood.domain.model.Restaurante;
-import com.danielarrais.algafood.domain.repository.custom.RestauranteRepositoryCustomQueries;
+import com.danielarrais.algafood.domain.repository.custom.RestauranteRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import java.util.List;
 import static com.danielarrais.algafood.infraestructure.spec.RestauranteSpecs.comFreteGratis;
 
 @Repository
-public class RestauranteRepositoryImpl extends SimpleJpaRepository<Restaurante, Long> implements RestauranteRepositoryCustomQueries {
+public class RestauranteRepositoryImpl extends SimpleJpaRepository<Restaurante, Long> implements RestauranteRepositoryCustom {
 
     @Autowired
     public RestauranteRepositoryImpl(EntityManager entityManager) {

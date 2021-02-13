@@ -5,10 +5,11 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.repository.EstadoRepository;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,8 +24,8 @@ public class EstadoService {
         this.estadoRepository = estadoRepository;
     }
 
-    public List<Estado> listar() {
-        return estadoRepository.findAll();
+    public Page<Estado> listar(Pageable pageable) {
+        return estadoRepository.findAll(pageable);
     }
 
     public Optional<Estado> buscar(long estadoId) {

@@ -7,9 +7,11 @@ import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.repository.UsuarioRepository;
 import com.danielarrais.algafood.domain.service.validation.UsuarioValidation;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,8 +31,8 @@ public class UsuarioService {
         this.grupoService = grupoService;
     }
 
-    public List<Usuario> listar() {
-        return usuarioRepository.findAll();
+    public Page<Usuario> listar(Pageable pageable) {
+        return usuarioRepository.findAll(pageable);
     }
 
     public Optional<Usuario> buscar(long usuarioId) {

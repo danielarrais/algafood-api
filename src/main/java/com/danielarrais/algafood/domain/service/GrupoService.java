@@ -4,13 +4,13 @@ import com.danielarrais.algafood.domain.exception.RegistroEmUsoException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Grupo;
 import com.danielarrais.algafood.domain.repository.GrupoRepository;
-import lombok.SneakyThrows;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,8 +27,8 @@ public class GrupoService {
         this.permissaoService = permissaoService;
     }
 
-    public List<Grupo> listar() {
-        return grupoRepository.findAll();
+    public Page<Grupo> listar(Pageable pageable) {
+        return grupoRepository.findAll(pageable);
     }
 
     public Optional<Grupo> buscar(long grupoId) {
