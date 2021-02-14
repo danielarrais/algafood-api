@@ -8,7 +8,6 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 
 import java.util.TimeZone;
 
-@EnableOpenApi
 @SpringBootApplication
 @EnableJpaRepositories(repositoryBaseClass = BaseSimpleJpaRepositoryImpl.class)
 public class AlgafoodApiApplication {
