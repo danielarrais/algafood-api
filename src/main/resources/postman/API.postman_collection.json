@@ -219,12 +219,46 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/pedidos",
+									"raw": "{{host}}/pedidos?sort=cliente.nome,ASC&size=10&page=0",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"pedidos"
+									],
+									"query": [
+										{
+											"key": "clienteId",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "restauranteId",
+											"value": "4",
+											"disabled": true
+										},
+										{
+											"key": "dataCriacaoInicio",
+											"value": "2021-01-01T01:00:43Z",
+											"disabled": true
+										},
+										{
+											"key": "dataCriacaoFim",
+											"value": "2021-02-01T01:00:00Z",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "cliente.nome,ASC"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										}
 									]
 								},
 								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
@@ -311,20 +345,19 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/pedidos/:id/cancelamento",
+									"raw": "{{host}}/pedidos/:codigo/cancelamento",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"pedidos",
-										":id",
+										":codigo",
 										"cancelamento"
 									],
 									"variable": [
 										{
-											"key": "id",
-											"value": "1",
-											"type": "string"
+											"key": "codigo",
+											"value": "ebe8ef76-67e0-4a93-b888-f2f310dda050"
 										}
 									]
 								},
@@ -357,7 +390,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "cdc9288c-7cdc-4225-9944-6696436754d6",
+											"value": "d0c8e7a7-da3c-45d9-b33b-aed349999cf4",
 											"type": "string"
 										}
 									]
@@ -2089,6 +2122,46 @@
 							"response": []
 						},
 						{
+							"name": "Buscar Foto do Produto",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "image/*",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/restaurantes/:restauranteId/produtos/:produtoId/foto",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"restaurantes",
+										":restauranteId",
+										"produtos",
+										":produtoId",
+										"foto"
+									],
+									"variable": [
+										{
+											"key": "restauranteId",
+											"value": "1",
+											"type": "string"
+										},
+										{
+											"key": "produtoId",
+											"value": "1",
+											"type": "string"
+										}
+									]
+								},
+								"description": "Exclui cozinha da base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
 							"name": "Associar/Dessassociar Forma de Pagamento",
 							"request": {
 								"method": "PUT",
@@ -2163,6 +2236,55 @@
 										},
 										{
 											"key": "idUsuario",
+											"value": "1",
+											"type": "string"
+										}
+									]
+								},
+								"description": "Exclui cozinha da base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Foto do Produto",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "arquivo",
+											"type": "file",
+											"src": "/home/daniel/Downloads/oxixennte_141558017_854765618679290_7662885685921143995_n.jpg"
+										},
+										{
+											"key": "descricao",
+											"value": "Tetse",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/restaurantes/:restauranteId/produtos/:produtoId/foto",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"restaurantes",
+										":restauranteId",
+										"produtos",
+										":produtoId",
+										"foto"
+									],
+									"variable": [
+										{
+											"key": "restauranteId",
+											"value": "1",
+											"type": "string"
+										},
+										{
+											"key": "produtoId",
 											"value": "1",
 											"type": "string"
 										}
@@ -2443,6 +2565,55 @@
 							"response": []
 						},
 						{
+							"name": "Deletar Foto do Produto",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "arquivo",
+											"type": "file",
+											"src": "/home/daniel/Downloads/oxixennte_141558017_854765618679290_7662885685921143995_n.jpg"
+										},
+										{
+											"key": "descricao",
+											"value": "Tetse",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/restaurantes/:restauranteId/produtos/:produtoId/foto",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"restaurantes",
+										":restauranteId",
+										"produtos",
+										":produtoId",
+										"foto"
+									],
+									"variable": [
+										{
+											"key": "restauranteId",
+											"value": "1",
+											"type": "string"
+										},
+										{
+											"key": "produtoId",
+											"value": "1",
+											"type": "string"
+										}
+									]
+								},
+								"description": "Exclui cozinha da base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
 							"name": "Criar Restaurante",
 							"request": {
 								"method": "POST",
@@ -2505,6 +2676,77 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Estatistica",
+					"item": [
+						{
+							"name": "Vendas Diarias",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/pdf,application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/estatisticas/vendas-diarias?restauranteId=4",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estatisticas",
+										"vendas-diarias"
+									],
+									"query": [
+										{
+											"key": "restauranteId",
+											"value": "4"
+										},
+										{
+											"key": "dataCriacaoInicio",
+											"value": "2021-02-10T00:00:00.00Z",
+											"disabled": true
+										},
+										{
+											"key": "dataCriacaoFim",
+											"value": "2021-02-10T23:00:00.00Z",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Documentação",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/pdf,application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/v3/api-docs",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v3",
+								"api-docs"
+							]
+						},
+						"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+					},
+					"response": []
 				}
 			]
 		}
