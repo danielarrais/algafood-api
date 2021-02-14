@@ -75,20 +75,6 @@ public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptio
     }
 
     @Override
-    protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        var errorsMap = extractErrorsFrom(ex.getBindingResult());
-
-        Problem problem = Problem.builder()
-                .status(HttpStatus.BAD_REQUEST)
-                .title("Erros de validação")
-                .errors(errorsMap)
-                .detail("Um ou mais campos estão inválidos.")
-                .build();
-
-        return handleExceptionInternal(ex, problem, new HttpHeaders(), problem.getStatus(), request);
-    }
-
-    @Override
     protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
         return ResponseEntity.status(status).headers(headers).build();

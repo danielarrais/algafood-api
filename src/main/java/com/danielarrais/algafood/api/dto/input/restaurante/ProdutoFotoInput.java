@@ -2,6 +2,7 @@ package com.danielarrais.algafood.api.dto.input.restaurante;
 
 import com.danielarrais.algafood.core.validation.FileContentType;
 import com.danielarrais.algafood.core.validation.FileSize;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +15,7 @@ import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 @Data
 public class ProdutoFotoInput {
     @NotBlank(message = "A descrição arquivo é obrigatório")
+    @ApiModelProperty(required = true, example = "Foto do hamburguer colorido")
     private String descricao;
 
     @FileSize(max = "500KB")

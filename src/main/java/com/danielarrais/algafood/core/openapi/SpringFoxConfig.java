@@ -103,11 +103,11 @@ public class SpringFoxConfig {
     }
 
     private Consumer<RepresentationBuilder> builderModelProblema() {
-        return r -> r.model(m -> m.name("Problem")
+        return r -> r.model(m -> m.name("Problema")
                 .referenceModel(
                         ref -> ref.key(
                                 k -> k.qualifiedModelName(
-                                        q -> q.name("Problem").namespace("com.danielarrais.algafood.api.exception")
+                                        q -> q.name("Problema").namespace("com.danielarrais.algafood.api.exception")
                                 ))));
     }
 
