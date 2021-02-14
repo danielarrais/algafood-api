@@ -13,8 +13,10 @@ public class SpringFoxConfig {
 
     @Bean
     public Docket apiDocket() {
+        var basePackage = RequestHandlerSelectors.basePackage("com.danielarrais.algafood.api");
+
         return new Docket(DocumentationType.OAS_30)
-                .select().apis(RequestHandlerSelectors.any())
+                .select().apis(basePackage)
                 .build();
     }
 }

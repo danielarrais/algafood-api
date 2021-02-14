@@ -4,7 +4,6 @@ import com.danielarrais.algafood.infraestructure.repository.BaseSimpleJpaReposit
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 
 import java.util.TimeZone;
 
