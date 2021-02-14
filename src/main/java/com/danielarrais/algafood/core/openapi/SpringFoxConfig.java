@@ -1,19 +1,25 @@
 package com.danielarrais.algafood.core.openapi;
 
+import com.danielarrais.algafood.api.exception.Problem;
+import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.*;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.Response;
 import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 @EnableOpenApi
 @Configuration
@@ -22,6 +28,7 @@ public class SpringFoxConfig {
 
     @Bean
     public Docket apiDocket() {
+        var typeResolver = new TypeResolver();
         var basePackage = RequestHandlerSelectors.basePackage("com.danielarrais.algafood.api");
 
         var tags = new ArrayList<Tag>() {{
@@ -42,11 +49,66 @@ public class SpringFoxConfig {
             add(new Tag("Grupos de Permissões do Usuário", "Gerencia os usuários do sistema"));
         }};
 
+        var globalDeleteResponses = new ArrayList<Response>() {{
+            add(new ResponseBuilder()
+                    .code(String.valueOf(HttpStatus.BAD_REQUEST.value()))
+                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
+                    .description("Requisição inválida (erro do cliente)").build());
+            add(new ResponseBuilder()
+                    .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
+                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
+                    .description("Erro interno no servidor").build());
+        }};
+
+        var globalGetResponses = new ArrayList<Response>() {{
+            add(new ResponseBuilder()
+                    .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
+                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
+                    .description("Erro interno do servidor").build());
+            add(new ResponseBuilder()
+                    .code(String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()))
+                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
+                    .description("Recurso não possui representação que poderia ser aceita pelo consumidor").build());
+        }};
+
+        var globalPostPutResponses = new ArrayList<Response>() {{
+            add(new ResponseBuilder()
+                    .code(String.valueOf(HttpStatus.BAD_REQUEST.value()))
+                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
+                    .description("Requisição inválida (erro do cliente)").build());
+            add(new ResponseBuilder()
+                    .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
+                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
+                    .description("Erro interno no servidor").build());
+            add(new ResponseBuilder()
+                    .code(String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()))
+                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
+                    .description("Recurso não possui representação que poderia ser aceita pelo consumidor").build());
+            add(new ResponseBuilder()
+                    .code(String.valueOf(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value()))
+                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
+                    .description("Requisição recusada porque o corpo está em um formato não suportado").build());
+
+        }};
+
         return new Docket(DocumentationType.OAS_30)
-                .select().apis(basePackage)
-                .build()
+                .select().apis(basePackage).build()
+                .globalResponses(HttpMethod.GET, globalGetResponses)
+                .globalResponses(HttpMethod.POST, globalPostPutResponses)
+                .globalResponses(HttpMethod.PUT, globalPostPutResponses)
+                .globalResponses(HttpMethod.DELETE, globalDeleteResponses)
+                .additionalModels(typeResolver.resolve(Problem.class))
                 .apiInfo(apiInfo())
                 .tags(tags.remove(0), tags.toArray(new Tag[0]));
+    }
+
+    private Consumer<RepresentationBuilder> builderModelProblema() {
+        return r -> r.model(m -> m.name("Problem")
+                .referenceModel(
+                        ref -> ref.key(
+                                k -> k.qualifiedModelName(
+                                        q -> q.name("Problem").namespace("com.danielarrais.algafood.api.exception")
+                                ))));
     }
 
     public ApiInfo apiInfo() {

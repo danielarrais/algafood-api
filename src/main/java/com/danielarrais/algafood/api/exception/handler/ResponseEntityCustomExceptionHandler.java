@@ -1,7 +1,6 @@
 package com.danielarrais.algafood.api.exception.handler;
 
 import com.danielarrais.algafood.api.exception.Problem;
-import com.danielarrais.algafood.api.exception.ValidationProblem;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,14 +78,14 @@ public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptio
     protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         var errorsMap = extractErrorsFrom(ex.getBindingResult());
 
-        ValidationProblem validationProblem = ValidationProblem.builder()
+        Problem problem = Problem.builder()
                 .status(HttpStatus.BAD_REQUEST)
                 .title("Erros de validação")
                 .errors(errorsMap)
                 .detail("Um ou mais campos estão inválidos.")
                 .build();
 
-        return handleExceptionInternal(ex, validationProblem, new HttpHeaders(), validationProblem.getStatus(), request);
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     @Override
