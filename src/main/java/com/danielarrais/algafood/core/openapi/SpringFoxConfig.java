@@ -2,6 +2,8 @@ package com.danielarrais.algafood.core.openapi;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.oas.annotations.EnableOpenApi;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 
 @EnableOpenApi
 @Configuration
+@Import(BeanValidatorPluginsConfiguration.class)
 public class SpringFoxConfig {
 
     @Bean
