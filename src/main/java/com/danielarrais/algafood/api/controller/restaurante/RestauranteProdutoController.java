@@ -5,6 +5,7 @@ import com.danielarrais.algafood.api.dto.output.restaurante.ProdutoOutput;
 import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.service.ProdutoService;
 import com.danielarrais.algafood.domain.service.RestauranteService;
+import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
+@Api(tags = "Produtos")
 @RestController
 @RequestMapping("/restaurantes/{restauranteId}/produtos")
 public class RestauranteProdutoController {

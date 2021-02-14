@@ -6,6 +6,7 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.FotoProduto;
 import com.danielarrais.algafood.domain.service.FotoProdutoService;
 import com.danielarrais.algafood.domain.service.FotoStorageService.FotoRecuperada;
+import io.swagger.annotations.Api;
 import lombok.SneakyThrows;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +21,7 @@ import java.util.Arrays;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
-
+@Api(tags = "Produtos")
 @RestController
 @RequestMapping("/restaurantes/{restauranteId}/produtos/{produtoId}/foto")
 public class

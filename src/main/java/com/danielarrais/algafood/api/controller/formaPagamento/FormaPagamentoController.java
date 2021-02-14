@@ -4,6 +4,7 @@ import com.danielarrais.algafood.api.dto.input.formaPagamento.FormaPagamentoInpu
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
 import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.service.FormaPagamentoService;
+import io.swagger.annotations.Api;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
+@Api(tags = "Formas de Pagamento")
 @RestController
 @RequestMapping("/formas-pagamento")
 public class FormaPagamentoController {

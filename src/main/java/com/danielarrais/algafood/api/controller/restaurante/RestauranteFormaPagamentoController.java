@@ -2,6 +2,7 @@ package com.danielarrais.algafood.api.controller.restaurante;
 
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
 import com.danielarrais.algafood.domain.service.RestauranteService;
+import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
+@Api(tags = "Formas de Pagamento do Restaurante")
 @RestController
 @RequestMapping("/restaurantes/{restauranteId}/formas-pagamento")
 public class RestauranteFormaPagamentoController {

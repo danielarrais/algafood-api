@@ -5,6 +5,7 @@ import com.danielarrais.algafood.api.dto.input.usuario.UsuarioSenhaInput;
 import com.danielarrais.algafood.api.dto.output.usuario.UsuarioOutput;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.service.UsuarioService;
+import io.swagger.annotations.Api;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
+@Api(tags = "Usuários")
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {

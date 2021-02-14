@@ -6,17 +6,19 @@ import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaExcept
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.service.RestauranteService;
+import io.swagger.annotations.Api;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
+@Api(tags = "Restaurantes")
 @RestController
 @RequestMapping("/restaurantes")
 public class RestauranteController {

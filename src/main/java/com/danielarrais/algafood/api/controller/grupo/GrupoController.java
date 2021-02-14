@@ -4,6 +4,7 @@ import com.danielarrais.algafood.api.dto.input.grupo.GrupoInput;
 import com.danielarrais.algafood.api.dto.output.grupo.GrupoOutput;
 import com.danielarrais.algafood.domain.model.Grupo;
 import com.danielarrais.algafood.domain.service.GrupoService;
+import io.swagger.annotations.Api;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
+@Api(tags = "Grupos de Permissões")
 @RestController
 @RequestMapping("/grupos")
 public class GrupoController {
