@@ -5,9 +5,9 @@ import com.danielarrais.algafood.api.dto.output.cidade.CidadeOutput;
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.service.CidadeService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.SwaggerDefinition;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,8 +17,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Cidades")
 @RestController
-@RequestMapping("/cidades")
-@SwaggerDefinition(tags = {})
+@RequestMapping(path = "/cidades", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CidadeController implements CidadeControllerOAS {
     private final CidadeService cidadeService;
 

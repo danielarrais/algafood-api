@@ -3,6 +3,7 @@ package com.danielarrais.algafood.api.controller.grupo;
 import com.danielarrais.algafood.api.dto.output.permissao.PermissaoOutput;
 import com.danielarrais.algafood.domain.service.GrupoService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping("/grupos/{grupoId}/permissoes")
+@RequestMapping(path = "/grupos/{grupoId}/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class GrupoPermissoesController implements GrupoPermissoesControllerOAS {
     private final GrupoService grupoService;
 
