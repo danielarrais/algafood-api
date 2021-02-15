@@ -2,10 +2,7 @@ package com.danielarrais.algafood.api.controller.restaurante;
 
 import com.danielarrais.algafood.api.dto.output.usuario.UsuarioSimpleOutput;
 import com.danielarrais.algafood.api.exception.Problem;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
@@ -15,7 +12,7 @@ interface RestauranteUsuarioResponsavelControllerOAS {
 
     @ApiOperation("Lista responsáveis de um restaurante")
     @GetMapping()
-    List<UsuarioSimpleOutput> listar(Long restauranteId);
+    List<UsuarioSimpleOutput> listar(@ApiParam("ID do restaurante") Long restauranteId);
 
     @ApiOperation("Associa responśavel a um restaurante")
     @ApiResponses({
@@ -23,7 +20,7 @@ interface RestauranteUsuarioResponsavelControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante ou do usuário inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante ou usuário não encontrado", response = Problem.class)
     })
-    void associar(Long restauranteId, Long idUsuario);
+    void associar(@ApiParam("ID do restaurante") Long restauranteId, @ApiParam("ID do usuário") Long idUsuario);
 
     @ApiOperation("Desassocia responśavel a um restaurante")
     @ApiResponses({
@@ -31,5 +28,5 @@ interface RestauranteUsuarioResponsavelControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante ou do usuário inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante ou usuário não encontrado", response = Problem.class)
     })
-    void desassociar(Long restauranteId, Long idUsuario);
+    void desassociar(@ApiParam("ID do restaurante") Long restauranteId, @ApiParam("ID do usuário") Long idUsuario);
 }

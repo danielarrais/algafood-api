@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
@@ -50,12 +49,6 @@ public class EstadoController implements EstadoControllerOAS {
     public void atualizar(@PathVariable Long id, @RequestBody @Valid EstadoInput estadoInput) {
         var estado = mapper(estadoInput, Estado.class);
         estadoService.atualizar(id, estado);
-    }
-
-    @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
-        estadoService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")

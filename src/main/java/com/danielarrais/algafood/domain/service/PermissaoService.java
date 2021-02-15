@@ -6,16 +6,13 @@ import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.repository.PermissaoRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.springframework.data.domain.Pageable;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
-import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class PermissaoService {
@@ -49,14 +46,6 @@ public class PermissaoService {
         var permissaoAtual = buscarObrigatorio(id);
 
         copyNonNullValues(permissao, permissaoAtual);
-        permissaoRepository.save(permissaoAtual);
-    }
-
-    @Transactional
-    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        var permissaoAtual = buscarObrigatorio(id);
-
-        mergeValues(propertiesAndValues, permissaoAtual);
         permissaoRepository.save(permissaoAtual);
     }
 

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
@@ -50,11 +49,6 @@ public class RestauranteController implements RestauranteControllerOAS {
     public void atualizar(@PathVariable Long id, @RequestBody @Valid RestauranteInput restauranteInput) {
         var restaurante = mapper(restauranteInput, Restaurante.class);
         restauranteService.atualizar(id, restaurante);
-    }
-
-    @PatchMapping("/{id}")
-    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
-        restauranteService.atualizar(id, valores);
     }
 
     @PutMapping("/{id}/ativo")

@@ -5,19 +5,12 @@ import com.danielarrais.algafood.api.dto.output.pedido.PedidoFullOutput;
 import com.danielarrais.algafood.api.dto.output.pedido.PedidoSimpleOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.domain.filter.PedidoFilter;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 @Api(tags = "Pedidos")
 @RestController
@@ -28,14 +21,14 @@ interface PedidoControllerOAS {
     @ApiResponses({
             @ApiResponse(code = 201, message = "Pedido cadastrado", response = Problem.class)
     })
-    void adicionar(@RequestBody @Valid PedidoInput pedidoInput);
+    void adicionar(@ApiParam("Corpo") PedidoInput pedidoInput);
 
     @ApiOperation("Lista pedidos")
-    Page<PedidoSimpleOutput> listar(PedidoFilter filtro, Pageable pageable);
+    Page<PedidoSimpleOutput> listar(@ApiParam("Filtros") PedidoFilter filtro, Pageable pageable);
 
     @ApiOperation("Busca pedido")
     @ApiResponses({
             @ApiResponse(code = 404, message = "Pedido não encontrado", response = Problem.class)
     })
-    PedidoFullOutput buscar(@PathVariable String codigo);
+    PedidoFullOutput buscar(@ApiParam("Código do pedido") String codigo);
 }

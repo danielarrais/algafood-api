@@ -16,7 +16,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
@@ -65,16 +64,6 @@ public class CozinhaController {
     public void atualizar(@PathVariable Long id, @RequestBody @Valid CozinhaInput cozinhaInput) {
         var cozinha = mapper(cozinhaInput, Cozinha.class);
         cozinhaService.atualizar(id, cozinha);
-    }
-
-    @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    @ApiResponses({
-            @ApiResponse(code = 204, message = "Cozinha atualizada"),
-            @ApiResponse(code = 404, message = "Cozinha não encontrada", response = Problem.class)
-    })
-    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
-        cozinhaService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")

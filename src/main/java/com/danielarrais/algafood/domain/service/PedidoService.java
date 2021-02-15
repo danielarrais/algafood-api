@@ -1,8 +1,8 @@
 package com.danielarrais.algafood.domain.service;
 
-import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
+import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import com.danielarrais.algafood.domain.model.*;
 import com.danielarrais.algafood.domain.repository.PedidoRepository;
 import com.danielarrais.algafood.domain.service.validation.PedidoValidation;

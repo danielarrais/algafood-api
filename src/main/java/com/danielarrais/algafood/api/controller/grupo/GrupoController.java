@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
@@ -62,16 +61,6 @@ public class GrupoController implements GrupoControllerOAS{
     public void atualizar(@PathVariable Long id, @RequestBody @Valid GrupoInput grupoInput) {
         var grupo = mapper(grupoInput, Grupo.class);
         grupoService.atualizar(id, grupo);
-    }
-
-    @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    @ApiResponses({
-            @ApiResponse(code = 204, message = "Grupo atualizado"),
-            @ApiResponse(code = 404, message = "Grupo não encontrado", response = Problem.class)
-    })
-    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
-        grupoService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")

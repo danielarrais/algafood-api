@@ -7,8 +7,6 @@ import io.swagger.annotations.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Map;
-
 @Api(tags = "Cidades")
 interface CidadeControllerOAS {
 
@@ -36,14 +34,6 @@ interface CidadeControllerOAS {
     })
     void atualizar(@ApiParam("ID de uma cidade") Long id,
                    @ApiParam(name = "Corpo", value = "Novos dados da cidade") CidadeInput cidadeInput);
-
-    @ApiOperation("Atualiza partes de uma cidade pelo ID")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Cidade atualizada"),
-            @ApiResponse(code = 404, message = "Cidade não encontrada", response = Problem.class)
-    })
-    void atualizarParcial(@ApiParam("ID de uma cidade") Long id,
-                          @ApiParam("Novos dados da cidade") Map<String, Object> valores);
 
     @ApiOperation("Deleta uma cidade pelo ID")
     @ApiResponses({

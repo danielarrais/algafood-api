@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
@@ -48,12 +47,6 @@ public class CidadeController implements CidadeControllerOAS {
                           @RequestBody @Valid CidadeInput cidadeInput) {
         var cidade = mapper(cidadeInput, Cidade.class);
         cidadeService.atualizar(id, cidade);
-    }
-
-    @PatchMapping("/{id}")
-    public void atualizarParcial(@PathVariable Long id,
-                                 @RequestBody @Valid Map<String, Object> valores) {
-        cidadeService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")

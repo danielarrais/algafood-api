@@ -3,10 +3,7 @@ package com.danielarrais.algafood.api.controller.restaurante;
 import com.danielarrais.algafood.api.dto.input.restaurante.ProdutoInput;
 import com.danielarrais.algafood.api.dto.output.restaurante.ProdutoOutput;
 import com.danielarrais.algafood.api.exception.Problem;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 
 import java.util.List;
 
@@ -18,14 +15,14 @@ interface RestauranteProdutoControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    List<ProdutoOutput> listar(Long restauranteId);
+    List<ProdutoOutput> listar(@ApiParam("ID do restaurante") Long restauranteId);
 
     @ApiOperation("Adiciona produto a um restaurante")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Produto cadastrado"),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void adicionar(Long restauranteId, ProdutoInput produtoInput);
+    void adicionar(@ApiParam("ID do restaurante") Long restauranteId, @ApiParam("Corpo") ProdutoInput produtoInput);
 
     @ApiOperation("Busca produto de um restaurante")
     @ApiResponses({
@@ -33,12 +30,12 @@ interface RestauranteProdutoControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante ou do produto inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    ProdutoOutput buscar(Long id, Long restauranteId);
+    ProdutoOutput buscar(@ApiParam("ID do produto") Long id, Long restauranteId);
 
     @ApiOperation("Atualiza produto de um restaurante")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Produto atualizado"),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void atualizar(Long id, Long restauranteId, ProdutoInput produtoInput);
+    void atualizar(@ApiParam("ID do produto") Long id, @ApiParam("ID do restaurante") Long restauranteId, @ApiParam("Corpo") ProdutoInput produtoInput);
 }

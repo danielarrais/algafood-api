@@ -11,11 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
 import java.util.Optional;
 
 import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
-import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class GrupoService {
@@ -51,14 +49,6 @@ public class GrupoService {
         var grupoAtual = buscarObrigatorio(id);
 
         copyNonNullValues(grupo, grupoAtual);
-        grupoRepository.save(grupoAtual);
-    }
-
-    @Transactional
-    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        var grupoAtual = buscarObrigatorio(id);
-
-        mergeValues(propertiesAndValues, grupoAtual);
         grupoRepository.save(grupoAtual);
     }
 

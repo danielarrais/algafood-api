@@ -6,16 +6,13 @@ import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.repository.CozinhaRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.springframework.data.domain.Pageable;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
-import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class CozinhaService {
@@ -49,14 +46,6 @@ public class CozinhaService {
         var cozinhaAtual = buscarObrigatorio(id);
 
         copyNonNullValues(cozinha, cozinhaAtual);
-        salvar(cozinhaAtual);
-    }
-
-    @Transactional
-    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        var cozinhaAtual = buscarObrigatorio(id);
-
-        mergeValues(propertiesAndValues, cozinhaAtual);
         salvar(cozinhaAtual);
     }
 

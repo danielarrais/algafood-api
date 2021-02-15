@@ -10,11 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
 import java.util.Optional;
 
 import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
-import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class FormaPagamentoService {
@@ -48,14 +46,6 @@ public class FormaPagamentoService {
         var formaPagamentoAtual = buscarObrigatorio(id);
 
         copyNonNullValues(formaPagamento, formaPagamentoAtual);
-        formaPagamentoRepository.save(formaPagamentoAtual);
-    }
-
-    @Transactional
-    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        var formaPagamentoAtual = buscarObrigatorio(id);
-
-        mergeValues(propertiesAndValues, formaPagamentoAtual);
         formaPagamentoRepository.save(formaPagamentoAtual);
     }
 

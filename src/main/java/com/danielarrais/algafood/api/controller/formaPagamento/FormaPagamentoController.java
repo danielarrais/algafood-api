@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
@@ -63,16 +62,6 @@ public class FormaPagamentoController implements FormaPagamentoControllerOAS{
     public void atualizar(@PathVariable Long id, @RequestBody @Valid FormaPagamentoInput formaPagamentoInput) {
         var formaPagamento = mapper(formaPagamentoInput, FormaPagamento.class);
         formaPagamentoService.atualizar(id, formaPagamento);
-    }
-
-    @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    @ApiResponses({
-            @ApiResponse(code = 204, message = "Forma de pagamento atualizada"),
-            @ApiResponse(code = 404, message = "Forma de pagamento não encontrada", response = Problem.class)
-    })
-    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
-        formaPagamentoService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")
