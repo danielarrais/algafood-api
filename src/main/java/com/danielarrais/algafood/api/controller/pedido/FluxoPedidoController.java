@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
-public class FluxoPedidoController  implements FluxoPedidoControllerOAS{
+public class FluxoPedidoController implements FluxoPedidoControllerOAS {
     private final FluxoPedidoService fluxoPedidoService;
 
     public FluxoPedidoController(FluxoPedidoService fluxoPedidoService) {

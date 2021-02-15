@@ -12,7 +12,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
 @RequestMapping(path = "/usuarios/{usuarioId}/grupos", produces = MediaType.APPLICATION_JSON_VALUE)
-public class UsuarioGrupoController implements UsuarioGrupoControllerOAS{
+public class UsuarioGrupoController implements UsuarioGrupoControllerOAS {
     private final UsuarioService usuarioService;
 
     public UsuarioGrupoController(UsuarioService usuarioService) {

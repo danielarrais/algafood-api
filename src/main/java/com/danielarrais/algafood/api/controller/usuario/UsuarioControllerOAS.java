@@ -14,14 +14,14 @@ interface UsuarioControllerOAS {
     @ApiOperation("Lista usuários")
     Page<UsuarioOutput> listar(Pageable pageable);
 
-    UsuarioOutput buscar(@ApiParam("ID do usuário") Long id);
+    UsuarioOutput buscar(@ApiParam(value = "ID do usuário") Long id);
 
     @ApiOperation("Altera senha do usuário")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Senha alterada"),
             @ApiResponse(code = 404, message = "Usuário não encontrado", response = Problem.class)
     })
-    void alterarSenha(@ApiParam("ID do usuário") Long usuarioId, @ApiParam("Corpo") UsuarioSenhaInput usuarioSenhaInput);
+    void alterarSenha(@ApiParam(value = "ID do usuário") Long usuarioId, @ApiParam("Corpo") UsuarioSenhaInput usuarioSenhaInput);
 
     @ApiOperation("Adiciona usuário")
     @ApiResponses({
@@ -34,12 +34,12 @@ interface UsuarioControllerOAS {
             @ApiResponse(code = 204, message = "Usuário atualizado"),
             @ApiResponse(code = 404, message = "Usuário não encontrado", response = Problem.class)
     })
-    void atualizar(@ApiParam("ID do usuário") Long id, @ApiParam("Corpo") UsuarioInput usuarioInput);
+    void atualizar(@ApiParam(value = "ID do usuário") Long id, @ApiParam("Corpo") UsuarioInput usuarioInput);
 
     @ApiOperation("Exclui usuário")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Usuário excluido"),
             @ApiResponse(code = 404, message = "Usuário não encontrado", response = Problem.class)
     })
-    void remover(@ApiParam("ID do usuário") Long id);
+    void remover(@ApiParam(value = "ID do usuário") Long id);
 }

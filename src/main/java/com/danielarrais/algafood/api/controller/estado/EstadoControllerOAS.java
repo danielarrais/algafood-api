@@ -18,7 +18,7 @@ interface EstadoControllerOAS {
             @ApiResponse(code = 400, message = "ID do estado inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Estado não encontrado", response = Problem.class)
     })
-    EstadoOutput buscar(@ApiParam("ID do estado") Long id);
+    EstadoOutput buscar(@ApiParam(value = "ID do estado", example = "1", required = true) Long id);
 
     @ApiOperation("Adiciona um estado")
     @ApiResponses({
@@ -31,12 +31,12 @@ interface EstadoControllerOAS {
             @ApiResponse(code = 204, message = "Estado atualizado"),
             @ApiResponse(code = 404, message = "Estado não encontrado", response = Problem.class)
     })
-    void atualizar(@ApiParam("ID do estado") Long id, @ApiParam("Corpo") EstadoInput estadoInput);
+    void atualizar(@ApiParam(value = "ID do estado", example = "1", required = true) Long id, @ApiParam("Corpo") EstadoInput estadoInput);
 
     @ApiOperation("Exclui um estado")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Estado excluido"),
             @ApiResponse(code = 404, message = "Estado não encontrado", response = Problem.class)
     })
-    void remover(@ApiParam("ID do estado") Long id);
+    void remover(@ApiParam(value = "ID do estado", example = "1", required = true) Long id);
 }

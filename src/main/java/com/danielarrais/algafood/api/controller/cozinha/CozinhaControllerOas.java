@@ -19,7 +19,7 @@ interface CozinhaControllerOas {
             @ApiResponse(code = 400, message = "ID da cozinha inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Cozinha não encontrada", response = Problem.class)
     })
-    CozinhaFullOutput buscar(@ApiParam("ID da cozinha") Long id);
+    CozinhaFullOutput buscar(@ApiParam(value = "ID da cozinha", example = "1", required = true) Long id);
 
     @ApiOperation("Adiciona uma cozinha")
     @ApiResponses({
@@ -32,7 +32,7 @@ interface CozinhaControllerOas {
             @ApiResponse(code = 204, message = "Cozinha atualizada"),
             @ApiResponse(code = 404, message = "Cozinha não encontrada", response = Problem.class)
     })
-    void atualizar(@ApiParam("ID da cozinha") Long id, @ApiParam("Corpo") CozinhaInput cozinhaInput);
+    void atualizar(@ApiParam(value = "ID da cozinha", example = "1", required = true) Long id, @ApiParam("Corpo") CozinhaInput cozinhaInput);
 
     @ApiOperation("Deleta uma cozinha")
     @DeleteMapping("/{id}")
@@ -40,5 +40,5 @@ interface CozinhaControllerOas {
             @ApiResponse(code = 204, message = "Cozinha excluida"),
             @ApiResponse(code = 404, message = "Cozinha não encontrada", response = Problem.class)
     })
-    void remover(@ApiParam("ID da cozinha") Long id);
+    void remover(@ApiParam(value = "ID da cozinha", example = "1", required = true) Long id);
 }

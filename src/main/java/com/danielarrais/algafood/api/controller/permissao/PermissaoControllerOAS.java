@@ -18,7 +18,7 @@ interface PermissaoControllerOAS {
             @ApiResponse(code = 400, message = "ID da permissão inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Permissão não encontrada", response = Problem.class)
     })
-    PermissaoOutput buscar(@ApiParam("ID da permissão") Long id);
+    PermissaoOutput buscar(@ApiParam(value = "ID da permissão", example = "1", required = true) Long id);
 
     @ApiOperation("Adiciona permissão")
     @ApiResponses({
@@ -31,12 +31,13 @@ interface PermissaoControllerOAS {
             @ApiResponse(code = 204, message = "Permissão atualizada"),
             @ApiResponse(code = 404, message = "Permissão não encontrada", response = Problem.class)
     })
-    void atualizar(@ApiParam("ID da permissão") Long id, @ApiParam("Corpo") PermissaoInput permissaoInput);
+    void atualizar(@ApiParam(value = "ID da permissão", example = "1", required = true) Long id,
+                   @ApiParam("Corpo") PermissaoInput permissaoInput);
 
     @ApiOperation("Exclui permissão")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Permissão excluida"),
             @ApiResponse(code = 404, message = "Permissão não encontrada", response = Problem.class)
     })
-    void remover(@ApiParam("ID da permissão") Long id);
+    void remover(@ApiParam(value = "ID da permissão", example = "1", required = true) Long id);
 }

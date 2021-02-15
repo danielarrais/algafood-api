@@ -8,19 +8,21 @@ import java.util.List;
 
 @Api(tags = "Formas de Pagamento do Restaurante")
 interface RestauranteFormaPagamentoControllerOAS {
-    List<FormaPagamentoOutput> listar(@ApiParam("ID do restaurante") Long restauranteId);
+    List<FormaPagamentoOutput> listar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId);
 
     @ApiOperation("Associa forma de pagamento a um restaurante")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Forma de pagamento associada ao restaurante"),
             @ApiResponse(code = 404, message = "Restaurante ou forma de pagamento não encontrada", response = Problem.class)
     })
-    void associar(@ApiParam("ID do restaurante") Long restauranteId, @ApiParam("ID da forma de pagamento") Long idFormaPagamento);
+    void associar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId,
+                  @ApiParam(value = "ID da forma de pagamento", example = "1", required = true) Long idFormaPagamento);
 
     @ApiOperation("Desassocia forma de pagamento a um restaurante")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Forma de pagamento desassociada ao restaurante"),
             @ApiResponse(code = 404, message = "Restaurante ou forma de pagamento não encontrado", response = Problem.class)
     })
-    void desassociar(@ApiParam("ID do restaurante") Long restauranteId, @ApiParam("ID da forma de pagamento") Long idFormaPagamento);
+    void desassociar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId,
+                     @ApiParam(value = "ID da forma de pagamento", example = "1", required = true) Long idFormaPagamento);
 }

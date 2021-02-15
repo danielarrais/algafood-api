@@ -10,19 +10,19 @@ import java.util.List;
 interface UsuarioGrupoControllerOAS {
 
     @ApiOperation("Lista grupos de permissões de um usuário")
-    List<PermissaoOutput> listar(@ApiParam("ID do usuário") Long usuarioId);
+    List<PermissaoOutput> listar(@ApiParam(value = "ID do usuário") Long usuarioId);
 
     @ApiOperation("Associa grupo de permissões a um usuário")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Usuário associado ao grupo de permissões"),
             @ApiResponse(code = 404, message = "Usuário não encontrado", response = Problem.class)
     })
-    void associar(@ApiParam("ID do usuário") Long usuarioId, @ApiParam("ID do grupo") Long idGrupo);
+    void associar(@ApiParam(value = "ID do usuário") Long usuarioId, @ApiParam(value = "ID do grupo") Long idGrupo);
 
     @ApiOperation("Desassocia grupo de permissões a um usuário")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Usuário desassociado ao grupo de permissões"),
             @ApiResponse(code = 404, message = "Usuário não encontrado", response = Problem.class)
     })
-    void desassociar(@ApiParam("ID do usuário") Long usuarioId, @ApiParam("ID do grupo") Long idGrupo);
+    void desassociar(@ApiParam(value = "ID do usuário") Long usuarioId, @ApiParam(value = "ID do grupo") Long idGrupo);
 }

@@ -19,7 +19,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
 @RequestMapping(path = "/formas-pagamento", produces = MediaType.APPLICATION_JSON_VALUE)
-public class FormaPagamentoController implements FormaPagamentoControllerOAS{
+public class FormaPagamentoController implements FormaPagamentoControllerOAS {
 
     private final FormaPagamentoService formaPagamentoService;
 

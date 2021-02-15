@@ -15,7 +15,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
 @RequestMapping(path = "/restaurantes/{restauranteId}/produtos", produces = MediaType.APPLICATION_JSON_VALUE)
-public class RestauranteProdutoController implements RestauranteProdutoControllerOAS{
+public class RestauranteProdutoController implements RestauranteProdutoControllerOAS {
     private final RestauranteService restauranteService;
     private final ProdutoService produtoService;
 

@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.Arrays;
@@ -22,7 +23,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
 @RequestMapping(path = "/restaurantes/{restauranteId}/produtos/{produtoId}/foto")
-public class RestauranteFotoProdutoController implements RestauranteFotoProdutoControllerOAS{
+public class RestauranteFotoProdutoController implements RestauranteFotoProdutoControllerOAS {
     private final FotoProdutoService fotoProdutoService;
 
     public RestauranteFotoProdutoController(FotoProdutoService fotoProdutoService) {
@@ -33,7 +34,8 @@ public class RestauranteFotoProdutoController implements RestauranteFotoProdutoC
     @PutMapping(produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void atualizarFoto(@PathVariable Long restauranteId,
                               @PathVariable Long produtoId,
-                              @Valid ProdutoFotoInput produtoFotoInput) {
+                              @Valid ProdutoFotoInput produtoFotoInput,
+                              @RequestPart(required = false) MultipartFile arquivo) {
         var file = produtoFotoInput.getArquivo();
 
         var fotoProduto = FotoProduto.builder()

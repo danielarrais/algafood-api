@@ -15,14 +15,15 @@ interface RestauranteProdutoControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    List<ProdutoOutput> listar(@ApiParam("ID do restaurante") Long restauranteId);
+    List<ProdutoOutput> listar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId);
 
     @ApiOperation("Adiciona produto a um restaurante")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Produto cadastrado"),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void adicionar(@ApiParam("ID do restaurante") Long restauranteId, @ApiParam("Corpo") ProdutoInput produtoInput);
+    void adicionar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId,
+                   @ApiParam("Corpo") ProdutoInput produtoInput);
 
     @ApiOperation("Busca produto de um restaurante")
     @ApiResponses({
@@ -30,12 +31,14 @@ interface RestauranteProdutoControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante ou do produto inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    ProdutoOutput buscar(@ApiParam("ID do produto") Long id, Long restauranteId);
+    ProdutoOutput buscar(@ApiParam(value = "ID do produto", example = "1", required = true) Long id, Long restauranteId);
 
     @ApiOperation("Atualiza produto de um restaurante")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Produto atualizado"),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void atualizar(@ApiParam("ID do produto") Long id, @ApiParam("ID do restaurante") Long restauranteId, @ApiParam("Corpo") ProdutoInput produtoInput);
+    void atualizar(@ApiParam(value = "ID do produto", example = "1", required = true) Long id,
+                   @ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId,
+                   @ApiParam("Corpo") ProdutoInput produtoInput);
 }

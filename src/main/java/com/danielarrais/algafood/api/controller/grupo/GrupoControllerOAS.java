@@ -18,7 +18,7 @@ interface GrupoControllerOAS {
             @ApiResponse(code = 400, message = "ID do grupo inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Grupo não encontrado", response = Problem.class)
     })
-    GrupoOutput buscar(@ApiParam("ID do grupo") Long id);
+    GrupoOutput buscar(@ApiParam(value = "ID do grupo", example = "1", required = true) Long id);
 
     @ApiOperation("Adiciona grupo de permissão")
     @ApiResponses({
@@ -31,12 +31,12 @@ interface GrupoControllerOAS {
             @ApiResponse(code = 204, message = "Grupo atualizado"),
             @ApiResponse(code = 404, message = "Grupo não encontrado", response = Problem.class)
     })
-    void atualizar(@ApiParam("ID do grupo") Long id, @ApiParam("Corpo") GrupoInput grupoInput);
+    void atualizar(@ApiParam(value = "ID do grupo", example = "1", required = true) Long id, @ApiParam("Corpo") GrupoInput grupoInput);
 
     @ApiOperation("Exclui grupo de permissão")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Grupo de permissão excluido"),
             @ApiResponse(code = 404, message = "Grupo de permissão não encontrado", response = Problem.class)
     })
-    void remover(@ApiParam("ID do grupo") Long id);
+    void remover(@ApiParam(value = "ID do grupo", example = "1", required = true) Long id);
 }

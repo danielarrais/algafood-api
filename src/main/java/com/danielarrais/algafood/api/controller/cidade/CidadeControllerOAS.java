@@ -18,21 +18,21 @@ interface CidadeControllerOAS {
             @ApiResponse(code = 400, message = "ID da cidade inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Cidade não encontrada", response = Problem.class)
     })
-    CidadeOutput buscar(@ApiParam("ID de uma cidade") Long id);
+    CidadeOutput buscar(@ApiParam(value = "ID de uma cidade", example = "1", required = true) Long id);
 
     @ApiOperation("Adiciona uma cidade")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Cidade cadastrada", response = Problem.class)
     })
     void adicionar(@ApiParam(name = "Corpo", value = "Dados da cidade")
-                   CidadeInput cidadeInput);
+                           CidadeInput cidadeInput);
 
     @ApiOperation("Atualiza uma cidade pelo ID")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Cidade atualizada"),
             @ApiResponse(code = 404, message = "Cidade não encontrada", response = Problem.class)
     })
-    void atualizar(@ApiParam("ID de uma cidade") Long id,
+    void atualizar(@ApiParam(value = "ID de uma cidade", example = "1", required = true) Long id,
                    @ApiParam(name = "Corpo", value = "Novos dados da cidade") CidadeInput cidadeInput);
 
     @ApiOperation("Deleta uma cidade pelo ID")
@@ -40,5 +40,5 @@ interface CidadeControllerOAS {
             @ApiResponse(code = 204, message = "Cidade excluida"),
             @ApiResponse(code = 404, message = "Cidade não encontrada", response = Problem.class)
     })
-    void remover(@ApiParam("ID de uma cidade") Long id);
+    void remover(@ApiParam(value = "ID de uma cidade", example = "1", required = true) Long id);
 }

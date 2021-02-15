@@ -12,7 +12,7 @@ interface RestauranteUsuarioResponsavelControllerOAS {
 
     @ApiOperation("Lista responsáveis de um restaurante")
     @GetMapping()
-    List<UsuarioSimpleOutput> listar(@ApiParam("ID do restaurante") Long restauranteId);
+    List<UsuarioSimpleOutput> listar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId);
 
     @ApiOperation("Associa responśavel a um restaurante")
     @ApiResponses({
@@ -20,7 +20,8 @@ interface RestauranteUsuarioResponsavelControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante ou do usuário inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante ou usuário não encontrado", response = Problem.class)
     })
-    void associar(@ApiParam("ID do restaurante") Long restauranteId, @ApiParam("ID do usuário") Long idUsuario);
+    void associar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId,
+                  @ApiParam(value = "ID do usuário", example = "1", required = true) Long idUsuario);
 
     @ApiOperation("Desassocia responśavel a um restaurante")
     @ApiResponses({
@@ -28,5 +29,6 @@ interface RestauranteUsuarioResponsavelControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante ou do usuário inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante ou usuário não encontrado", response = Problem.class)
     })
-    void desassociar(@ApiParam("ID do restaurante") Long restauranteId, @ApiParam("ID do usuário") Long idUsuario);
+    void desassociar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId,
+                     @ApiParam(value = "ID do usuário", example = "1", required = true) Long idUsuario);
 }

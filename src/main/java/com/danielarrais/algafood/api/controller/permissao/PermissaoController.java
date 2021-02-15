@@ -16,7 +16,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
 @RequestMapping(path = "/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
-public class PermissaoController implements PermissaoControllerOAS{
+public class PermissaoController implements PermissaoControllerOAS {
     private final PermissaoService permissaoService;
 
     public PermissaoController(PermissaoService permissaoService) {

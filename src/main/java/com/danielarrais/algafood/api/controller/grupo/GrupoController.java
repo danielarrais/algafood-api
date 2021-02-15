@@ -19,7 +19,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
 @RequestMapping(path = "/grupos", produces = MediaType.APPLICATION_JSON_VALUE)
-public class GrupoController implements GrupoControllerOAS{
+public class GrupoController implements GrupoControllerOAS {
     private final GrupoService grupoService;
 
     public GrupoController(GrupoService grupoService) {

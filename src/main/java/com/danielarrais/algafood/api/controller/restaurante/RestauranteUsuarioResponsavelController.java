@@ -12,7 +12,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
 @RequestMapping(path = "/restaurantes/{restauranteId}/responsaveis", produces = MediaType.APPLICATION_JSON_VALUE)
-public class RestauranteUsuarioResponsavelController implements RestauranteUsuarioResponsavelControllerOAS{
+public class RestauranteUsuarioResponsavelController implements RestauranteUsuarioResponsavelControllerOAS {
     private final RestauranteService restauranteService;
 
     public RestauranteUsuarioResponsavelController(RestauranteService restauranteService) {

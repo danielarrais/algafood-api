@@ -18,7 +18,7 @@ interface FormaPagamentoControllerOAS {
             @ApiResponse(code = 400, message = "ID da forma de pagamento inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Forma de pagamento não encontrada", response = Problem.class)
     })
-    FormaPagamentoOutput buscar(@ApiParam("ID da forma de pagamento") Long id);
+    FormaPagamentoOutput buscar(@ApiParam(value = "ID da forma de pagamento", example = "1", required = true) Long id);
 
     @ApiOperation("Adiciona forma de pagamento")
     @ApiResponses({
@@ -31,12 +31,12 @@ interface FormaPagamentoControllerOAS {
             @ApiResponse(code = 204, message = "Forma de pagamento atualizada"),
             @ApiResponse(code = 404, message = "Forma de pagamento não encontrada", response = Problem.class)
     })
-    void atualizar(@ApiParam("ID da forma de pagamento") Long id, @ApiParam("Corpo") FormaPagamentoInput formaPagamentoInput);
+    void atualizar(@ApiParam(value = "ID da forma de pagamento", example = "1", required = true) Long id, @ApiParam("Corpo") FormaPagamentoInput formaPagamentoInput);
 
     @ApiOperation("Exclui forma de pagamento")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Forma de pagamento excluida"),
             @ApiResponse(code = 404, message = "Forma de pagamento não encontrada", response = Problem.class)
     })
-    void remover(@ApiParam("ID da forma de pagamento") Long id);
+    void remover(@ApiParam(value = "ID da forma de pagamento", example = "1", required = true) Long id);
 }

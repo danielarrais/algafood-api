@@ -20,7 +20,7 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID da do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Cidade não encontrada", response = Problem.class)
     })
-    RestauranteFullOutput buscar(@ApiParam("ID do restaurante") Long id);
+    RestauranteFullOutput buscar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Adiciona restaurante")
     @ApiResponses({
@@ -33,7 +33,8 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 200, message = "Restaurante atualizado", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void atualizar(@ApiParam("ID do restaurante") Long id, @ApiParam("Corpo") RestauranteInput restauranteInput);
+    void atualizar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id,
+                   @ApiParam("Corpo") RestauranteInput restauranteInput);
 
     @ApiOperation("Ativa restaurante")
     @ApiResponses({
@@ -41,7 +42,7 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void ativar(@ApiParam("ID do restaurante") Long id);
+    void ativar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Inativa restaurantes")
     @ApiResponses({
@@ -49,13 +50,13 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void inativar(@ApiParam("ID do restaurante") Long id);
+    void inativar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Ativa restaurantes")
-    void ativarBach(@ApiParam("IDs dos restaurantes") List<Long> ids);
+    void ativarBach(@ApiParam(value = "IDs dos restaurantes") List<Long> ids);
 
     @ApiOperation("Inativa restaurantes")
-    void inativarBach(@ApiParam("IDs dos restaurantes") List<Long> ids);
+    void inativarBach(@ApiParam(value = "IDs dos restaurantes") List<Long> ids);
 
     @ApiOperation("Abre restaurante")
     @ApiResponses({
@@ -63,7 +64,7 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void abrir(@ApiParam("ID do restaurante") Long id);
+    void abrir(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Fecha restaurante")
     @ApiResponses({
@@ -71,12 +72,12 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void fechar(@ApiParam("ID do restaurante") Long id);
+    void fechar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Exlui restaurante")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Restaurante excluido"),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void remover(@ApiParam("ID do restaurante") Long id);
+    void remover(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 }
