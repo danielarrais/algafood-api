@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/estatisticas")
-public class EstatisticaController {
+@RequestMapping(path = "/estatisticas", produces = MediaType.APPLICATION_JSON_VALUE)
+public class EstatisticaController implements EstatisticaControllerOAS {
     private final VendaConsultaService vendaConsultaService;
     private final VendaReportService vendaReportService;
 

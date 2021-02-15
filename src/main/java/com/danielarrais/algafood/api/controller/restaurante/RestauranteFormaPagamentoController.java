@@ -3,6 +3,7 @@ package com.danielarrais.algafood.api.controller.restaurante;
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
 import com.danielarrais.algafood.domain.service.RestauranteService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import java.util.List;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping("/restaurantes/{restauranteId}/formas-pagamento")
-public class RestauranteFormaPagamentoController {
+@RequestMapping(path = "/restaurantes/{restauranteId}/formas-pagamento", produces = MediaType.APPLICATION_JSON_VALUE)
+public class RestauranteFormaPagamentoController implements RestauranteFormaPagamentoControllerOAS {
     private final RestauranteService restauranteService;
 
     public RestauranteFormaPagamentoController(RestauranteService restauranteService) {

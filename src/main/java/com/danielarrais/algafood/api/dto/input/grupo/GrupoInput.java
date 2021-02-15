@@ -1,6 +1,7 @@
 package com.danielarrais.algafood.api.dto.input.grupo;
 
 import com.danielarrais.algafood.api.dto.input.permissao.PermissaoIdInput;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class GrupoInput {
     @NotBlank
+    @ApiModelProperty(required = true, example = "Responsável por restaurante")
     private String nome;
 
     @NotEmpty

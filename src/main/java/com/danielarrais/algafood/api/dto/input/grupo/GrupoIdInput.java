@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.api.dto.input.grupo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +14,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class GrupoIdInput {
     @NotNull
+    @ApiModelProperty(required = true, example = "1")
     private Long id;
 }

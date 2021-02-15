@@ -10,11 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
 import java.util.Optional;
 
 import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
-import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class EstadoService {
@@ -51,13 +49,6 @@ public class EstadoService {
         salvar(estadoAtual);
     }
 
-    @Transactional
-    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        var estadoAtual = buscarObrigatorio(id);
-
-        mergeValues(propertiesAndValues, estadoAtual);
-        salvar(estadoAtual);
-    }
 
     @Transactional
     public void remover(Long id) {
