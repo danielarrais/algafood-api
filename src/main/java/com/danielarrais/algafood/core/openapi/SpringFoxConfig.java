@@ -5,26 +5,29 @@ import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
-import springfox.documentation.builders.*;
-import springfox.documentation.oas.annotations.EnableOpenApi;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ResponseMessageBuilder;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
-import springfox.documentation.service.Response;
+import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
-@EnableOpenApi
+@EnableSwagger2
 @Configuration
 @Import(BeanValidatorPluginsConfiguration.class)
-public class SpringFoxConfig {
+public class SpringFoxConfig implements WebMvcConfigurer {
 
     @Bean
     public Docket apiDocket() {
@@ -49,66 +52,59 @@ public class SpringFoxConfig {
             add(new Tag("Grupos de Permissões do Usuário", "Gerencia os usuários do sistema"));
         }};
 
-        var globalDeleteResponses = new ArrayList<Response>() {{
-            add(new ResponseBuilder()
-                    .code(String.valueOf(HttpStatus.BAD_REQUEST.value()))
-                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
-                    .description("Requisição inválida (erro do cliente)").build());
-            add(new ResponseBuilder()
-                    .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
-                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
-                    .description("Erro interno no servidor").build());
+        var typeProblemResolver = typeResolver.resolve(Problem.class);
+
+        var globalDeleteResponses = new ArrayList<ResponseMessage>() {{
+            add(new ResponseMessageBuilder()
+                    .code(HttpStatus.BAD_REQUEST.value())
+                    .responseModel(new ModelRef("Problema"))
+                    .message("Requisição inválida (erro do cliente)").build());
+            add(new ResponseMessageBuilder()
+                    .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .responseModel(new ModelRef("Problema"))
+                    .message("Erro interno no servidor").build());
         }};
 
-        var globalGetResponses = new ArrayList<Response>() {{
-            add(new ResponseBuilder()
-                    .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
-                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
-                    .description("Erro interno do servidor").build());
-            add(new ResponseBuilder()
-                    .code(String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()))
-                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
-                    .description("Recurso não possui representação que poderia ser aceita pelo consumidor").build());
+        var globalGetResponses = new ArrayList<ResponseMessage>() {{
+            add(new ResponseMessageBuilder()
+                    .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .responseModel(new ModelRef("Problema"))
+                    .message("Erro interno do servidor").build());
+            add(new ResponseMessageBuilder()
+                    .code(HttpStatus.NOT_ACCEPTABLE.value())
+                    .responseModel(new ModelRef("Problema"))
+                    .message("Recurso não possui representação que poderia ser aceita pelo consumidor").build());
         }};
 
-        var globalPostPutResponses = new ArrayList<Response>() {{
-            add(new ResponseBuilder()
-                    .code(String.valueOf(HttpStatus.BAD_REQUEST.value()))
-                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
-                    .description("Requisição inválida (erro do cliente)").build());
-            add(new ResponseBuilder()
-                    .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
-                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
-                    .description("Erro interno no servidor").build());
-            add(new ResponseBuilder()
-                    .code(String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()))
-                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
-                    .description("Recurso não possui representação que poderia ser aceita pelo consumidor").build());
-            add(new ResponseBuilder()
-                    .code(String.valueOf(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value()))
-                    .representation(MediaType.APPLICATION_JSON).apply(builderModelProblema())
-                    .description("Requisição recusada porque o corpo está em um formato não suportado").build());
+        var globalPostPutResponses = new ArrayList<ResponseMessage>() {{
+            add(new ResponseMessageBuilder()
+                    .code(HttpStatus.BAD_REQUEST.value())
+                    .responseModel(new ModelRef("Problema"))
+                    .message("Requisição inválida (erro do cliente)").build());
+            add(new ResponseMessageBuilder()
+                    .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .responseModel(new ModelRef("Problema"))
+                    .message("Erro interno no servidor").build());
+            add(new ResponseMessageBuilder()
+                    .code(HttpStatus.NOT_ACCEPTABLE.value())
+                    .responseModel(new ModelRef("Problema"))
+                    .message("Recurso não possui representação que poderia ser aceita pelo consumidor").build());
+            add(new ResponseMessageBuilder()
+                    .code(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value())
+                    .responseModel(new ModelRef("Problema"))
+                    .message("Requisição recusada porque o corpo está em um formato não suportado").build());
 
         }};
 
-        return new Docket(DocumentationType.OAS_30)
+        return new Docket(DocumentationType.SWAGGER_2)
                 .select().apis(basePackage).build()
-                .globalResponses(HttpMethod.GET, globalGetResponses)
-                .globalResponses(HttpMethod.POST, globalPostPutResponses)
-                .globalResponses(HttpMethod.PUT, globalPostPutResponses)
-                .globalResponses(HttpMethod.DELETE, globalDeleteResponses)
+                .globalResponseMessage(RequestMethod.GET, globalGetResponses)
+                .globalResponseMessage(RequestMethod.POST, globalPostPutResponses)
+                .globalResponseMessage(RequestMethod.PUT, globalPostPutResponses)
+                .globalResponseMessage(RequestMethod.DELETE, globalDeleteResponses)
                 .additionalModels(typeResolver.resolve(Problem.class))
                 .apiInfo(apiInfo())
                 .tags(tags.remove(0), tags.toArray(new Tag[0]));
-    }
-
-    private Consumer<RepresentationBuilder> builderModelProblema() {
-        return r -> r.model(m -> m.name("Problema")
-                .referenceModel(
-                        ref -> ref.key(
-                                k -> k.qualifiedModelName(
-                                        q -> q.name("Problema").namespace("com.danielarrais.algafood.api.exception")
-                                ))));
     }
 
     public ApiInfo apiInfo() {
@@ -120,5 +116,14 @@ public class SpringFoxConfig {
                 .version("1")
                 .contact(contato)
                 .build();
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }

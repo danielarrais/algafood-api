@@ -2,12 +2,10 @@ package com.danielarrais.algafood.api.controller.cidade;
 
 import com.danielarrais.algafood.api.dto.input.cidade.CidadeInput;
 import com.danielarrais.algafood.api.dto.output.cidade.CidadeOutput;
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.service.CidadeService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.SwaggerDefinition;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -38,6 +36,10 @@ public class CidadeController {
 
     @ApiOperation("Busca uma cidade pelo ID")
     @GetMapping("/{id}")
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "ID da cidade inválido", response = Problem.class),
+            @ApiResponse(code = 404, message = "Cidade não encontrada", response = Problem.class)
+    })
     public CidadeOutput buscar(@ApiParam("ID de uma cidade") @PathVariable Long id) {
         var cidade = cidadeService.buscarObrigatorio(id);
         return mapper(cidade, CidadeOutput.class);
