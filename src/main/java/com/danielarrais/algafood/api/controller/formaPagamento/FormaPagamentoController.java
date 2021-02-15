@@ -7,11 +7,10 @@ import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.service.FormaPagamentoService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,13 +29,9 @@ public class FormaPagamentoController implements FormaPagamentoControllerOAS{
     }
 
     @GetMapping()
-    public ResponseEntity<?> listar(Pageable pageable) {
+    public Page<FormaPagamentoOutput> listar(Pageable pageable) {
         var formaPagamentos = formaPagamentoService.listar(pageable);
-        var formasPagamentoDTO = mapper(formaPagamentos, FormaPagamentoOutput.class);
-
-        return ResponseEntity.ok()
-                .cacheControl(CacheControl.noCache())
-                .body(formasPagamentoDTO);
+        return mapper(formaPagamentos, FormaPagamentoOutput.class);
     }
 
     @GetMapping("/{id}")

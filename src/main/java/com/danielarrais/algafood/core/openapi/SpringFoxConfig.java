@@ -1,18 +1,32 @@
 package com.danielarrais.algafood.core.openapi;
 
+import com.danielarrais.algafood.api.dto.output.cidade.CidadeOutput;
+import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaOutput;
+import com.danielarrais.algafood.api.dto.output.estado.EstadoOutput;
+import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
+import com.danielarrais.algafood.api.dto.output.grupo.GrupoOutput;
+import com.danielarrais.algafood.api.dto.output.pedido.PedidoSimpleOutput;
+import com.danielarrais.algafood.api.dto.output.permissao.PermissaoOutput;
+import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteFullOutput;
+import com.danielarrais.algafood.api.dto.output.usuario.UsuarioOutput;
 import com.danielarrais.algafood.api.exception.Problem;
+import com.danielarrais.algafood.core.openapi.model.PageOAS;
+import com.danielarrais.algafood.core.openapi.model.PageableOAS;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
+import springfox.documentation.schema.AlternateTypeRule;
+import springfox.documentation.schema.AlternateTypeRules;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -23,6 +37,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+
+import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
 
 @EnableSwagger2
 @Configuration
@@ -32,7 +49,6 @@ public class SpringFoxConfig implements WebMvcConfigurer {
     @Bean
     public Docket apiDocket() {
         var typeResolver = new TypeResolver();
-        var basePackage = RequestHandlerSelectors.basePackage("com.danielarrais.algafood.api");
 
         var tags = new ArrayList<Tag>() {{
             add(new Tag("Cidades", "Gerencia as cidades"));
@@ -50,9 +66,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
             add(new Tag("Responsáveis do Restaurante", "Gerencia os responsáveis de um restaurante"));
             add(new Tag("Usuários", "Gerencia os usuários do sistema"));
             add(new Tag("Grupos de Permissões do Usuário", "Gerencia os usuários do sistema"));
-        }};
-
-        var typeProblemResolver = typeResolver.resolve(Problem.class);
+        }}.toArray(new Tag[0]);
 
         var globalDeleteResponses = new ArrayList<ResponseMessage>() {{
             add(new ResponseMessageBuilder()
@@ -96,15 +110,38 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 
         }};
 
+        var alternateTypeRules = new HashSet<AlternateTypeRule>(){{
+            add(buildPageTypeRole(CidadeOutput.class));
+            add(buildPageTypeRole(CozinhaOutput.class));
+            add(buildPageTypeRole(EstadoOutput.class));
+            add(buildPageTypeRole(GrupoOutput.class));
+            add(buildPageTypeRole(PedidoSimpleOutput.class));
+            add(buildPageTypeRole(PermissaoOutput.class));
+            add(buildPageTypeRole(RestauranteFullOutput.class));
+            add(buildPageTypeRole(UsuarioOutput.class));
+            add(buildPageTypeRole(FormaPagamentoOutput.class));
+        }}.toArray(new AlternateTypeRule[0]);
+
         return new Docket(DocumentationType.SWAGGER_2)
-                .select().apis(basePackage).build()
+                .select().apis(basePackage("com.danielarrais.algafood.api")).build()
                 .globalResponseMessage(RequestMethod.GET, globalGetResponses)
                 .globalResponseMessage(RequestMethod.POST, globalPostPutResponses)
                 .globalResponseMessage(RequestMethod.PUT, globalPostPutResponses)
                 .globalResponseMessage(RequestMethod.DELETE, globalDeleteResponses)
                 .additionalModels(typeResolver.resolve(Problem.class))
+                .directModelSubstitute(Pageable.class, PageableOAS.class)
+                .alternateTypeRules(alternateTypeRules)
                 .apiInfo(apiInfo())
-                .tags(tags.remove(0), tags.toArray(new Tag[0]));
+                .tags(tags[0], tags);
+    }
+
+    private AlternateTypeRule buildPageTypeRole(Class<?> classModel) {
+        var typeResolver = new TypeResolver();
+
+        return AlternateTypeRules.newRule(
+                typeResolver.resolve(Page.class, classModel),
+                typeResolver.resolve(PageOAS.class, classModel)
+        );
     }
 
     public ApiInfo apiInfo() {

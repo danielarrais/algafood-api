@@ -6,15 +6,15 @@ import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
 
 @Api(tags = "Formas de Pagamento")
 interface FormaPagamentoControllerOAS {
 
-    ResponseEntity<?> listar(Pageable pageable);
+    Page<FormaPagamentoOutput> listar(Pageable pageable);
 
     @ApiResponses({
             @ApiResponse(code = 400, message = "ID da forma de pagamento inválido", response = Problem.class),
