@@ -29,14 +29,14 @@ interface RestauranteProdutoControllerOAS {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Restaurante encontrado"),
             @ApiResponse(code = 400, message = "ID do restaurante ou do produto inválido", response = Problem.class),
-            @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
+            @ApiResponse(code = 404, message = "Restaurante ou produto não encontrado", response = Problem.class)
     })
     ProdutoOutput buscar(@ApiParam(value = "ID do produto", example = "1", required = true) Long id, Long restauranteId);
 
     @ApiOperation("Atualiza produto de um restaurante")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Produto atualizado"),
-            @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
+            @ApiResponse(code = 404, message = "Restaurante ou produto não encontrado", response = Problem.class)
     })
     void atualizar(@ApiParam(value = "ID do produto", example = "1", required = true) Long id,
                    @ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId,

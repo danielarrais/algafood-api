@@ -15,14 +15,14 @@ interface UsuarioGrupoControllerOAS {
     @ApiOperation("Associa grupo de permissões a um usuário")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Usuário associado ao grupo de permissões"),
-            @ApiResponse(code = 404, message = "Usuário não encontrado", response = Problem.class)
+            @ApiResponse(code = 404, message = "Usuário ou grupo não encontrado", response = Problem.class)
     })
     void associar(@ApiParam(value = "ID do usuário") Long usuarioId, @ApiParam(value = "ID do grupo") Long idGrupo);
 
     @ApiOperation("Desassocia grupo de permissões a um usuário")
     @ApiResponses({
             @ApiResponse(code = 204, message = "Usuário desassociado ao grupo de permissões"),
-            @ApiResponse(code = 404, message = "Usuário não encontrado", response = Problem.class)
+            @ApiResponse(code = 404, message = "Usuário ou grupo não encontrado", response = Problem.class)
     })
     void desassociar(@ApiParam(value = "ID do usuário") Long usuarioId, @ApiParam(value = "ID do grupo") Long idGrupo);
 }

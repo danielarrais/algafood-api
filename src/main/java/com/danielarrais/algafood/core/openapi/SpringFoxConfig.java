@@ -16,6 +16,7 @@ import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,11 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLStreamHandler;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -122,6 +128,15 @@ public class SpringFoxConfig implements WebMvcConfigurer {
             add(buildPageTypeRole(FormaPagamentoOutput.class));
         }}.toArray(new AlternateTypeRule[0]);
 
+        var ignoreParametersTypes = new HashSet<Class<?>>() {{
+            add(URI.class);
+            add(URL.class);
+            add(URLStreamHandler.class);
+            add(Resource.class);
+            add(InputStream.class);
+            add(File.class);
+        }}.toArray(new Class[0]);
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .select().apis(basePackage("com.danielarrais.algafood.api")).build()
                 .globalResponseMessage(RequestMethod.GET, globalGetResponses)
@@ -130,6 +145,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .globalResponseMessage(RequestMethod.DELETE, globalDeleteResponses)
                 .additionalModels(typeResolver.resolve(Problem.class))
                 .directModelSubstitute(Pageable.class, PageableOAS.class)
+                .ignoredParameterTypes(ignoreParametersTypes)
                 .alternateTypeRules(alternateTypeRules)
                 .apiInfo(apiInfo())
                 .tags(tags[0], tags);
