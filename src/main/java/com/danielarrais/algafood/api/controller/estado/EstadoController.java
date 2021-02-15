@@ -18,7 +18,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 @Api(tags = "Estados")
 @RestController
 @RequestMapping("/estados")
-public class EstadoController {
+public class EstadoController implements EstadoControllerOAS {
     private final EstadoService estadoService;
 
     public EstadoController(EstadoService estadoService) {
@@ -38,6 +38,7 @@ public class EstadoController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void adicionar(@RequestBody @Valid EstadoInput estadoInput) {
         var estado = mapper(estadoInput, Estado.class);
         estadoService.salvar(estado);

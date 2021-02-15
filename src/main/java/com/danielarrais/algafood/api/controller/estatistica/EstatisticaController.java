@@ -4,7 +4,6 @@ import com.danielarrais.algafood.domain.filter.VendaDiariaFilter;
 import com.danielarrais.algafood.domain.model.dto.VendaDiaria;
 import com.danielarrais.algafood.domain.service.VendaConsultaService;
 import com.danielarrais.algafood.domain.service.VendaReportService;
-import io.swagger.annotations.Api;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(tags = "Estatisticas")
 @RestController
 @RequestMapping("/estatisticas")
 public class EstatisticaController {

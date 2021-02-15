@@ -1,14 +1,12 @@
 package com.danielarrais.algafood.api.controller.pedido;
 
 import com.danielarrais.algafood.domain.service.FluxoPedidoService;
-import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@Api(tags = "Alteração de Status de Pedido")
 @RestController
 @RequestMapping("/pedidos")
-public class FluxoPedidoController {
+public class FluxoPedidoController  implements FluxoPedidoControllerOAS{
     private final FluxoPedidoService fluxoPedidoService;
 
     public FluxoPedidoController(FluxoPedidoService fluxoPedidoService) {

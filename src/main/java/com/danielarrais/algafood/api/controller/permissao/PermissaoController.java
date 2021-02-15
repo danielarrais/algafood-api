@@ -15,10 +15,9 @@ import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
-@Api(tags = "Permissões")
 @RestController
 @RequestMapping("/permissoes")
-public class PermissaoController {
+public class PermissaoController implements PermissaoControllerOAS{
     private final PermissaoService permissaoService;
 
     public PermissaoController(PermissaoService permissaoService) {
@@ -38,6 +37,7 @@ public class PermissaoController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void adicionar(@RequestBody @Valid PermissaoInput permissaoInput) {
         var permissao = mapper(permissaoInput, Permissao.class);
         permissaoService.salvar(permissao);

@@ -2,7 +2,6 @@ package com.danielarrais.algafood.api.controller.grupo;
 
 import com.danielarrais.algafood.api.dto.output.permissao.PermissaoOutput;
 import com.danielarrais.algafood.domain.service.GrupoService;
-import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,10 +9,9 @@ import java.util.List;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
-@Api(tags = "Grupos de Permissões")
 @RestController
 @RequestMapping("/grupos/{grupoId}/permissoes")
-public class GrupoPermissoesController {
+public class GrupoPermissoesController implements GrupoPermissoesControllerOAS {
     private final GrupoService grupoService;
 
     public GrupoPermissoesController(GrupoService grupoService) {

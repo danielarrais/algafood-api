@@ -21,11 +21,9 @@ import java.util.Arrays;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
-@Api(tags = "Produtos")
 @RestController
 @RequestMapping("/restaurantes/{restauranteId}/produtos/{produtoId}/foto")
-public class
-RestauranteFotoProdutoController {
+public class RestauranteFotoProdutoController implements RestauranteFotoProdutoControllerOAS{
     private final FotoProdutoService fotoProdutoService;
 
     public RestauranteFotoProdutoController(FotoProdutoService fotoProdutoService) {
@@ -59,8 +57,8 @@ RestauranteFotoProdutoController {
     @SneakyThrows
     @GetMapping
     public ResponseEntity<?> downloadFoto(@PathVariable Long restauranteId,
-                                                            @PathVariable Long produtoId,
-                                                            @RequestHeader(name = "Accept") String mediaTypeName) {
+                                          @PathVariable Long produtoId,
+                                          @RequestHeader(name = "Accept") String mediaTypeName) {
         validMediaType(mediaTypeName);
 
         try {
@@ -88,10 +86,9 @@ RestauranteFotoProdutoController {
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long restauranteId,
-                                    @PathVariable Long produtoId) {
+                        @PathVariable Long produtoId) {
         fotoProdutoService.deletar(restauranteId, produtoId);
     }
-
 
 
     private void validMediaType(String mediaTypeName) throws HttpMediaTypeNotAcceptableException {
@@ -100,11 +97,11 @@ RestauranteFotoProdutoController {
 
         var allowed =
                 allowedMediaTypes.stream()
-                .anyMatch(allowedMediaType -> allowedMediaType.isCompatibleWith(mediaType));
+                        .anyMatch(allowedMediaType -> allowedMediaType.isCompatibleWith(mediaType));
 
-         if (!allowed) {
+        if (!allowed) {
             throw new HttpMediaTypeNotAcceptableException(allowedMediaTypes);
-         }
+        }
     }
 
 }

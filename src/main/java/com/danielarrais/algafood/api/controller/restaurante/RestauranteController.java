@@ -6,7 +6,6 @@ import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaExcept
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.service.RestauranteService;
-import io.swagger.annotations.Api;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -18,10 +17,9 @@ import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
-@Api(tags = "Restaurantes")
 @RestController
 @RequestMapping("/restaurantes")
-public class RestauranteController {
+public class RestauranteController implements RestauranteControllerOAS {
     private final RestauranteService restauranteService;
 
     public RestauranteController(RestauranteService restauranteService) {
@@ -41,16 +39,21 @@ public class RestauranteController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void adicionar(@RequestBody @Valid RestauranteInput restauranteInput) {
         var restaurante = mapper(restauranteInput, Restaurante.class);
         restauranteService.salvar(restaurante);
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public void atualizar(@PathVariable Long id, @RequestBody @Valid RestauranteInput restauranteInput) {
         var restaurante = mapper(restauranteInput, Restaurante.class);
         restauranteService.atualizar(id, restaurante);
+    }
+
+    @PatchMapping("/{id}")
+    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
+        restauranteService.atualizar(id, valores);
     }
 
     @PutMapping("/{id}/ativo")
@@ -95,12 +98,6 @@ public class RestauranteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void fechar(@PathVariable Long id) {
         restauranteService.fechar(id);
-    }
-
-    @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
-        restauranteService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")
