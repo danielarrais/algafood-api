@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.api.dto.input.cozinha;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +14,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CozinhaInput {
     @NotBlank
+    @ApiModelProperty(required = true, example = "Italiana")
     private String nome;
 }

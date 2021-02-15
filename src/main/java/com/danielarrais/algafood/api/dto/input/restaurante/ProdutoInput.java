@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.api.dto.input.restaurante;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,9 +16,13 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class ProdutoInput {
     @NotBlank
+    @ApiModelProperty(required = true, example = "X-Tudo com refrigerante")
     private String descricao;
 
     @PositiveOrZero
+    @ApiModelProperty(required = true, example = "30.5")
     private BigDecimal preco;
+
+    @ApiModelProperty(example = "false")
     private Boolean ativo;
 }

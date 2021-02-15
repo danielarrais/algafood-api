@@ -8,16 +8,13 @@ import com.danielarrais.algafood.domain.repository.UsuarioRepository;
 import com.danielarrais.algafood.domain.service.validation.UsuarioValidation;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.springframework.data.domain.Pageable;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static com.danielarrais.algafood.util.CustomBeansUtils.copyNonNullValues;
-import static com.danielarrais.algafood.util.CustomBeansUtils.mergeValues;
 
 @Service
 public class UsuarioService {
@@ -67,15 +64,6 @@ public class UsuarioService {
         var usuarioAtual = buscarObrigatorio(id);
 
         copyNonNullValues(usuario, usuarioAtual);
-        this.usuarioValidation.validate(usuarioAtual);
-        usuarioRepository.save(usuarioAtual);
-    }
-
-    @Transactional
-    public void atualizar(Long id, Map<String, Object> propertiesAndValues) {
-        var usuarioAtual = buscarObrigatorio(id);
-
-        mergeValues(propertiesAndValues, usuarioAtual);
         this.usuarioValidation.validate(usuarioAtual);
         usuarioRepository.save(usuarioAtual);
     }

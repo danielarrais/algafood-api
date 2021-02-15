@@ -7,19 +7,19 @@ import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.service.RestauranteService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import org.springframework.data.domain.Pageable;
 import java.util.List;
-import java.util.Map;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping("/restaurantes")
-public class RestauranteController {
+@RequestMapping(path = "/restaurantes", produces = MediaType.APPLICATION_JSON_VALUE)
+public class RestauranteController implements RestauranteControllerOAS {
     private final RestauranteService restauranteService;
 
     public RestauranteController(RestauranteService restauranteService) {
@@ -39,13 +39,13 @@ public class RestauranteController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void adicionar(@RequestBody @Valid RestauranteInput restauranteInput) {
         var restaurante = mapper(restauranteInput, Restaurante.class);
         restauranteService.salvar(restaurante);
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public void atualizar(@PathVariable Long id, @RequestBody @Valid RestauranteInput restauranteInput) {
         var restaurante = mapper(restauranteInput, Restaurante.class);
         restauranteService.atualizar(id, restaurante);
@@ -93,12 +93,6 @@ public class RestauranteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void fechar(@PathVariable Long id) {
         restauranteService.fechar(id);
-    }
-
-    @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void atualizarParcial(@PathVariable Long id, @RequestBody @Valid Map<String, Object> valores) {
-        restauranteService.atualizar(id, valores);
     }
 
     @DeleteMapping("/{id}")

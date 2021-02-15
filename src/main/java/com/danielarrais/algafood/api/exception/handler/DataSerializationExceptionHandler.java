@@ -8,6 +8,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -16,6 +17,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static com.danielarrais.algafood.util.ValidationUtils.extractErrorsFrom;
 
 @ControllerAdvice
 public class DataSerializationExceptionHandler {
@@ -57,6 +60,20 @@ public class DataSerializationExceptionHandler {
                 .build();
 
         return exceptionHandler.handleExceptionInternal(e, problem, new HttpHeaders(), problem.getStatus(), request);
+    }
+
+    @ExceptionHandler(BindException.class)
+    protected ResponseEntity<Object> handleBindException(BindException ex, WebRequest request) {
+        var errorsMap = extractErrorsFrom(ex.getBindingResult());
+
+        Problem problem = Problem.builder()
+                .status(HttpStatus.BAD_REQUEST)
+                .title("Erros de validação")
+                .errors(errorsMap)
+                .detail("Um ou mais campos estão inválidos")
+                .build();
+
+        return exceptionHandler.handleExceptionInternal(ex, problem, new HttpHeaders(), problem.getStatus(), request);
     }
 
     private ResponseEntity<Object> handlePropertyBindingException(PropertyBindingException e, WebRequest request) {

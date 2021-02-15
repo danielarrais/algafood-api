@@ -1,6 +1,7 @@
 package com.danielarrais.algafood.api.dto.input.usuario;
 
 import com.danielarrais.algafood.api.dto.input.grupo.GrupoIdInput;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,13 +18,16 @@ import java.util.List;
 @AllArgsConstructor
 public class UsuarioInput {
     @NotBlank
+    @ApiModelProperty(required = true, example = "Lucas Silva")
     private String nome;
 
-    @NotBlank
     @Email
+    @NotBlank
+    @ApiModelProperty(required = true, example = "lucassilva@gmail.com")
     private String email;
 
     @NotBlank
+    @ApiModelProperty(required = true, example = "46546546546")
     private String senha;
 
     @NotEmpty

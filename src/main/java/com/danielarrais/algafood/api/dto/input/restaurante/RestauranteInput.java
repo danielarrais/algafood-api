@@ -3,6 +3,7 @@ package com.danielarrais.algafood.api.dto.input.restaurante;
 import com.danielarrais.algafood.api.dto.input.cozinha.CozinhaIdInput;
 import com.danielarrais.algafood.api.dto.input.endereco.EnderecoInput;
 import com.danielarrais.algafood.api.dto.input.formaPagamento.FormaPagamentoIdInput;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,10 +21,14 @@ import java.util.List;
 @AllArgsConstructor
 public class RestauranteInput {
     @NotBlank
+    @ApiModelProperty(required = true, example = "Pé de Fava")
     private String nome;
 
     @NotNull
+    @ApiModelProperty(required = true, example = "5.00")
     private BigDecimal taxaFrete;
+
+    @ApiModelProperty(required = true, example = "false")
     private Boolean ativo;
 
     @Valid

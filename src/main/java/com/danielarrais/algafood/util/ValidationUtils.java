@@ -1,6 +1,6 @@
 package com.danielarrais.algafood.util;
 
-import com.danielarrais.algafood.api.exception.handler.ObjectError;
+import com.danielarrais.algafood.api.exception.ObjectError;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;

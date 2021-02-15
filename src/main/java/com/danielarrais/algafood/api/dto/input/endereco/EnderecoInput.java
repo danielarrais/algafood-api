@@ -1,6 +1,7 @@
 package com.danielarrais.algafood.api.dto.input.endereco;
 
 import com.danielarrais.algafood.api.dto.input.cidade.CidadeIdInput;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,14 +17,19 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class EnderecoInput {
     @NotBlank
+    @ApiModelProperty(required = true, example = "77065-130")
     private String cep;
 
     @NotBlank
+    @ApiModelProperty(required = true, example = "Rua Mato Grosso de Mathias")
     private String logradouro;
+    @ApiModelProperty(example = "SN")
     private String numero;
+    @ApiModelProperty(example = "QDR 30 SW 15")
     private String complemento;
 
     @NotBlank
+    @ApiModelProperty(required = true, example = "Jardins Paulista")
     private String bairro;
 
     @Valid
