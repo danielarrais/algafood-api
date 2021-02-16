@@ -2,12 +2,13 @@ package com.danielarrais.algafood.api.dto.output.restaurante;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.math.BigDecimal;
 
 
 @Data
-public class RestauranteSimpleOutput {
+public class RestauranteSimpleOutput extends RepresentationModel<RestauranteSimpleOutput> {
 
     @ApiModelProperty(value = "ID do restaurante", example = "1")
     private Long id;
