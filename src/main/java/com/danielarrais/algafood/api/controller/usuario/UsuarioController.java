@@ -8,6 +8,7 @@ import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.service.UsuarioService;
 import io.swagger.annotations.Api;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,16 +24,19 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 public class UsuarioController implements UsuarioControllerOAS {
     private final UsuarioService usuarioService;
     private final UsuarioOutputAssembler usuarioOutputAssembler;
+    private final PagedResourcesAssembler<Usuario> pagedResourcesAssembler;
 
-    public UsuarioController(UsuarioService usuarioService, UsuarioOutputAssembler usuarioOutputAssembler) {
+
+    public UsuarioController(UsuarioService usuarioService, UsuarioOutputAssembler usuarioOutputAssembler, PagedResourcesAssembler<Usuario> pagedResourcesAssembler) {
         this.usuarioService = usuarioService;
         this.usuarioOutputAssembler = usuarioOutputAssembler;
+        this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
     @GetMapping()
     public CollectionModel<UsuarioOutput> listar(Pageable pageable) {
         var usuarios = usuarioService.listar(pageable);
-        return usuarioOutputAssembler.toCollectionModel(usuarios);
+        return pagedResourcesAssembler.toModel(usuarios, usuarioOutputAssembler);
     }
 
     @GetMapping("/{id}")

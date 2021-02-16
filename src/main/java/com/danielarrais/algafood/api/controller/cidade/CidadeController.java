@@ -7,6 +7,7 @@ import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.service.CidadeService;
 import io.swagger.annotations.Api;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,16 +22,18 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 public class CidadeController implements CidadeControllerOAS {
     private final CidadeService cidadeService;
     private final CidadeOutputAssembler cidadeOutputAssembler;
+    private final PagedResourcesAssembler<Cidade> pagedResourcesAssembler;
 
-    public CidadeController(CidadeService cidadeService, CidadeOutputAssembler cidadeOutputAssembler) {
+    public CidadeController(CidadeService cidadeService, CidadeOutputAssembler cidadeOutputAssembler, PagedResourcesAssembler<Cidade> pagedResourcesAssembler) {
         this.cidadeService = cidadeService;
         this.cidadeOutputAssembler = cidadeOutputAssembler;
+        this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
     @GetMapping()
     public CollectionModel<CidadeOutput> listar(Pageable pageable) {
         var cidades = cidadeService.listar(pageable);
-        return cidadeOutputAssembler.toCollectionModel(cidades);
+        return pagedResourcesAssembler.toModel(cidades, cidadeOutputAssembler);
     }
 
     @GetMapping("/{id}")

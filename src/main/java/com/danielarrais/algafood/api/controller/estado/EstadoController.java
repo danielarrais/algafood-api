@@ -7,6 +7,7 @@ import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.service.EstadoService;
 import io.swagger.annotations.Api;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,16 +23,18 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 public class EstadoController implements EstadoControllerOAS {
     private final EstadoService estadoService;
     private final EstadoOutputAssembler estadoOutputAssembler;
+    private final PagedResourcesAssembler<Estado> pagedResourcesAssembler;
 
-    public EstadoController(EstadoService estadoService, EstadoOutputAssembler estadoOutputAssembler) {
+    public EstadoController(EstadoService estadoService, EstadoOutputAssembler estadoOutputAssembler, PagedResourcesAssembler<Estado> pagedResourcesAssembler) {
         this.estadoService = estadoService;
         this.estadoOutputAssembler = estadoOutputAssembler;
+        this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
     @GetMapping()
     public CollectionModel<EstadoOutput> listar(Pageable pageable) {
         var estados = estadoService.listar(pageable);
-        return estadoOutputAssembler.toCollectionModel(estados);
+        return pagedResourcesAssembler.toModel(estados,estadoOutputAssembler);
     }
 
     @GetMapping("/{id}")
