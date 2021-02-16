@@ -1,28 +1,32 @@
 package com.danielarrais.algafood.api.controller.restaurante;
 
+import com.danielarrais.algafood.api.assembler.usuario.UsuarioSimpleOutputAssembler;
 import com.danielarrais.algafood.api.dto.output.usuario.UsuarioSimpleOutput;
 import com.danielarrais.algafood.domain.service.RestauranteService;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = "/restaurantes/{restauranteId}/responsaveis", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteUsuarioResponsavelController implements RestauranteUsuarioResponsavelControllerOAS {
     private final RestauranteService restauranteService;
+    private final UsuarioSimpleOutputAssembler usuarioSimpleOutputAssembler;
 
-    public RestauranteUsuarioResponsavelController(RestauranteService restauranteService) {
+    public RestauranteUsuarioResponsavelController(RestauranteService restauranteService, UsuarioSimpleOutputAssembler usuarioSimpleOutputAssembler) {
         this.restauranteService = restauranteService;
+        this.usuarioSimpleOutputAssembler = usuarioSimpleOutputAssembler;
     }
 
     @GetMapping()
-    public List<UsuarioSimpleOutput> listar(@PathVariable Long restauranteId) {
+    public CollectionModel<UsuarioSimpleOutput> listar(@PathVariable Long restauranteId) {
         var restaurante = restauranteService.buscarObrigatorio(restauranteId);
-        return mapper(restaurante.getResponsaveis(), UsuarioSimpleOutput.class);
+        return usuarioSimpleOutputAssembler.toCollectionModel(restaurante.getResponsaveis())
+                .removeLinks().add(linkTo(methodOn(this.getClass()).listar(restauranteId)).withSelfRel());
     }
 
     @PutMapping("/{idUsuario}")

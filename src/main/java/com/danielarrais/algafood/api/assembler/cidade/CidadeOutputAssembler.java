@@ -5,6 +5,7 @@ import com.danielarrais.algafood.api.controller.estado.EstadoController;
 import com.danielarrais.algafood.api.dto.output.cidade.CidadeOutput;
 import com.danielarrais.algafood.domain.model.Cidade;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -32,5 +33,10 @@ public class CidadeOutputAssembler extends RepresentationModelAssemblerSupport<C
                 .buscar(cidadeOutput.getEstado().getId())).withSelfRel());
 
         return cidadeOutput;
+    }
+
+    @Override
+    public CollectionModel<CidadeOutput> toCollectionModel(Iterable<? extends Cidade> entities) {
+        return super.toCollectionModel(entities).add(linkTo(CidadeController.class).withSelfRel());
     }
 }

@@ -1,13 +1,14 @@
 package com.danielarrais.algafood.api.controller.usuario;
 
+import com.danielarrais.algafood.api.assembler.usuario.UsuarioOutputAssembler;
 import com.danielarrais.algafood.api.dto.input.usuario.UsuarioInput;
 import com.danielarrais.algafood.api.dto.input.usuario.UsuarioSenhaInput;
 import com.danielarrais.algafood.api.dto.output.usuario.UsuarioOutput;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.service.UsuarioService;
 import io.swagger.annotations.Api;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,21 +22,23 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 @RequestMapping(path = "/usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UsuarioController implements UsuarioControllerOAS {
     private final UsuarioService usuarioService;
+    private final UsuarioOutputAssembler usuarioOutputAssembler;
 
-    public UsuarioController(UsuarioService usuarioService) {
+    public UsuarioController(UsuarioService usuarioService, UsuarioOutputAssembler usuarioOutputAssembler) {
         this.usuarioService = usuarioService;
+        this.usuarioOutputAssembler = usuarioOutputAssembler;
     }
 
     @GetMapping()
-    public Page<UsuarioOutput> listar(Pageable pageable) {
+    public CollectionModel<UsuarioOutput> listar(Pageable pageable) {
         var usuarios = usuarioService.listar(pageable);
-        return mapper(usuarios, UsuarioOutput.class);
+        return usuarioOutputAssembler.toCollectionModel(usuarios);
     }
 
     @GetMapping("/{id}")
     public UsuarioOutput buscar(@PathVariable Long id) {
         var usuario = usuarioService.buscarObrigatorio(id);
-        return mapper(usuario, UsuarioOutput.class);
+        return usuarioOutputAssembler.toModel(usuario);
     }
 
     @PutMapping("/{usuarioId}/senha")

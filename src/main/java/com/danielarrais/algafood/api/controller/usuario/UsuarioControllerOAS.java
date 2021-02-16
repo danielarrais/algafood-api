@@ -5,14 +5,14 @@ import com.danielarrais.algafood.api.dto.input.usuario.UsuarioSenhaInput;
 import com.danielarrais.algafood.api.dto.output.usuario.UsuarioOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 
 @Api(tags = "Usuários")
 interface UsuarioControllerOAS {
 
     @ApiOperation("Lista usuários")
-    Page<UsuarioOutput> listar(Pageable pageable);
+    CollectionModel<UsuarioOutput> listar(Pageable pageable);
 
     UsuarioOutput buscar(@ApiParam(value = "ID do usuário") Long id);
 

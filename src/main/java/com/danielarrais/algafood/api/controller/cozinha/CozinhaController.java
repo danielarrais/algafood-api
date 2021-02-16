@@ -1,5 +1,7 @@
 package com.danielarrais.algafood.api.controller.cozinha;
 
+import com.danielarrais.algafood.api.assembler.cozinha.CozinhaFullOutputAssembler;
+import com.danielarrais.algafood.api.assembler.cozinha.CozinhaOutputAssembler;
 import com.danielarrais.algafood.api.dto.input.cozinha.CozinhaInput;
 import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaFullOutput;
 import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaOutput;
@@ -9,8 +11,9 @@ import com.danielarrais.algafood.domain.service.CozinhaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -24,15 +27,23 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 @RequestMapping(path = "/cozinhas", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CozinhaController {
     private final CozinhaService cozinhaService;
+    private final CozinhaOutputAssembler cozinhaOutputAssembler;
+    private final CozinhaFullOutputAssembler cozinhaFullOutputAssembler;
+    private final PagedResourcesAssembler<Cozinha> pagedResourcesAssembler;
 
-    public CozinhaController(CozinhaService cozinhaService) {
+    public CozinhaController(CozinhaService cozinhaService,
+                             CozinhaOutputAssembler cozinhaOutputAssembler,
+                             CozinhaFullOutputAssembler cozinhaFullOutputAssembler, PagedResourcesAssembler<Cozinha> pagedResourcesAssembler) {
         this.cozinhaService = cozinhaService;
+        this.cozinhaOutputAssembler = cozinhaOutputAssembler;
+        this.cozinhaFullOutputAssembler = cozinhaFullOutputAssembler;
+        this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
     @GetMapping()
-    public Page<CozinhaOutput> listar(Pageable pageable) {
+    public CollectionModel<CozinhaOutput> listar(Pageable pageable) {
         var cozinhas = cozinhaService.listar(pageable);
-        return mapper(cozinhas, CozinhaOutput.class);
+        return pagedResourcesAssembler.toModel(cozinhas, cozinhaOutputAssembler);
     }
 
     @GetMapping("/{id}")
@@ -42,7 +53,7 @@ public class CozinhaController {
     })
     public CozinhaFullOutput buscar(@PathVariable Long id) {
         var cozinha = cozinhaService.buscarObrigatorio(id);
-        return mapper(cozinha, CozinhaFullOutput.class);
+        return cozinhaFullOutputAssembler.toModel(cozinha);
     }
 
     @PostMapping

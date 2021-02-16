@@ -1,12 +1,13 @@
 package com.danielarrais.algafood.api.controller.estado;
 
+import com.danielarrais.algafood.api.assembler.estado.EstadoOutputAssembler;
 import com.danielarrais.algafood.api.dto.input.estado.EstadoInput;
 import com.danielarrais.algafood.api.dto.output.estado.EstadoOutput;
 import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.service.EstadoService;
 import io.swagger.annotations.Api;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -20,21 +21,23 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 @RequestMapping(path = "/estados", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EstadoController implements EstadoControllerOAS {
     private final EstadoService estadoService;
+    private final EstadoOutputAssembler estadoOutputAssembler;
 
-    public EstadoController(EstadoService estadoService) {
+    public EstadoController(EstadoService estadoService, EstadoOutputAssembler estadoOutputAssembler) {
         this.estadoService = estadoService;
+        this.estadoOutputAssembler = estadoOutputAssembler;
     }
 
     @GetMapping()
-    public Page<EstadoOutput> listar(Pageable pageable) {
+    public CollectionModel<EstadoOutput> listar(Pageable pageable) {
         var estados = estadoService.listar(pageable);
-        return mapper(estados, EstadoOutput.class);
+        return estadoOutputAssembler.toCollectionModel(estados);
     }
 
     @GetMapping("/{id}")
     public EstadoOutput buscar(@PathVariable Long id) {
         var estado = estadoService.buscarObrigatorio(id);
-        return mapper(estado, EstadoOutput.class);
+        return estadoOutputAssembler.toModel(estado);
     }
 
     @PostMapping

@@ -3,16 +3,15 @@ package com.danielarrais.algafood.api.controller.restaurante;
 import com.danielarrais.algafood.api.dto.output.usuario.UsuarioSimpleOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
 
 @Api(tags = "Responsáveis do Restaurante")
 interface RestauranteUsuarioResponsavelControllerOAS {
 
     @ApiOperation("Lista responsáveis de um restaurante")
     @GetMapping()
-    List<UsuarioSimpleOutput> listar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId);
+    CollectionModel<UsuarioSimpleOutput> listar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId);
 
     @ApiOperation("Associa responśavel a um restaurante")
     @ApiResponses({
