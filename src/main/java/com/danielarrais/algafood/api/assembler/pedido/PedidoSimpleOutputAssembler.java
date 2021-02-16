@@ -4,14 +4,13 @@ import com.danielarrais.algafood.api.controller.pedido.PedidoController;
 import com.danielarrais.algafood.api.controller.restaurante.RestauranteController;
 import com.danielarrais.algafood.api.controller.usuario.UsuarioController;
 import com.danielarrais.algafood.api.dto.output.pedido.PedidoSimpleOutput;
-import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import com.danielarrais.algafood.domain.model.Pedido;
-import org.springframework.data.domain.Pageable;
-import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.*;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
+import static org.springframework.hateoas.TemplateVariable.VariableType.REQUEST_PARAM;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -29,14 +28,22 @@ public class PedidoSimpleOutputAssembler extends RepresentationModelAssemblerSup
         pedidoSimpleOutput.add(linkTo(methodOn(PedidoController.class)
                 .buscar(pedidoSimpleOutput.getCodigo())).withSelfRel());
 
-        pedidoSimpleOutput.add(linkTo(methodOn(PedidoController.class)
-                .listar(new PedidoFilter(), Pageable.unpaged())).withRel("pedidos"));
+        var urlPedidos = linkTo(methodOn(PedidoController.class).listar(null, null)).toUri().toString();
+
+        var variables = new TemplateVariables(
+                new TemplateVariable("page", REQUEST_PARAM),
+                new TemplateVariable("size", REQUEST_PARAM),
+                new TemplateVariable("sort", REQUEST_PARAM)
+        );
+
+        pedidoSimpleOutput.add(Link.of(UriTemplate.of(urlPedidos, variables), "pedidos"));
+
 
         pedidoSimpleOutput.getRestaurante().add(linkTo(methodOn(RestauranteController.class)
                 .buscar(pedido.getRestaurante().getId())).withSelfRel());
 
         pedidoSimpleOutput.getCliente().add(linkTo(methodOn(UsuarioController.class)
-                .buscar(pedido.getRestaurante().getId())).withSelfRel());
+                .buscar(pedido.getCliente().getId())).withSelfRel());
 
         return pedidoSimpleOutput;
     }

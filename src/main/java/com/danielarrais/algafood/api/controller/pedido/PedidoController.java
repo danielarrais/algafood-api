@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Map;
 
+import static com.danielarrais.algafood.core.data.PageWrapper.of;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
@@ -50,7 +51,8 @@ public class PedidoController implements PedidoControllerOAS {
     @GetMapping()
     public PagedModel<PedidoSimpleOutput> listar(PedidoFilter filtro, Pageable pageable) {
         var pedidos = pedidoService.listar(filtro, traduzirPageable(pageable));
-        return pagedResourcesAssembler.toModel(pedidos, pedidoSimpleOutputAssembler);
+
+        return pagedResourcesAssembler.toModel(of(pedidos, pageable), pedidoSimpleOutputAssembler);
     }
 
     @GetMapping("/{codigo}")

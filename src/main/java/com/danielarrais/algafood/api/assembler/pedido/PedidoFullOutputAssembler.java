@@ -8,11 +8,12 @@ import com.danielarrais.algafood.api.controller.restaurante.RestauranteProdutoCo
 import com.danielarrais.algafood.api.controller.usuario.UsuarioController;
 import com.danielarrais.algafood.api.dto.output.pedido.PedidoFullOutput;
 import com.danielarrais.algafood.domain.model.Pedido;
-import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.*;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
+import static org.springframework.hateoas.TemplateVariable.VariableType.REQUEST_PARAM;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -30,8 +31,17 @@ public class PedidoFullOutputAssembler extends RepresentationModelAssemblerSuppo
         pedidoFullOutput.add(linkTo(methodOn(PedidoController.class)
                 .buscar(pedidoFullOutput.getCodigo())).withSelfRel());
 
-        pedidoFullOutput.add(linkTo(methodOn(PedidoController.class)
-                .listar(null, null)).withRel("pedidos"));
+        var urlPedidos = linkTo(methodOn(PedidoController.class).listar(null, null)).toUri().toString();
+
+        var variables = new TemplateVariables(
+                new TemplateVariable("page", REQUEST_PARAM),
+                new TemplateVariable("size", REQUEST_PARAM),
+                new TemplateVariable("sort", REQUEST_PARAM)
+        );
+
+        pedidoFullOutput.add(Link.of(UriTemplate.of(urlPedidos, variables), "pedidos"));
+
+//        pedidoFullOutput.add().withRel("pedidos"));
 
         pedidoFullOutput.getRestaurante().add(linkTo(methodOn(RestauranteController.class)
                 .buscar(pedido.getRestaurante().getId())).withSelfRel());
@@ -50,7 +60,7 @@ public class PedidoFullOutputAssembler extends RepresentationModelAssemblerSuppo
                     .buscar(pedidoFullOutput.getRestaurante().getId(), itemPedidoOutput.getProduto().getId()))
                     .withRel("produto"));
         });
-        
+
         return pedidoFullOutput;
     }
 
