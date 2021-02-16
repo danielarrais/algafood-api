@@ -1,17 +1,17 @@
 package com.danielarrais.algafood.api.assembler.cidade;
 
 import com.danielarrais.algafood.api.controller.cidade.CidadeController;
-import com.danielarrais.algafood.api.controller.estado.EstadoController;
 import com.danielarrais.algafood.api.dto.output.cidade.CidadeOutput;
+import com.danielarrais.algafood.core.hateoas.LinkBuilder;
 import com.danielarrais.algafood.domain.model.Cidade;
-import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkBuscarCidade;
+import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkCidades;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class CidadeOutputAssembler extends RepresentationModelAssemblerSupport<Cidade, CidadeOutput> {
@@ -23,14 +23,13 @@ public class CidadeOutputAssembler extends RepresentationModelAssemblerSupport<C
     public CidadeOutput toModel(Cidade cidade) {
         var cidadeOutput = mapper(cidade, CidadeOutput.class);
 
-        cidadeOutput.add(linkTo(methodOn(CidadeController.class)
-                .buscar(cidadeOutput.getId())).withSelfRel());
+        var estado = cidadeOutput.getEstado();
+        var idEstado = estado.getId();
 
-        cidadeOutput.add(linkTo(methodOn(CidadeController.class)
-                .listar(Pageable.unpaged())).withRel("cidades"));
+        cidadeOutput.add(linkBuscarCidade(cidade.getId()));
+        cidadeOutput.add(linkCidades());
 
-        cidadeOutput.getEstado().add(linkTo(methodOn(EstadoController.class)
-                .buscar(cidadeOutput.getEstado().getId())).withSelfRel());
+        estado.add(LinkBuilder.linkBuscarEstado(idEstado));
 
         return cidadeOutput;
     }

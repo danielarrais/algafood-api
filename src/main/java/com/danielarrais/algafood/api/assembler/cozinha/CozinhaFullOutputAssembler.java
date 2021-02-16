@@ -3,14 +3,14 @@ package com.danielarrais.algafood.api.assembler.cozinha;
 import com.danielarrais.algafood.api.controller.cozinha.CozinhaController;
 import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaFullOutput;
 import com.danielarrais.algafood.domain.model.Cozinha;
-import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkBuscarCozinha;
+import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkCozinhas;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class CozinhaFullOutputAssembler extends RepresentationModelAssemblerSupport<Cozinha, CozinhaFullOutput> {
@@ -23,11 +23,8 @@ public class CozinhaFullOutputAssembler extends RepresentationModelAssemblerSupp
     public CozinhaFullOutput toModel(Cozinha cozinha) {
         var cozinhaFullOutput = mapper(cozinha, CozinhaFullOutput.class);
 
-        cozinhaFullOutput.add(linkTo(methodOn(CozinhaController.class)
-                .buscar(cozinhaFullOutput.getId())).withSelfRel());
-
-        cozinhaFullOutput.add(linkTo(methodOn(CozinhaController.class)
-                .listar(Pageable.unpaged())).withRel("cozinhas"));
+        cozinhaFullOutput.add(linkBuscarCozinha(cozinha.getId()));
+        cozinhaFullOutput.add(linkCozinhas());
         
         return cozinhaFullOutput;
     }
