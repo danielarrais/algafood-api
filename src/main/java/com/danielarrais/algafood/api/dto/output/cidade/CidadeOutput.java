@@ -4,11 +4,12 @@ import com.danielarrais.algafood.api.dto.output.estado.EstadoOutput;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 
 @Data
 @ApiModel("Cidade")
-public class CidadeOutput {
+public class CidadeOutput extends RepresentationModel<CidadeOutput> {
     @ApiModelProperty(value = "ID da cidade)", example = "1")
     private Long id;
 
