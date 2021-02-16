@@ -7,6 +7,7 @@ import com.danielarrais.algafood.api.controller.restaurante.RestauranteControlle
 import com.danielarrais.algafood.api.controller.restaurante.RestauranteProdutoController;
 import com.danielarrais.algafood.api.controller.usuario.UsuarioController;
 import com.danielarrais.algafood.api.dto.output.pedido.PedidoFullOutput;
+import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import com.danielarrais.algafood.domain.model.Pedido;
 import org.springframework.hateoas.*;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
@@ -33,13 +34,20 @@ public class PedidoFullOutputAssembler extends RepresentationModelAssemblerSuppo
 
         var urlPedidos = linkTo(methodOn(PedidoController.class).listar(null, null)).toUri().toString();
 
-        var variables = new TemplateVariables(
+        var variablesPageable = new TemplateVariables(
                 new TemplateVariable("page", REQUEST_PARAM),
                 new TemplateVariable("size", REQUEST_PARAM),
                 new TemplateVariable("sort", REQUEST_PARAM)
         );
 
-        pedidoFullOutput.add(Link.of(UriTemplate.of(urlPedidos, variables), "pedidos"));
+        var variablesFiltroPedido = new TemplateVariables(
+                new TemplateVariable(PedidoFilter.Fields.clienteId, REQUEST_PARAM),
+                new TemplateVariable(PedidoFilter.Fields.dataCriacaoFim, REQUEST_PARAM),
+                new TemplateVariable(PedidoFilter.Fields.dataCriacaoInicio, REQUEST_PARAM),
+                new TemplateVariable(PedidoFilter.Fields.restauranteId, REQUEST_PARAM)
+        );
+
+        pedidoFullOutput.add(Link.of(UriTemplate.of(urlPedidos, variablesPageable.concat(variablesFiltroPedido)), "pedidos"));
 
 //        pedidoFullOutput.add().withRel("pedidos"));
 
