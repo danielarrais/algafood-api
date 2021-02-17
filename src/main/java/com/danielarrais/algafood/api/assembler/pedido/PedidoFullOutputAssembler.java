@@ -49,6 +49,7 @@ public class PedidoFullOutputAssembler extends RepresentationModelAssemblerSuppo
 
         itens.forEach(itemPedido -> {
             itemPedido.add(linkBuscarProduto(restaurante.getId(), itemPedido.getProduto().getId()));
+            itemPedido.add(linkFotoProduto(restaurante.getId(), itemPedido.getProduto().getId()));
         });
 
         return pedidoDTO;

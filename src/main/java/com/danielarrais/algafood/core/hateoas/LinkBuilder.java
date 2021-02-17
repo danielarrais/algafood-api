@@ -6,10 +6,7 @@ import com.danielarrais.algafood.api.controller.estado.EstadoController;
 import com.danielarrais.algafood.api.controller.formaPagamento.FormaPagamentoController;
 import com.danielarrais.algafood.api.controller.pedido.FluxoPedidoController;
 import com.danielarrais.algafood.api.controller.pedido.PedidoController;
-import com.danielarrais.algafood.api.controller.restaurante.RestauranteController;
-import com.danielarrais.algafood.api.controller.restaurante.RestauranteFormaPagamentoController;
-import com.danielarrais.algafood.api.controller.restaurante.RestauranteProdutoController;
-import com.danielarrais.algafood.api.controller.restaurante.RestauranteUsuarioResponsavelController;
+import com.danielarrais.algafood.api.controller.restaurante.*;
 import com.danielarrais.algafood.api.controller.usuario.UsuarioController;
 import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import org.springframework.hateoas.Link;
@@ -53,6 +50,12 @@ public class LinkBuilder {
         return linkTo(methodOn(RestauranteProdutoController.class)
                 .buscar(idRestaurante, idProduto))
                 .withRel("produto");
+    }
+
+    public static Link linkFotoProduto(Long idRestaurante, Long idProduto) {
+        return linkTo(methodOn(RestauranteFotoProdutoController.class)
+                .buscar(idRestaurante, idProduto))
+                .withRel("foto");
     }
 
     public static Link linkBuscarEstado(Long id) {

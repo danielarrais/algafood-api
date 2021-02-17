@@ -6,10 +6,11 @@ import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.util.ModelMapperUtils;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
+import org.springframework.stereotype.Component;
 
-import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkBuscarProduto;
-import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkProdutos;
+import static com.danielarrais.algafood.core.hateoas.LinkBuilder.*;
 
+@Component
 public class ProdutoOutputAssembler extends RepresentationModelAssemblerSupport<Produto, ProdutoOutput> {
 
     public ProdutoOutputAssembler() {
@@ -22,6 +23,7 @@ public class ProdutoOutputAssembler extends RepresentationModelAssemblerSupport<
         var restaurante = produto.getRestaurante();
 
         produtoDTO.add(linkBuscarProduto(restaurante.getId(), produto.getId()));
+        produtoDTO.add(linkFotoProduto(restaurante.getId(), produto.getId()));
         produtoDTO.add(linkProdutos(restaurante.getId()));
 
         return null;
