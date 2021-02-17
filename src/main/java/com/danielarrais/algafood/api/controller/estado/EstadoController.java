@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class EstadoController implements EstadoControllerOAS {
     }
 
     @GetMapping()
-    public CollectionModel<EstadoOutput> listar(Pageable pageable) {
+    public PagedModel<EstadoOutput> listar(Pageable pageable) {
         var estados = estadoService.listar(pageable);
         return pagedResourcesAssembler.toModel(estados,estadoOutputAssembler);
     }

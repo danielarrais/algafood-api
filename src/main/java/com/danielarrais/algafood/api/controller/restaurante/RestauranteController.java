@@ -11,7 +11,7 @@ import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.service.RestauranteService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +41,7 @@ public class RestauranteController implements RestauranteControllerOAS {
     }
 
     @GetMapping()
-    public CollectionModel<RestauranteSimpleOutput> listar(Pageable pageable) {
+    public PagedModel<RestauranteSimpleOutput> listar(Pageable pageable) {
         var restaurantes = restauranteService.listar(pageable);
         return pagedResourcesAssembler.toModel(restaurantes, restauranteSimpleOutputAssembler);
     }

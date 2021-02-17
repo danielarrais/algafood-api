@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class UsuarioController implements UsuarioControllerOAS {
     }
 
     @GetMapping()
-    public CollectionModel<UsuarioOutput> listar(Pageable pageable) {
+    public PagedModel<UsuarioOutput> listar(Pageable pageable) {
         var usuarios = usuarioService.listar(pageable);
         return pagedResourcesAssembler.toModel(usuarios, usuarioOutputAssembler);
     }

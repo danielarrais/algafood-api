@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +41,7 @@ public class CozinhaController {
     }
 
     @GetMapping()
-    public CollectionModel<CozinhaOutput> listar(Pageable pageable) {
+    public PagedModel<CozinhaOutput> listar(Pageable pageable) {
         var cozinhas = cozinhaService.listar(pageable);
         return pagedResourcesAssembler.toModel(cozinhas, cozinhaOutputAssembler);
     }
