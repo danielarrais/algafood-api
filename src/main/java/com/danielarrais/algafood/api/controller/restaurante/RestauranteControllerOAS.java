@@ -7,6 +7,7 @@ import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void ativar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
+    ResponseEntity<Void> ativar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Inativa restaurantes")
     @ApiResponses({
@@ -51,7 +52,7 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void inativar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
+    ResponseEntity<Void> inativar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Ativa restaurantes")
     void ativarBach(@ApiParam(value = "IDs dos restaurantes") List<Long> ids);

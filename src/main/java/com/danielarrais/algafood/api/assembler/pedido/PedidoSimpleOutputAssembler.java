@@ -52,6 +52,6 @@ public class PedidoSimpleOutputAssembler extends RepresentationModelAssemblerSup
 
     @Override
     public CollectionModel<PedidoSimpleOutput> toCollectionModel(Iterable<? extends Pedido> estados) {
-        return super.toCollectionModel(estados).add(linkTo(PedidoController.class).withSelfRel());
+        return super.toCollectionModel(estados).add(linkPedidos().withSelfRel());
     }
 }

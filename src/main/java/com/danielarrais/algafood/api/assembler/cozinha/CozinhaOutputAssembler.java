@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkBuscarCozinha;
 import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkCozinhas;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Component
 public class CozinhaOutputAssembler extends RepresentationModelAssemblerSupport<Cozinha, CozinhaOutput> {
@@ -31,6 +30,6 @@ public class CozinhaOutputAssembler extends RepresentationModelAssemblerSupport<
 
     @Override
     public CollectionModel<CozinhaOutput> toCollectionModel(Iterable<? extends Cozinha> cozinhas) {
-        return super.toCollectionModel(cozinhas).add(linkTo(CozinhaController.class).withSelfRel());
+        return super.toCollectionModel(cozinhas).add(linkCozinhas().withSelfRel());
     }
 }

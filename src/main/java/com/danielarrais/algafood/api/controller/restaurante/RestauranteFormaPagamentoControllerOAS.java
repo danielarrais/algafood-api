@@ -3,12 +3,11 @@ package com.danielarrais.algafood.api.controller.restaurante;
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
-
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 @Api(tags = "Formas de Pagamento do Restaurante")
 interface RestauranteFormaPagamentoControllerOAS {
-    List<FormaPagamentoOutput> listar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId);
+    CollectionModel<FormaPagamentoOutput> listar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId);
 
     @ApiOperation("Associa forma de pagamento a um restaurante")
     @ApiResponses({

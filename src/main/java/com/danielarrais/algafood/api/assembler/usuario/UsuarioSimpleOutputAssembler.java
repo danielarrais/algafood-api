@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkBuscarUsuario;
 import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkUsuarios;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Component
 public class UsuarioSimpleOutputAssembler extends RepresentationModelAssemblerSupport<Usuario, UsuarioSimpleOutput> {
@@ -31,6 +30,6 @@ public class UsuarioSimpleOutputAssembler extends RepresentationModelAssemblerSu
 
     @Override
     public CollectionModel<UsuarioSimpleOutput> toCollectionModel(Iterable<? extends Usuario> entities) {
-        return super.toCollectionModel(entities).add(linkTo(UsuarioController.class).withSelfRel());
+        return super.toCollectionModel(entities).add(linkUsuarios().withSelfRel());
     }
 }

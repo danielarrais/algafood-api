@@ -31,6 +31,6 @@ public class CozinhaFullOutputAssembler extends RepresentationModelAssemblerSupp
 
     @Override
     public CollectionModel<CozinhaFullOutput> toCollectionModel(Iterable<? extends Cozinha> cozinhas) {
-        return super.toCollectionModel(cozinhas).add(linkTo(CozinhaController.class).withSelfRel());
+        return super.toCollectionModel(cozinhas).add(linkCozinhas().withSelfRel());
     }
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import static com.danielarrais.algafood.core.hateoas.LinkBuilder.*;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Component
 public class PedidoFullOutputAssembler extends RepresentationModelAssemblerSupport<Pedido, PedidoFullOutput> {
@@ -57,6 +56,6 @@ public class PedidoFullOutputAssembler extends RepresentationModelAssemblerSuppo
 
     @Override
     public CollectionModel<PedidoFullOutput> toCollectionModel(Iterable<? extends Pedido> estados) {
-        return super.toCollectionModel(estados).add(linkTo(PedidoController.class).withSelfRel());
+        return super.toCollectionModel(estados).add(linkPedidos().withSelfRel());
     }
 }

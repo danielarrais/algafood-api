@@ -4,6 +4,7 @@ import com.danielarrais.algafood.api.controller.restaurante.RestauranteControlle
 import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteSimpleOutput;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.util.ModelMapperUtils;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -28,5 +29,10 @@ public class RestauranteSimpleOutputAssembler extends RepresentationModelAssembl
         cozinha.add(linkBuscarCozinha(cozinha.getId()));
 
         return restauranteDTO;
+    }
+
+    @Override
+    public CollectionModel<RestauranteSimpleOutput> toCollectionModel(Iterable<? extends Restaurante> entities) {
+        return super.toCollectionModel(entities).add(linkRestaurantes().withSelfRel());
     }
 }

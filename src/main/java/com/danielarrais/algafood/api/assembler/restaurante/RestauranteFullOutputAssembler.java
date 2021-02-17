@@ -4,6 +4,7 @@ import com.danielarrais.algafood.api.controller.restaurante.RestauranteControlle
 import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteFullOutput;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.util.ModelMapperUtils;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -28,9 +29,20 @@ public class RestauranteFullOutputAssembler extends RepresentationModelAssembler
         restauranteDTO.add(linkResponsaveisRestaurante(restaurante.getId()));
         restauranteDTO.add(linkFormasPagamentoRestaurante(restaurante.getId()));
 
+        if (restaurante.getAtivo()) {
+            restauranteDTO.add(linkinaivarRestaurante(restaurante.getId()));
+        } else {
+            restauranteDTO.add(linkAtivarRestaurante(restaurante.getId()));
+        }
+
         cozinha.add(linkBuscarCozinha(cozinha.getId()));
         cidade.add(linkBuscarCidade(cidade.getId()));
 
         return restauranteDTO;
+    }
+
+    @Override
+    public CollectionModel<RestauranteFullOutput> toCollectionModel(Iterable<? extends Restaurante> entities) {
+        return super.toCollectionModel(entities).add(linkRestaurantes().withSelfRel());
     }
 }

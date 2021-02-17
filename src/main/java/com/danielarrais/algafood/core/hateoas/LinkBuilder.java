@@ -74,6 +74,22 @@ public class LinkBuilder {
         return linkTo(methodOn(FluxoPedidoController.class).cancelar(codigo)).withRel("cancelar");
     }
 
+    public static Link linkResponsaveisRestaurante(Long idRestaurante) {
+        return linkTo(methodOn(RestauranteUsuarioResponsavelController.class).listar(idRestaurante)).withRel("responsaveis");
+    }
+
+    public static Link linkFormasPagamentoRestaurante(Long idRestaurante) {
+        return linkTo(methodOn(RestauranteFormaPagamentoController.class).listar(idRestaurante)).withRel("formas-pagamento");
+    }
+
+    public static Link linkAtivarRestaurante(Long idRestaurante) {
+        return linkTo(methodOn(RestauranteController.class).ativar(idRestaurante)).withRel("ativar");
+    }
+
+    public static Link linkinaivarRestaurante(Long idRestaurante) {
+        return linkTo(methodOn(RestauranteController.class).inativar(idRestaurante)).withRel("inativar");
+    }
+
     public static Link linkPedidos() {
         var urlPedidos = linkTo(methodOn(PedidoController.class).listar(null, null)).toUri().toString();
 
@@ -92,16 +108,6 @@ public class LinkBuilder {
         return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "restaurantes");
     }
 
-    public static Link linkResponsaveisRestaurante(Long idRestaurante) {
-        var url = linkTo(methodOn(RestauranteUsuarioResponsavelController.class).listar(idRestaurante)).toUri().toString();
-        return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "responsaveis");
-    }
-
-    public static Link linkFormasPagamentoRestaurante(Long idRestaurante) {
-        var url = linkTo(methodOn(RestauranteFormaPagamentoController.class).listar(idRestaurante)).toUri().toString();
-        return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "formas-pagamento");
-    }
-
     public static Link linkCidades() {
         var url = linkTo(methodOn(CidadeController.class).listar(null)).toUri().toString();
         return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "cidades");
@@ -115,6 +121,11 @@ public class LinkBuilder {
     public static Link linkCozinhas() {
         var url = linkTo(methodOn(CozinhaController.class).listar(null)).toUri().toString();
         return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "cozinhas");
+    }
+
+    public static Link linkFormasPagamento() {
+        var url = linkTo(methodOn(FormaPagamentoController.class).listar(null)).toUri().toString();
+        return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "formas-pagamento");
     }
 
     public static Link linkUsuarios(String rel) {

@@ -14,6 +14,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,12 +28,12 @@ public class RestauranteController implements RestauranteControllerOAS {
     private final RestauranteService restauranteService;
     private final RestauranteSimpleOutputAssembler restauranteSimpleOutputAssembler;
     private final RestauranteFullOutputAssembler restauranteFullOutputAssembler;
-    private final PagedResourcesAssembler pagedResourcesAssembler;
+    private final PagedResourcesAssembler<Restaurante> pagedResourcesAssembler;
 
     public RestauranteController(RestauranteService restauranteService,
                                  RestauranteSimpleOutputAssembler restauranteSimpleOutputAssembler,
                                  RestauranteFullOutputAssembler restauranteFullOutputAssembler,
-                                 PagedResourcesAssembler pagedResourcesAssembler) {
+                                 PagedResourcesAssembler<Restaurante> pagedResourcesAssembler) {
         this.restauranteService = restauranteService;
         this.restauranteSimpleOutputAssembler = restauranteSimpleOutputAssembler;
         this.restauranteFullOutputAssembler = restauranteFullOutputAssembler;
@@ -66,14 +67,18 @@ public class RestauranteController implements RestauranteControllerOAS {
 
     @PutMapping("/{id}/ativo")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void ativar(@PathVariable Long id) {
+    public ResponseEntity<Void> ativar(@PathVariable Long id) {
         restauranteService.ativar(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/inativo")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void inativar(@PathVariable Long id) {
+    public ResponseEntity<Void> inativar(@PathVariable Long id) {
         restauranteService.inativar(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/ativos")

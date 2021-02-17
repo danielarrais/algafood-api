@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkBuscarCidade;
 import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkCidades;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Component
 public class CidadeOutputAssembler extends RepresentationModelAssemblerSupport<Cidade, CidadeOutput> {
@@ -36,6 +35,6 @@ public class CidadeOutputAssembler extends RepresentationModelAssemblerSupport<C
 
     @Override
     public CollectionModel<CidadeOutput> toCollectionModel(Iterable<? extends Cidade> entities) {
-        return super.toCollectionModel(entities).add(linkTo(CidadeController.class).withSelfRel());
+        return super.toCollectionModel(entities).add(linkCidades().withSelfRel());
     }
 }
