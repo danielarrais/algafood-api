@@ -7,8 +7,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkBuscarUsuario;
-import static com.danielarrais.algafood.core.hateoas.LinkBuilder.linkUsuarios;
+import static com.danielarrais.algafood.core.hateoas.LinkBuilder.*;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Component
@@ -24,7 +23,8 @@ public class UsuarioOutputAssembler extends RepresentationModelAssemblerSupport<
 
         usuarioOutput.add(linkBuscarUsuario(usuario.getId()));
         usuarioOutput.add(linkUsuarios());
-        
+        usuarioOutput.add(linkGrupos(usuario.getId()));
+
         return usuarioOutput;
     }
 

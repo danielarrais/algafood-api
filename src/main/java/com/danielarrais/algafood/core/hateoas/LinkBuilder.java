@@ -3,6 +3,7 @@ package com.danielarrais.algafood.core.hateoas;
 import com.danielarrais.algafood.api.controller.cidade.CidadeController;
 import com.danielarrais.algafood.api.controller.cozinha.CozinhaController;
 import com.danielarrais.algafood.api.controller.estado.EstadoController;
+import com.danielarrais.algafood.api.controller.estatistica.EstatisticaController;
 import com.danielarrais.algafood.api.controller.formaPagamento.FormaPagamentoController;
 import com.danielarrais.algafood.api.controller.grupo.GrupoController;
 import com.danielarrais.algafood.api.controller.grupo.GrupoPermissoesController;
@@ -11,7 +12,9 @@ import com.danielarrais.algafood.api.controller.pedido.PedidoController;
 import com.danielarrais.algafood.api.controller.permissao.PermissaoController;
 import com.danielarrais.algafood.api.controller.restaurante.*;
 import com.danielarrais.algafood.api.controller.usuario.UsuarioController;
+import com.danielarrais.algafood.api.controller.usuario.UsuarioGrupoController;
 import com.danielarrais.algafood.domain.filter.PedidoFilter;
+import com.danielarrais.algafood.domain.filter.VendaDiariaFilter;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.TemplateVariable;
 import org.springframework.hateoas.TemplateVariables;
@@ -28,6 +31,9 @@ public class LinkBuilder {
             new TemplateVariable("sort", REQUEST_PARAM)
     );
 
+    public static Link linkEstatisticas() {
+        return linkTo(methodOn(EstatisticaController.class).root()).withRel("estatisticas");
+    }
 
     public static Link linkBuscarPedido(String codigo) {
         return linkTo(methodOn(PedidoController.class).buscar(codigo)).withSelfRel();
@@ -121,6 +127,14 @@ public class LinkBuilder {
         return linkTo(methodOn(GrupoPermissoesController.class).associar(idGrupo, idPermissao)).withRel("desassociar");
     }
 
+    public static Link linkAssociarGrupoUsuario(Long idUsuario) {
+        return linkTo(methodOn(UsuarioGrupoController.class).associar(idUsuario, null)).withRel("associar");
+    }
+
+    public static Link linkDesassociarGrupoUsuario(Long idUsuario, Long idGrupo) {
+        return linkTo(methodOn(UsuarioGrupoController.class).associar(idUsuario, idGrupo)).withRel("desassociar");
+    }
+
     public static Link linkAssociarFormaPagamentoRestaurante(Long idRestaurante) {
         return linkTo(methodOn(RestauranteFormaPagamentoController.class).associar(idRestaurante, null)).withRel("associar");
     }
@@ -135,6 +149,18 @@ public class LinkBuilder {
 
     public static Link linkDesassociarResponsavelRestaurante(Long idRestaurante, Long idResponsavel) {
         return linkTo(methodOn(RestauranteUsuarioResponsavelController.class).desassociar(idRestaurante, idResponsavel)).withRel("desassociar");
+    }
+
+    public static Link linkVendasDiarias() {
+        var urlPedidos = linkTo(methodOn(EstatisticaController.class).findVendasDiariasInJSON(null)).toUri().toString();
+
+        var variablesFiltroPedido = new TemplateVariables(
+                new TemplateVariable(VendaDiariaFilter.Fields.restauranteId, REQUEST_PARAM),
+                new TemplateVariable(VendaDiariaFilter.Fields.dataCriacaoInicio, REQUEST_PARAM),
+                new TemplateVariable(VendaDiariaFilter.Fields.dataCriacaoFim, REQUEST_PARAM)
+        );
+
+        return Link.of(UriTemplate.of(urlPedidos, VARIABLES_PAGEABLE.concat(variablesFiltroPedido)), "vendas-diarias");
     }
 
     public static Link linkPedidos() {
@@ -152,6 +178,10 @@ public class LinkBuilder {
 
     public static Link linkPermissoes(Long idGrupo) {
         return linkTo(methodOn(GrupoPermissoesController.class).listar(idGrupo)).withRel("permissoes");
+    }
+
+    public static Link linkGrupos(Long idUsuario) {
+        return linkTo(methodOn(UsuarioGrupoController.class).listar(idUsuario)).withRel("grupos");
     }
 
     public static Link linkProdutos(Long idRestaurante) {
