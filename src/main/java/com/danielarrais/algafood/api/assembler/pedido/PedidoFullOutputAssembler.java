@@ -36,6 +36,18 @@ public class PedidoFullOutputAssembler extends RepresentationModelAssemblerSuppo
         cliente.add(linkBuscarUsuario(cliente.getId()));
         cidade.add(linkBuscarCidade(cidade.getId()));
 
+        if (pedido.podeConfirmar()) {
+            pedidoDTO.add(linkConfimacaoPedido(pedido.getCodigo()));
+        }
+
+        if (pedido.podeEntregar()) {
+            pedidoDTO.add(linkEntregaPedido(pedido.getCodigo()));
+        }
+
+        if (pedido.podeCancelar()) {
+            pedidoDTO.add(linkCancelamentoPedido(pedido.getCodigo()));
+        }
+
         itens.forEach(itemPedido -> {
             itemPedido.add(linkBuscarProduto(restaurante.getId(), itemPedido.getProduto().getId()));
         });

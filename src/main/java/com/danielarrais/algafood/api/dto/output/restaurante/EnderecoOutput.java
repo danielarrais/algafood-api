@@ -3,10 +3,11 @@ package com.danielarrais.algafood.api.dto.output.restaurante;
 import com.danielarrais.algafood.api.dto.output.cidade.CidadeSimpleOutput;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 
 @Data
-public class EnderecoOutput {
+public class EnderecoOutput extends RepresentationModel<EnderecoOutput> {
 
     @ApiModelProperty(value = "CEP do endereço", example = "65960-000")
     private String cep;

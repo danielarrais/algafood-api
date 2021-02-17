@@ -35,6 +35,18 @@ public class PedidoSimpleOutputAssembler extends RepresentationModelAssemblerSup
         restaurante.add(linkBuscarRestaurante(restaurante.getId()));
         cliente.add(linkBuscarUsuario(cliente.getId()));
 
+        if (pedido.podeConfirmar()) {
+            pedidoDTO.add(linkConfimacaoPedido(pedido.getCodigo()));
+        }
+
+        if (pedido.podeEntregar()) {
+            pedidoDTO.add(linkEntregaPedido(pedido.getCodigo()));
+        }
+
+        if (pedido.podeCancelar()) {
+            pedidoDTO.add(linkCancelamentoPedido(pedido.getCodigo()));
+        }
+
         return pedidoDTO;
     }
 

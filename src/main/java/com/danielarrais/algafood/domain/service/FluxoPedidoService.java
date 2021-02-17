@@ -23,7 +23,7 @@ public class FluxoPedidoService {
     public void cancelar(String codigo) {
         var pedido = pedidoService.buscarObrigatorio(codigo);
 
-        if (pedido.getStatus().equals(CRIADO)) {
+        if (pedido.getStatus().podeAlterarPara(CRIADO)) {
             pedido.cancelar();
             pedidoRepository.save(pedido);
         } else {
@@ -35,7 +35,7 @@ public class FluxoPedidoService {
     public void entregar(String codigo) {
         var pedido = pedidoService.buscarObrigatorio(codigo);
 
-        if (pedido.getStatus().equals(CONFIRMADO)) {
+        if (pedido.getStatus().podeAlterarPara(CONFIRMADO)) {
             pedido.entregar();
             pedidoRepository.save(pedido);
         } else {
@@ -47,7 +47,7 @@ public class FluxoPedidoService {
     public void confirmar(String codigo) {
         var pedido = pedidoService.buscarObrigatorio(codigo);
 
-        if (pedido.getStatus().equals(CRIADO)) {
+        if (pedido.getStatus().podeAlterarPara(CRIADO)) {
             pedido.confirmar();
             pedidoRepository.save(pedido);
         } else {

@@ -1,5 +1,7 @@
 package com.danielarrais.algafood.api.dto.output.restaurante;
 
+import com.danielarrais.algafood.api.dto.input.cozinha.CozinhaInput;
+import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaOutput;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
@@ -21,4 +23,6 @@ public class RestauranteSimpleOutput extends RepresentationModel<RestauranteSimp
 
     @ApiModelProperty(value = "Status do restaurante", example = "true")
     private Boolean ativo;
+
+    private CozinhaOutput cozinha;
 }

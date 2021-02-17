@@ -4,12 +4,13 @@ import com.danielarrais.algafood.api.dto.output.cozinha.CozinhaOutput;
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-public class RestauranteFullOutput {
+public class RestauranteFullOutput  extends RepresentationModel<RestauranteFullOutput> {
 
     @ApiModelProperty(value = "ID do restaurante", example = "1")
     private Long id;

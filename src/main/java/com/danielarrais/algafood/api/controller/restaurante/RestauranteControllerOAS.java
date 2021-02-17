@@ -2,10 +2,11 @@ package com.danielarrais.algafood.api.controller.restaurante;
 
 import com.danielarrais.algafood.api.dto.input.restaurante.RestauranteInput;
 import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteFullOutput;
+import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteSimpleOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 interface RestauranteControllerOAS {
 
     @ApiOperation("Lista restaurantes")
-    Page<RestauranteFullOutput> listar(Pageable pageable);
+    CollectionModel<RestauranteSimpleOutput> listar(Pageable pageable);
 
     @ApiOperation("Busca restaurante")
     @ApiResponses({

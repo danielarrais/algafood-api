@@ -1,13 +1,17 @@
 package com.danielarrais.algafood.api.controller.restaurante;
 
+import com.danielarrais.algafood.api.assembler.restaurante.RestauranteFullOutputAssembler;
+import com.danielarrais.algafood.api.assembler.restaurante.RestauranteSimpleOutputAssembler;
 import com.danielarrais.algafood.api.dto.input.restaurante.RestauranteInput;
 import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteFullOutput;
+import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteSimpleOutput;
 import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.service.RestauranteService;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,21 +25,30 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 @RequestMapping(path = "/restaurantes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteController implements RestauranteControllerOAS {
     private final RestauranteService restauranteService;
+    private final RestauranteSimpleOutputAssembler restauranteSimpleOutputAssembler;
+    private final RestauranteFullOutputAssembler restauranteFullOutputAssembler;
+    private final PagedResourcesAssembler pagedResourcesAssembler;
 
-    public RestauranteController(RestauranteService restauranteService) {
+    public RestauranteController(RestauranteService restauranteService,
+                                 RestauranteSimpleOutputAssembler restauranteSimpleOutputAssembler,
+                                 RestauranteFullOutputAssembler restauranteFullOutputAssembler,
+                                 PagedResourcesAssembler pagedResourcesAssembler) {
         this.restauranteService = restauranteService;
+        this.restauranteSimpleOutputAssembler = restauranteSimpleOutputAssembler;
+        this.restauranteFullOutputAssembler = restauranteFullOutputAssembler;
+        this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
     @GetMapping()
-    public Page<RestauranteFullOutput> listar(Pageable pageable) {
+    public CollectionModel<RestauranteSimpleOutput> listar(Pageable pageable) {
         var restaurantes = restauranteService.listar(pageable);
-        return mapper(restaurantes, RestauranteFullOutput.class);
+        return pagedResourcesAssembler.toModel(restaurantes, restauranteSimpleOutputAssembler);
     }
 
     @GetMapping("/{id}")
     public RestauranteFullOutput buscar(@PathVariable Long id) {
         var restaurante = restauranteService.buscarObrigatorio(id);
-        return mapper(restaurante, RestauranteFullOutput.class);
+        return restauranteFullOutputAssembler.toModel(restaurante);
     }
 
     @PostMapping
