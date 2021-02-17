@@ -103,14 +103,18 @@ public class RestauranteController implements RestauranteControllerOAS {
 
     @PutMapping("/{id}/aberto")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void abrir(@PathVariable Long id) {
+    public ResponseEntity<Void> abrir(@PathVariable Long id) {
         restauranteService.abrir(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/fechado")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void fechar(@PathVariable Long id) {
+    public ResponseEntity<Void> fechar(@PathVariable Long id) {
         restauranteService.fechar(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")

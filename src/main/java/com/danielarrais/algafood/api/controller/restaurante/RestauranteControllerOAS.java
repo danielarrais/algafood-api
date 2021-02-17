@@ -66,7 +66,7 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void abrir(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
+    ResponseEntity<Void> abrir(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Fecha restaurante")
     @ApiResponses({
@@ -74,7 +74,7 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void fechar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
+    ResponseEntity<Void> fechar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Exlui restaurante")
     @ApiResponses({

@@ -26,6 +26,7 @@ public class RestauranteFullOutputAssembler extends RepresentationModelAssembler
 
         restauranteDTO.add(linkBuscarRestaurante(restaurante.getId()));
         restauranteDTO.add(linkRestaurantes());
+        restauranteDTO.add(linkProdutos(restaurante.getId()));
         restauranteDTO.add(linkResponsaveisRestaurante(restaurante.getId()));
         restauranteDTO.add(linkFormasPagamentoRestaurante(restaurante.getId()));
 
@@ -33,6 +34,12 @@ public class RestauranteFullOutputAssembler extends RepresentationModelAssembler
             restauranteDTO.add(linkInativarRestaurante(restaurante.getId()));
         } else {
             restauranteDTO.add(linkAtivarRestaurante(restaurante.getId()));
+        }
+
+        if (restaurante.getAberto()) {
+            restauranteDTO.add(linkFecharRestaurante(restaurante.getId()));
+        } else {
+            restauranteDTO.add(linkAbrirRestaurante(restaurante.getId()));
         }
 
         cozinha.add(linkBuscarCozinha(cozinha.getId()));
@@ -43,6 +50,7 @@ public class RestauranteFullOutputAssembler extends RepresentationModelAssembler
 
     @Override
     public CollectionModel<RestauranteFullOutput> toCollectionModel(Iterable<? extends Restaurante> entities) {
-        return super.toCollectionModel(entities).add(linkRestaurantes().withSelfRel());
+        return super.toCollectionModel(entities)
+                .add(linkRestaurantes().withSelfRel());
     }
 }

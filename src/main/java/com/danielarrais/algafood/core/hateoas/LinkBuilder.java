@@ -54,6 +54,7 @@ public class LinkBuilder {
                 .buscar(idRestaurante, idProduto))
                 .withRel("produto");
     }
+
     public static Link linkBuscarEstado(Long id) {
         return linkTo(methodOn(EstadoController.class).buscar(id)).withSelfRel();
     }
@@ -94,6 +95,14 @@ public class LinkBuilder {
         return linkTo(methodOn(RestauranteFormaPagamentoController.class).associar(idRestaurante, null)).withRel("associar");
     }
 
+    public static Link linkAbrirRestaurante(Long idRestaurante) {
+        return linkTo(methodOn(RestauranteController.class).abrir(idRestaurante)).withRel("abrir");
+    }
+
+    public static Link linkFecharRestaurante(Long idRestaurante) {
+        return linkTo(methodOn(RestauranteController.class).fechar(idRestaurante)).withRel("fechar");
+    }
+
     public static Link linkDesassociarFormaPagamentoRestaurante(Long idRestaurante, Long idFormaPagamento) {
         return linkTo(methodOn(RestauranteFormaPagamentoController.class).desassociar(idRestaurante, idFormaPagamento)).withRel("desassociar");
     }
@@ -119,8 +128,13 @@ public class LinkBuilder {
         return Link.of(UriTemplate.of(urlPedidos, VARIABLES_PAGEABLE.concat(variablesFiltroPedido)), "pedidos");
     }
 
+    public static Link linkProdutos(Long idRestaurante) {
+        var url = linkTo(methodOn(RestauranteProdutoController.class).listar(idRestaurante)).toUri().toString();
+        return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "produtos");
+    }
+
     public static Link linkRestaurantes() {
-        var url = linkTo(methodOn(PedidoController.class).listar(null, null)).toUri().toString();
+        var url = linkTo(methodOn(RestauranteController.class).listar(null)).toUri().toString();
         return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "restaurantes");
     }
 

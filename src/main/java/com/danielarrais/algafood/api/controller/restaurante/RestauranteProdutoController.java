@@ -1,15 +1,16 @@
 package com.danielarrais.algafood.api.controller.restaurante;
 
+import com.danielarrais.algafood.api.assembler.restaurante.ProdutoOutputAssembler;
 import com.danielarrais.algafood.api.dto.input.restaurante.ProdutoInput;
 import com.danielarrais.algafood.api.dto.output.restaurante.ProdutoOutput;
 import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.service.ProdutoService;
 import com.danielarrais.algafood.domain.service.RestauranteService;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
@@ -18,17 +19,20 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 public class RestauranteProdutoController implements RestauranteProdutoControllerOAS {
     private final RestauranteService restauranteService;
     private final ProdutoService produtoService;
+    private final ProdutoOutputAssembler produtoOutputAssembler;
 
     public RestauranteProdutoController(RestauranteService restauranteService,
-                                        ProdutoService produtoService) {
+                                        ProdutoService produtoService,
+                                        ProdutoOutputAssembler produtoOutputAssembler) {
         this.restauranteService = restauranteService;
         this.produtoService = produtoService;
+        this.produtoOutputAssembler = produtoOutputAssembler;
     }
 
     @GetMapping()
-    public List<ProdutoOutput> listar(@PathVariable Long restauranteId) {
+    public CollectionModel<ProdutoOutput> listar(@PathVariable Long restauranteId) {
         var restaurante = restauranteService.buscarObrigatorio(restauranteId);
-        return mapper(restaurante.getProdutos(), ProdutoOutput.class);
+        return produtoOutputAssembler.toCollectionModel(restauranteId, restaurante.getProdutos());
     }
 
     @PostMapping
