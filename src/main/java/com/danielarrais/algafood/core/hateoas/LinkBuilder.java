@@ -98,6 +98,14 @@ public class LinkBuilder {
         return linkTo(methodOn(RestauranteFormaPagamentoController.class).desassociar(idRestaurante, idFormaPagamento)).withRel("desassociar");
     }
 
+    public static Link linkAssociarResponsavelRestaurante(Long idRestaurante) {
+        return linkTo(methodOn(RestauranteUsuarioResponsavelController.class).associar(idRestaurante, null)).withRel("associar");
+    }
+
+    public static Link linkDesassociarResponsavelRestaurante(Long idRestaurante, Long idResponsavel) {
+        return linkTo(methodOn(RestauranteUsuarioResponsavelController.class).desassociar(idRestaurante, idResponsavel)).withRel("desassociar");
+    }
+
     public static Link linkPedidos() {
         var urlPedidos = linkTo(methodOn(PedidoController.class).listar(null, null)).toUri().toString();
 
