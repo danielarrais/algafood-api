@@ -4,6 +4,8 @@ import com.danielarrais.algafood.api.controller.cidade.CidadeController;
 import com.danielarrais.algafood.api.controller.cozinha.CozinhaController;
 import com.danielarrais.algafood.api.controller.estado.EstadoController;
 import com.danielarrais.algafood.api.controller.formaPagamento.FormaPagamentoController;
+import com.danielarrais.algafood.api.controller.grupo.GrupoController;
+import com.danielarrais.algafood.api.controller.grupo.GrupoPermissoesController;
 import com.danielarrais.algafood.api.controller.pedido.FluxoPedidoController;
 import com.danielarrais.algafood.api.controller.pedido.PedidoController;
 import com.danielarrais.algafood.api.controller.restaurante.*;
@@ -60,6 +62,10 @@ public class LinkBuilder {
 
     public static Link linkBuscarEstado(Long id) {
         return linkTo(methodOn(EstadoController.class).buscar(id)).withSelfRel();
+    }
+
+    public static Link linkBuscarGrupo(Long id) {
+        return linkTo(methodOn(GrupoController.class).buscar(id)).withSelfRel();
     }
 
     public static Link linkBuscarCozinha(Long id) {
@@ -131,9 +137,12 @@ public class LinkBuilder {
         return Link.of(UriTemplate.of(urlPedidos, VARIABLES_PAGEABLE.concat(variablesFiltroPedido)), "pedidos");
     }
 
+    public static Link linkPermissoes(Long idGrupo) {
+        return linkTo(methodOn(GrupoPermissoesController.class).listar(idGrupo)).withRel("permissoes");
+    }
+
     public static Link linkProdutos(Long idRestaurante) {
-        var url = linkTo(methodOn(RestauranteProdutoController.class).listar(idRestaurante)).toUri().toString();
-        return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "produtos");
+        return linkTo(methodOn(RestauranteProdutoController.class).listar(idRestaurante)).withRel("produtos");
     }
 
     public static Link linkRestaurantes() {
@@ -159,6 +168,11 @@ public class LinkBuilder {
     public static Link linkFormasPagamento() {
         var url = linkTo(methodOn(FormaPagamentoController.class).listar(null)).toUri().toString();
         return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "formas-pagamento");
+    }
+
+    public static Link linkGrupos() {
+        var url = linkTo(methodOn(GrupoController.class).listar(null)).toUri().toString();
+        return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "grupos");
     }
 
     public static Link linkUsuarios(String rel) {

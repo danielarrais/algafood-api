@@ -26,7 +26,7 @@ public class ProdutoOutputAssembler extends RepresentationModelAssemblerSupport<
         produtoDTO.add(linkFotoProduto(restaurante.getId(), produto.getId()));
         produtoDTO.add(linkProdutos(restaurante.getId()));
 
-        return null;
+        return produtoDTO;
     }
 
     public CollectionModel<ProdutoOutput> toCollectionModel(Long idRestaurante, Iterable<? extends Produto> entities) {
