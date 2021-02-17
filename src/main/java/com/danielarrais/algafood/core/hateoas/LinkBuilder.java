@@ -8,6 +8,7 @@ import com.danielarrais.algafood.api.controller.grupo.GrupoController;
 import com.danielarrais.algafood.api.controller.grupo.GrupoPermissoesController;
 import com.danielarrais.algafood.api.controller.pedido.FluxoPedidoController;
 import com.danielarrais.algafood.api.controller.pedido.PedidoController;
+import com.danielarrais.algafood.api.controller.permissao.PermissaoController;
 import com.danielarrais.algafood.api.controller.restaurante.*;
 import com.danielarrais.algafood.api.controller.usuario.UsuarioController;
 import com.danielarrais.algafood.domain.filter.PedidoFilter;
@@ -64,6 +65,10 @@ public class LinkBuilder {
         return linkTo(methodOn(EstadoController.class).buscar(id)).withSelfRel();
     }
 
+    public static Link linkBuscarPermissao(Long id) {
+        return linkTo(methodOn(PermissaoController.class).buscar(id)).withSelfRel();
+    }
+
     public static Link linkBuscarGrupo(Long id) {
         return linkTo(methodOn(GrupoController.class).buscar(id)).withSelfRel();
     }
@@ -100,16 +105,24 @@ public class LinkBuilder {
         return linkTo(methodOn(RestauranteController.class).inativar(idRestaurante)).withRel("inativar");
     }
 
-    public static Link linkAssociarFormaPagamentoRestaurante(Long idRestaurante) {
-        return linkTo(methodOn(RestauranteFormaPagamentoController.class).associar(idRestaurante, null)).withRel("associar");
-    }
-
     public static Link linkAbrirRestaurante(Long idRestaurante) {
         return linkTo(methodOn(RestauranteController.class).abrir(idRestaurante)).withRel("abrir");
     }
 
     public static Link linkFecharRestaurante(Long idRestaurante) {
         return linkTo(methodOn(RestauranteController.class).fechar(idRestaurante)).withRel("fechar");
+    }
+
+    public static Link linkAssociarPermissaoGrupo(Long idGrupo) {
+        return linkTo(methodOn(GrupoPermissoesController.class).associar(idGrupo, null)).withRel("associar");
+    }
+
+    public static Link linkDesassociarPermissaoGrupo(Long idGrupo, Long idPermissao) {
+        return linkTo(methodOn(GrupoPermissoesController.class).associar(idGrupo, idPermissao)).withRel("desassociar");
+    }
+
+    public static Link linkAssociarFormaPagamentoRestaurante(Long idRestaurante) {
+        return linkTo(methodOn(RestauranteFormaPagamentoController.class).associar(idRestaurante, null)).withRel("associar");
     }
 
     public static Link linkDesassociarFormaPagamentoRestaurante(Long idRestaurante, Long idFormaPagamento) {
@@ -178,6 +191,11 @@ public class LinkBuilder {
     public static Link linkUsuarios(String rel) {
         var url = linkTo(methodOn(UsuarioController.class).listar(null)).toUri().toString();
         return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), rel);
+    }
+
+    public static Link linkPermissoes() {
+        var url = linkTo(methodOn(PermissaoController.class).listar(null)).toUri().toString();
+        return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "permissoes");
     }
 
     public static Link linkUsuarios() {

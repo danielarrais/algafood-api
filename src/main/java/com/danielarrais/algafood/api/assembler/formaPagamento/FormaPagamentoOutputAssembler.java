@@ -30,15 +30,15 @@ public class FormaPagamentoOutputAssembler extends RepresentationModelAssemblerS
         return formaPagamentoDTO;
     }
 
+    @Override
+    public CollectionModel<FormaPagamentoOutput> toCollectionModel(Iterable<? extends FormaPagamento> entities) {
+        return super.toCollectionModel(entities).add(linkFormasPagamento().withSelfRel());
+    }
+
     public FormaPagamentoOutput toModel(Long idRestaurante, FormaPagamento formaPagamento) {
         var formaPagamentoDTO = toModel(formaPagamento);
 
         return formaPagamentoDTO.add(linkDesassociarFormaPagamentoRestaurante(idRestaurante, formaPagamento.getId()));
-    }
-
-    @Override
-    public CollectionModel<FormaPagamentoOutput> toCollectionModel(Iterable<? extends FormaPagamento> entities) {
-        return super.toCollectionModel(entities).add(linkFormasPagamento().withSelfRel());
     }
 
     public CollectionModel<FormaPagamentoOutput> toCollectionModel(Long idRestaurante, Iterable<? extends FormaPagamento> entities) {
