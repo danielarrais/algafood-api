@@ -4,6 +4,7 @@ import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOut
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 @Api(tags = "Formas de Pagamento do Restaurante")
 interface RestauranteFormaPagamentoControllerOAS {
@@ -14,7 +15,7 @@ interface RestauranteFormaPagamentoControllerOAS {
             @ApiResponse(code = 204, message = "Forma de pagamento associada ao restaurante"),
             @ApiResponse(code = 404, message = "Restaurante ou forma de pagamento não encontrada", response = Problem.class)
     })
-    void associar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId,
+    ResponseEntity<Void> associar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId,
                   @ApiParam(value = "ID da forma de pagamento", example = "1", required = true) Long idFormaPagamento);
 
     @ApiOperation("Desassocia forma de pagamento a um restaurante")
@@ -22,6 +23,6 @@ interface RestauranteFormaPagamentoControllerOAS {
             @ApiResponse(code = 204, message = "Forma de pagamento desassociada ao restaurante"),
             @ApiResponse(code = 404, message = "Restaurante ou forma de pagamento não encontrado", response = Problem.class)
     })
-    void desassociar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId,
+    ResponseEntity<Void> desassociar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId,
                      @ApiParam(value = "ID da forma de pagamento", example = "1", required = true) Long idFormaPagamento);
 }

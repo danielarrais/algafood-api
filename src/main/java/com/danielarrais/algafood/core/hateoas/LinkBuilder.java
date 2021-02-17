@@ -86,8 +86,16 @@ public class LinkBuilder {
         return linkTo(methodOn(RestauranteController.class).ativar(idRestaurante)).withRel("ativar");
     }
 
-    public static Link linkinaivarRestaurante(Long idRestaurante) {
+    public static Link linkInativarRestaurante(Long idRestaurante) {
         return linkTo(methodOn(RestauranteController.class).inativar(idRestaurante)).withRel("inativar");
+    }
+
+    public static Link linkAssociarFormaPagamentoRestaurante(Long idRestaurante) {
+        return linkTo(methodOn(RestauranteFormaPagamentoController.class).associar(idRestaurante, null)).withRel("associar");
+    }
+
+    public static Link linkDesassociarFormaPagamentoRestaurante(Long idRestaurante, Long idFormaPagamento) {
+        return linkTo(methodOn(RestauranteFormaPagamentoController.class).desassociar(idRestaurante, idFormaPagamento)).withRel("desassociar");
     }
 
     public static Link linkPedidos() {

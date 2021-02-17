@@ -30,7 +30,7 @@ public class RestauranteFullOutputAssembler extends RepresentationModelAssembler
         restauranteDTO.add(linkFormasPagamentoRestaurante(restaurante.getId()));
 
         if (restaurante.getAtivo()) {
-            restauranteDTO.add(linkinaivarRestaurante(restaurante.getId()));
+            restauranteDTO.add(linkInativarRestaurante(restaurante.getId()));
         } else {
             restauranteDTO.add(linkAtivarRestaurante(restaurante.getId()));
         }
