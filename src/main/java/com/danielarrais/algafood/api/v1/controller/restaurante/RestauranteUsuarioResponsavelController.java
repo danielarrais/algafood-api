@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/restaurantes/{restauranteId}/responsaveis", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/restaurantes/{restauranteId}/responsaveis", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class RestauranteUsuarioResponsavelController implements RestauranteUsuarioResponsavelControllerOAS {
     private final RestauranteService restauranteService;
     private final UsuarioSimpleOutputAssembler usuarioSimpleOutputAssembler;

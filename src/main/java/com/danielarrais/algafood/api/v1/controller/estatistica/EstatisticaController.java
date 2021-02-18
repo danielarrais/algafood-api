@@ -18,7 +18,7 @@ import java.util.List;
 import static com.danielarrais.algafood.api.v1.util.LinkBuilder.linkVendasDiarias;
 
 @RestController
-@RequestMapping(path = "/estatisticas", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/estatisticas", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class EstatisticaController implements EstatisticaControllerOAS {
     private final VendaConsultaService vendaConsultaService;
     private final VendaReportService vendaReportService;
@@ -37,12 +37,12 @@ public class EstatisticaController implements EstatisticaControllerOAS {
         return rootEntryPoint;
     }
 
-    @GetMapping(value = "/vendas-diarias", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/vendas-diarias", produces = MediaTypes.JSON_ALGAFOOD_V1)
     public List<VendaDiaria> findVendasDiariasInJSON(VendaDiariaFilter filter) {
         return vendaConsultaService.consultarVendasDiarias(filter);
     }
 
-    @GetMapping(value = "/vendas-diarias", produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(value = "/vendas-diarias", produces = MediaTypes.PDF_ALGAFOOD_V1)
     public ResponseEntity<byte[]> findVendasDiariasInPDF(VendaDiariaFilter filter) {
         byte[] pdf = vendaReportService.emitirVendasDiarias(filter);
 

@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/permissoes", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/permissoes", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class PermissaoController implements PermissaoControllerOAS {
     private final PermissaoService permissaoService;
     private final PermissaoOutputAssembler permissaoOutputAssembler;

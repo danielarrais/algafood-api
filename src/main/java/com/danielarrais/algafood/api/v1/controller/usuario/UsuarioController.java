@@ -20,7 +20,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Usuários")
 @RestController
-@RequestMapping(path = "/usuarios", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/usuarios", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class UsuarioController implements UsuarioControllerOAS {
     private final UsuarioService usuarioService;
     private final UsuarioOutputAssembler usuarioOutputAssembler;

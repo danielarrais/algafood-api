@@ -24,7 +24,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Cozinhas")
 @RestController
-@RequestMapping(path = "/cozinhas", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/cozinhas", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class CozinhaController {
     private final CozinhaService cozinhaService;
     private final CozinhaOutputAssembler cozinhaOutputAssembler;

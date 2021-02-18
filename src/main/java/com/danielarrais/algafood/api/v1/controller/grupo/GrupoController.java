@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/grupos", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/grupos", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class GrupoController implements GrupoControllerOAS {
     private final GrupoService grupoService;
     private final GrupoOutputAssembler grupoOutputAssembler;

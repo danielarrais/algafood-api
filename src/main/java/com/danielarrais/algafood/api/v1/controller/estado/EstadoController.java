@@ -19,7 +19,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Estados")
 @RestController
-@RequestMapping(path = "/estados", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/estados", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class EstadoController implements EstadoControllerOAS {
     private final EstadoService estadoService;
     private final EstadoOutputAssembler estadoOutputAssembler;

@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/grupos/{grupoId}/permissoes", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/grupos/{grupoId}/permissoes", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class GrupoPermissoesController implements GrupoPermissoesControllerOAS {
     private final GrupoService grupoService;
     private final PermissaoOutputAssembler permissaoOutputAssembler;

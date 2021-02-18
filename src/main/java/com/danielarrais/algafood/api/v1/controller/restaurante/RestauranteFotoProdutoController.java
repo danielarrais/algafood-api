@@ -23,7 +23,7 @@ import java.util.Arrays;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/restaurantes/{restauranteId}/produtos/{produtoId}/foto", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/restaurantes/{restauranteId}/produtos/{produtoId}/foto", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class RestauranteFotoProdutoController implements RestauranteFotoProdutoControllerOAS {
     private final FotoProdutoService fotoProdutoService;
 
@@ -32,7 +32,7 @@ public class RestauranteFotoProdutoController implements RestauranteFotoProdutoC
     }
 
     @SneakyThrows
-    @PutMapping(produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(produces = MediaTypes.MULTIPART_ALGAFOOD_V1)
     public void atualizarFoto(@PathVariable Long restauranteId,
                               @PathVariable Long produtoId,
                               @Valid ProdutoFotoInput produtoFotoInput,
@@ -49,7 +49,7 @@ public class RestauranteFotoProdutoController implements RestauranteFotoProdutoC
         fotoProdutoService.salvar(restauranteId, produtoId, fotoProduto, file.getInputStream());
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaTypes.MULTIPART_ALGAFOOD_V1)
     public FotoProdutoOutput buscar(@PathVariable Long restauranteId,
                                     @PathVariable Long produtoId) {
         var fotoProduto = fotoProdutoService.buscarOuFalhar(restauranteId, produtoId);

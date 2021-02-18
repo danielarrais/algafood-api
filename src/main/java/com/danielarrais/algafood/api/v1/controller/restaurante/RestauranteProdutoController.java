@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/restaurantes/{restauranteId}/produtos", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/restaurantes/{restauranteId}/produtos", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class RestauranteProdutoController implements RestauranteProdutoControllerOAS {
     private final RestauranteService restauranteService;
     private final ProdutoService produtoService;

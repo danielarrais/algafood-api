@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/restaurantes/{restauranteId}/formas-pagamento", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/restaurantes/{restauranteId}/formas-pagamento", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class RestauranteFormaPagamentoController implements RestauranteFormaPagamentoControllerOAS {
     private final RestauranteService restauranteService;
     private final FormaPagamentoOutputAssembler formaPagamentoOutputAssembler;

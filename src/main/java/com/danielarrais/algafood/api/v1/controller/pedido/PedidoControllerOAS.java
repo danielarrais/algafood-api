@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(tags = "Pedidos")
 @RestController
-@RequestMapping(path = "/pedidos", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/pedidos", produces = MediaTypes.JSON_ALGAFOOD_V1)
 interface PedidoControllerOAS {
 
     @ApiOperation("Adiciona pedido")

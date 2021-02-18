@@ -18,7 +18,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Cidades")
 @RestController
-@RequestMapping(path = "/cidades", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/cidades", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class CidadeController implements CidadeControllerOAS {
     private final CidadeService cidadeService;
     private final CidadeOutputAssembler cidadeOutputAssembler;

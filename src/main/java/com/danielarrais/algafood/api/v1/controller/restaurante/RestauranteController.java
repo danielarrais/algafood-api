@@ -23,7 +23,7 @@ import java.util.List;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/restaurantes", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/restaurantes", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class RestauranteController implements RestauranteControllerOAS {
     private final RestauranteService restauranteService;
     private final RestauranteSimpleOutputAssembler restauranteSimpleOutputAssembler;

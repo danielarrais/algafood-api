@@ -11,7 +11,7 @@ import static com.danielarrais.algafood.api.v1.util.LinkBuilder.*;
 
 @Api(tags = "Raiz")
 @RestController
-@RequestMapping(value = "/", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(value = "/", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class RootController {
 
     @GetMapping

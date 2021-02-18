@@ -23,7 +23,7 @@ import static com.danielarrais.algafood.core.data.PageWrapper.of;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/pedidos", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
+@RequestMapping(path = "/pedidos", produces = MediaTypes.JSON_ALGAFOOD_V1)
 public class PedidoController implements PedidoControllerOAS {
     private final PedidoService pedidoService;
     private final PedidoFullOutputAssembler pedidoFullOutputAssembler;
