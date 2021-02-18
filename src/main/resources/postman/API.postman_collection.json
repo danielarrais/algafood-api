@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a8b90dae-ca32-4772-a311-53b017e529be",
+		"_postman_id": "10cdf339-47cb-43c7-a9c1-d7f35b363d1c",
 		"name": "API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -28,6 +28,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"cidades"
 									]
 								},
@@ -52,6 +53,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"cidades",
 										":id"
 									],
@@ -92,6 +94,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"cidades",
 										":id"
 									],
@@ -132,6 +135,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"cidades",
 										":id"
 									],
@@ -172,6 +176,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"cidades"
 									]
 								},
@@ -201,6 +206,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"pedidos"
 									],
 									"query": [
@@ -259,6 +265,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"pedidos",
 										":id"
 									],
@@ -290,6 +297,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"pedidos",
 										":id",
 										"entrega"
@@ -322,6 +330,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"pedidos",
 										":codigo",
 										"cancelamento"
@@ -354,6 +363,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"pedidos",
 										":id",
 										"confirmacao"
@@ -395,6 +405,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"pedidos"
 									]
 								},
@@ -424,6 +435,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"usuarios"
 									]
 								},
@@ -448,6 +460,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"usuarios",
 										":id",
 										"grupos"
@@ -480,6 +493,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"usuarios",
 										":id"
 									],
@@ -520,6 +534,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"usuarios",
 										":id"
 									],
@@ -560,6 +575,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"usuarios",
 										":id",
 										"senha"
@@ -601,6 +617,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"usuarios",
 										":id",
 										"grupos",
@@ -647,6 +664,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"usuarios",
 										":id"
 									],
@@ -687,6 +705,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"usuarios"
 									]
 								},
@@ -716,6 +735,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"permissoes"
 									]
 								},
@@ -740,6 +760,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"permissoes",
 										":id"
 									],
@@ -780,6 +801,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"permissoes",
 										":id"
 									],
@@ -820,6 +842,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"permissoes",
 										":id"
 									],
@@ -860,6 +883,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"permissoes"
 									]
 								},
@@ -889,6 +913,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"grupos"
 									]
 								},
@@ -913,6 +938,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"grupos",
 										":id",
 										"permissoes"
@@ -945,6 +971,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"grupos",
 										":id"
 									],
@@ -985,6 +1012,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"grupos",
 										":id"
 									],
@@ -1025,6 +1053,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"grupos",
 										":id",
 										"permissoes",
@@ -1071,6 +1100,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"grupos",
 										":id"
 									],
@@ -1111,6 +1141,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"grupos"
 									]
 								},
@@ -1140,6 +1171,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"cozinhas"
 									]
 								},
@@ -1164,6 +1196,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"cozinhas",
 										":id"
 									],
@@ -1204,6 +1237,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"cozinhas",
 										":id"
 									],
@@ -1244,6 +1278,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"cozinhas",
 										":id"
 									],
@@ -1284,6 +1319,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"cozinhas"
 									]
 								},
@@ -1313,6 +1349,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"formas-pagamento"
 									]
 								},
@@ -1337,6 +1374,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"formas-pagamento",
 										":id"
 									],
@@ -1377,6 +1415,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"formas-pagamento",
 										":id"
 									],
@@ -1417,6 +1456,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"formas-pagamento",
 										":id"
 									],
@@ -1457,6 +1497,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"formas-pagamento"
 									]
 								},
@@ -1486,6 +1527,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":idRestaurante",
 										"produtos"
@@ -1518,6 +1560,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":idRestaurante",
 										"produtos",
@@ -1564,6 +1607,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":idRestaurante",
 										"produtos",
@@ -1610,6 +1654,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":idRestaurante",
 										"produtos",
@@ -1656,6 +1701,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":idRestaurante",
 										"produtos"
@@ -1693,6 +1739,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"estados"
 									]
 								},
@@ -1717,6 +1764,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"estados",
 										":id"
 									],
@@ -1757,6 +1805,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"estados",
 										":id"
 									],
@@ -1797,6 +1846,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"estados",
 										":id"
 									],
@@ -1837,6 +1887,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"estados"
 									]
 								},
@@ -1866,6 +1917,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes"
 									]
 								},
@@ -1890,6 +1942,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":id",
 										"formas-pagamento"
@@ -1922,6 +1975,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":idRestaurante",
 										"responsaveis"
@@ -1954,6 +2008,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":id"
 									],
@@ -1985,6 +2040,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":restauranteId",
 										"produtos",
@@ -2032,6 +2088,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":idRestaurante",
 										"formas-pagamento",
@@ -2078,6 +2135,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":idRestaurante",
 										"responsaveis",
@@ -2130,6 +2188,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":restauranteId",
 										"produtos",
@@ -2177,6 +2236,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":id"
 									],
@@ -2217,6 +2277,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":id",
 										"ativo"
@@ -2258,6 +2319,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										"ativos"
 									]
@@ -2292,6 +2354,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":id",
 										"aberto"
@@ -2333,6 +2396,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":id",
 										"inativo"
@@ -2374,6 +2438,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										"inativos"
 									]
@@ -2408,6 +2473,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":id",
 										"fechado"
@@ -2449,6 +2515,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":id"
 									],
@@ -2495,6 +2562,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes",
 										":restauranteId",
 										"produtos",
@@ -2542,6 +2610,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"restaurantes"
 									]
 								},
@@ -2571,6 +2640,7 @@
 										"{{host}}"
 									],
 									"path": [
+										"v1",
 										"estatisticas",
 										"vendas-diarias"
 									],
@@ -2609,7 +2679,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/v1/v3/api-docs",
+							"raw": "{{host}}/v3/api-docs",
 							"host": [
 								"{{host}}"
 							],
@@ -2642,11 +2712,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/v1/cidades",
+									"raw": "{{host}}/v2/cidades",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
+										"v2",
 										"cidades"
 									]
 								},
@@ -2666,11 +2737,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/v1/cidades/:id",
+									"raw": "{{host}}/v2/cidades/:id",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
+										"v2",
 										"cidades",
 										":id"
 									],
@@ -2706,11 +2778,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/v1/cidades/:id",
+									"raw": "{{host}}/v2/cidades/:id",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
+										"v2",
 										"cidades",
 										":id"
 									],
@@ -2746,11 +2819,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/v1/cidades/:id",
+									"raw": "{{host}}/v2/cidades/:id",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
+										"v2",
 										"cidades",
 										":id"
 									],
@@ -2786,11 +2860,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/v1/cidades",
+									"raw": "{{host}}/v2/cidades",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
+										"v2",
 										"cidades"
 									]
 								},
@@ -2812,11 +2887,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/v1/v2/api-docs",
+							"raw": "{{host}}/v2/v3/api-docs",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"v2",
 								"v3",
 								"api-docs"
 							]

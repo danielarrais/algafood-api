@@ -1,8 +1,6 @@
 package com.danielarrais.algafood.api.v2.util;
 
-import com.danielarrais.algafood.api.v1.controller.cidade.CidadeController;
-import com.danielarrais.algafood.api.v1.controller.estado.EstadoController;
-import com.danielarrais.algafood.api.v1.controller.usuario.UsuarioController;
+import com.danielarrais.algafood.api.v2.controller.cidade.CidadeControllerV2;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.TemplateVariable;
 import org.springframework.hateoas.TemplateVariables;
@@ -20,21 +18,11 @@ public class LinkBuilderV2 {
     );
 
     public static Link linkBuscarCidade(Long id) {
-        return linkTo(methodOn(CidadeController.class).buscar(id)).withSelfRel();
+        return linkTo(methodOn(CidadeControllerV2.class).buscar(id)).withSelfRel();
     }
 
     public static Link linkCidades() {
-        var url = linkTo(methodOn(CidadeController.class).listar(null)).toUri().toString();
+        var url = linkTo(methodOn(CidadeControllerV2.class).listar(null)).toUri().toString();
         return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), "cidades");
     }
-
-    public static Link linkUsuarios(String rel) {
-        var url = linkTo(methodOn(UsuarioController.class).listar(null)).toUri().toString();
-        return Link.of(UriTemplate.of(url, VARIABLES_PAGEABLE), rel);
-    }
-
-    public static Link linkBuscarEstado(Long id) {
-        return linkTo(methodOn(EstadoController.class).buscar(id)).withSelfRel();
-    }
-
 }
