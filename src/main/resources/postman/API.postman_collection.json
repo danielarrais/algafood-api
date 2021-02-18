@@ -2105,7 +2105,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "multipart/vnd.algafood.v1+form-data",
 										"type": "text"
 									}
 								],
@@ -2592,6 +2592,209 @@
 									]
 								},
 								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Documentação",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/pdf,application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/v3/api-docs",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v3",
+								"api-docs"
+							]
+						},
+						"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "V2",
+			"item": [
+				{
+					"name": "Cidade",
+					"item": [
+						{
+							"name": "LIstar Cidades",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v2+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/cidades",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades"
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Cidade",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/vnd.algafood.v2+json"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/cidades/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								},
+								"description": "Traz todas as cozinhas cadastradas no Alga Food API."
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Cidade",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v2+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Sambaíba de Açúcar\",\n    \"estadoId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cidades/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								},
+								"description": "Atualiza cozinha cadastrada na base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Cidade",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v2+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cidades/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								},
+								"description": "Exclui cozinha da base de dados do Alga Food API"
+							},
+							"response": []
+						},
+						{
+							"name": "Criar Cidade",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Sambaíba\",\n    \"estado\": {\n        \"id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cidades",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades"
+									]
+								},
+								"description": "Adiciona nova cozinha na base de dados do Alga Food API"
 							},
 							"response": []
 						}
