@@ -5,7 +5,7 @@ import com.danielarrais.algafood.api.v1.assembler.restaurante.RestauranteSimpleO
 import com.danielarrais.algafood.api.v1.dto.input.restaurante.RestauranteInput;
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.RestauranteFullOutput;
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.RestauranteSimpleOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
@@ -23,7 +23,7 @@ import java.util.List;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/restaurantes", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/restaurantes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteController implements RestauranteControllerOAS {
     private final RestauranteService restauranteService;
     private final RestauranteSimpleOutputAssembler restauranteSimpleOutputAssembler;

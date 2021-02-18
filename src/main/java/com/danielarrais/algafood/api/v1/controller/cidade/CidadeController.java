@@ -3,7 +3,7 @@ package com.danielarrais.algafood.api.v1.controller.cidade;
 import com.danielarrais.algafood.api.v1.assembler.cidade.CidadeOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.cidade.CidadeInput;
 import com.danielarrais.algafood.api.v1.dto.output.cidade.CidadeOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.service.CidadeService;
 import io.swagger.annotations.Api;
@@ -18,7 +18,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Cidades")
 @RestController
-@RequestMapping(path = "/cidades", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/cidades", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CidadeController implements CidadeControllerOAS {
     private final CidadeService cidadeService;
     private final CidadeOutputAssembler cidadeOutputAssembler;

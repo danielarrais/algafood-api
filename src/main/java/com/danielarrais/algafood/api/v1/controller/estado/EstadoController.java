@@ -3,7 +3,7 @@ package com.danielarrais.algafood.api.v1.controller.estado;
 import com.danielarrais.algafood.api.v1.assembler.estado.EstadoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.estado.EstadoInput;
 import com.danielarrais.algafood.api.v1.dto.output.estado.EstadoOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.model.Estado;
 import com.danielarrais.algafood.domain.service.EstadoService;
 import io.swagger.annotations.Api;
@@ -19,7 +19,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Estados")
 @RestController
-@RequestMapping(path = "/estados", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/estados", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EstadoController implements EstadoControllerOAS {
     private final EstadoService estadoService;
     private final EstadoOutputAssembler estadoOutputAssembler;

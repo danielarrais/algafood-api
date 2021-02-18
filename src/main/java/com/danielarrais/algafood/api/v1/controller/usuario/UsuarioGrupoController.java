@@ -2,7 +2,7 @@ package com.danielarrais.algafood.api.v1.controller.usuario;
 
 import com.danielarrais.algafood.api.v1.assembler.grupo.GrupoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.output.grupo.GrupoOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.service.UsuarioService;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/usuarios/{usuarioId}/grupos", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/usuarios/{usuarioId}/grupos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UsuarioGrupoController implements UsuarioGrupoControllerOAS {
     private final UsuarioService usuarioService;
     private final GrupoOutputAssembler grupoOutputAssembler;

@@ -2,7 +2,6 @@ package com.danielarrais.algafood.api.v1.controller.restaurante;
 
 import com.danielarrais.algafood.api.v1.dto.input.restaurante.ProdutoFotoInput;
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.FotoProdutoOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.FotoProduto;
 import com.danielarrais.algafood.domain.service.FotoProdutoService;
@@ -23,7 +22,7 @@ import java.util.Arrays;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/restaurantes/{restauranteId}/produtos/{produtoId}/foto", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/restaurantes/{restauranteId}/produtos/{produtoId}/foto", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteFotoProdutoController implements RestauranteFotoProdutoControllerOAS {
     private final FotoProdutoService fotoProdutoService;
 
@@ -32,7 +31,7 @@ public class RestauranteFotoProdutoController implements RestauranteFotoProdutoC
     }
 
     @SneakyThrows
-    @PutMapping(produces = MediaTypes.MULTIPART_ALGAFOOD_V1)
+    @PutMapping(produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void atualizarFoto(@PathVariable Long restauranteId,
                               @PathVariable Long produtoId,
                               @Valid ProdutoFotoInput produtoFotoInput,
@@ -49,7 +48,7 @@ public class RestauranteFotoProdutoController implements RestauranteFotoProdutoC
         fotoProdutoService.salvar(restauranteId, produtoId, fotoProduto, file.getInputStream());
     }
 
-    @GetMapping(produces = MediaTypes.MULTIPART_ALGAFOOD_V1)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public FotoProdutoOutput buscar(@PathVariable Long restauranteId,
                                     @PathVariable Long produtoId) {
         var fotoProduto = fotoProdutoService.buscarOuFalhar(restauranteId, produtoId);

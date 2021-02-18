@@ -1,6 +1,5 @@
 package com.danielarrais.algafood.api.v1.controller.estatistica;
 
-import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.filter.VendaDiariaFilter;
 import com.danielarrais.algafood.domain.model.dto.VendaDiaria;
 import io.swagger.annotations.Api;
@@ -16,10 +15,10 @@ import java.util.List;
 interface EstatisticaControllerOAS {
 
     @ApiOperation("Retorna vendas diárias")
-    @GetMapping(value = "/vendas-diarias", produces = MediaTypes.MULTIPART_ALGAFOOD_V1)
+    @GetMapping(value = "/vendas-diarias", produces = MediaType.APPLICATION_JSON_VALUE)
     List<VendaDiaria> findVendasDiariasInJSON(@ApiParam("Filtros") VendaDiariaFilter filter);
 
     @ApiOperation("Retorna PDF com venda diárias")
-    @GetMapping(value = "/vendas-diarias", produces = MediaTypes.PDF_ALGAFOOD_V1)
+    @GetMapping(value = "/vendas-diarias", produces = MediaType.APPLICATION_PDF_VALUE)
     ResponseEntity<byte[]> findVendasDiariasInPDF(@ApiParam("Filtros") VendaDiariaFilter filter);
 }

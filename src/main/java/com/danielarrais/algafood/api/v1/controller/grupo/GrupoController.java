@@ -4,7 +4,7 @@ import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.assembler.grupo.GrupoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.grupo.GrupoInput;
 import com.danielarrais.algafood.api.v1.dto.output.grupo.GrupoOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.model.Grupo;
 import com.danielarrais.algafood.domain.service.GrupoService;
 import io.swagger.annotations.ApiResponse;
@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/grupos", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/grupos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class GrupoController implements GrupoControllerOAS {
     private final GrupoService grupoService;
     private final GrupoOutputAssembler grupoOutputAssembler;

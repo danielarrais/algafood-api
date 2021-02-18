@@ -4,7 +4,7 @@ import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.dto.input.pedido.PedidoInput;
 import com.danielarrais.algafood.api.v1.dto.output.pedido.PedidoFullOutput;
 import com.danielarrais.algafood.api.v1.dto.output.pedido.PedidoSimpleOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import io.swagger.annotations.*;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(tags = "Pedidos")
 @RestController
-@RequestMapping(path = "/pedidos", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
 interface PedidoControllerOAS {
 
     @ApiOperation("Adiciona pedido")

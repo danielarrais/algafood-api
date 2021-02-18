@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.api.v1.controller;
 
 import com.danielarrais.algafood.api.v1.dto.output.EntryPointOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +11,7 @@ import static com.danielarrais.algafood.api.v1.util.LinkBuilder.*;
 
 @Api(tags = "Raiz")
 @RestController
-@RequestMapping(value = "/", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RootController {
 
     @GetMapping

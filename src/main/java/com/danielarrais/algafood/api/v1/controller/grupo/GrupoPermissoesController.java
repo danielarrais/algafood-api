@@ -2,7 +2,7 @@ package com.danielarrais.algafood.api.v1.controller.grupo;
 
 import com.danielarrais.algafood.api.v1.assembler.permissao.PermissaoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.output.permissao.PermissaoOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.service.GrupoService;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/grupos/{grupoId}/permissoes", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/grupos/{grupoId}/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class GrupoPermissoesController implements GrupoPermissoesControllerOAS {
     private final GrupoService grupoService;
     private final PermissaoOutputAssembler permissaoOutputAssembler;

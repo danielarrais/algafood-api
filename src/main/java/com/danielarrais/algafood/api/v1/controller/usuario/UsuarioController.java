@@ -4,7 +4,7 @@ import com.danielarrais.algafood.api.v1.assembler.usuario.UsuarioOutputAssembler
 import com.danielarrais.algafood.api.v1.dto.input.usuario.UsuarioInput;
 import com.danielarrais.algafood.api.v1.dto.input.usuario.UsuarioSenhaInput;
 import com.danielarrais.algafood.api.v1.dto.output.usuario.UsuarioOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.service.UsuarioService;
 import io.swagger.annotations.Api;
@@ -20,7 +20,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Usuários")
 @RestController
-@RequestMapping(path = "/usuarios", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UsuarioController implements UsuarioControllerOAS {
     private final UsuarioService usuarioService;
     private final UsuarioOutputAssembler usuarioOutputAssembler;

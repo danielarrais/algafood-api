@@ -1,7 +1,6 @@
 package com.danielarrais.algafood.api.v1.controller.estatistica;
 
 import com.danielarrais.algafood.api.v1.dto.output.EntryPointOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.filter.VendaDiariaFilter;
 import com.danielarrais.algafood.domain.model.dto.VendaDiaria;
 import com.danielarrais.algafood.domain.service.VendaConsultaService;
@@ -18,7 +17,7 @@ import java.util.List;
 import static com.danielarrais.algafood.api.v1.util.LinkBuilder.linkVendasDiarias;
 
 @RestController
-@RequestMapping(path = "/estatisticas", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/estatisticas", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EstatisticaController implements EstatisticaControllerOAS {
     private final VendaConsultaService vendaConsultaService;
     private final VendaReportService vendaReportService;
@@ -37,12 +36,12 @@ public class EstatisticaController implements EstatisticaControllerOAS {
         return rootEntryPoint;
     }
 
-    @GetMapping(value = "/vendas-diarias", produces = MediaTypes.JSON_ALGAFOOD_V1)
+    @GetMapping(value = "/vendas-diarias", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<VendaDiaria> findVendasDiariasInJSON(VendaDiariaFilter filter) {
         return vendaConsultaService.consultarVendasDiarias(filter);
     }
 
-    @GetMapping(value = "/vendas-diarias", produces = MediaTypes.PDF_ALGAFOOD_V1)
+    @GetMapping(value = "/vendas-diarias", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<byte[]> findVendasDiariasInPDF(VendaDiariaFilter filter) {
         byte[] pdf = vendaReportService.emitirVendasDiarias(filter);
 

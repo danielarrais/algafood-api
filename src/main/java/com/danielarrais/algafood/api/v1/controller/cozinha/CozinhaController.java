@@ -6,7 +6,7 @@ import com.danielarrais.algafood.api.v1.assembler.cozinha.CozinhaOutputAssembler
 import com.danielarrais.algafood.api.v1.dto.input.cozinha.CozinhaInput;
 import com.danielarrais.algafood.api.v1.dto.output.cozinha.CozinhaFullOutput;
 import com.danielarrais.algafood.api.v1.dto.output.cozinha.CozinhaOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.service.CozinhaService;
 import io.swagger.annotations.Api;
@@ -24,7 +24,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Cozinhas")
 @RestController
-@RequestMapping(path = "/cozinhas", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/cozinhas", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CozinhaController {
     private final CozinhaService cozinhaService;
     private final CozinhaOutputAssembler cozinhaOutputAssembler;

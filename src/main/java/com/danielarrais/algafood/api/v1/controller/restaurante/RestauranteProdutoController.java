@@ -3,7 +3,7 @@ package com.danielarrais.algafood.api.v1.controller.restaurante;
 import com.danielarrais.algafood.api.v1.assembler.restaurante.ProdutoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.restaurante.ProdutoInput;
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.ProdutoOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.service.ProdutoService;
 import com.danielarrais.algafood.domain.service.RestauranteService;
@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/restaurantes/{restauranteId}/produtos", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/restaurantes/{restauranteId}/produtos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteProdutoController implements RestauranteProdutoControllerOAS {
     private final RestauranteService restauranteService;
     private final ProdutoService produtoService;

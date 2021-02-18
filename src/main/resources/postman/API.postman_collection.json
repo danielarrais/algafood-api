@@ -18,12 +18,12 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/cidades",
+									"raw": "{{host}}/v1/cidades",
 									"host": [
 										"{{host}}"
 									],
@@ -43,11 +43,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/cidades/:id",
+									"raw": "{{host}}/v1/cidades/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -73,7 +73,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -87,7 +87,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/cidades/:id",
+									"raw": "{{host}}/v1/cidades/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -113,7 +113,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -127,7 +127,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/cidades/:id",
+									"raw": "{{host}}/v1/cidades/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -153,7 +153,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -167,7 +167,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/cidades",
+									"raw": "{{host}}/v1/cidades",
 									"host": [
 										"{{host}}"
 									],
@@ -191,12 +191,12 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/pedidos?sort=cliente.nome,ASC&size=10&page=0",
+									"raw": "{{host}}/v1/pedidos?sort=cliente.nome,ASC&size=10&page=0",
 									"host": [
 										"{{host}}"
 									],
@@ -250,11 +250,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/pedidos/:id",
+									"raw": "{{host}}/v1/pedidos/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -281,11 +281,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/pedidos/:id/entrega",
+									"raw": "{{host}}/v1/pedidos/:id/entrega",
 									"host": [
 										"{{host}}"
 									],
@@ -313,11 +313,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/pedidos/:codigo/cancelamento",
+									"raw": "{{host}}/v1/pedidos/:codigo/cancelamento",
 									"host": [
 										"{{host}}"
 									],
@@ -345,11 +345,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/pedidos/:id/confirmacao",
+									"raw": "{{host}}/v1/pedidos/:id/confirmacao",
 									"host": [
 										"{{host}}"
 									],
@@ -377,7 +377,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -390,7 +390,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/pedidos",
+									"raw": "{{host}}/v1/pedidos",
 									"host": [
 										"{{host}}"
 									],
@@ -415,11 +415,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/usuarios",
+									"raw": "{{host}}/v1/usuarios",
 									"host": [
 										"{{host}}"
 									],
@@ -439,11 +439,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/usuarios/:id/grupos",
+									"raw": "{{host}}/v1/usuarios/:id/grupos",
 									"host": [
 										"{{host}}"
 									],
@@ -471,11 +471,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/usuarios/:id",
+									"raw": "{{host}}/v1/usuarios/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -501,7 +501,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -515,7 +515,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/usuarios/:id",
+									"raw": "{{host}}/v1/usuarios/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -541,7 +541,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -555,7 +555,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/usuarios/:id/senha",
+									"raw": "{{host}}/v1/usuarios/:id/senha",
 									"host": [
 										"{{host}}"
 									],
@@ -582,7 +582,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -596,7 +596,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/usuarios/:id/grupos/:idGrupo",
+									"raw": "{{host}}/v1/usuarios/:id/grupos/:idGrupo",
 									"host": [
 										"{{host}}"
 									],
@@ -628,7 +628,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -642,7 +642,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/usuarios/:id",
+									"raw": "{{host}}/v1/usuarios/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -668,7 +668,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -682,7 +682,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/usuarios",
+									"raw": "{{host}}/v1/usuarios",
 									"host": [
 										"{{host}}"
 									],
@@ -707,11 +707,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/permissoes",
+									"raw": "{{host}}/v1/permissoes",
 									"host": [
 										"{{host}}"
 									],
@@ -731,11 +731,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/permissoes/:id",
+									"raw": "{{host}}/v1/permissoes/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -761,7 +761,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -775,7 +775,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/permissoes/:id",
+									"raw": "{{host}}/v1/permissoes/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -801,7 +801,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -815,7 +815,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/permissoes/:id",
+									"raw": "{{host}}/v1/permissoes/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -841,7 +841,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -855,7 +855,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/permissoes",
+									"raw": "{{host}}/v1/permissoes",
 									"host": [
 										"{{host}}"
 									],
@@ -880,11 +880,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/grupos",
+									"raw": "{{host}}/v1/grupos",
 									"host": [
 										"{{host}}"
 									],
@@ -904,11 +904,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/grupos/:id/permissoes",
+									"raw": "{{host}}/v1/grupos/:id/permissoes",
 									"host": [
 										"{{host}}"
 									],
@@ -936,11 +936,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/grupos/:id",
+									"raw": "{{host}}/v1/grupos/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -966,7 +966,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -980,7 +980,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/grupos/:id",
+									"raw": "{{host}}/v1/grupos/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1006,7 +1006,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1020,7 +1020,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/grupos/:id/permissoes/:idPermissao",
+									"raw": "{{host}}/v1/grupos/:id/permissoes/:idPermissao",
 									"host": [
 										"{{host}}"
 									],
@@ -1052,7 +1052,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1066,7 +1066,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/grupos/:id",
+									"raw": "{{host}}/v1/grupos/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1092,7 +1092,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1106,7 +1106,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/grupos",
+									"raw": "{{host}}/v1/grupos",
 									"host": [
 										"{{host}}"
 									],
@@ -1130,12 +1130,12 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/cozinhas",
+									"raw": "{{host}}/v1/cozinhas",
 									"host": [
 										"{{host}}"
 									],
@@ -1155,11 +1155,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/cozinhas/:id",
+									"raw": "{{host}}/v1/cozinhas/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1185,7 +1185,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1199,7 +1199,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/cozinhas/:id",
+									"raw": "{{host}}/v1/cozinhas/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1225,7 +1225,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1239,7 +1239,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/cozinhas/:id",
+									"raw": "{{host}}/v1/cozinhas/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1265,7 +1265,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1279,7 +1279,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/cozinhas",
+									"raw": "{{host}}/v1/cozinhas",
 									"host": [
 										"{{host}}"
 									],
@@ -1303,12 +1303,12 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/formas-pagamento",
+									"raw": "{{host}}/v1/formas-pagamento",
 									"host": [
 										"{{host}}"
 									],
@@ -1328,11 +1328,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/formas-pagamento/:id",
+									"raw": "{{host}}/v1/formas-pagamento/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1358,7 +1358,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1372,7 +1372,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/formas-pagamento/:id",
+									"raw": "{{host}}/v1/formas-pagamento/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1398,7 +1398,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1412,7 +1412,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/formas-pagamento/:id",
+									"raw": "{{host}}/v1/formas-pagamento/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1438,7 +1438,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1452,7 +1452,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/formas-pagamento",
+									"raw": "{{host}}/v1/formas-pagamento",
 									"host": [
 										"{{host}}"
 									],
@@ -1476,12 +1476,12 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/restaurantes/:idRestaurante/produtos",
+									"raw": "{{host}}/v1/restaurantes/:idRestaurante/produtos",
 									"host": [
 										"{{host}}"
 									],
@@ -1509,11 +1509,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/restaurantes/:idRestaurante/produtos/:id",
+									"raw": "{{host}}/v1/restaurantes/:idRestaurante/produtos/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1545,7 +1545,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1559,7 +1559,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:idRestaurante/produtos/:id",
+									"raw": "{{host}}/v1/restaurantes/:idRestaurante/produtos/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1591,7 +1591,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1605,7 +1605,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:idRestaurante/produtos/:id",
+									"raw": "{{host}}/v1/restaurantes/:idRestaurante/produtos/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1637,7 +1637,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1651,7 +1651,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:idRestaurante/produtos",
+									"raw": "{{host}}/v1/restaurantes/:idRestaurante/produtos",
 									"host": [
 										"{{host}}"
 									],
@@ -1683,12 +1683,12 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/estados",
+									"raw": "{{host}}/v1/estados",
 									"host": [
 										"{{host}}"
 									],
@@ -1708,11 +1708,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/estados/:id",
+									"raw": "{{host}}/v1/estados/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1738,7 +1738,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1752,7 +1752,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/estados/:id",
+									"raw": "{{host}}/v1/estados/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1778,7 +1778,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1792,7 +1792,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/estados/:id",
+									"raw": "{{host}}/v1/estados/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1818,7 +1818,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -1832,7 +1832,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/estados",
+									"raw": "{{host}}/v1/estados",
 									"host": [
 										"{{host}}"
 									],
@@ -1856,12 +1856,12 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/restaurantes",
+									"raw": "{{host}}/v1/restaurantes",
 									"host": [
 										"{{host}}"
 									],
@@ -1880,12 +1880,12 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/restaurantes/:id/formas-pagamento",
+									"raw": "{{host}}/v1/restaurantes/:id/formas-pagamento",
 									"host": [
 										"{{host}}"
 									],
@@ -1912,12 +1912,12 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/restaurantes/:idRestaurante/responsaveis",
+									"raw": "{{host}}/v1/restaurantes/:idRestaurante/responsaveis",
 									"host": [
 										"{{host}}"
 									],
@@ -1945,11 +1945,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v1+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/restaurantes/:id",
+									"raw": "{{host}}/v1/restaurantes/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -1980,7 +1980,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/restaurantes/:restauranteId/produtos/:produtoId/foto",
+									"raw": "{{host}}/v1/restaurantes/:restauranteId/produtos/:produtoId/foto",
 									"host": [
 										"{{host}}"
 									],
@@ -2013,7 +2013,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2027,7 +2027,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:idRestaurante/formas-pagamento/:idFormaPagamento",
+									"raw": "{{host}}/v1/restaurantes/:idRestaurante/formas-pagamento/:idFormaPagamento",
 									"host": [
 										"{{host}}"
 									],
@@ -2059,7 +2059,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2073,7 +2073,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:idRestaurante/responsaveis/:idUsuario",
+									"raw": "{{host}}/v1/restaurantes/:idRestaurante/responsaveis/:idUsuario",
 									"host": [
 										"{{host}}"
 									],
@@ -2105,7 +2105,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "multipart/vnd.algafood.v1+form-data",
+										"value": "multipart/form-data",
 										"type": "text"
 									}
 								],
@@ -2125,7 +2125,7 @@
 									]
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:restauranteId/produtos/:produtoId/foto",
+									"raw": "{{host}}/v1/restaurantes/:restauranteId/produtos/:produtoId/foto",
 									"host": [
 										"{{host}}"
 									],
@@ -2158,7 +2158,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2172,7 +2172,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:id",
+									"raw": "{{host}}/v1/restaurantes/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -2198,7 +2198,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2212,7 +2212,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:id/ativo",
+									"raw": "{{host}}/v1/restaurantes/:id/ativo",
 									"host": [
 										"{{host}}"
 									],
@@ -2239,7 +2239,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2253,7 +2253,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/ativos",
+									"raw": "{{host}}/v1/restaurantes/ativos",
 									"host": [
 										"{{host}}"
 									],
@@ -2273,7 +2273,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2287,7 +2287,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:id/aberto",
+									"raw": "{{host}}/v1/restaurantes/:id/aberto",
 									"host": [
 										"{{host}}"
 									],
@@ -2314,7 +2314,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2328,7 +2328,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:id/inativo",
+									"raw": "{{host}}/v1/restaurantes/:id/inativo",
 									"host": [
 										"{{host}}"
 									],
@@ -2355,7 +2355,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2369,7 +2369,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/inativos",
+									"raw": "{{host}}/v1/restaurantes/inativos",
 									"host": [
 										"{{host}}"
 									],
@@ -2389,7 +2389,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2403,7 +2403,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:id/fechado",
+									"raw": "{{host}}/v1/restaurantes/:id/fechado",
 									"host": [
 										"{{host}}"
 									],
@@ -2430,7 +2430,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2444,7 +2444,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:id",
+									"raw": "{{host}}/v1/restaurantes/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -2470,7 +2470,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2490,7 +2490,7 @@
 									]
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes/:restauranteId/produtos/:produtoId/foto",
+									"raw": "{{host}}/v1/restaurantes/:restauranteId/produtos/:produtoId/foto",
 									"host": [
 										"{{host}}"
 									],
@@ -2523,7 +2523,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2537,7 +2537,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/restaurantes",
+									"raw": "{{host}}/v1/restaurantes",
 									"host": [
 										"{{host}}"
 									],
@@ -2566,7 +2566,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/estatisticas/vendas-diarias?restauranteId=4",
+									"raw": "{{host}}/v1/estatisticas/vendas-diarias?restauranteId=4",
 									"host": [
 										"{{host}}"
 									],
@@ -2609,7 +2609,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/v3/api-docs",
+							"raw": "{{host}}/v1/v3/api-docs",
 							"host": [
 								"{{host}}"
 							],
@@ -2637,12 +2637,12 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v2+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/cidades",
+									"raw": "{{host}}/v1/cidades",
 									"host": [
 										"{{host}}"
 									],
@@ -2662,11 +2662,11 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/vnd.algafood.v2+json"
+										"value": "application/json"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/cidades/:id",
+									"raw": "{{host}}/v1/cidades/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -2692,7 +2692,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v2+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2706,7 +2706,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/cidades/:id",
+									"raw": "{{host}}/v1/cidades/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -2732,7 +2732,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v2+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2746,7 +2746,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/cidades/:id",
+									"raw": "{{host}}/v1/cidades/:id",
 									"host": [
 										"{{host}}"
 									],
@@ -2772,7 +2772,7 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
@@ -2786,7 +2786,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/cidades",
+									"raw": "{{host}}/v1/cidades",
 									"host": [
 										"{{host}}"
 									],
@@ -2812,7 +2812,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/v3/api-docs",
+							"raw": "{{host}}/v1/v2/api-docs",
 							"host": [
 								"{{host}}"
 							],

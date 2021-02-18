@@ -6,7 +6,7 @@ import com.danielarrais.algafood.api.v1.dto.input.pedido.PedidoInput;
 import com.danielarrais.algafood.api.v1.dto.output.pedido.PedidoFullOutput;
 import com.danielarrais.algafood.api.v1.dto.output.pedido.PedidoSimpleOutput;
 import com.danielarrais.algafood.core.data.PageableTranslator;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import com.danielarrais.algafood.domain.model.Pedido;
 import com.danielarrais.algafood.domain.service.PedidoService;
@@ -23,7 +23,7 @@ import static com.danielarrais.algafood.core.data.PageWrapper.of;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/pedidos", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PedidoController implements PedidoControllerOAS {
     private final PedidoService pedidoService;
     private final PedidoFullOutputAssembler pedidoFullOutputAssembler;

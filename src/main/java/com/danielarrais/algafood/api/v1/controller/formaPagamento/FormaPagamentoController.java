@@ -4,7 +4,7 @@ import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.assembler.formaPagamento.FormaPagamentoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.formaPagamento.FormaPagamentoInput;
 import com.danielarrais.algafood.api.v1.dto.output.formaPagamento.FormaPagamentoOutput;
-import com.danielarrais.algafood.core.util.MediaTypes;
+import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.service.FormaPagamentoService;
 import io.swagger.annotations.ApiResponse;
@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/formas-pagamento", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/v1/formas-pagamento", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FormaPagamentoController implements FormaPagamentoControllerOAS {
 
     private final FormaPagamentoService formaPagamentoService;
