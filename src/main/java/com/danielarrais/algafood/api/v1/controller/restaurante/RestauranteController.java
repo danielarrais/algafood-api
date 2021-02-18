@@ -91,6 +91,7 @@ public class RestauranteController implements RestauranteControllerOAS {
         }
     }
 
+    @Deprecated
     @PutMapping("/inativos")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void inativarBach(@RequestBody List<Long> ids) {
