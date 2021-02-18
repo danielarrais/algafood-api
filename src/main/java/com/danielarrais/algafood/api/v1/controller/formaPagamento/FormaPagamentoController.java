@@ -1,9 +1,10 @@
 package com.danielarrais.algafood.api.v1.controller.formaPagamento;
 
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.assembler.formaPagamento.FormaPagamentoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.formaPagamento.FormaPagamentoInput;
 import com.danielarrais.algafood.api.v1.dto.output.formaPagamento.FormaPagamentoOutput;
-import com.danielarrais.algafood.api.exception.Problem;
+import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.service.FormaPagamentoService;
 import io.swagger.annotations.ApiResponse;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/formas-pagamento", produces = "application/vnd.algafood.v1+json")
+@RequestMapping(path = "/formas-pagamento", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
 public class FormaPagamentoController implements FormaPagamentoControllerOAS {
 
     private final FormaPagamentoService formaPagamentoService;

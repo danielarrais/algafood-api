@@ -1,9 +1,9 @@
 package com.danielarrais.algafood.api.v1.controller.cozinha;
 
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.dto.input.cozinha.CozinhaInput;
 import com.danielarrais.algafood.api.v1.dto.output.cozinha.CozinhaFullOutput;
 import com.danielarrais.algafood.api.v1.dto.output.cozinha.CozinhaOutput;
-import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

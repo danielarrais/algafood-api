@@ -1,13 +1,13 @@
 package com.danielarrais.algafood.api.v1.controller.pedido;
 
+import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.service.FluxoPedidoService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/pedidos", produces = "application/vnd.algafood.v1+json")
+@RequestMapping(path = "/pedidos", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
 public class FluxoPedidoController implements FluxoPedidoControllerOAS {
     private final FluxoPedidoService fluxoPedidoService;
 

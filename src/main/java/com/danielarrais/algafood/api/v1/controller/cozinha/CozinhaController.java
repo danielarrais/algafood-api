@@ -1,11 +1,12 @@
 package com.danielarrais.algafood.api.v1.controller.cozinha;
 
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.assembler.cozinha.CozinhaFullOutputAssembler;
 import com.danielarrais.algafood.api.v1.assembler.cozinha.CozinhaOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.cozinha.CozinhaInput;
 import com.danielarrais.algafood.api.v1.dto.output.cozinha.CozinhaFullOutput;
 import com.danielarrais.algafood.api.v1.dto.output.cozinha.CozinhaOutput;
-import com.danielarrais.algafood.api.exception.Problem;
+import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.service.CozinhaService;
 import io.swagger.annotations.Api;
@@ -15,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,7 +24,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Cozinhas")
 @RestController
-@RequestMapping(path = "/cozinhas", produces = "application/vnd.algafood.v1+json")
+@RequestMapping(path = "/cozinhas", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
 public class CozinhaController {
     private final CozinhaService cozinhaService;
     private final CozinhaOutputAssembler cozinhaOutputAssembler;

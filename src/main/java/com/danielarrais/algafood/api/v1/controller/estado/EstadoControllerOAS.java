@@ -1,8 +1,8 @@
 package com.danielarrais.algafood.api.v1.controller.estado;
 
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.dto.input.estado.EstadoInput;
 import com.danielarrais.algafood.api.v1.dto.output.estado.EstadoOutput;
-import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;

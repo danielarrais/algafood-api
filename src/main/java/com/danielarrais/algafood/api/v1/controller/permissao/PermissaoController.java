@@ -3,13 +3,13 @@ package com.danielarrais.algafood.api.v1.controller.permissao;
 import com.danielarrais.algafood.api.v1.assembler.permissao.PermissaoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.permissao.PermissaoInput;
 import com.danielarrais.algafood.api.v1.dto.output.permissao.PermissaoOutput;
+import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.model.Permissao;
 import com.danielarrais.algafood.domain.service.PermissaoService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/permissoes", produces = "application/vnd.algafood.v1+json")
+@RequestMapping(path = "/permissoes", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
 public class PermissaoController implements PermissaoControllerOAS {
     private final PermissaoService permissaoService;
     private final PermissaoOutputAssembler permissaoOutputAssembler;

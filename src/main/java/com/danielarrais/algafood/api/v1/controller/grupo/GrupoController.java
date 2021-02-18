@@ -1,9 +1,10 @@
 package com.danielarrais.algafood.api.v1.controller.grupo;
 
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.assembler.grupo.GrupoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.grupo.GrupoInput;
 import com.danielarrais.algafood.api.v1.dto.output.grupo.GrupoOutput;
-import com.danielarrais.algafood.api.exception.Problem;
+import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.model.Grupo;
 import com.danielarrais.algafood.domain.service.GrupoService;
 import io.swagger.annotations.ApiResponse;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/grupos", produces = "application/vnd.algafood.v1+json")
+@RequestMapping(path = "/grupos", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
 public class GrupoController implements GrupoControllerOAS {
     private final GrupoService grupoService;
     private final GrupoOutputAssembler grupoOutputAssembler;

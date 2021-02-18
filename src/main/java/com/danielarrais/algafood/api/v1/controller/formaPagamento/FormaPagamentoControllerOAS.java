@@ -1,8 +1,8 @@
 package com.danielarrais.algafood.api.v1.controller.formaPagamento;
 
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.dto.input.formaPagamento.FormaPagamentoInput;
 import com.danielarrais.algafood.api.v1.dto.output.formaPagamento.FormaPagamentoOutput;
-import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.PagedModel;

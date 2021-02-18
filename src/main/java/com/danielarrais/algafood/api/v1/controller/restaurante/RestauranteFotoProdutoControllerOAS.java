@@ -1,8 +1,8 @@
 package com.danielarrais.algafood.api.v1.controller.restaurante;
 
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.dto.input.restaurante.ProdutoFotoInput;
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.FotoProdutoOutput;
-import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;

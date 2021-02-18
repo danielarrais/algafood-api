@@ -1,9 +1,9 @@
 package com.danielarrais.algafood.api.v1.controller.restaurante;
 
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.dto.input.restaurante.RestauranteInput;
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.RestauranteFullOutput;
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.RestauranteSimpleOutput;
-import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;

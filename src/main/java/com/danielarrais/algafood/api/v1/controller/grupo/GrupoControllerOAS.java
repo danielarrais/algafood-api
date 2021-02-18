@@ -1,8 +1,8 @@
 package com.danielarrais.algafood.api.v1.controller.grupo;
 
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.dto.input.grupo.GrupoInput;
 import com.danielarrais.algafood.api.v1.dto.output.grupo.GrupoOutput;
-import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.PagedModel;

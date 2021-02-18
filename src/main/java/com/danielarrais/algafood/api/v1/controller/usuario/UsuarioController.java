@@ -4,6 +4,7 @@ import com.danielarrais.algafood.api.v1.assembler.usuario.UsuarioOutputAssembler
 import com.danielarrais.algafood.api.v1.dto.input.usuario.UsuarioInput;
 import com.danielarrais.algafood.api.v1.dto.input.usuario.UsuarioSenhaInput;
 import com.danielarrais.algafood.api.v1.dto.output.usuario.UsuarioOutput;
+import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.service.UsuarioService;
 import io.swagger.annotations.Api;
@@ -11,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,7 +20,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Usuários")
 @RestController
-@RequestMapping(path = "/usuarios", produces = "application/vnd.algafood.v1+json")
+@RequestMapping(path = "/usuarios", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
 public class UsuarioController implements UsuarioControllerOAS {
     private final UsuarioService usuarioService;
     private final UsuarioOutputAssembler usuarioOutputAssembler;

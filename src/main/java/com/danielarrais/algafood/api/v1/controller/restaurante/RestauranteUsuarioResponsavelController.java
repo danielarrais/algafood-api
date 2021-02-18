@@ -2,15 +2,15 @@ package com.danielarrais.algafood.api.v1.controller.restaurante;
 
 import com.danielarrais.algafood.api.v1.assembler.usuario.UsuarioSimpleOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.output.usuario.UsuarioSimpleOutput;
+import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.service.RestauranteService;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/restaurantes/{restauranteId}/responsaveis", produces = "application/vnd.algafood.v1+json")
+@RequestMapping(path = "/restaurantes/{restauranteId}/responsaveis", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
 public class RestauranteUsuarioResponsavelController implements RestauranteUsuarioResponsavelControllerOAS {
     private final RestauranteService restauranteService;
     private final UsuarioSimpleOutputAssembler usuarioSimpleOutputAssembler;

@@ -2,6 +2,7 @@ package com.danielarrais.algafood.api.v1.controller.restaurante;
 
 import com.danielarrais.algafood.api.v1.dto.input.restaurante.ProdutoFotoInput;
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.FotoProdutoOutput;
+import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.FotoProduto;
 import com.danielarrais.algafood.domain.service.FotoProdutoService;
@@ -22,7 +23,7 @@ import java.util.Arrays;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @RestController
-@RequestMapping(path = "/restaurantes/{restauranteId}/produtos/{produtoId}/foto")
+@RequestMapping(path = "/restaurantes/{restauranteId}/produtos/{produtoId}/foto", produces = MediaTypes.APPLICATION_ALGAFOOD_V1_JSON)
 public class RestauranteFotoProdutoController implements RestauranteFotoProdutoControllerOAS {
     private final FotoProdutoService fotoProdutoService;
 

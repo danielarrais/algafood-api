@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.api.v1.controller.usuario;
 
-import com.danielarrais.algafood.api.v1.dto.output.grupo.GrupoOutput;
 import com.danielarrais.algafood.api.exception.Problem;
+import com.danielarrais.algafood.api.v1.dto.output.grupo.GrupoOutput;
 import io.swagger.annotations.*;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;

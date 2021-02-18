@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.api.v1.controller.grupo;
 
-import com.danielarrais.algafood.api.v1.dto.output.permissao.PermissaoOutput;
 import com.danielarrais.algafood.api.exception.Problem;
+import com.danielarrais.algafood.api.v1.dto.output.permissao.PermissaoOutput;
 import io.swagger.annotations.*;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
