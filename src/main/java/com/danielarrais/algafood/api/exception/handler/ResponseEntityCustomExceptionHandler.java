@@ -1,6 +1,7 @@
 package com.danielarrais.algafood.api.exception.handler;
 
 import com.danielarrais.algafood.api.exception.Problem;
+import io.sentry.Sentry;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +57,8 @@ public class ResponseEntityCustomExceptionHandler extends ResponseEntityExceptio
 
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        Sentry.captureException(ex);
+
         if (body == null) {
             body = Problem.builder()
                     .status(status)
