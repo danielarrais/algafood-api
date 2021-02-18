@@ -14,5 +14,5 @@ public class CidadeInputV2 {
 
     @NotNull
     @ApiModelProperty(required = true, example = "1")
-    private Long idEstado;
+    private Long estadoId;
 }

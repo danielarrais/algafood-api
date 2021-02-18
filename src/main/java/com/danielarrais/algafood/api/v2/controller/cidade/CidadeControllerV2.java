@@ -1,7 +1,7 @@
 package com.danielarrais.algafood.api.v2.controller.cidade;
 
-import com.danielarrais.algafood.api.v1.dto.input.cidade.CidadeInput;
 import com.danielarrais.algafood.api.v2.assembler.cidade.CidadeOutputAssemblerV2;
+import com.danielarrais.algafood.api.v2.dto.input.cidade.CidadeInputV2;
 import com.danielarrais.algafood.api.v2.dto.output.cidade.CidadeOutputV2;
 import com.danielarrais.algafood.core.util.MediaTypes;
 import com.danielarrais.algafood.domain.model.Cidade;
@@ -18,7 +18,7 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Api(tags = "Cidades")
 @RestController
-@RequestMapping(path = "/cidades", produces = MediaTypes.JSON_ALGAFOOD_V1)
+@RequestMapping(path = "/cidades", produces = MediaTypes.JSON_ALGAFOOD_V2)
 public class CidadeControllerV2 implements CidadeControllerOASV2 {
     private final CidadeService cidadeService;
     private final CidadeOutputAssemblerV2 cidadeOutputAssembler;
@@ -43,14 +43,14 @@ public class CidadeControllerV2 implements CidadeControllerOASV2 {
     }
 
     @PostMapping
-    public void adicionar(@RequestBody @Valid CidadeInput cidadeInput) {
+    public void adicionar(@RequestBody @Valid CidadeInputV2 cidadeInput) {
         var cidade = mapper(cidadeInput, Cidade.class);
         cidadeService.salvar(cidade);
     }
 
     @PutMapping("/{id}")
     public void atualizar(@PathVariable Long id,
-                          @RequestBody @Valid CidadeInput cidadeInput) {
+                          @RequestBody @Valid CidadeInputV2 cidadeInput) {
         var cidade = mapper(cidadeInput, Cidade.class);
         cidadeService.atualizar(id, cidade);
     }

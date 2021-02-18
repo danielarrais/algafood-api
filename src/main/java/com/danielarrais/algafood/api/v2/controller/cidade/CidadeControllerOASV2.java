@@ -2,6 +2,7 @@ package com.danielarrais.algafood.api.v2.controller.cidade;
 
 import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.dto.input.cidade.CidadeInput;
+import com.danielarrais.algafood.api.v2.dto.input.cidade.CidadeInputV2;
 import com.danielarrais.algafood.api.v2.dto.output.cidade.CidadeOutputV2;
 import io.swagger.annotations.*;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,7 @@ interface CidadeControllerOASV2 {
             @ApiResponse(code = 201, message = "Cidade cadastrada", response = Problem.class)
     })
     void adicionar(@ApiParam(name = "Corpo", value = "Dados da cidade")
-                           CidadeInput cidadeInput);
+                           CidadeInputV2 cidadeInput);
 
     @ApiOperation("Atualiza uma cidade pelo ID")
     @ApiResponses({
@@ -33,7 +34,7 @@ interface CidadeControllerOASV2 {
             @ApiResponse(code = 404, message = "Cidade não encontrada", response = Problem.class)
     })
     void atualizar(@ApiParam(value = "ID de uma cidade", example = "1", required = true) Long id,
-                   @ApiParam(name = "Corpo", value = "Novos dados da cidade") CidadeInput cidadeInput);
+                   @ApiParam(name = "Corpo", value = "Novos dados da cidade") CidadeInputV2 cidadeInput);
 
     @ApiOperation("Deleta uma cidade pelo ID")
     @ApiResponses({
