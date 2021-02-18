@@ -2,10 +2,11 @@ package com.danielarrais.algafood.api.dto.output.restaurante;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.MediaType;
 
 @Data
-public class FotoProdutoOutput {
+public class FotoProdutoOutput extends RepresentationModel<FotoProdutoOutput> {
 
     @ApiModelProperty(value = "Tamanho do arquivo (em Bytes)", example = "5000000")
     private Long tamanho;

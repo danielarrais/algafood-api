@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.api.controller.formaPagamento;
 
+import com.danielarrais.algafood.api.assembler.formaPagamento.FormaPagamentoOutputAssembler;
 import com.danielarrais.algafood.api.dto.input.formaPagamento.FormaPagamentoInput;
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
 import com.danielarrais.algafood.api.exception.Problem;
@@ -7,8 +8,9 @@ import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.service.FormaPagamentoService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -22,15 +24,21 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 public class FormaPagamentoController implements FormaPagamentoControllerOAS {
 
     private final FormaPagamentoService formaPagamentoService;
+    private final FormaPagamentoOutputAssembler formaPagamentoOutputAssembler;
+    private final PagedResourcesAssembler<FormaPagamento> pagedResourcesAssembler;
 
-    public FormaPagamentoController(FormaPagamentoService formaPagamentoService) {
+    public FormaPagamentoController(FormaPagamentoService formaPagamentoService,
+                                    FormaPagamentoOutputAssembler formaPagamentoOutputAssembler,
+                                    PagedResourcesAssembler<FormaPagamento> pagedResourcesAssembler) {
         this.formaPagamentoService = formaPagamentoService;
+        this.formaPagamentoOutputAssembler = formaPagamentoOutputAssembler;
+        this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
     @GetMapping()
-    public Page<FormaPagamentoOutput> listar(Pageable pageable) {
+    public PagedModel<FormaPagamentoOutput> listar(Pageable pageable) {
         var formaPagamentos = formaPagamentoService.listar(pageable);
-        return mapper(formaPagamentos, FormaPagamentoOutput.class);
+        return pagedResourcesAssembler.toModel(formaPagamentos, formaPagamentoOutputAssembler);
     }
 
     @GetMapping("/{id}")
@@ -40,7 +48,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOAS {
     })
     public FormaPagamentoOutput buscar(@PathVariable Long id) {
         var formaPagamento = formaPagamentoService.buscarObrigatorio(id);
-        return mapper(formaPagamento, FormaPagamentoOutput.class);
+        return formaPagamentoOutputAssembler.toModel(formaPagamento);
     }
 
     @PostMapping

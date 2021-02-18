@@ -3,10 +3,11 @@ package com.danielarrais.algafood.api.dto.output.usuario;
 import com.danielarrais.algafood.api.dto.output.grupo.GrupoOutput;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 @Data
-public class UsuarioOutput {
+public class UsuarioOutput extends RepresentationModel<UsuarioOutput> {
 
     @ApiModelProperty(value = "ID do usuário", example = "1")
     private Long id;

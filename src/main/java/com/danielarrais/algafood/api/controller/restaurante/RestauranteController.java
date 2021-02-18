@@ -1,15 +1,20 @@
 package com.danielarrais.algafood.api.controller.restaurante;
 
+import com.danielarrais.algafood.api.assembler.restaurante.RestauranteFullOutputAssembler;
+import com.danielarrais.algafood.api.assembler.restaurante.RestauranteSimpleOutputAssembler;
 import com.danielarrais.algafood.api.dto.input.restaurante.RestauranteInput;
 import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteFullOutput;
+import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteSimpleOutput;
 import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
 import com.danielarrais.algafood.domain.service.RestauranteService;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,21 +26,30 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 @RequestMapping(path = "/restaurantes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteController implements RestauranteControllerOAS {
     private final RestauranteService restauranteService;
+    private final RestauranteSimpleOutputAssembler restauranteSimpleOutputAssembler;
+    private final RestauranteFullOutputAssembler restauranteFullOutputAssembler;
+    private final PagedResourcesAssembler<Restaurante> pagedResourcesAssembler;
 
-    public RestauranteController(RestauranteService restauranteService) {
+    public RestauranteController(RestauranteService restauranteService,
+                                 RestauranteSimpleOutputAssembler restauranteSimpleOutputAssembler,
+                                 RestauranteFullOutputAssembler restauranteFullOutputAssembler,
+                                 PagedResourcesAssembler<Restaurante> pagedResourcesAssembler) {
         this.restauranteService = restauranteService;
+        this.restauranteSimpleOutputAssembler = restauranteSimpleOutputAssembler;
+        this.restauranteFullOutputAssembler = restauranteFullOutputAssembler;
+        this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
     @GetMapping()
-    public Page<RestauranteFullOutput> listar(Pageable pageable) {
+    public PagedModel<RestauranteSimpleOutput> listar(Pageable pageable) {
         var restaurantes = restauranteService.listar(pageable);
-        return mapper(restaurantes, RestauranteFullOutput.class);
+        return pagedResourcesAssembler.toModel(restaurantes, restauranteSimpleOutputAssembler);
     }
 
     @GetMapping("/{id}")
     public RestauranteFullOutput buscar(@PathVariable Long id) {
         var restaurante = restauranteService.buscarObrigatorio(id);
-        return mapper(restaurante, RestauranteFullOutput.class);
+        return restauranteFullOutputAssembler.toModel(restaurante);
     }
 
     @PostMapping
@@ -53,14 +67,18 @@ public class RestauranteController implements RestauranteControllerOAS {
 
     @PutMapping("/{id}/ativo")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void ativar(@PathVariable Long id) {
+    public ResponseEntity<Void> ativar(@PathVariable Long id) {
         restauranteService.ativar(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/inativo")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void inativar(@PathVariable Long id) {
+    public ResponseEntity<Void> inativar(@PathVariable Long id) {
         restauranteService.inativar(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/ativos")
@@ -85,14 +103,18 @@ public class RestauranteController implements RestauranteControllerOAS {
 
     @PutMapping("/{id}/aberto")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void abrir(@PathVariable Long id) {
+    public ResponseEntity<Void> abrir(@PathVariable Long id) {
         restauranteService.abrir(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/fechado")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void fechar(@PathVariable Long id) {
+    public ResponseEntity<Void> fechar(@PathVariable Long id) {
         restauranteService.fechar(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")

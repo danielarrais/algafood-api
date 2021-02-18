@@ -1,12 +1,15 @@
 package com.danielarrais.algafood.api.controller.cidade;
 
+import com.danielarrais.algafood.api.assembler.cidade.CidadeOutputAssembler;
 import com.danielarrais.algafood.api.dto.input.cidade.CidadeInput;
 import com.danielarrais.algafood.api.dto.output.cidade.CidadeOutput;
 import com.danielarrais.algafood.domain.model.Cidade;
 import com.danielarrais.algafood.domain.service.CidadeService;
 import io.swagger.annotations.Api;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,21 +22,25 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 @RequestMapping(path = "/cidades", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CidadeController implements CidadeControllerOAS {
     private final CidadeService cidadeService;
+    private final CidadeOutputAssembler cidadeOutputAssembler;
+    private final PagedResourcesAssembler<Cidade> pagedResourcesAssembler;
 
-    public CidadeController(CidadeService cidadeService) {
+    public CidadeController(CidadeService cidadeService, CidadeOutputAssembler cidadeOutputAssembler, PagedResourcesAssembler<Cidade> pagedResourcesAssembler) {
         this.cidadeService = cidadeService;
+        this.cidadeOutputAssembler = cidadeOutputAssembler;
+        this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
     @GetMapping()
-    public Page<CidadeOutput> listar(Pageable pageable) {
+    public PagedModel<CidadeOutput> listar(Pageable pageable) {
         var cidades = cidadeService.listar(pageable);
-        return mapper(cidades, CidadeOutput.class);
+        return pagedResourcesAssembler.toModel(cidades, cidadeOutputAssembler);
     }
 
     @GetMapping("/{id}")
     public CidadeOutput buscar(@PathVariable Long id) {
         var cidade = cidadeService.buscarObrigatorio(id);
-        return mapper(cidade, CidadeOutput.class);
+        return cidadeOutputAssembler.toModel(cidade);
     }
 
     @PostMapping

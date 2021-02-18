@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.api.controller.estatistica;
 
+import com.danielarrais.algafood.api.dto.output.EntryPointOutput;
 import com.danielarrais.algafood.domain.filter.VendaDiariaFilter;
 import com.danielarrais.algafood.domain.model.dto.VendaDiaria;
 import com.danielarrais.algafood.domain.service.VendaConsultaService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.danielarrais.algafood.core.hateoas.LinkBuilder.*;
+
 @RestController
 @RequestMapping(path = "/estatisticas", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EstatisticaController implements EstatisticaControllerOAS {
@@ -22,6 +25,15 @@ public class EstatisticaController implements EstatisticaControllerOAS {
     public EstatisticaController(VendaConsultaService vendaConsultaService, VendaReportService vendaReportService) {
         this.vendaConsultaService = vendaConsultaService;
         this.vendaReportService = vendaReportService;
+    }
+
+    @GetMapping
+    public EntryPointOutput root() {
+        var rootEntryPoint = new EntryPointOutput();
+
+        rootEntryPoint.add(linkVendasDiarias());
+
+        return rootEntryPoint;
     }
 
     @GetMapping(value = "/vendas-diarias", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -2,10 +2,12 @@ package com.danielarrais.algafood.api.controller.restaurante;
 
 import com.danielarrais.algafood.api.dto.input.restaurante.RestauranteInput;
 import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteFullOutput;
+import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteSimpleOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
 interface RestauranteControllerOAS {
 
     @ApiOperation("Lista restaurantes")
-    Page<RestauranteFullOutput> listar(Pageable pageable);
+    CollectionModel<RestauranteSimpleOutput> listar(Pageable pageable);
 
     @ApiOperation("Busca restaurante")
     @ApiResponses({
@@ -42,7 +44,7 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void ativar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
+    ResponseEntity<Void> ativar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Inativa restaurantes")
     @ApiResponses({
@@ -50,7 +52,7 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void inativar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
+    ResponseEntity<Void> inativar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Ativa restaurantes")
     void ativarBach(@ApiParam(value = "IDs dos restaurantes") List<Long> ids);
@@ -64,7 +66,7 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void abrir(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
+    ResponseEntity<Void> abrir(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Fecha restaurante")
     @ApiResponses({
@@ -72,7 +74,7 @@ interface RestauranteControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    void fechar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
+    ResponseEntity<Void> fechar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long id);
 
     @ApiOperation("Exlui restaurante")
     @ApiResponses({

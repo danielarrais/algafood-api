@@ -15,8 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.danielarrais.algafood.domain.model.ItemPedido.Fields.pedido;
-import static com.danielarrais.algafood.domain.model.StatusPedido.CANCELADO;
-import static com.danielarrais.algafood.domain.model.StatusPedido.ENTREGUE;
+import static com.danielarrais.algafood.domain.model.StatusPedido.*;
 
 @Entity
 @Data
@@ -83,6 +82,18 @@ public class Pedido extends AbstractAggregateRoot<Pedido> {
     public void entregar() {
         setStatus(ENTREGUE);
         setDataCancelamento(OffsetDateTime.now());
+    }
+
+    public boolean podeConfirmar() {
+        return getStatus().podeAlterarPara(CONFIRMADO);
+    }
+
+    public boolean podeCancelar() {
+        return getStatus().podeAlterarPara(CANCELADO);
+    }
+
+    public boolean podeEntregar() {
+        return getStatus().podeAlterarPara(ENTREGUE);
     }
 
     public void calcularTotal() {

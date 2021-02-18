@@ -4,14 +4,14 @@ import com.danielarrais.algafood.api.dto.input.permissao.PermissaoInput;
 import com.danielarrais.algafood.api.dto.output.permissao.PermissaoOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.PagedModel;
 
 @Api(tags = "Permissões")
 interface PermissaoControllerOAS {
 
     @ApiOperation("Lista permissões")
-    Page<PermissaoOutput> listar(Pageable pageable);
+    PagedModel<PermissaoOutput> listar(Pageable pageable);
 
     @ApiOperation("Busca permissão")
     @ApiResponses({

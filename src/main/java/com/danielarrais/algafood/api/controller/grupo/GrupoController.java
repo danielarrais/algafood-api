@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.api.controller.grupo;
 
+import com.danielarrais.algafood.api.assembler.grupo.GrupoOutputAssembler;
 import com.danielarrais.algafood.api.dto.input.grupo.GrupoInput;
 import com.danielarrais.algafood.api.dto.output.grupo.GrupoOutput;
 import com.danielarrais.algafood.api.exception.Problem;
@@ -7,8 +8,9 @@ import com.danielarrais.algafood.domain.model.Grupo;
 import com.danielarrais.algafood.domain.service.GrupoService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,15 +23,21 @@ import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 @RequestMapping(path = "/grupos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class GrupoController implements GrupoControllerOAS {
     private final GrupoService grupoService;
+    private final GrupoOutputAssembler grupoOutputAssembler;
+    private final PagedResourcesAssembler<Grupo> pagedResourcesAssembler;
 
-    public GrupoController(GrupoService grupoService) {
+    public GrupoController(GrupoService grupoService,
+                           GrupoOutputAssembler grupoOutputAssembler,
+                           PagedResourcesAssembler<Grupo> pagedResourcesAssembler) {
         this.grupoService = grupoService;
+        this.grupoOutputAssembler = grupoOutputAssembler;
+        this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
     @GetMapping()
-    public Page<GrupoOutput> listar(Pageable pageable) {
+    public PagedModel<GrupoOutput> listar(Pageable pageable) {
         var grupos = grupoService.listar(pageable);
-        return mapper(grupos, GrupoOutput.class);
+        return pagedResourcesAssembler.toModel(grupos, grupoOutputAssembler);
     }
 
     @GetMapping("/{id}")
@@ -39,7 +47,7 @@ public class GrupoController implements GrupoControllerOAS {
     })
     public GrupoOutput buscar(@PathVariable Long id) {
         var grupo = grupoService.buscarObrigatorio(id);
-        return mapper(grupo, GrupoOutput.class);
+        return grupoOutputAssembler.toModel(grupo);
     }
 
     @PostMapping
