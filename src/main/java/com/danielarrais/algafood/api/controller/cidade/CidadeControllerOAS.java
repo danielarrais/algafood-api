@@ -4,14 +4,14 @@ import com.danielarrais.algafood.api.dto.input.cidade.CidadeInput;
 import com.danielarrais.algafood.api.dto.output.cidade.CidadeOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 
 @Api(tags = "Cidades")
 interface CidadeControllerOAS {
 
     @ApiOperation("Lista as cidades")
-    Page<CidadeOutput> listar(Pageable pageable);
+    CollectionModel<CidadeOutput> listar(Pageable pageable);
 
     @ApiOperation("Busca uma cidade pelo ID")
     @ApiResponses({

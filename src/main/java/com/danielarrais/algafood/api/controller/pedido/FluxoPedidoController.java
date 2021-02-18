@@ -3,6 +3,7 @@ package com.danielarrais.algafood.api.controller.pedido;
 import com.danielarrais.algafood.domain.service.FluxoPedidoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,20 +17,26 @@ public class FluxoPedidoController implements FluxoPedidoControllerOAS {
 
     @PutMapping("/{codigo}/cancelamento")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void cancelar(@PathVariable String codigo) {
+    public ResponseEntity<Void> cancelar(@PathVariable String codigo) {
         fluxoPedidoService.cancelar(codigo);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{codigo}/confirmacao")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void confirmar(@PathVariable String codigo) {
+    public ResponseEntity<Void> confirmar(@PathVariable String codigo) {
         fluxoPedidoService.confirmar(codigo);
+
+        return ResponseEntity.noContent().build();
     }
 
 
     @PutMapping("/{codigo}/entrega")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void entregar(@PathVariable String codigo) {
+    public ResponseEntity<Void> entregar(@PathVariable String codigo) {
         fluxoPedidoService.entregar(codigo);
+
+        return ResponseEntity.noContent().build();
     }
 }

@@ -4,14 +4,14 @@ import com.danielarrais.algafood.api.dto.input.estado.EstadoInput;
 import com.danielarrais.algafood.api.dto.output.estado.EstadoOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 
 @Api(tags = "Estados")
 interface EstadoControllerOAS {
 
     @ApiOperation("Lista estados")
-    Page<EstadoOutput> listar(Pageable pageable);
+    CollectionModel<EstadoOutput> listar(Pageable pageable);
 
     @ApiOperation("Busca um estado")
     @ApiResponses({

@@ -4,14 +4,14 @@ import com.danielarrais.algafood.api.dto.input.formaPagamento.FormaPagamentoInpu
 import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.PagedModel;
 
 @Api(tags = "Formas de Pagamento")
 interface FormaPagamentoControllerOAS {
 
     @ApiOperation("Lista formas de pagamentos")
-    Page<FormaPagamentoOutput> listar(Pageable pageable);
+    PagedModel<FormaPagamentoOutput> listar(Pageable pageable);
 
     @ApiOperation("Busca forma de pagamento")
     @ApiResponses({

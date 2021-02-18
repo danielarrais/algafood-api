@@ -4,8 +4,7 @@ import com.danielarrais.algafood.api.dto.input.restaurante.ProdutoInput;
 import com.danielarrais.algafood.api.dto.output.restaurante.ProdutoOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
-
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 @Api(tags = "Produtos")
 interface RestauranteProdutoControllerOAS {
@@ -15,7 +14,7 @@ interface RestauranteProdutoControllerOAS {
             @ApiResponse(code = 400, message = "ID do restaurante inválido", response = Problem.class),
             @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
     })
-    List<ProdutoOutput> listar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId);
+    CollectionModel<ProdutoOutput> listar(@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId);
 
     @ApiOperation("Adiciona produto a um restaurante")
     @ApiResponses({

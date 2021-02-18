@@ -6,8 +6,8 @@ import com.danielarrais.algafood.api.dto.output.pedido.PedidoSimpleOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import io.swagger.annotations.*;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +24,7 @@ interface PedidoControllerOAS {
     void adicionar(@ApiParam("Corpo") PedidoInput pedidoInput);
 
     @ApiOperation("Lista pedidos")
-    Page<PedidoSimpleOutput> listar(@ApiParam("Filtros") PedidoFilter filtro, Pageable pageable);
+    PagedModel<PedidoSimpleOutput> listar(@ApiParam("Filtros") PedidoFilter filtro, Pageable pageable);
 
     @ApiOperation("Busca pedido")
     @ApiResponses({

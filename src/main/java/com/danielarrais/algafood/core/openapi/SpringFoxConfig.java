@@ -7,19 +7,30 @@ import com.danielarrais.algafood.api.dto.output.formaPagamento.FormaPagamentoOut
 import com.danielarrais.algafood.api.dto.output.grupo.GrupoOutput;
 import com.danielarrais.algafood.api.dto.output.pedido.PedidoSimpleOutput;
 import com.danielarrais.algafood.api.dto.output.permissao.PermissaoOutput;
+import com.danielarrais.algafood.api.dto.output.restaurante.ProdutoOutput;
 import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteFullOutput;
+import com.danielarrais.algafood.api.dto.output.restaurante.RestauranteSimpleOutput;
 import com.danielarrais.algafood.api.dto.output.usuario.UsuarioOutput;
+import com.danielarrais.algafood.api.dto.output.usuario.UsuarioSimpleOutput;
 import com.danielarrais.algafood.api.exception.Problem;
-import com.danielarrais.algafood.core.openapi.model.PageOAS;
+import com.danielarrais.algafood.core.openapi.model.CollectionModelOAS;
+import com.danielarrais.algafood.core.openapi.model.LinksOAS;
 import com.danielarrais.algafood.core.openapi.model.PageableOAS;
+import com.danielarrais.algafood.core.openapi.model.PagedModelOAS;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Links;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.hateoas.client.LinkDiscoverer;
+import org.springframework.hateoas.client.LinkDiscoverers;
+import org.springframework.hateoas.mediatype.collectionjson.CollectionJsonLinkDiscoverer;
 import org.springframework.http.HttpStatus;
+import org.springframework.plugin.core.SimplePluginRegistry;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -44,6 +55,7 @@ import java.net.URL;
 import java.net.URLStreamHandler;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
 
@@ -116,7 +128,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 
         }};
 
-        var alternateTypeRules = new HashSet<AlternateTypeRule>(){{
+        var alternatePageTypeRules = new HashSet<AlternateTypeRule>(){{
             add(buildPageTypeRole(CidadeOutput.class));
             add(buildPageTypeRole(CozinhaOutput.class));
             add(buildPageTypeRole(EstadoOutput.class));
@@ -126,6 +138,19 @@ public class SpringFoxConfig implements WebMvcConfigurer {
             add(buildPageTypeRole(RestauranteFullOutput.class));
             add(buildPageTypeRole(UsuarioOutput.class));
             add(buildPageTypeRole(FormaPagamentoOutput.class));
+        }}.toArray(new AlternateTypeRule[0]);
+
+        var alternateListTypeRules = new HashSet<AlternateTypeRule>(){{
+            add(buildListTypeRole(CidadeOutput.class));
+            add(buildListTypeRole(CozinhaOutput.class));
+            add(buildListTypeRole(EstadoOutput.class));
+            add(buildListTypeRole(FormaPagamentoOutput.class));
+            add(buildListTypeRole(GrupoOutput.class));
+            add(buildListTypeRole(PermissaoOutput.class));
+            add(buildListTypeRole(UsuarioOutput.class));
+            add(buildListTypeRole(ProdutoOutput.class));
+            add(buildListTypeRole(RestauranteSimpleOutput.class));
+            add(buildListTypeRole(UsuarioSimpleOutput.class));
         }}.toArray(new AlternateTypeRule[0]);
 
         var ignoreParametersTypes = new HashSet<Class<?>>() {{
@@ -145,8 +170,10 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .globalResponseMessage(RequestMethod.DELETE, globalDeleteResponses)
                 .additionalModels(typeResolver.resolve(Problem.class))
                 .directModelSubstitute(Pageable.class, PageableOAS.class)
+                .directModelSubstitute(Links.class, LinksOAS[].class)
                 .ignoredParameterTypes(ignoreParametersTypes)
-                .alternateTypeRules(alternateTypeRules)
+                .alternateTypeRules(alternatePageTypeRules)
+                .alternateTypeRules(alternateListTypeRules)
                 .apiInfo(apiInfo())
                 .tags(tags[0], tags);
     }
@@ -155,8 +182,17 @@ public class SpringFoxConfig implements WebMvcConfigurer {
         var typeResolver = new TypeResolver();
 
         return AlternateTypeRules.newRule(
-                typeResolver.resolve(Page.class, classModel),
-                typeResolver.resolve(PageOAS.class, classModel)
+                typeResolver.resolve(PagedModel.class, classModel),
+                typeResolver.resolve(PagedModelOAS.class, classModel)
+        );
+    }
+
+    private AlternateTypeRule buildListTypeRole(Class<?> classModel) {
+        var typeResolver = new TypeResolver();
+
+        return AlternateTypeRules.newRule(
+                typeResolver.resolve(CollectionModel.class, classModel),
+                typeResolver.resolve(CollectionModelOAS.class, classModel)
         );
     }
 
@@ -178,5 +214,12 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
+    @Bean
+    public LinkDiscoverers discoverers() {
+        List<LinkDiscoverer> plugins = new ArrayList<>();
+        plugins.add(new CollectionJsonLinkDiscoverer());
+        return new LinkDiscoverers(SimplePluginRegistry.create(plugins));
     }
 }

@@ -4,14 +4,14 @@ import com.danielarrais.algafood.api.dto.input.grupo.GrupoInput;
 import com.danielarrais.algafood.api.dto.output.grupo.GrupoOutput;
 import com.danielarrais.algafood.api.exception.Problem;
 import io.swagger.annotations.*;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.PagedModel;
 
 @Api(tags = "Grupos de Permissões")
 interface GrupoControllerOAS {
 
     @ApiOperation("Lista grupos de permissão")
-    Page<GrupoOutput> listar(Pageable pageable);
+    PagedModel<GrupoOutput> listar(Pageable pageable);
 
     @ApiOperation("Busca grupo de permissão")
     @ApiResponses({

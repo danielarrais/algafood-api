@@ -7,13 +7,14 @@ import com.danielarrais.algafood.api.dto.output.usuario.UsuarioSimpleOutput;
 import com.danielarrais.algafood.domain.model.StatusPedido;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
 @Data
-public class PedidoFullOutput {
+public class PedidoFullOutput extends RepresentationModel<PedidoFullOutput> {
 
     @ApiModelProperty(value = "Código do pedido", example = "e032d335-a030-467a-9a0c-41688ac3ea50")
     private String codigo;
