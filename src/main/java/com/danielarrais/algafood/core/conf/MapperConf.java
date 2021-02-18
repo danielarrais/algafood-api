@@ -20,7 +20,7 @@ public class MapperConf {
                 .addMappings(mapper -> mapper.skip(Cidade::setId));
 
         var enderecoToOutputTypeMap = modelMapper.createTypeMap(Endereco.class, EnderecoOutput.class);
-        
+
         enderecoToOutputTypeMap
                 .addMapping(src -> src.getCidade().getEstado().getNome(),
                         (destino, valor) -> destino.getCidade().setEstado((String) valor));
