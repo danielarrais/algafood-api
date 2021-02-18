@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "65ac7fbd-1025-4852-b1e3-f75f297e00c7",
+		"_postman_id": "a8b90dae-ca32-4772-a311-53b017e529be",
 		"name": "API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,9 +18,8 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/xml",
-										"type": "text",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -44,8 +43,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -60,8 +58,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -73,7 +70,13 @@
 							"name": "Atualizar Cidade",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Sambaíba de Açúcar\",\n    \"estado\": {\n        \"id\": 555\n    }\n}",
@@ -95,8 +98,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -108,7 +110,13 @@
 							"name": "Deletar Cidade",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
@@ -130,8 +138,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -143,7 +150,13 @@
 							"name": "Criar Cidade",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Sambaíba\",\n    \"estado\": {\n        \"id\": 1\n    }\n}",
@@ -178,9 +191,8 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/xml",
-										"type": "text",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -238,8 +250,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -254,8 +265,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "cdc9288c-7cdc-4225-9944-6696436754d6",
-											"type": "string"
+											"value": "cdc9288c-7cdc-4225-9944-6696436754d6"
 										}
 									]
 								},
@@ -271,8 +281,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -288,8 +297,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "22b40961-8eed-4c56-8a3f-f0519385926a",
-											"type": "string"
+											"value": "22b40961-8eed-4c56-8a3f-f0519385926a"
 										}
 									]
 								},
@@ -305,8 +313,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -338,8 +345,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -355,8 +361,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "d0c8e7a7-da3c-45d9-b33b-aed349999cf4",
-											"type": "string"
+											"value": "d0c8e7a7-da3c-45d9-b33b-aed349999cf4"
 										}
 									]
 								},
@@ -372,8 +377,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"body": {
@@ -411,8 +415,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -436,8 +439,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -453,8 +455,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -470,8 +471,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -486,8 +486,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -499,7 +498,13 @@
 							"name": "Atualizar Usuario",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Daniel Arrais\",\n    \"email\": \"maria@email.com\",\n    \"senha\": \"Sambaíba\"\n}",
@@ -521,8 +526,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -534,7 +538,13 @@
 							"name": "Atualizar Senha do Usuario",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"novaSenha\": \"Sambaíba2\",\n    \"senhaAtual\": \"Sambaíba\"\n}",
@@ -557,8 +567,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -570,7 +579,13 @@
 							"name": "Associar/Dessassociar Grupo",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"ativo\": false\n}",
@@ -594,13 +609,11 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										},
 										{
 											"key": "idGrupo",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -612,7 +625,13 @@
 							"name": "Deletar Usuario",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
@@ -634,8 +653,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "6",
-											"type": "string"
+											"value": "6"
 										}
 									]
 								},
@@ -647,7 +665,13 @@
 							"name": "Criar Usuario",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Daniel\",\n    \"email\": \"daniel2@email.com\",\n    \"senha\": \"Sambaíba\",\n    \"grupos\": [\n        {\n            \"id\": 2\n        },\n        {\n            \"id\": 3\n        }\n    ]\n}",
@@ -683,8 +707,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -708,8 +731,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -724,8 +746,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -737,7 +758,13 @@
 							"name": "Atualizar Permissão",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"ALUNO\",\n    \"descricao\": \"Permite tudom\"\n}",
@@ -759,8 +786,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "3",
-											"type": "string"
+											"value": "3"
 										}
 									]
 								},
@@ -772,7 +798,13 @@
 							"name": "Deletar Permissão",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
@@ -794,8 +826,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -807,7 +838,13 @@
 							"name": "Criar Permissão",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"\",\n    \"descricao\": \"Permite tudo\"\n}",
@@ -843,8 +880,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -868,8 +904,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -885,8 +920,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -902,8 +936,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -918,8 +951,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -931,7 +963,13 @@
 							"name": "Atualizar Grupo",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Alunos, professores e coordenadores\"\n}",
@@ -953,8 +991,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -966,7 +1003,13 @@
 							"name": "Associar/Dessassociar Permissão",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"ativo\": false\n}",
@@ -990,13 +1033,11 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										},
 										{
 											"key": "idPermissao",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -1008,7 +1049,13 @@
 							"name": "Deletar Grupo",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
@@ -1030,8 +1077,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -1043,7 +1089,13 @@
 							"name": "Criar Grupo",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Alunos e professores\",\n    \"permissoes\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 3\n        }\n    ]\n}",
@@ -1078,9 +1130,8 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/xml",
-										"type": "text",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -1104,8 +1155,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -1120,8 +1170,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "21",
-											"type": "string"
+											"value": "21"
 										}
 									]
 								},
@@ -1133,7 +1182,13 @@
 							"name": "Atualizar Cozinha",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
@@ -1155,8 +1210,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -1168,7 +1222,13 @@
 							"name": "Deletar Cozinha",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
@@ -1190,8 +1250,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2",
-											"type": "string"
+											"value": "2"
 										}
 									]
 								},
@@ -1203,7 +1262,13 @@
 							"name": "Criar Cozinha",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Nordestina\"\n}",
@@ -1238,9 +1303,8 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/xml",
-										"type": "text",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -1264,8 +1328,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -1280,8 +1343,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "3",
-											"type": "string"
+											"value": "3"
 										}
 									]
 								},
@@ -1293,7 +1355,13 @@
 							"name": "Atualizar Forma de Pagamento",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"descricao\": \"Francesa e  Italiana\"\n}",
@@ -1315,8 +1383,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "3",
-											"type": "string"
+											"value": "3"
 										}
 									]
 								},
@@ -1328,7 +1395,13 @@
 							"name": "Deletar Forma de Pagamento",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
@@ -1350,8 +1423,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "3",
-											"type": "string"
+											"value": "3"
 										}
 									]
 								},
@@ -1363,7 +1435,13 @@
 							"name": "Criar Forma de Pagamento",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"descricao\": \"Cartão de Crédito\"\n}",
@@ -1398,9 +1476,8 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/xml",
-										"type": "text",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -1416,8 +1493,7 @@
 									"variable": [
 										{
 											"key": "idRestaurante",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -1433,8 +1509,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -1451,13 +1526,11 @@
 									"variable": [
 										{
 											"key": "idRestaurante",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										},
 										{
 											"key": "id",
-											"value": "5",
-											"type": "string"
+											"value": "5"
 										}
 									]
 								},
@@ -1469,7 +1542,13 @@
 							"name": "Atualizar Produto",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"descricao\": \"Prato Feito\",\n    \"preco\": \"167.00\",\n    \"ativo\": true\n}",
@@ -1493,13 +1572,11 @@
 									"variable": [
 										{
 											"key": "idRestaurante",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										},
 										{
 											"key": "id",
-											"value": "9",
-											"type": "string"
+											"value": "9"
 										}
 									]
 								},
@@ -1511,7 +1588,13 @@
 							"name": "Deletar Produto",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
@@ -1535,13 +1618,11 @@
 									"variable": [
 										{
 											"key": "idRestaurante",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										},
 										{
 											"key": "id",
-											"value": "5",
-											"type": "string"
+											"value": "5"
 										}
 									]
 								},
@@ -1553,7 +1634,13 @@
 							"name": "Criar Produto",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"descricao\": \"Prato Feito\",\n    \"preco\": \"15.00\",\n    \"ativo\": true\n}",
@@ -1576,8 +1663,7 @@
 									"variable": [
 										{
 											"key": "idRestaurante",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -1597,9 +1683,8 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/xml",
-										"type": "text",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -1623,8 +1708,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -1639,8 +1723,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "21",
-											"type": "string"
+											"value": "21"
 										}
 									]
 								},
@@ -1652,7 +1735,13 @@
 							"name": "Atualizar Estado",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
@@ -1674,8 +1763,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "26",
-											"type": "string"
+											"value": "26"
 										}
 									]
 								},
@@ -1687,7 +1775,13 @@
 							"name": "Deletar Estado",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
@@ -1709,8 +1803,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -1722,7 +1815,13 @@
 							"name": "Criar Estado",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Bahia\"\n}",
@@ -1757,9 +1856,8 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/xml",
-										"type": "text",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -1782,9 +1880,8 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/xml",
-										"type": "text",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -1800,8 +1897,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -1816,9 +1912,8 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/xml",
-										"type": "text",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -1834,8 +1929,7 @@
 									"variable": [
 										{
 											"key": "idRestaurante",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -1851,8 +1945,7 @@
 									{
 										"key": "Accept",
 										"type": "text",
-										"value": "application/xml",
-										"disabled": true
+										"value": "application/vnd.algafood.v1+json"
 									}
 								],
 								"url": {
@@ -1867,8 +1960,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -1902,13 +1994,11 @@
 									"variable": [
 										{
 											"key": "restauranteId",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										},
 										{
 											"key": "produtoId",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -1920,7 +2010,13 @@
 							"name": "Associar/Dessassociar Forma de Pagamento",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"ativo\": false\n}",
@@ -1944,13 +2040,11 @@
 									"variable": [
 										{
 											"key": "idRestaurante",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										},
 										{
 											"key": "idFormaPagamento",
-											"value": "12",
-											"type": "string"
+											"value": "12"
 										}
 									]
 								},
@@ -1962,7 +2056,13 @@
 							"name": "Associar/Dessassociar Responsaveis",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"ativo\": false\n}",
@@ -1986,13 +2086,11 @@
 									"variable": [
 										{
 											"key": "idRestaurante",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										},
 										{
 											"key": "idUsuario",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -2004,7 +2102,13 @@
 							"name": "Atualizar Foto do Produto",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "formdata",
 									"formdata": [
@@ -2035,13 +2139,11 @@
 									"variable": [
 										{
 											"key": "restauranteId",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										},
 										{
 											"key": "produtoId",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -2053,7 +2155,13 @@
 							"name": "Atualizar Restaurante",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"vxcv\",\n    \"taxaFrete\": \"0.00\",\n    \"ativo\": \"true\",\n    \"cozinha\": {\n        \"id\": 2\n    }, \n    \"endereco\": {\n        \"cep\": \"77060140\",\n        \"logradouro\": \"Rua Mato Grosso e Mathias\",\n        \"numero\": \"S/N\",\n        \"complemento\": \"Predio mais alto da cidade\",\n        \"bairro\": \"Açaí\",\n        \"cidade\": {\n            \"id\": 2\n        }\n    },\n    \"formasPagamento\" : [\n        {\n            \"id\": 1\n        }\n    ]\n}",
@@ -2075,8 +2183,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -2088,7 +2195,13 @@
 							"name": "Ativar Restaurante",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"ativo\": true\n}",
@@ -2111,8 +2224,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -2124,7 +2236,13 @@
 							"name": "Ativar Restaurantes",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "[1, 2]",
@@ -2152,7 +2270,13 @@
 							"name": "Abrir Restaurante",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"ativo\": true\n}",
@@ -2175,8 +2299,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -2188,7 +2311,13 @@
 							"name": "Inativar Restaurante",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"ativo\": false\n}",
@@ -2211,8 +2340,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -2224,7 +2352,13 @@
 							"name": "Inativar Restaurantes",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "[1, 2]",
@@ -2252,7 +2386,13 @@
 							"name": "Fechar Restaurante",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"ativo\": false\n}",
@@ -2275,8 +2415,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -2288,7 +2427,13 @@
 							"name": "Deletar Restaurante",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"Francesa e  Italiana\"\n}",
@@ -2310,8 +2455,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "15",
-											"type": "string"
+											"value": "15"
 										}
 									]
 								},
@@ -2323,7 +2467,13 @@
 							"name": "Deletar Foto do Produto",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "formdata",
 									"formdata": [
@@ -2354,13 +2504,11 @@
 									"variable": [
 										{
 											"key": "restauranteId",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										},
 										{
 											"key": "produtoId",
-											"value": "1",
-											"type": "string"
+											"value": "1"
 										}
 									]
 								},
@@ -2372,7 +2520,13 @@
 							"name": "Criar Restaurante",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"nome\": \"vbcvbcvbc - frete grátis\",\n    \"taxaFrete\": \"0.00\",\n    \"ativo\": \"true\",\n    \"cozinha\": {\n        \"id\": 1\n    }, \n    \"endereco\": {\n        \"cep\": \"77060140\",\n        \"logradouro\": \"Rua Mato Grosso e Mathias\",\n        \"numero\": \"S/N\",\n        \"complemento\": \"Predio mais alto da cidade\",\n        \"bairro\": \"Açaí\",\n        \"cidade\": {\n            \"id\": 1\n        }\n    },\n    \"formasPagamento\": [\n        {\n            \"id\": 1\n        }\n    ]\n}",
