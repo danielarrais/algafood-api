@@ -4,7 +4,6 @@ import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.assembler.formaPagamento.FormaPagamentoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.formaPagamento.FormaPagamentoInput;
 import com.danielarrais.algafood.api.v1.dto.output.formaPagamento.FormaPagamentoOutput;
-import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.model.FormaPagamento;
 import com.danielarrais.algafood.domain.service.FormaPagamentoService;
 import io.swagger.annotations.ApiResponse;
@@ -13,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

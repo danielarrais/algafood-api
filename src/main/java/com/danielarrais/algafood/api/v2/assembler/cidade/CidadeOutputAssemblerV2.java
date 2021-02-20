@@ -7,7 +7,8 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import static com.danielarrais.algafood.api.v2.util.LinkBuilderV2.*;
+import static com.danielarrais.algafood.api.v2.util.LinkBuilderV2.linkBuscarCidade;
+import static com.danielarrais.algafood.api.v2.util.LinkBuilderV2.linkCidades;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
 
 @Component

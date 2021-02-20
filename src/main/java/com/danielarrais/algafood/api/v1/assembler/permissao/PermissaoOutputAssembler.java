@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
-import static com.danielarrais.algafood.api.v1.util.LinkBuilder.*;
+import static com.danielarrais.algafood.api.v1.util.LinkBuilder.linkAssociarPermissaoGrupo;
+import static com.danielarrais.algafood.api.v1.util.LinkBuilder.linkDesassociarPermissaoGrupo;
 
 @Component
 public class PermissaoOutputAssembler extends RepresentationModelAssemblerSupport<Permissao, PermissaoOutput> {

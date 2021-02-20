@@ -1,8 +1,6 @@
 package com.danielarrais.algafood;
 
-import com.danielarrais.algafood.domain.exception.NegocioException;
 import com.danielarrais.algafood.infraestructure.repository.BaseSimpleJpaRepositoryImpl;
-import io.sentry.Sentry;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;

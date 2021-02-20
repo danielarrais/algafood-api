@@ -6,7 +6,6 @@ import com.danielarrais.algafood.api.v1.assembler.cozinha.CozinhaOutputAssembler
 import com.danielarrais.algafood.api.v1.dto.input.cozinha.CozinhaInput;
 import com.danielarrais.algafood.api.v1.dto.output.cozinha.CozinhaFullOutput;
 import com.danielarrais.algafood.api.v1.dto.output.cozinha.CozinhaOutput;
-import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.model.Cozinha;
 import com.danielarrais.algafood.domain.service.CozinhaService;
 import io.swagger.annotations.Api;
@@ -16,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

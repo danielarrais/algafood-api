@@ -1,7 +1,6 @@
 package com.danielarrais.algafood.api.v2.controller.cidade;
 
 import com.danielarrais.algafood.api.exception.Problem;
-import com.danielarrais.algafood.api.v1.dto.input.cidade.CidadeInput;
 import com.danielarrais.algafood.api.v2.dto.input.cidade.CidadeInputV2;
 import com.danielarrais.algafood.api.v2.dto.output.cidade.CidadeOutputV2;
 import io.swagger.annotations.*;

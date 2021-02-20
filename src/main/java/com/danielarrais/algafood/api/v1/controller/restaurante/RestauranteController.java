@@ -5,7 +5,6 @@ import com.danielarrais.algafood.api.v1.assembler.restaurante.RestauranteSimpleO
 import com.danielarrais.algafood.api.v1.dto.input.restaurante.RestauranteInput;
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.RestauranteFullOutput;
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.RestauranteSimpleOutput;
-import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.model.Restaurante;
@@ -14,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

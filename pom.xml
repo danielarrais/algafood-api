@@ -12,7 +12,7 @@
     <artifactId>algafood-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>algafood-api</name>
-    <description>Projeto para estudo do módulo 2 do curso Spring Rest API</description>
+    <description>Projeto para estudo curso Especialista Spring Rest</description>
 
     <properties>
         <java.version>11</java.version>

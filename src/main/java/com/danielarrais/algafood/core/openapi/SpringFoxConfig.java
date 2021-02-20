@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.core.openapi;
 
+import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.dto.output.cidade.CidadeOutput;
 import com.danielarrais.algafood.api.v1.dto.output.cidade.CidadeSimpleOutput;
 import com.danielarrais.algafood.api.v1.dto.output.cozinha.CozinhaOutput;
@@ -13,7 +14,6 @@ import com.danielarrais.algafood.api.v1.dto.output.restaurante.RestauranteFullOu
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.RestauranteSimpleOutput;
 import com.danielarrais.algafood.api.v1.dto.output.usuario.UsuarioOutput;
 import com.danielarrais.algafood.api.v1.dto.output.usuario.UsuarioSimpleOutput;
-import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v2.dto.output.cidade.CidadeOutputV2;
 import com.danielarrais.algafood.api.v2.dto.output.cidade.CidadeSimpleOutputV2;
 import com.danielarrais.algafood.core.openapi.model.CollectionModelOAS;
