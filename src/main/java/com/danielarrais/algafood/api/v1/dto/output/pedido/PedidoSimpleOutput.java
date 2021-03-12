@@ -34,5 +34,5 @@ public class PedidoSimpleOutput extends RepresentationModel<PedidoSimpleOutput> 
     private UsuarioSimpleOutput cliente;
 
     @ApiModelProperty(value = "Nome do cliente", example = "Daniel Arrais")
-    private String nomeUsuario;
+    private String nomeCliente;
 }
