@@ -36,10 +36,10 @@ VALUES ('Alunos', (now() at time zone 'utc'), (now() at time zone 'utc')),
 
 -- Inserts Usuários
 INSERT INTO usuario (nome, email, senha, data_cadastro, data_atualizacao)
-VALUES ('Daniel', 'daniel@email.com', 'Sambaíba', (now() at time zone 'utc'), (now() at time zone 'utc')),
-       ('Maria', 'maria@email.com', 'Sambaíba', (now() at time zone 'utc'), (now() at time zone 'utc')),
-       ('João', 'joão@email.com', 'Sambaíba', (now() at time zone 'utc'), (now() at time zone 'utc')),
-       ('Joana', 'joana@email.com', 'Sambaíba', (now() at time zone 'utc'), (now() at time zone 'utc'));
+VALUES ('Daniel', 'daniel@email.com', '$2y$12$VB1Nm12cFXxisOCEKFMvB.FX7MhutU8Lw9ynO8ymRjexvg8k0P.TW', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('Maria', 'maria@email.com', '$2y$12$VB1Nm12cFXxisOCEKFMvB.FX7MhutU8Lw9ynO8ymRjexvg8k0P.TW', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('João', 'joão@email.com', '$2y$12$VB1Nm12cFXxisOCEKFMvB.FX7MhutU8Lw9ynO8ymRjexvg8k0P.TW', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('Joana', 'joana@email.com', '$2y$12$VB1Nm12cFXxisOCEKFMvB.FX7MhutU8Lw9ynO8ymRjexvg8k0P.TW', (now() at time zone 'utc'), (now() at time zone 'utc'));
 
 -- Inserts Cozinha
 INSERT INTO cozinha (nome, data_cadastro, data_atualizacao)
