@@ -3,6 +3,7 @@ package com.danielarrais.algafood.api.v1.controller.usuario;
 import com.danielarrais.algafood.api.v1.assembler.usuario.UsuarioOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.usuario.UsuarioInput;
 import com.danielarrais.algafood.api.v1.dto.input.usuario.UsuarioSenhaInput;
+import com.danielarrais.algafood.api.v1.dto.input.usuario.UsuarioUpdateInput;
 import com.danielarrais.algafood.api.v1.dto.output.usuario.UsuarioOutput;
 import com.danielarrais.algafood.domain.model.Usuario;
 import com.danielarrais.algafood.domain.service.UsuarioService;
@@ -60,7 +61,7 @@ public class UsuarioController implements UsuarioControllerOAS {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioInput usuarioInput) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioUpdateInput usuarioInput) {
         var usuario = mapper(usuarioInput, Usuario.class);
         usuarioService.atualizar(id, usuario);
     }
