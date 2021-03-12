@@ -43,21 +43,21 @@ public class Restaurante {
             name = "forma_pagamento_restaurante",
             joinColumns = @JoinColumn(name = "restaurante_id"),
             inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
-    private Set<@Valid @ConvertGroup(to = OnlyId.class) FormaPagamento> formasPagamento = new HashSet<>();
+    private Set<@ConvertGroup(to = OnlyId.class) FormaPagamento> formasPagamento = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
             name = "usuario_responsavel_restaurante",
             joinColumns = @JoinColumn(name = "restaurante_id"),
             inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-    private Set<@Valid @ConvertGroup(to = OnlyId.class) Usuario> responsaveis = new HashSet<>();
+    private Set<@ConvertGroup(to = OnlyId.class) Usuario> responsaveis = new HashSet<>();
 
     @Embedded
     private Endereco endereco;
 
     @JsonIgnore
     @OneToMany(mappedBy = Produto.Fields.restaurante)
-    private List<@Valid Produto> produtos;
+    private List<Produto> produtos;
 
     @CreationTimestamp
     @Column(updatable = false)

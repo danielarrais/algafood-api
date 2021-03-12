@@ -5,7 +5,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +29,7 @@ public class Usuario {
             name = "usuario_grupo",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "grupo_id"))
-    private Set<@Valid Grupo> grupos = new HashSet<>();
+    private Set<Grupo> grupos = new HashSet<>();
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -38,10 +37,6 @@ public class Usuario {
 
     @UpdateTimestamp
     private OffsetDateTime dataAtualizacao;
-
-    public boolean isSenhaIgual(String senhaAtual) {
-        return this.senha.equals(senhaAtual);
-    }
 
     public void adicionarGrupo(Grupo formaPagamento) {
         getGrupos().add(formaPagamento);
