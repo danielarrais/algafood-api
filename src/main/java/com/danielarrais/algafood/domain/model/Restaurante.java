@@ -1,6 +1,5 @@
 package com.danielarrais.algafood.domain.model;
 
-import com.danielarrais.algafood.core.validation.Groups.OnlyId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;
@@ -9,8 +8,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.groups.ConvertGroup;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
@@ -43,14 +40,14 @@ public class Restaurante {
             name = "forma_pagamento_restaurante",
             joinColumns = @JoinColumn(name = "restaurante_id"),
             inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
-    private Set<@ConvertGroup(to = OnlyId.class) FormaPagamento> formasPagamento = new HashSet<>();
+    private Set<FormaPagamento> formasPagamento = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
             name = "usuario_responsavel_restaurante",
             joinColumns = @JoinColumn(name = "restaurante_id"),
             inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-    private Set<@ConvertGroup(to = OnlyId.class) Usuario> responsaveis = new HashSet<>();
+    private Set<Usuario> responsaveis = new HashSet<>();
 
     @Embedded
     private Endereco endereco;
