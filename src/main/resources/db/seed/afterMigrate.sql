@@ -24,8 +24,24 @@ VALUES ('Sambaíba', 1, (now() at time zone 'utc'), (now() at time zone 'utc')),
 
 -- Inserts Permissoes
 INSERT INTO permissao (nome, descricao, data_cadastro, data_atualizacao)
-VALUES ('ADMIN', 'Permite tudo', (now() at time zone 'utc'), (now() at time zone 'utc')),
-       ('ALUNO', 'Permite emição de certificados', (now() at time zone 'utc'), (now() at time zone 'utc'));
+VALUES ('CONSULTAR_COZINHAS', 'Permite consultar cozinhas', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('EDITAR_COZINHAS', 'Permite editar cozinhas', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('CONSULTAR_FORMAS_PAGAMENTO', 'Permite consultar formas de pagamento', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('EDITAR_FORMAS_PAGAMENTO', 'Permite criar ou editar formas de pagamento', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('CONSULTAR_CIDADES', 'Permite consultar cidades', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('EDITAR_CIDADES', 'Permite criar ou editar cidades', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('CONSULTAR_ESTADOS', 'Permite consultar estados', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('EDITAR_ESTADOS', 'Permite criar ou editar estados', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('CONSULTAR_USUARIOS', 'Permite consultar usuários', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('EDITAR_USUARIOS', 'Permite criar ou editar usuários', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('CONSULTAR_RESTAURANTES', 'Permite consultar restaurantes', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('EDITAR_RESTAURANTES', 'Permite criar, editar ou gerenciar restaurantes', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('CONSULTAR_PRODUTOS', 'Permite consultar produtos', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('EDITAR_PRODUTOS', 'Permite criar ou editar produtos', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('CONSULTAR_PEDIDOS', 'Permite consultar pedidos', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('GERENCIAR_PEDIDOS', 'Permite gerenciar pedidos', (now() at time zone 'utc'), (now() at time zone 'utc')),
+       ('GERAR_RELATORIOS', 'Permite gerar relatórios', (now() at time zone 'utc'), (now() at time zone 'utc'));
+
 
 -- Inserts Grupos
 INSERT INTO grupo (nome, data_cadastro, data_atualizacao)
