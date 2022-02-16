@@ -1,8 +1,8 @@
 package com.danielarrais.algafood.api.v1.controller;
 
 import com.danielarrais.algafood.api.v1.dto.output.EntryPointOutput;
-import org.springframework.http.MediaType;
 import io.swagger.annotations.Api;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

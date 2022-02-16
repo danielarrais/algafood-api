@@ -1,7 +1,5 @@
 package com.danielarrais.algafood.util;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
 
@@ -30,15 +28,6 @@ public class CustomBeansUtils extends BeanUtils {
         }
 
         return nullFields.toArray(new String[0]);
-    }
-
-    private static ObjectMapper buildObjectMapper() {
-        var objectMapper = new ObjectMapper();
-
-        objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
-
-        return objectMapper;
     }
 
     public static <T> T getPropertieValue(Object value, String valorField) throws InvocationTargetException, IllegalAccessException {

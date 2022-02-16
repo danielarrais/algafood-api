@@ -3,7 +3,6 @@ package com.danielarrais.algafood.api.v1.dto.input.pedido;
 import com.danielarrais.algafood.api.v1.dto.input.endereco.EnderecoInput;
 import com.danielarrais.algafood.api.v1.dto.input.formaPagamento.FormaPagamentoIdInput;
 import com.danielarrais.algafood.api.v1.dto.input.restaurante.RestauranteIdInput;
-import com.danielarrais.algafood.api.v1.dto.input.usuario.UsuarioIdInput;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -13,10 +12,6 @@ import java.util.Set;
 
 @Data
 public class PedidoInput {
-    @Valid
-    @NotNull
-    private UsuarioIdInput cliente;
-
     @Valid
     @NotNull
     private EnderecoInput enderecoEntrega;

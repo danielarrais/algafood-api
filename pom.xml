@@ -12,13 +12,14 @@
     <artifactId>algafood-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>algafood-api</name>
-    <description>Projeto para estudo do módulo 2 do curso Spring Rest API</description>
+    <description>Projeto para estudo curso Especialista Spring Rest</description>
 
     <properties>
         <java.version>11</java.version>
         <jasperreports.version>6.16.0</jasperreports.version>
         <aws-java-sdk-s3.version>1.11.671</aws-java-sdk-s3.version>
         <springfox.version>2.9.2</springfox.version>
+        <oauth2-oidc-sdk.version>9.1</oauth2-oidc-sdk.version>
     </properties>
 
     <dependencies>
@@ -149,6 +150,19 @@
             <groupId>io.sentry</groupId>
             <artifactId>sentry-logback</artifactId>
             <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>oauth2-oidc-sdk</artifactId>
+            <version>${oauth2-oidc-sdk.version}</version>
         </dependency>
     </dependencies>
     <build>
