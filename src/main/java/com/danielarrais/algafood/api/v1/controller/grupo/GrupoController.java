@@ -4,7 +4,6 @@ import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.assembler.grupo.GrupoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.grupo.GrupoInput;
 import com.danielarrais.algafood.api.v1.dto.output.grupo.GrupoOutput;
-import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.model.Grupo;
 import com.danielarrais.algafood.domain.service.GrupoService;
 import io.swagger.annotations.ApiResponse;
@@ -13,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

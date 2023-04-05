@@ -4,11 +4,11 @@ import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.dto.input.pedido.PedidoInput;
 import com.danielarrais.algafood.api.v1.dto.output.pedido.PedidoFullOutput;
 import com.danielarrais.algafood.api.v1.dto.output.pedido.PedidoSimpleOutput;
-import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.filter.PedidoFilter;
 import io.swagger.annotations.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

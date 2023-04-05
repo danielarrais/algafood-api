@@ -1,5 +1,6 @@
 package com.danielarrais.algafood.domain.service;
 
+import com.danielarrais.algafood.core.security.AlgaSecurity;
 import com.danielarrais.algafood.domain.exception.DependenciaNaoEncontradaException;
 import com.danielarrais.algafood.domain.exception.RegistroNaoEncontradoException;
 import com.danielarrais.algafood.domain.filter.PedidoFilter;
@@ -29,13 +30,16 @@ public class PedidoService {
     private final UsuarioService usuarioService;
     private final CidadeService cidadeService;
 
+    private final AlgaSecurity algaSecurity;
+
     public PedidoService(PedidoRepository pedidoRepository,
                          PedidoValidation pedidoValidation,
                          ProdutoService produtoService,
                          RestauranteService restauranteService,
                          FormaPagamentoService formaPagamentoService,
                          UsuarioService usuarioService,
-                         CidadeService cidadeService) {
+                         CidadeService cidadeService,
+                         AlgaSecurity algaSecurity) {
         this.pedidoValidation = pedidoValidation;
         this.produtoService = produtoService;
         this.pedidoRepository = pedidoRepository;
@@ -43,6 +47,7 @@ public class PedidoService {
         this.formaPagamentoService = formaPagamentoService;
         this.usuarioService = usuarioService;
         this.cidadeService = cidadeService;
+        this.algaSecurity = algaSecurity;
     }
 
     public Page<Pedido> listar(PedidoFilter filtro, Pageable pageable) {
@@ -75,7 +80,7 @@ public class PedidoService {
     }
 
     private void prencherDadosDoPedido(Pedido pedido) {
-        Long clienteId = pedido.getCliente().getId();
+        Long clienteId = algaSecurity.getUsuarioId();
         Long formaPagamentoId = pedido.getFormaPagamento().getId();
         Long restauranteId = pedido.getRestaurante().getId();
         Long cidadeId = pedido.getEnderecoEntrega().getCidade().getId();

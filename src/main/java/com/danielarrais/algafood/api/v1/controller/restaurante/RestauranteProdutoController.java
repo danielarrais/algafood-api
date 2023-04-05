@@ -3,11 +3,11 @@ package com.danielarrais.algafood.api.v1.controller.restaurante;
 import com.danielarrais.algafood.api.v1.assembler.restaurante.ProdutoOutputAssembler;
 import com.danielarrais.algafood.api.v1.dto.input.restaurante.ProdutoInput;
 import com.danielarrais.algafood.api.v1.dto.output.restaurante.ProdutoOutput;
-import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.model.Produto;
 import com.danielarrais.algafood.domain.service.ProdutoService;
 import com.danielarrais.algafood.domain.service.RestauranteService;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

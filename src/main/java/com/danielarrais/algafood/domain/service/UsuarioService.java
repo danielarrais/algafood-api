@@ -9,6 +9,7 @@ import com.danielarrais.algafood.domain.service.validation.UsuarioValidation;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,10 +23,16 @@ public class UsuarioService {
     private final UsuarioValidation usuarioValidation;
     private final GrupoService grupoService;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioValidation usuarioValidation, GrupoService grupoService) {
+    private final PasswordEncoder passwordEncoder;
+
+    public UsuarioService(UsuarioRepository usuarioRepository,
+                          UsuarioValidation usuarioValidation,
+                          GrupoService grupoService,
+                          PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
         this.usuarioValidation = usuarioValidation;
         this.grupoService = grupoService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Page<Usuario> listar(Pageable pageable) {
@@ -45,6 +52,10 @@ public class UsuarioService {
     @Transactional
     public void salvar(Usuario usuario) {
         this.usuarioValidation.validate(usuario);
+
+        var senhaEncriptada =  passwordEncoder.encode(usuario.getSenha());
+        usuario.setSenha(senhaEncriptada);
+
         usuarioRepository.save(usuario);
     }
 
@@ -52,10 +63,11 @@ public class UsuarioService {
     public void alterarSenha(Long id, String senhaAtual, String novaSenha) {
         Usuario usuario = buscarObrigatorio(id);
 
-        if (!usuario.isSenhaIgual(senhaAtual)) {
+        if (!passwordEncoder.matches(senhaAtual, usuario.getSenha())) {
             throw new NegocioException("A senha atual informada não é válida");
         }
 
+        novaSenha = passwordEncoder.encode(novaSenha);
         usuario.setSenha(novaSenha);
     }
 

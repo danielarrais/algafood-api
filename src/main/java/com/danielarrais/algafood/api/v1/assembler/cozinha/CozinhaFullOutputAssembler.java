@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import static com.danielarrais.algafood.api.v1.util.LinkBuilder.linkBuscarCozinha;
 import static com.danielarrais.algafood.api.v1.util.LinkBuilder.linkCozinhas;
 import static com.danielarrais.algafood.util.ModelMapperUtils.mapper;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Component
 public class CozinhaFullOutputAssembler extends RepresentationModelAssemblerSupport<Cozinha, CozinhaFullOutput> {

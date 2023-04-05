@@ -3,6 +3,7 @@ package com.danielarrais.algafood.api.v1.controller.usuario;
 import com.danielarrais.algafood.api.exception.Problem;
 import com.danielarrais.algafood.api.v1.dto.input.usuario.UsuarioInput;
 import com.danielarrais.algafood.api.v1.dto.input.usuario.UsuarioSenhaInput;
+import com.danielarrais.algafood.api.v1.dto.input.usuario.UsuarioUpdateInput;
 import com.danielarrais.algafood.api.v1.dto.output.usuario.UsuarioOutput;
 import io.swagger.annotations.*;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +35,7 @@ interface UsuarioControllerOAS {
             @ApiResponse(code = 204, message = "Usuário atualizado"),
             @ApiResponse(code = 404, message = "Usuário não encontrado", response = Problem.class)
     })
-    void atualizar(@ApiParam(value = "ID do usuário") Long id, @ApiParam("Corpo") UsuarioInput usuarioInput);
+    void atualizar(@ApiParam(value = "ID do usuário") Long id, @ApiParam("Corpo") UsuarioUpdateInput usuarioInput);
 
     @ApiOperation("Exclui usuário")
     @ApiResponses({

@@ -1,8 +1,8 @@
 package com.danielarrais.algafood.api.v1.controller.pedido;
 
-import org.springframework.http.MediaType;
 import com.danielarrais.algafood.domain.service.FluxoPedidoService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
